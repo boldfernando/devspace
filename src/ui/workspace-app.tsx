@@ -1,9 +1,4 @@
-import {
-  App,
-  applyDocumentTheme,
-  applyHostFonts,
-  applyHostStyleVariables,
-} from "@modelcontextprotocol/ext-apps";
+import type { App } from "@modelcontextprotocol/ext-apps";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import {
   isEditTool,
@@ -38,7 +33,9 @@ interface MountedPayload {
   unmount(): void;
 }
 
+type ExtAppsModule = typeof import("@modelcontextprotocol/ext-apps");
 let app: App | null = null;
+let extAppsModule: ExtAppsModule | null = null;
 let connected = false;
 let connectionError: string | null = null;
 let hostContext: HostContext | undefined;
@@ -64,7 +61,7 @@ void boot();
 async function boot(): Promise<void> {
   render();
 
-  app = new App(
+  app = new extAppsModule!.App(
     { name: "devspace-tool-cards", version: "0.4.0" },
     {},
   );
@@ -130,12 +127,12 @@ async function boot(): Promise<void> {
 }
 
 function applyHostContext(): void {
-  if (hostContext?.theme) applyDocumentTheme(hostContext.theme);
+  if (hostContext?.theme && extAppsModule) extAppsModule.applyDocumentTheme(hostContext.theme);
   if (hostContext?.styles?.variables) {
-    applyHostStyleVariables(hostContext.styles.variables);
+    extAppsModule?.applyHostStyleVariables(hostContext.styles.variables);
   }
   if (hostContext?.styles?.css?.fonts) {
-    applyHostFonts(hostContext.styles.css.fonts);
+    extAppsModule?.applyHostFonts(hostContext.styles.css.fonts);
   }
 
   const insets = hostContext?.safeAreaInsets;

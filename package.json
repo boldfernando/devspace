@@ -29,7 +29,10 @@
     "postinstall": "node scripts/fix-node-pty-permissions.mjs",
     "start": "node dist/cli.js serve",
     "test": "node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && tsx src/cli.test.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
+    "coverage": "c8 --all --src=src --extension=.ts --reporter=text --reporter=lcov npm test",
+    "coverage:check": "c8 --all --src=src --extension=.ts --check-coverage --lines=60 --functions=55 --branches=45 --statements=60 --reporter=text --reporter=lcov npm test"
   },
   "keywords": [],
   "author": "",
@@ -63,6 +66,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/semver": "^7.7.1",
     "@vitejs/plugin-react": "^6.0.2",
+    "c8": "^12.0.0",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3",
     "vite": "^8.0.14"
