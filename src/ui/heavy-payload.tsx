@@ -1,8 +1,5 @@
-import { useEffect, useMemo, useRef } from "react";
+import { lazy, Suspense } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { FileStream, getFiletypeFromFileName } from "@pierre/diffs";
-import type { FileStreamOptions } from "@pierre/diffs";
-import { PatchDiff } from "@pierre/diffs/react";
 import {
   isEditTool,
   isReadTool,
@@ -15,6 +12,8 @@ import {
 import { pierrePrettyScrollbarCss } from "./scrollbar.js";
 
 type ThemeType = "light" | "dark";
+const LazyFilePayload = lazy(() => import("./file-payload.js").then((module) => ({ default: module.FilePayload })));
+const LazyDiffPayload = lazy(() => import("./diff-payload.js").then((module) => ({ default: module.DiffPayload })));
 
 interface PayloadRendererOptions {
   card: ToolResultCard;
@@ -61,7 +60,7 @@ function HeavyPayload({
     const patch = card.payload?.patch || card.payload?.diff;
     if (!patch) return <StatusLine message="Diff payload is not available." />;
 
-    return <DiffPayload patch={patch} themeType={themeType} />;
+    return <Suspense fallback={<StatusLine message="Loading diff renderer..." />}><LazyDiffPayload patch={patch} themeType={themeType} /></Suspense>;
   }
 
   const text = payloadText(card.payload);
@@ -69,106 +68,18 @@ function HeavyPayload({
 
   if (isReadTool(card.tool)) {
     return (
-      <FilePayload
+      <Suspense fallback={<StatusLine message="Loading file renderer..." />}>
+      <LazyFilePayload
         path={card.path ?? "file"}
         text={text}
         startLine={summaryNumber(card.summary, "offset") ?? 1}
         themeType={themeType}
       />
+      </Suspense>
     );
   }
 
   return <pre className={`text-payload pretty-scrollbar ${card.tool}`}>{text}</pre>;
-}
-
-function FilePayload({
-  path,
-  text,
-  startLine,
-  themeType,
-}: {
-  path: string;
-  text: string;
-  startLine: number;
-  themeType: ThemeType;
-}) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const fileOptions: FileStreamOptions = useMemo(
-    () => ({
-      theme: {
-        light: "pierre-light",
-        dark: "pierre-dark",
-      },
-      themeType,
-      overflow: "scroll",
-      unsafeCSS: pierrePrettyScrollbarCss,
-    }),
-    [themeType],
-  );
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    const fileStream = new FileStream({
-      ...fileOptions,
-      lang: getFiletypeFromFileName(path),
-      startingLineIndex: startLine,
-    });
-    const source = new ReadableStream<string>({
-      start(controller) {
-        controller.enqueue(text);
-        controller.close();
-      },
-    });
-    let disposed = false;
-
-    void fileStream.setup(source, wrapper).then(() => {
-      if (!disposed) return;
-      fileStream.cleanUp();
-      wrapper.replaceChildren();
-    });
-
-    return () => {
-      disposed = true;
-      fileStream.cleanUp();
-      wrapper.replaceChildren();
-    };
-  }, [fileOptions, path, startLine, text]);
-
-  return <div ref={wrapperRef} className="pierre-file pretty-scrollbar" />;
-}
-
-function DiffPayload({
-  patch,
-  themeType,
-}: {
-  patch: string;
-  themeType: ThemeType;
-}) {
-  return (
-    <PatchDiff
-      patch={patch}
-      options={{
-        theme: {
-          light: "pierre-light",
-          dark: "pierre-dark",
-        },
-        themeType,
-        diffStyle: "unified",
-        diffIndicators: "bars",
-        hunkSeparators: "line-info",
-        lineDiffType: "word-alt",
-        overflow: "scroll",
-        unsafeCSS: pierrePrettyScrollbarCss,
-        collapsedContextThreshold: 4,
-        expansionLineCount: 20,
-        stickyHeader: true,
-        disableFileHeader: true,
-      }}
-      className="pierre-diff pretty-scrollbar"
-    />
-  );
 }
 
 function StatusLine({

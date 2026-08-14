@@ -45,10 +45,17 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: End-to-end HTTP/MCP
+      - name: Bundle budget gate
+        run: npm run bundle:audit:check
+
+      - name: Bundle audit module tests
+        run: npm run test:bundle-audit
+      - name: End-to-end HTTP/MCP OAuth P0
         run: npm run e2e
+
       - name: Coverage gate
         run: npm run coverage:check
+
       - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,5 +63,14 @@ jobs:
           name: coverage-${{ matrix.os }}
           path: coverage/
           if-no-files-found: ignore
+
+      - name: Upload UI bundle report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-bundle-report-${{ matrix.os }}
+          path: artifacts/ui-bundle-report.json
+          if-no-files-found: ignore
+
       - name: Doctor
         run: node dist/cli.js doctor

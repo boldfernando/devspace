@@ -32,7 +32,10 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "coverage": "c8 --all --src=src --extension=.ts --reporter=text --reporter=lcov npm test",
-    "coverage:check": "c8 --all --src=src --extension=.ts --check-coverage --lines=60 --functions=55 --branches=45 --statements=60 --reporter=text --reporter=lcov npm test"
+    "coverage:check": "c8 --all --src=src --extension=.ts --check-coverage --lines=60 --functions=55 --branches=45 --statements=60 --reporter=text --reporter=lcov npm test",
+    "bundle:audit": "node scripts/audit-ui-bundle.mjs",
+    "bundle:audit:check": "node scripts/audit-ui-bundle.mjs --check",
+    "test:bundle-audit": "node --test scripts/audit-ui-bundle.test.mjs"
   },
   "keywords": [],
   "author": "",
