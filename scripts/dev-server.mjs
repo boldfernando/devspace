@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { readdirSync, statSync, watch } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildDevServerCommand } from "./dev-command.mjs";
 
 const repoRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const watchRoots = ["src"].map((entry) => join(repoRoot, entry));
@@ -19,11 +20,11 @@ function log(message) {
 
 function start() {
   stoppingForRestart = false;
-  child = spawn("npx", ["tsx", "src/cli.ts", "serve"], {
+  const { command, args } = buildDevServerCommand();
+  child = spawn(command, args, {
     cwd: repoRoot,
     env: process.env,
     stdio: "inherit",
-    shell: true,
   });
 
   child.on("exit", (code, signal) => {
