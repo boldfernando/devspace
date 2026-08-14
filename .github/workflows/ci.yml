@@ -45,5 +45,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: End-to-end HTTP/MCP
+        run: npm run e2e
+      - name: Coverage gate
+        run: npm run coverage:check
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.os }}
+          path: coverage/
+          if-no-files-found: ignore
       - name: Doctor
         run: node dist/cli.js doctor
