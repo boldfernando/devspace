@@ -27,6 +27,11 @@ const migrations: Migration[] = [
     name: "workspace-conversation-bindings",
     up: migrateWorkspaceConversationBindings,
   },
+  {
+    version: 5,
+    name: "write-idempotency",
+    up: migrateWriteIdempotency,
+  },
 ];
 
 export function migrateDatabase(sqlite: Database.Database): void {
@@ -198,6 +203,29 @@ function migrateWorkspaceConversationBindings(sqlite: Database.Database): void {
   `);
 }
 
+function migrateWriteIdempotency(sqlite: Database.Database): void {
+  sqlite.exec(`
+    create table if not exists write_idempotency (
+      scope_key text not null,
+      idempotency_key text not null,
+      payload_hash text not null,
+      state text not null check (state in ('pending', 'succeeded', 'failed')),
+      lease_token text,
+      result_json text,
+      error_code text,
+      error_message text,
+      created_at text not null,
+      updated_at text not null,
+      pending_until text,
+      retained_until text not null,
+      primary key (scope_key, idempotency_key)
+    );
+    create index if not exists write_idempotency_state_retained_idx
+      on write_idempotency(state, retained_until);
+    create index if not exists write_idempotency_pending_idx
+      on write_idempotency(state, pending_until);
+  `);
+}
 function addColumnIfMissing(
   sqlite: Database.Database,
   table: "workspace_sessions" | "local_agent_sessions",

@@ -54,6 +54,8 @@ import { openAiConversationScopeId } from "./request-meta.js";
 import { shutdownHttpServer } from "./server-shutdown.js";
 import { formatPathForPrompt } from "./skills.js";
 import { createWorkspaceStore } from "./workspace-store.js";
+import { openDatabase } from "./db/client.js";
+import { IdempotencyConflictError, IdempotencyFailedError, IdempotencyPendingError, WriteIdempotencyStore } from "./idempotency-store.js";
 import { formatAgentsPath, WorkspaceRegistry } from "./workspaces.js";
 import { summarizeLocalAgentProfile } from "./local-agent-profiles.js";
 import {
@@ -704,6 +706,9 @@ export function createMcpServer(
   processSessions: ProcessSessionManager,
   localAgentProviders: LocalAgentProviderAvailability[],
   incomingArtifactAdapters: readonly IncomingArtifactAdapter[],
+  idempotencyStore?: WriteIdempotencyStore,
+  sessionClientId?: string | null,
+  sessionResource?: string | null,
 ): McpServer {
   const server = new McpServer(
     {
@@ -1063,19 +1068,47 @@ export function createMcpServer(
           .string()
           .describe("File path to write, relative to the workspace root."),
         content: z.string().describe("Complete new file content."),
+        idempotencyKey: z.string().min(1).max(256).optional().describe("Stable key for deduplicating this write intent across retries."),
       },
       outputSchema: resultOutputSchema(),
       ...toolWidgetDescriptorMeta(config, "write"),
       annotations: WRITE_TOOL_ANNOTATIONS,
     },
-    async ({ workspaceId, ...input }) => {
+    async ({ workspaceId, idempotencyKey, ...input }) => {
       const startedAt = performance.now();
       const workspace = workspaces.getWorkspace(workspaceId);
       workspaces.resolvePath(workspace, input.path);
-      const response = await writeFileTool(input, {
+      const executeWrite = () => writeFileTool(input, {
         cwd: workspace.root,
         root: workspace.root,
       });
+      let response: Awaited<ReturnType<typeof writeFileTool>>;
+      try {
+        if (idempotencyStore && sessionClientId && sessionResource && !idempotencyKey) {
+          response = {
+            content: [{ type: "text" as const, text: "idempotencyKey is required for write_file in authenticated MCP sessions." }],
+            isError: true,
+          };
+        } else if (idempotencyStore && sessionClientId && sessionResource && idempotencyKey) {
+          const scopeKey = `${sessionClientId}|${sessionResource}|${workspaceId}|${toolNames.write}`;
+          const run = await idempotencyStore.run(scopeKey, idempotencyKey, {
+            path: input.path,
+            content: input.content,
+          }, executeWrite);
+          response = run.value;
+        } else {
+          response = await executeWrite();
+        }
+      } catch (error) {
+        if (error instanceof IdempotencyConflictError || error instanceof IdempotencyPendingError || error instanceof IdempotencyFailedError) {
+          response = {
+            content: [{ type: "text" as const, text: `${error.code}: ${error.message}` }],
+            isError: true,
+          };
+        } else {
+          throw error;
+        }
+      }
 
       if (response.isError) {
         logFailedToolResponse(config, {
@@ -1689,6 +1722,8 @@ export function createServer(
     resourceMetadataUrl: getOAuthProtectedResourceMetadataUrl(resourceServerUrl),
   });
   const workspaceStore = createWorkspaceStore(config.stateDir);
+  const idempotencyDatabase = openDatabase(config.stateDir);
+  const idempotencyStore = new WriteIdempotencyStore(idempotencyDatabase.sqlite);
   const workspaces = new WorkspaceRegistry(config, workspaceStore);
   const reviewCheckpoints = createReviewCheckpointManager();
   const processSessions = new ProcessSessionManager();
@@ -1888,6 +1923,9 @@ export function createServer(
           processSessions,
           localAgentProviders,
           incomingArtifactAdapters,
+          idempotencyStore,
+          req.auth?.clientId ?? null,
+          req.auth?.resource?.href ?? null,
         );
         await server.connect(transport);
       } else {
@@ -1921,6 +1959,7 @@ export function createServer(
         processSessions.shutdown();
         oauthProvider.close();
         workspaceStore.close?.();
+        idempotencyDatabase.close();
       })();
       return closePromise;
     },

@@ -49,6 +49,22 @@ export class IdempotencyPendingError extends Error {
   }
 }
 
+export class IdempotencyFailedError extends Error {
+  readonly code = "IDEMPOTENCY_REQUEST_FAILED";
+  constructor(readonly record: IdempotencyRecord) {
+    super(record.errorMessage ?? "The idempotent request previously failed");
+    this.name = "IdempotencyFailedError";
+  }
+}
+
+export class IdempotencyEffectError<T = unknown> extends Error {
+  readonly code = "IDEMPOTENCY_EFFECT_FAILED";
+  constructor(readonly response: T, message = "The idempotent effect failed") {
+    super(message);
+    this.name = "IdempotencyEffectError";
+  }
+}
+
 export interface IdempotencyRunOptions {
   now?: Date;
   retentionMs?: number;
@@ -157,6 +173,9 @@ export class WriteIdempotencyStore {
     if (claimed.kind === "pending") {
       throw new IdempotencyPendingError(scopeKey, idempotencyKey);
     }
+    if (claimed.kind === "failed") {
+      throw new IdempotencyFailedError(claimed.record);
+    }
 
     try {
       const value = await effect();
@@ -175,7 +194,7 @@ export class WriteIdempotencyStore {
     now: Date,
     retentionMs: number,
     pendingLeaseMs: number,
-  ): { kind: "owner"; leaseToken: string } | { kind: "replay"; record: IdempotencyRecord } | { kind: "pending" } {
+  ): { kind: "owner"; leaseToken: string } | { kind: "replay"; record: IdempotencyRecord } | { kind: "pending" } | { kind: "failed"; record: IdempotencyRecord } {
     const createdAt = now.toISOString();
     const retainedUntil = new Date(now.getTime() + retentionMs).toISOString();
     const pendingUntil = new Date(now.getTime() + pendingLeaseMs).toISOString();
@@ -194,6 +213,7 @@ export class WriteIdempotencyStore {
         throw new IdempotencyConflictError(scopeKey, idempotencyKey);
       }
       if (existing.state === "succeeded") return { kind: "replay" as const, record: existing };
+      if (existing.state === "failed") return { kind: "failed" as const, record: existing };
       return { kind: "pending" as const };
     });
     return transaction();
