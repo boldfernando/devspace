@@ -144,4 +144,30 @@ test("device authorization grant completes and is one-time consumable", async ()
     body: form({ grant_type: "urn:ietf:params:oauth:grant-type:device_code", device_code: device.device_code, client_id: client.client_id, resource: `${baseUrl}/other` }),
   });
   assert.equal(wrongResource.status, 400);
+
+  const authorizationRateLimitResponses = [];
+  for (let index = 0; index < 10; index += 1) {
+    authorizationRateLimitResponses.push(await fetch(metadata.device_authorization_endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: form({ client_id: client.client_id, scope: "devspace:read", resource }),
+    }));
+  }
+  const authorizationRateLimited = authorizationRateLimitResponses.find((response) => response.status === 429);
+  assert.ok(authorizationRateLimited, "device authorization requests must be rate limited");
+  assert.ok(authorizationRateLimited.headers.get("retry-after"));
+  assert.equal((await json(authorizationRateLimited)).error, "slow_down");
+
+  const pollingRateLimitResponses = [];
+  for (let index = 0; index < 35; index += 1) {
+    pollingRateLimitResponses.push(await fetch(metadata.token_endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: form({ grant_type: "urn:ietf:params:oauth:grant-type:device_code", device_code: device.device_code, client_id: client.client_id, resource }),
+    }));
+  }
+  const pollingRateLimited = pollingRateLimitResponses.find((response) => response.status === 429);
+  assert.ok(pollingRateLimited, "device token polling must be rate limited");
+  assert.ok(pollingRateLimited.headers.get("retry-after"));
+  assert.equal((await json(pollingRateLimited)).error, "slow_down");
 });

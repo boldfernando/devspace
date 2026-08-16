@@ -4,6 +4,36 @@ import type { SingleUserOAuthProvider } from "./oauth-provider.js";
 
 const DEVICE_GRANT = "urn:ietf:params:oauth:grant-type:device_code";
 
+type DeviceRateLimitBucket = { windowStartedAt: number; count: number };
+
+function createDeviceRateLimiter(maxRequests: number, windowMs: number, description: string) {
+  const buckets = new Map<string, DeviceRateLimitBucket>();
+  return (req: Request, res: Response, next: () => void): void => {
+    const now = Date.now();
+    if (buckets.size > 10_000) {
+      for (const [staleKey, staleBucket] of buckets) {
+        if (now - staleBucket.windowStartedAt >= windowMs) buckets.delete(staleKey);
+      }
+    }
+    const ip = req.ip || req.socket.remoteAddress || "unknown";
+    const clientId = formValue(req, "client_id") || "anonymous";
+    const key = `${ip}|${clientId}`;
+    const current = buckets.get(key);
+    const bucket = !current || now - current.windowStartedAt >= windowMs
+      ? { windowStartedAt: now, count: 0 }
+      : current;
+    if (!current || bucket !== current) buckets.set(key, bucket);
+    if (bucket.count >= maxRequests) {
+      const retryAfterSeconds = Math.max(1, Math.ceil((bucket.windowStartedAt + windowMs - now) / 1_000));
+      res.setHeader("Retry-After", String(retryAfterSeconds));
+      sendOAuthError(res, "slow_down", `${description} rate limit exceeded`, 429);
+      return;
+    }
+    bucket.count += 1;
+    next();
+  };
+}
+
 function escapeHtml(value: string): string {
   return value
     .replaceAll("&", "&amp;")
@@ -56,7 +86,13 @@ export function registerOAuthDeviceRoutes(
 ): void {
   app.use(express.urlencoded({ extended: false, limit: "16kb" }));
 
+  const deviceAuthorizationRateLimiter = createDeviceRateLimiter(10, 60_000, "Device authorization");
+  const devicePollingRateLimiter = createDeviceRateLimiter(30, 60_000, "Device token polling");
+  const deviceApprovalRateLimiter = createDeviceRateLimiter(20, 60_000, "Device approval");
+
   app.post("/oauth/device/authorize", async (req, res) => {
+    deviceAuthorizationRateLimiter(req, res, () => undefined);
+    if (res.headersSent) return;
     const clientId = formValue(req, "client_id");
     const scopes = formValue(req, "scope").split(/\s+/).filter(Boolean);
     const resourceValue = formValue(req, "resource");
@@ -101,6 +137,8 @@ export function registerOAuthDeviceRoutes(
   });
 
   app.post("/oauth/device/approve", (req, res) => {
+    deviceApprovalRateLimiter(req, res, () => undefined);
+    if (res.headersSent) return;
     const userCode = formValue(req, "user_code");
     const ownerToken = formValue(req, "owner_token");
     const decision = formValue(req, "decision");
@@ -116,6 +154,8 @@ export function registerOAuthDeviceRoutes(
   });
 
   app.post("/token", async (req, res, next) => {
+    devicePollingRateLimiter(req, res, () => undefined);
+    if (res.headersSent) return;
     if (formValue(req, "grant_type") !== DEVICE_GRANT) {
       next();
       return;

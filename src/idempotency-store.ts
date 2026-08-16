@@ -49,6 +49,14 @@ export class IdempotencyPendingError extends Error {
   }
 }
 
+export class IdempotencyAmbiguousError extends Error {
+  readonly code = "IDEMPOTENCY_REQUEST_AMBIGUOUS";
+  constructor(readonly record: IdempotencyRecord) {
+    super("The idempotent request has an expired lease and requires reconciliation");
+    this.name = "IdempotencyAmbiguousError";
+  }
+}
+
 export class IdempotencyFailedError extends Error {
   readonly code = "IDEMPOTENCY_REQUEST_FAILED";
   constructor(readonly record: IdempotencyRecord) {
@@ -171,6 +179,10 @@ export class WriteIdempotencyStore {
       };
     }
     if (claimed.kind === "pending") {
+      const pendingUntil = claimed.record.pendingUntil ? Date.parse(claimed.record.pendingUntil) : Number.POSITIVE_INFINITY;
+      if (pendingUntil <= now.getTime()) {
+        throw new IdempotencyAmbiguousError(claimed.record);
+      }
       throw new IdempotencyPendingError(scopeKey, idempotencyKey);
     }
     if (claimed.kind === "failed") {
@@ -194,7 +206,7 @@ export class WriteIdempotencyStore {
     now: Date,
     retentionMs: number,
     pendingLeaseMs: number,
-  ): { kind: "owner"; leaseToken: string } | { kind: "replay"; record: IdempotencyRecord } | { kind: "pending" } | { kind: "failed"; record: IdempotencyRecord } {
+  ): { kind: "owner"; leaseToken: string } | { kind: "replay"; record: IdempotencyRecord } | { kind: "pending"; record: IdempotencyRecord } | { kind: "failed"; record: IdempotencyRecord } {
     const createdAt = now.toISOString();
     const retainedUntil = new Date(now.getTime() + retentionMs).toISOString();
     const pendingUntil = new Date(now.getTime() + pendingLeaseMs).toISOString();
@@ -214,7 +226,7 @@ export class WriteIdempotencyStore {
       }
       if (existing.state === "succeeded") return { kind: "replay" as const, record: existing };
       if (existing.state === "failed") return { kind: "failed" as const, record: existing };
-      return { kind: "pending" as const };
+      return { kind: "pending" as const, record: existing };
     });
     return transaction();
   }

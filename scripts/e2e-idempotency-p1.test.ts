@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { after, before, test } from "node:test";
 import Database from "better-sqlite3";
 import { startIdempotencyFixture, type FixtureHandle } from "./idempotency-p1-fixture-server.js";
-import { WriteIdempotencyStore } from "../src/idempotency-store.js";
+import { IdempotencyAmbiguousError, WriteIdempotencyStore } from "../src/idempotency-store.js";
 
 const repoRoot = join(import.meta.dirname, "..");
 const artifactsDir = join(repoRoot, "artifacts");
@@ -51,16 +51,22 @@ async function writeVisualEvidence(): Promise<void> {
   await mkdir(artifactsDir, { recursive: true });
   const passed = results.filter((result) => result.status === "passed").length;
   const rows = results.map((result) => `<tr><td>${result.id}</td><td class="${result.status}">${result.status.toUpperCase()}</td><td>${result.detail}</td></tr>`).join("\n");
-  await writeFile(reportPath, JSON.stringify({
+  const reportData = {
     suite: "IDEMP-P1-001..008",
     mode: "real HTTP fixture with SQLite transaction store",
     status: passed === 8 && results.length === 8 ? "passed" : "failed",
     passed,
     total: 8,
     effect_count: fixture?.effectCount() ?? null,
+    cases: results,
     scenarios: results,
     secret_leak_detected: false,
-  }, null, 2) + "\n", "utf8");
+  };
+  const unsignedReport = JSON.stringify(reportData);
+  const effectLog = await readFile(fixture.effectLogPath, "utf8");
+  reportData.secret_leak_detected = secretPatterns.some((pattern) => pattern.test(`${effectLog}\n${unsignedReport}`));
+  const reportText = JSON.stringify(reportData, null, 2) + "\n";
+  await writeFile(reportPath, reportText, "utf8");
   await writeFile(visualPath, `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Idempotency P1 Evidence</title>
 <style>body{font-family:Arial,sans-serif;background:#071426;color:#f4f8fc;margin:0;padding:48px}h1{font-size:32px}p{color:#a9bacb}.summary{font-size:56px;color:#31d18b;font-weight:700;margin:24px 0}table{border-collapse:collapse;width:100%;max-width:1100px}th,td{border-bottom:1px solid #24445d;text-align:left;padding:14px}th{color:#62d8ff;text-transform:uppercase;font-size:12px;letter-spacing:1px}.passed{color:#31d18b}.failed{color:#f27676}.note{margin-top:28px;color:#8099ac;font-size:13px}</style></head>
@@ -123,6 +129,27 @@ test("IDEMP-P1-005 retry after ambiguous timeout replays the committed result", 
   assert.equal(retry.payload.replayed, true);
   assert.equal(fixture.effectCount() - beforeEffects, 1);
   record("IDEMP-P1-005", "passed", "lost response was recovered by replay without duplicate write");
+  const recoveryRoot = await mkdtemp(join(tmpdir(), "devspace-idempotency-ambiguous-"));
+  const recoveryDatabase = new Database(join(recoveryRoot, "recovery.sqlite"));
+  const recoveryStore = new WriteIdempotencyStore(recoveryDatabase);
+  let releaseRecoveryEffect = () => undefined;
+  const recoveryGate = new Promise<void>((resolve) => { releaseRecoveryEffect = resolve; });
+  const ownerPromise = recoveryStore.run("workspace-recovery", "key-ambiguous", { value: "uncertain" }, async () => {
+    await recoveryGate;
+    return { effect: "committed-after-reconciliation" };
+  }, { now: new Date("2026-08-16T00:00:00.000Z"), pendingLeaseMs: 1_000 });
+  try {
+    await assert.rejects(
+      recoveryStore.run("workspace-recovery", "key-ambiguous", { value: "uncertain" }, () => ({ effect: "duplicate" }), { now: new Date("2026-08-16T00:00:02.000Z"), pendingLeaseMs: 1_000 }),
+      (error) => error instanceof IdempotencyAmbiguousError && error.code === "IDEMPOTENCY_REQUEST_AMBIGUOUS",
+    );
+  } finally {
+    releaseRecoveryEffect();
+    await ownerPromise;
+    recoveryDatabase.close();
+    await rm(recoveryRoot, { recursive: true, force: true });
+  }
+  results[results.length - 1].detail = "lost response replays committed result; expired lease is surfaced as ambiguous without automatic re-execution";
 });
 
 test("IDEMP-P1-006 identical keys are isolated by scope", async () => {
@@ -161,6 +188,13 @@ test("IDEMP-P1-008 artifacts and logs contain no secret-like values", async () =
     assert.doesNotMatch(report, pattern);
   }
   record("IDEMP-P1-008", "passed", "fixture effect log and test evidence passed the secret scan");
+  await writeVisualEvidence();
+  const reportArtifact = await readFile(reportPath, "utf8");
+  const visualArtifact = await readFile(visualPath, "utf8");
+  for (const pattern of secretPatterns) {
+    assert.doesNotMatch(reportArtifact, pattern);
+    assert.doesNotMatch(visualArtifact, pattern);
+  }
 });
 
 after(async () => {

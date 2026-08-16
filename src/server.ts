@@ -56,7 +56,7 @@ import { shutdownHttpServer } from "./server-shutdown.js";
 import { formatPathForPrompt } from "./skills.js";
 import { createWorkspaceStore } from "./workspace-store.js";
 import { openDatabase } from "./db/client.js";
-import { IdempotencyConflictError, IdempotencyFailedError, IdempotencyPendingError, WriteIdempotencyStore } from "./idempotency-store.js";
+import { IdempotencyAmbiguousError, IdempotencyConflictError, IdempotencyFailedError, IdempotencyPendingError, WriteIdempotencyStore } from "./idempotency-store.js";
 import { formatAgentsPath, WorkspaceRegistry } from "./workspaces.js";
 import { summarizeLocalAgentProfile } from "./local-agent-profiles.js";
 import {
@@ -1097,16 +1097,47 @@ export function createMcpServer(
             content: input.content,
           }, executeWrite);
           response = run.value;
+          const idempotencyDurationMs = Math.round(performance.now() - startedAt);
+          logEvent(config.logging, "info", "idempotency_claim", {
+            tool: toolNames.write,
+            outcome: run.replayed ? "replay" : "owner",
+            state: run.record.state,
+            durationMs: idempotencyDurationMs,
+          });
+          logEvent(config.logging, "info", "idempotency_effect", {
+            tool: toolNames.write,
+            state: run.record.state,
+            outcome: run.replayed ? "replayed" : "committed",
+            durationMs: idempotencyDurationMs,
+          });
         } else {
           response = await executeWrite();
         }
       } catch (error) {
-        if (error instanceof IdempotencyConflictError || error instanceof IdempotencyPendingError || error instanceof IdempotencyFailedError) {
+          const outcome = error instanceof IdempotencyAmbiguousError
+            ? "ambiguous"
+            : error instanceof IdempotencyConflictError
+              ? "conflict"
+              : error instanceof IdempotencyPendingError
+                ? "pending"
+                : "failed";
+          logEvent(config.logging, outcome === "failed" || outcome === "ambiguous" ? "error" : "warn", "idempotency_claim", {
+            tool: toolNames.write,
+            outcome,
+            durationMs: Math.round(performance.now() - startedAt),
+          });
+        if (error instanceof IdempotencyAmbiguousError || error instanceof IdempotencyConflictError || error instanceof IdempotencyPendingError || error instanceof IdempotencyFailedError) {
           response = {
             content: [{ type: "text" as const, text: `${error.code}: ${error.message}` }],
             isError: true,
           };
         } else {
+          if (error instanceof Error && error.message === "idempotency lease was lost before completion") {
+            logEvent(config.logging, "error", "idempotency_lease_lost", {
+              tool: toolNames.write,
+              durationMs: Math.round(performance.now() - startedAt),
+            });
+          }
           throw error;
         }
       }

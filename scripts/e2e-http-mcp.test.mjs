@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash, randomBytes } from "node:crypto";
 import { spawn } from "node:child_process";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -94,7 +94,8 @@ test("real OAuth PKCE flow completes an authenticated MCP handshake", async () =
     const loadSamples = Number(process.env.MCP_LOAD_SAMPLES ?? "20");
     const loadStarted = performance.now();
     const latencies = [];
-    for (let index = 0; index < loadSamples; index += 1) {
+    const loadConcurrency = Math.max(1, Number(process.env.MCP_LOAD_CONCURRENCY ?? "4"));
+    const runLoadSample = async (index) => {
       const requestStarted = performance.now();
       const initResponse = await rpc(accessToken, { jsonrpc: "2.0", id: 1000 + index, method: "initialize", params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "devspace-load", version: "1.0.0" } } });
       const initBody = parseRpc(await initResponse.text());
@@ -111,10 +112,28 @@ test("real OAuth PKCE flow completes an authenticated MCP handshake", async () =
         throw new Error(`MCP load tools/list ${index} failed: status=${listResponse.status} body=${JSON.stringify(listBody)}`);
       }
       latencies.push(performance.now() - requestStarted);
+    };
+    for (let batchStart = 0; batchStart < loadSamples; batchStart += loadConcurrency) {
+      const batchSize = Math.min(loadConcurrency, loadSamples - batchStart);
+      await Promise.all(Array.from({ length: batchSize }, (_, offset) => runLoadSample(batchStart + offset)));
     }
     const sortedLatencies = [...latencies].sort((a, b) => a - b);
     const percentile = (ratio) => sortedLatencies[Math.min(sortedLatencies.length - 1, Math.floor(sortedLatencies.length * ratio))];
-    console.log(JSON.stringify({ event: "mcp_load", samples: loadSamples, wallMs: performance.now() - loadStarted, p50Ms: percentile(0.5), p95Ms: percentile(0.95), maxMs: sortedLatencies.at(-1) }));
+    if (sortedLatencies.length === 0) throw new Error("MCP load produced no latency samples");
+    const loadSummary = {
+      schema: "devspace.mcp-load.v1",
+      event: "mcp_load",
+      status: "passed",
+      samples: loadSamples,
+      wallMs: Math.round(performance.now() - loadStarted),
+      p50Ms: Math.round(percentile(0.5)),
+      p95Ms: Math.round(percentile(0.95)),
+      p99Ms: Math.round(percentile(0.99)),
+      maxMs: Math.round(sortedLatencies.at(-1)),
+    };
+    await mkdir("artifacts", { recursive: true });
+    await writeFile(process.env.MCP_LOAD_REPORT ?? "artifacts/mcp-load-log.json", `${JSON.stringify(loadSummary, null, 2)}\n`, "utf8");
+    console.log(JSON.stringify(loadSummary));
   } finally {
     if (child) { child.kill(); await new Promise((resolve) => child.once("exit", resolve)); }
     await rm(stateDir, { recursive: true, force: true });
