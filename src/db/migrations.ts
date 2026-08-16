@@ -32,6 +32,11 @@ const migrations: Migration[] = [
     name: "write-idempotency",
     up: migrateWriteIdempotency,
   },
+  {
+    version: 6,
+    name: "oauth-device-authorization",
+    up: migrateOAuthDeviceAuthorization,
+  },
 ];
 
 export function migrateDatabase(sqlite: Database.Database): void {
@@ -224,6 +229,32 @@ function migrateWriteIdempotency(sqlite: Database.Database): void {
       on write_idempotency(state, retained_until);
     create index if not exists write_idempotency_pending_idx
       on write_idempotency(state, pending_until);
+  `);
+}
+function migrateOAuthDeviceAuthorization(sqlite: Database.Database): void {
+  sqlite.exec(`
+    create table if not exists oauth_device_authorizations (
+      device_code_hash text primary key,
+      user_code_hash text not null unique,
+      client_id text not null,
+      resource text not null,
+      scopes_json text not null,
+      status text not null check (status in ('pending', 'approved', 'denied', 'consumed', 'expired')),
+      subject_id text,
+      expires_at integer not null,
+      interval_seconds integer not null,
+      last_poll_at integer,
+      poll_count integer not null default 0,
+      created_at integer not null,
+      approved_at integer,
+      consumed_at integer,
+      denied_at integer,
+      foreign key (client_id) references oauth_clients(client_id) on delete cascade
+    );
+    create index if not exists oauth_device_authorizations_status_expiry_idx
+      on oauth_device_authorizations(status, expires_at);
+    create index if not exists oauth_device_authorizations_client_idx
+      on oauth_device_authorizations(client_id, created_at desc);
   `);
 }
 function addColumnIfMissing(

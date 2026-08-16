@@ -1,6 +1,6 @@
 # Canonical 360° PRD Reverse Engineering
 
-Generated: 2026-08-16T18:53:17.636Z
+Generated: 2026-08-16T20:43:25.255Z
 
 ## Discovery
 
@@ -10,8 +10,8 @@ Generated: 2026-08-16T18:53:17.636Z
 - Package manager: **npm**
 - Surfaces: **6**
 - Features: **6**
-- Routes/APIs: **2**
-- Tests: **34**
+- Routes/APIs: **3**
+- Tests: **37**
 
 ## Surface map
 
@@ -32,7 +32,7 @@ Generated: 2026-08-16T18:53:17.636Z
 | Web app | Detected | EXPLICIT |
 | Next.js | NOT_OBSERVED | UNKNOWN |
 | Monorepo | Not observed | EXPLICIT |
-| Routes | 2 | EXPLICIT |
+| Routes | 3 | EXPLICIT |
 | Gaps | 7 | EXPLICIT |
 | Orphans | 13 | EXPLICIT |
 

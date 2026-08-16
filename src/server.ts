@@ -44,6 +44,7 @@ import {
   writeFileTool,
 } from "./pi-tools.js";
 import { SingleUserOAuthProvider } from "./oauth-provider.js";
+import { registerOAuthDeviceRoutes } from "./oauth-device-routes.js";
 import {
   McpSessionRegistry,
   type McpSessionCloseResult,
@@ -1789,6 +1790,23 @@ export function createServer(
     next();
   });
 
+  registerOAuthDeviceRoutes(app, oauthProvider, new URL(config.publicBaseUrl));
+
+  app.get("/.well-known/oauth-authorization-server", (_req, res) => {
+    const issuer = new URL(config.publicBaseUrl);
+    res.json({
+      issuer: issuer.href,
+      authorization_endpoint: new URL("/authorize", issuer).href,
+      token_endpoint: new URL("/token", issuer).href,
+      registration_endpoint: new URL("/register", issuer).href,
+      device_authorization_endpoint: new URL("/oauth/device/authorize", issuer).href,
+      grant_types_supported: ["authorization_code", "refresh_token", "urn:ietf:params:oauth:grant-type:device_code"],
+      response_types_supported: ["code"],
+      token_endpoint_auth_methods_supported: ["none"],
+      scopes_supported: config.oauth.scopes,
+      code_challenge_methods_supported: ["S256"],
+    });
+  });
   app.use(
     mcpAuthRouter({
       provider: oauthProvider,

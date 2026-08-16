@@ -1,6 +1,7 @@
 import { timingSafeEqual, randomBytes, randomUUID, createHash } from "node:crypto";
 import type { Response } from "express";
 import type { OAuthRegisteredClientsStore } from "@modelcontextprotocol/sdk/server/auth/clients.js";
+import { SqliteDeviceAuthorizationStore, type DeviceAuthorizationCreated, type DeviceAuthorizationPublicRecord, type DevicePollResult } from "./oauth-device-store.js";
 import type { OAuthServerProvider, AuthorizationParams } from "@modelcontextprotocol/sdk/server/auth/provider.js";
 import { AccessDeniedError, InvalidGrantError, InvalidRequestError, InvalidTokenError } from "@modelcontextprotocol/sdk/server/auth/errors.js";
 import type { AuthInfo } from "@modelcontextprotocol/sdk/server/auth/types.js";
@@ -14,6 +15,7 @@ import { SqliteOAuthClientsStore, SqliteOAuthStore } from "./oauth-store.js";
 
 export interface OAuthConfig {
   ownerToken: string;
+  devicePepper?: string;
   accessTokenTtlSeconds: number;
   refreshTokenTtlSeconds: number;
   scopes: string[];
@@ -115,6 +117,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
   readonly clientsStore: OAuthRegisteredClientsStore;
   private readonly codes = new Map<string, AuthorizationCodeRecord>();
   private readonly oauthStore: SqliteOAuthStore;
+  private deviceStore: SqliteDeviceAuthorizationStore | undefined;
   private readonly resourceServerUrl: URL;
 
   constructor(
@@ -125,6 +128,13 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     this.resourceServerUrl = resourceUrlFromServerUrl(resourceServerUrl);
     this.oauthStore = new SqliteOAuthStore(stateDir);
     this.clientsStore = new SqliteOAuthClientsStore(this.oauthStore, config.allowedRedirectHosts);
+  }
+
+  private getDeviceStore(): SqliteDeviceAuthorizationStore {
+    if (!this.deviceStore) {
+      this.deviceStore = new SqliteDeviceAuthorizationStore(this.oauthStore.databaseHandle, this.config.devicePepper);
+    }
+    return this.deviceStore;
   }
 
   async authorize(
@@ -235,6 +245,66 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     );
   }
 
+  async createDeviceAuthorization(
+    clientId: string,
+    requestedScopes: string[],
+    resource?: URL,
+  ): Promise<DeviceAuthorizationCreated> {
+    const client = await Promise.resolve(this.clientsStore.getClient(clientId));
+    if (!client) throw new InvalidRequestError("Unknown client_id");
+    const scopes = requestedScopes.length > 0 ? [...new Set(requestedScopes)] : [...this.config.scopes];
+    if (!requestedScopes.every((scope) => this.config.scopes.includes(scope))) {
+      throw new InvalidRequestError("Requested scope is not supported");
+    }
+    if (resource && !checkResourceAllowed({ requestedResource: resource, configuredResource: this.resourceServerUrl })) {
+      throw new InvalidRequestError("Requested resource is not supported");
+    }
+    return this.getDeviceStore().create({
+      clientId,
+      resource: (resource ?? this.resourceServerUrl).href,
+      scopes,
+      expiresInSeconds: 600,
+      intervalSeconds: 5,
+    });
+  }
+
+  getDeviceAuthorization(userCode: string): DeviceAuthorizationPublicRecord | undefined {
+    return this.getDeviceStore().getByUserCode(userCode);
+  }
+
+  approveDeviceAuthorization(userCode: string, ownerToken: string): boolean {
+    if (!safeEquals(ownerToken, this.config.ownerToken)) return false;
+    return this.getDeviceStore().approve(userCode, "owner");
+  }
+
+  denyDeviceAuthorization(userCode: string, ownerToken: string): boolean {
+    if (!safeEquals(ownerToken, this.config.ownerToken)) return false;
+    return this.getDeviceStore().deny(userCode);
+  }
+
+  async exchangeDeviceCode(
+    clientId: string,
+    deviceCode: string,
+    resource?: URL,
+  ): Promise<OAuthTokens> {
+    const record = this.getDeviceStore().getByDeviceCode(deviceCode, clientId);
+    if (!record) throw new InvalidGrantError("Invalid device authorization");
+    const requestedResource = resource ?? new URL(record.resource);
+    if (requestedResource.href !== record.resource || !checkResourceAllowed({ requestedResource, configuredResource: this.resourceServerUrl })) {
+      throw new InvalidGrantError("Resource does not match the device authorization");
+    }
+    const result: DevicePollResult = this.getDeviceStore().poll(deviceCode, clientId);
+    if (result.kind === "authorization_pending") {
+      throw new InvalidGrantError("authorization_pending");
+    }
+    if (result.kind === "slow_down") {
+      throw new InvalidGrantError(`slow_down:${result.intervalSeconds}`);
+    }
+    if (result.kind === "access_denied") throw new AccessDeniedError("Device authorization was denied");
+    if (result.kind === "expired_token") throw new InvalidGrantError("expired_token");
+    if (result.kind !== "approved") throw new InvalidGrantError("Invalid device authorization");
+    return this.issueTokens(clientId, result.scopes, requestedResource);
+  }
   async verifyAccessToken(token: string): Promise<AuthInfo> {
     const record = this.oauthStore.getAccessToken(hashToken(token));
     if (!record || record.expiresAt < Math.floor(Date.now() / 1000)) {
@@ -257,6 +327,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
   }
 
   close(): void {
+    this.deviceStore?.close();
     this.oauthStore.close();
   }
 

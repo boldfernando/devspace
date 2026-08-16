@@ -40,8 +40,9 @@ import {
 import { expandHomePath } from "./roots.js";
 import { shutdownHttpServer } from "./server-shutdown.js";
 import { runCanonicalReverse } from "./reverse-engineering/index.js";
+import { runAuthCommand } from "./oauth-device-cli.js";
 
-type Command = "serve" | "init" | "doctor" | "config" | "agents" | "prd-reverse" | "help" | "version";
+type Command = "serve" | "init" | "doctor" | "config" | "agents" | "prd-reverse" | "auth" | "help" | "version";
 const require = createRequire(import.meta.url);
 const SUPPORTED_NODE_RANGE = ">=20.12 <27";
 
@@ -61,6 +62,9 @@ async function main(argv: string[]): Promise<void> {
       return;
     case "doctor":
       await runDoctor();
+      return;
+    case "auth":
+      await runAuthCommand(args);
       return;
     case "prd-reverse":
       process.exitCode = runCanonicalReverse(args);
@@ -82,7 +86,7 @@ async function main(argv: string[]): Promise<void> {
 
 function normalizeCommand(command: string | undefined): Command {
   if (!command || command === "serve" || command === "start") return "serve";
-  if (command === "init" || command === "doctor" || command === "config" || command === "agents" || command === "prd-reverse") return command;
+  if (command === "init" || command === "doctor" || command === "config" || command === "agents" || command === "prd-reverse" || command === "auth") return command;
   if (command === "help" || command === "--help" || command === "-h") return "help";
   if (command === "version" || command === "--version" || command === "-v") return "version";
   throw new Error(`Unknown command: ${command}`);
@@ -310,6 +314,7 @@ function printHelp(): void {
       "  devspace                 Run first-time setup if needed, then start the server",
       "  devspace serve           Start the server",
       "  devspace prd-reverse    Generate Canonical 360 manifest",
+      "  devspace auth login --device  Login with OAuth device code",
       "  devspace init            Create or update ~/.devspace/config.json and auth.json",
       "  devspace doctor          Show config, runtime, and native dependency status",
       "  devspace config get      Print persisted config",

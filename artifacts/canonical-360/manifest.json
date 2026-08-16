@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0.0",
-  "generated_at": "2026-08-16T18:53:17.636Z",
+  "generated_at": "2026-08-16T20:43:25.255Z",
   "repository": {
     "name": "@waishnav/devspace",
     "version": "1.0.7",
@@ -478,6 +478,7 @@
       "queries": [],
       "services": [],
       "apis": [
+        "route_bb4326233ab5",
         "route_88fe637beab8"
       ],
       "schemas": [],
@@ -528,6 +529,7 @@
         }
       ],
       "routes": [
+        "route_bb4326233ab5",
         "route_88fe637beab8"
       ],
       "surfaces": [
@@ -656,7 +658,7 @@
         "test_58bf0909c5a7",
         "test_79f91807593e",
         "test_9518f8ac5193",
-        "test_578f628d84b0"
+        "test_1b70bb90691a"
       ],
       "dependencies": [
         "src/server.ts",
@@ -817,7 +819,7 @@
         "test_58bf0909c5a7",
         "test_79f91807593e",
         "test_9518f8ac5193",
-        "test_578f628d84b0"
+        "test_1b70bb90691a"
       ],
       "dependencies": [
         "src/ui/language-catalog.ts"
@@ -883,7 +885,7 @@
         "test_58bf0909c5a7",
         "test_79f91807593e",
         "test_9518f8ac5193",
-        "test_578f628d84b0"
+        "test_1b70bb90691a"
       ],
       "dependencies": [
         "src/cli.ts"
@@ -914,6 +916,31 @@
   ],
   "workflows": [],
   "routes": [
+    {
+      "id": "route_bb4326233ab5",
+      "path": "/.well-known/oauth-authorization-server",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "kind": "HTTP",
+      "purpose": "OAuth metadata discovery",
+      "authentication": [
+        "OAuth/Bearer"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/.well-known/oauth-authorization-server",
+          "confidence": 0.99
+        }
+      ]
+    },
     {
       "id": "route_88fe637beab8",
       "path": "/mcp",
@@ -1311,6 +1338,31 @@
   ],
   "apis": [
     {
+      "id": "route_bb4326233ab5",
+      "path": "/.well-known/oauth-authorization-server",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "kind": "HTTP",
+      "purpose": "OAuth metadata discovery",
+      "authentication": [
+        "OAuth/Bearer"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/.well-known/oauth-authorization-server",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "route_88fe637beab8",
       "path": "/mcp",
       "methods": [
@@ -1490,6 +1542,42 @@
           "type": "file",
           "source": "repository",
           "path": "scripts/e2e-idempotency-p1.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_1b70bb90691a",
+      "path": "scripts/e2e-oauth-device-cli.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-oauth-device-cli.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_2257358bbd61",
+      "path": "scripts/e2e-oauth-device.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-oauth-device.test.mjs",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -1706,6 +1794,24 @@
           "type": "file",
           "source": "repository",
           "path": "src/mcp-sessions.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_dfbd418d9660",
+      "path": "src/oauth-device-store.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-device-store.test.ts",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -2151,6 +2257,14 @@
       "source": "repository",
       "path": "src/server.ts",
       "detector": "route-detector",
+      "raw_signal": "/.well-known/oauth-authorization-server",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "route-detector",
       "raw_signal": "/mcp",
       "confidence": 0.99
     },
@@ -2445,6 +2559,22 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "scripts/e2e-oauth-device-cli.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-oauth-device.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/apply-patch.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
@@ -2534,6 +2664,14 @@
       "type": "file",
       "source": "repository",
       "path": "src/mcp-sessions.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/oauth-device-store.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -4829,6 +4967,7 @@
         "surface_cf302234e82b"
       ],
       "ROUTE": [
+        "route_bb4326233ab5",
         "route_88fe637beab8",
         "route_15a99506b4e1"
       ],
@@ -4840,6 +4979,8 @@
         "test_58bf0909c5a7",
         "test_79f91807593e",
         "test_9518f8ac5193",
+        "test_1b70bb90691a",
+        "test_2257358bbd61",
         "test_578f628d84b0",
         "test_edfde0016435",
         "test_c6e5a6551503",
@@ -4852,6 +4993,7 @@
         "test_a92fd9e898fd",
         "test_8f35bd0c1c45",
         "test_17566866b891",
+        "test_dfbd418d9660",
         "test_2481f1ebca49",
         "test_faf78054b92c",
         "test_76404f90283a",
@@ -4880,6 +5022,8 @@
         "test_58bf0909c5a7",
         "test_79f91807593e",
         "test_9518f8ac5193",
+        "test_1b70bb90691a",
+        "test_2257358bbd61",
         "test_578f628d84b0",
         "test_edfde0016435",
         "test_c6e5a6551503",
@@ -4892,6 +5036,7 @@
         "test_a92fd9e898fd",
         "test_8f35bd0c1c45",
         "test_17566866b891",
+        "test_dfbd418d9660",
         "test_2481f1ebca49",
         "test_faf78054b92c",
         "test_76404f90283a",
@@ -4909,6 +5054,7 @@
         "test_008cbd460864"
       ],
       "ROUTE": [
+        "route_bb4326233ab5",
         "route_88fe637beab8",
         "route_15a99506b4e1"
       ],

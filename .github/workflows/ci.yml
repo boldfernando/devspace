@@ -45,6 +45,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: OAuth device store contract
+        run: npm run test:oauth-device
+      - name: OAuth device HTTP E2E
+        run: npm run e2e:oauth-device
+      - name: OAuth device CLI E2E
+        run: npm run e2e:oauth-device-cli
+
       - name: Canonical 360 contract tests
         run: npm run test:prd-reverse
       - name: Canonical 360 self-scan

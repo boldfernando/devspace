@@ -26,7 +26,7 @@ try {
   testTransactionalTokenRotation(join(root, "rotation"));
   await testProviderRestartRotationAndRevocation(join(root, "provider"));
 } finally {
-  await rm(root, { recursive: true, force: true });
+  await rm(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
 }
 
 async function testDatabaseConfiguration(stateDir: string): Promise<void> {
@@ -46,6 +46,7 @@ async function testDatabaseConfiguration(stateDir: string): Promise<void> {
       { version: 3, name: "local-agent-sessions" },
       { version: 4, name: "workspace-conversation-bindings" },
       { version: 5, name: "write-idempotency" },
+      { version: 6, name: "oauth-device-authorization" },
     ]);
   } finally {
     database.close();

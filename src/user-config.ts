@@ -25,6 +25,14 @@ export interface DevspaceUserConfig {
 
 export interface DevspaceAuthConfig {
   ownerToken?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  tokenType?: string;
+  server?: string;
+  resource?: string;
+  clientId?: string;
+  scopes?: string[];
+  expiresAt?: number;
 }
 
 export interface DevspaceFiles {
