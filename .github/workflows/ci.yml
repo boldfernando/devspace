@@ -45,6 +45,17 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Canonical 360 contract tests
+        run: npm run test:prd-reverse
+      - name: Canonical 360 self-scan
+        run: npm run prd:reverse
+      - name: Upload Canonical 360 artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-360-${{ matrix.os }}
+          path: artifacts/canonical-360/
+          if-no-files-found: ignore
       - name: Bundle budget gate
         run: npm run bundle:audit:check
 

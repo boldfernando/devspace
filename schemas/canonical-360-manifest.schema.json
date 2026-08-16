@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devspace.local/schemas/canonical-360-manifest.schema.json",
+  "title": "Canonical 360 PRD Reverse Engineering Manifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "manifest_version", "generated_at", "repository", "topology", "products", "applications", "packages", "surfaces", "personas", "jobs_to_be_done", "domains", "capabilities", "features", "workflows", "routes", "components", "apis", "contracts", "entities", "events", "tests", "metrics", "integrations", "infrastructure", "environments", "evidence", "orphans", "drift", "gaps", "risks", "tasks", "gates", "dor", "dod", "scoring", "traceability", "ignored_paths"
+  ],
+  "properties": {
+    "manifest_version": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "repository": {"$ref": "#/$defs/evidenceObject"},
+    "topology": {"$ref": "#/$defs/evidenceObject"},
+    "products": {"type": "array"},
+    "applications": {"type": "array"},
+    "packages": {"type": "array"},
+    "surfaces": {"type": "array", "items": {"$ref": "#/$defs/evidenceObject"}},
+    "personas": {"type": "array"},
+    "jobs_to_be_done": {"type": "array"},
+    "domains": {"type": "array"},
+    "capabilities": {"type": "array"},
+    "features": {"type": "array", "items": {"$ref": "#/$defs/evidenceObject"}},
+    "workflows": {"type": "array"},
+    "routes": {"type": "array", "items": {"$ref": "#/$defs/evidenceObject"}},
+    "components": {"type": "array"},
+    "apis": {"type": "array"},
+    "contracts": {"type": "array"},
+    "entities": {"type": "array"},
+    "events": {"type": "array"},
+    "tests": {"type": "array"},
+    "metrics": {"type": "array"},
+    "integrations": {"type": "array"},
+    "infrastructure": {"type": "array"},
+    "environments": {"type": "array"},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "orphans": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "drift": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "gaps": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "risks": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "tasks": {"type": "array", "items": {"$ref": "#/$defs/task"}},
+    "gates": {"type": "array", "items": {"$ref": "#/$defs/gate"}},
+    "dor": {"type": "object"},
+    "dod": {"type": "object"},
+    "scoring": {"type": "object"},
+    "traceability": {"type": "object"},
+    "ignored_paths": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["type", "source", "detector", "raw_signal", "confidence"],
+      "properties": {
+        "type": {"type": "string"},
+        "source": {"type": "string"},
+        "path": {"type": "string"},
+        "symbol": {"type": "string"},
+        "detector": {"type": "string"},
+        "raw_signal": {"type": "string"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": true
+    },
+    "evidenceObject": {
+      "type": "object",
+      "properties": {"id": {"type": "string"}, "evidence_status": {"enum": ["EXPLICIT", "INFERRED", "UNKNOWN", "CONFLICTING"]}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}, "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}},
+      "additionalProperties": true
+    },
+    "finding": {
+      "type": "object",
+      "required": ["id", "kind", "title", "status", "severity", "description", "evidence", "confidence", "affected_paths"],
+      "properties": {"id": {"type": "string"}, "kind": {"type": "string"}, "title": {"type": "string"}, "status": {"enum": ["EXPLICIT", "INFERRED", "UNKNOWN", "CONFLICTING"]}, "severity": {"enum": ["P0", "P1", "P2", "P3", "P4"]}, "description": {"type": "string"}, "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}, "affected_paths": {"type": "array", "items": {"type": "string"}}},
+      "additionalProperties": true
+    },
+    "gate": {
+      "type": "object",
+      "required": ["id", "name", "state", "critical", "evidence", "rationale"],
+      "properties": {"id": {"pattern": "^G[0-9]+$"}, "name": {"type": "string"}, "state": {"enum": ["PASS", "FAIL", "BLOCKED", "N/A", "UNKNOWN"]}, "critical": {"type": "boolean"}, "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}, "rationale": {"type": "string"}},
+      "additionalProperties": true
+    },
+    "task": {
+      "type": "object",
+      "required": ["id", "title", "priority", "domain", "capability", "finding", "evidence", "impact", "risk", "scope", "affected_paths", "acceptance_criteria", "dor", "dod", "dependencies", "verification_command"],
+      "properties": {"id": {"type": "string"}, "title": {"type": "string"}, "priority": {"enum": ["P0", "P1", "P2", "P3", "P4"]}, "domain": {"type": "string"}, "capability": {"type": "string"}, "finding": {"type": "string"}, "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}, "impact": {"type": "string"}, "risk": {"type": "string"}, "scope": {"type": "string"}, "affected_paths": {"type": "array", "items": {"type": "string"}}, "acceptance_criteria": {"type": "array", "items": {"type": "string"}}, "dor": {"type": "array", "items": {"type": "string"}}, "dod": {"type": "array", "items": {"type": "string"}}, "dependencies": {"type": "array", "items": {"type": "string"}}, "verification_command": {"type": "string"}},
+      "additionalProperties": true
+    }
+  }
+}

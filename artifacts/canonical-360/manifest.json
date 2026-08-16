@@ -1,0 +1,4933 @@
+{
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-08-16T18:53:17.636Z",
+  "repository": {
+    "name": "@waishnav/devspace",
+    "version": "1.0.7",
+    "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+    "language": "TypeScript",
+    "runtime": "Node.js",
+    "source_of_truth": "repository source + package metadata",
+    "evidence_status": "EXPLICIT",
+    "confidence": 0.98
+  },
+  "topology": {
+    "classification": "MODULAR_MONOLITH",
+    "architecture": "modular_monolith",
+    "build_system": "Vite + TypeScript compiler",
+    "package_manager": "npm",
+    "workspace_manager": "NOT_OBSERVED",
+    "package_name": "@waishnav/devspace",
+    "evidence_status": "EXPLICIT",
+    "confidence": 0.98
+  },
+  "products": [
+    {
+      "id": "product_0f31a1cf38c2",
+      "name": "@waishnav/devspace",
+      "evidence_status": "INFERRED",
+      "confidence": 0.65
+    }
+  ],
+  "applications": [
+    {
+      "id": "application_devspace",
+      "name": "DevSpace",
+      "surfaces": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c",
+        "surface_451923c6e2ed",
+        "surface_f27f28db5b26",
+        "surface_cf302234e82b"
+      ],
+      "evidence_status": "INFERRED",
+      "confidence": 0.76
+    }
+  ],
+  "packages": [
+    {
+      "id": "package_0f31a1cf38c2",
+      "name": "@waishnav/devspace",
+      "version": "1.0.7",
+      "dependencies": [
+        "@agentclientprotocol/sdk",
+        "@anthropic-ai/claude-agent-sdk",
+        "@clack/prompts",
+        "@earendil-works/pi-coding-agent",
+        "@modelcontextprotocol/ext-apps",
+        "@modelcontextprotocol/sdk",
+        "@openai/codex-sdk",
+        "@opencode-ai/sdk",
+        "@pierre/diffs",
+        "better-sqlite3",
+        "diff",
+        "drizzle-orm",
+        "express",
+        "lucide",
+        "react",
+        "react-dom",
+        "semver",
+        "yaml",
+        "zod"
+      ],
+      "dev_dependencies": [
+        "@types/better-sqlite3",
+        "@types/express",
+        "@types/node",
+        "@types/react",
+        "@types/react-dom",
+        "@types/semver",
+        "@vitejs/plugin-react",
+        "c8",
+        "tsx",
+        "typescript",
+        "vite"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 1
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "surface_03b51a594e8b",
+      "canonical_name": "DevSpace CLI",
+      "family": "CLI",
+      "subtype": "package-bin",
+      "protocol": "process",
+      "entry_point": "src/cli.ts",
+      "source_location": [
+        "src/cli.ts",
+        "package.json"
+      ],
+      "owning_package": "@waishnav/devspace",
+      "deployable": true,
+      "runtime": "Node.js",
+      "personas": [
+        "UNKNOWN"
+      ],
+      "capabilities": [],
+      "features": [],
+      "routes": [],
+      "dependencies": [],
+      "authentication": [],
+      "authorization": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 1,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "surface-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package.json",
+          "detector": "surface-detector",
+          "raw_signal": "package.json",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "surface_5d95b490f9fe",
+      "canonical_name": "Authenticated MCP Server",
+      "family": "MCP_SERVER",
+      "subtype": "HTTP MCP server",
+      "protocol": "HTTP/MCP",
+      "entry_point": "src/server.ts",
+      "source_location": [
+        "src/server.ts"
+      ],
+      "owning_package": "@waishnav/devspace",
+      "deployable": true,
+      "runtime": "Node.js",
+      "personas": [
+        "UNKNOWN"
+      ],
+      "capabilities": [],
+      "features": [],
+      "routes": [],
+      "dependencies": [],
+      "authentication": [
+        "OAuth 2.0 PKCE",
+        "Bearer"
+      ],
+      "authorization": [
+        "resource",
+        "scope",
+        "session binding"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 1,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "surface-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "surface_2c906eee076c",
+      "canonical_name": "DevSpace HTTP API",
+      "family": "API",
+      "subtype": "Express HTTP API",
+      "protocol": "HTTP",
+      "entry_point": "src/server.ts",
+      "source_location": [
+        "src/server.ts"
+      ],
+      "owning_package": "@waishnav/devspace",
+      "deployable": true,
+      "runtime": "Node.js",
+      "personas": [
+        "UNKNOWN"
+      ],
+      "capabilities": [],
+      "features": [],
+      "routes": [],
+      "dependencies": [],
+      "authentication": [
+        "OAuth 2.0 PKCE",
+        "Bearer"
+      ],
+      "authorization": [
+        "resource",
+        "scope",
+        "session binding"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "surface-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.98
+        }
+      ]
+    },
+    {
+      "id": "surface_451923c6e2ed",
+      "canonical_name": "DevSpace Web UX",
+      "family": "WEB_APP",
+      "subtype": "Vite React UI",
+      "protocol": "HTTP",
+      "entry_point": "src/ui",
+      "source_location": [
+        "src/ui",
+        "vite.config.ts"
+      ],
+      "owning_package": "@waishnav/devspace",
+      "deployable": true,
+      "runtime": "Node.js",
+      "personas": [
+        "UNKNOWN"
+      ],
+      "capabilities": [],
+      "features": [],
+      "routes": [],
+      "dependencies": [],
+      "authentication": [],
+      "authorization": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "surface-detector",
+          "raw_signal": "src/ui",
+          "confidence": 0.96
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "vite.config.ts",
+          "detector": "surface-detector",
+          "raw_signal": "vite.config.ts",
+          "confidence": 0.96
+        }
+      ]
+    },
+    {
+      "id": "surface_f27f28db5b26",
+      "canonical_name": "DevSpace Documentation",
+      "family": "DOCUMENTATION",
+      "subtype": "repository docs",
+      "protocol": "Markdown",
+      "entry_point": "README.md",
+      "source_location": [
+        "README.md",
+        "docs"
+      ],
+      "owning_package": "@waishnav/devspace",
+      "deployable": false,
+      "runtime": "Node.js",
+      "personas": [
+        "UNKNOWN"
+      ],
+      "capabilities": [],
+      "features": [],
+      "routes": [],
+      "dependencies": [],
+      "authentication": [],
+      "authorization": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 1,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "README.md",
+          "detector": "surface-detector",
+          "raw_signal": "README.md",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "docs",
+          "detector": "surface-detector",
+          "raw_signal": "docs",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "surface_cf302234e82b",
+      "canonical_name": "@waishnav/devspace",
+      "family": "PACKAGE",
+      "subtype": "npm package",
+      "protocol": "npm",
+      "entry_point": "package.json",
+      "source_location": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "owning_package": "@waishnav/devspace",
+      "deployable": true,
+      "runtime": "Node.js",
+      "personas": [
+        "UNKNOWN"
+      ],
+      "capabilities": [],
+      "features": [],
+      "routes": [],
+      "dependencies": [],
+      "authentication": [],
+      "authorization": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 1,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package.json",
+          "detector": "surface-detector",
+          "raw_signal": "package.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "surface-detector",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
+  "personas": [
+    {
+      "id": "persona_unknown",
+      "name": "UNKNOWN",
+      "evidence_status": "UNKNOWN",
+      "confidence": 0.1
+    }
+  ],
+  "jobs_to_be_done": [
+    {
+      "id": "jtbd_unknown",
+      "statement": "UNKNOWN",
+      "evidence_status": "UNKNOWN",
+      "confidence": 0.1
+    }
+  ],
+  "domains": [
+    {
+      "id": "domain_83f9d72c7d58",
+      "name": "Identity and transport",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "domain_8f6fb4eb7f42",
+      "name": "Security",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "domain_ab7566959630",
+      "name": "Developer workflow",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "domain_71d0acd46556",
+      "name": "Reliability",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "domain_1bc8aad564c2",
+      "name": "Frontend performance",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "domain_358cc201f87d",
+      "name": "Operations",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "capability_aa8d0edfccda",
+      "name": "Authenticated MCP access",
+      "owner": "UNKNOWN",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "capability_23a5487457e8",
+      "name": "Session isolation",
+      "owner": "UNKNOWN",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "capability_32507732b5c7",
+      "name": "Workspace execution",
+      "owner": "UNKNOWN",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "capability_92b0a7f4897b",
+      "name": "Idempotent writes",
+      "owner": "UNKNOWN",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "capability_f6d523c1cfa0",
+      "name": "Lazy language loading",
+      "owner": "UNKNOWN",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    },
+    {
+      "id": "capability_d2af5ac1e8ac",
+      "name": "Runtime diagnosis",
+      "owner": "UNKNOWN",
+      "evidence_status": "INFERRED",
+      "confidence": 0.7
+    }
+  ],
+  "features": [
+    {
+      "id": "oauth-pkce-mcp-auth",
+      "name": "OAuth PKCE authenticated MCP handshake",
+      "purpose": "Authenticated MCP access",
+      "owner": "UNKNOWN",
+      "domain": "Identity and transport",
+      "capability": "Authenticated MCP access",
+      "personas": [
+        "Developer",
+        "UNKNOWN"
+      ],
+      "jobs_to_be_done": [
+        "UNKNOWN"
+      ],
+      "trigger": "UNKNOWN",
+      "preconditions": [],
+      "user_inputs": [],
+      "system_inputs": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ],
+      "business_rules": [],
+      "workflows": [],
+      "ui_states": [],
+      "commands": [],
+      "queries": [],
+      "services": [],
+      "apis": [
+        "route_88fe637beab8"
+      ],
+      "schemas": [],
+      "entities": [],
+      "events": [],
+      "permissions": [],
+      "telemetry": [],
+      "tests": [
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e"
+      ],
+      "dependencies": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ],
+      "risks": [],
+      "expected_outcomes": [
+        "Authenticated MCP access"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "routes": [
+        "route_88fe637beab8"
+      ],
+      "surfaces": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c"
+      ]
+    },
+    {
+      "id": "mcp-session-isolation",
+      "name": "MCP session binding and isolation",
+      "purpose": "Session isolation",
+      "owner": "UNKNOWN",
+      "domain": "Security",
+      "capability": "Session isolation",
+      "personas": [
+        "Developer",
+        "UNKNOWN"
+      ],
+      "jobs_to_be_done": [
+        "UNKNOWN"
+      ],
+      "trigger": "UNKNOWN",
+      "preconditions": [],
+      "user_inputs": [],
+      "system_inputs": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ],
+      "business_rules": [],
+      "workflows": [],
+      "ui_states": [],
+      "commands": [],
+      "queries": [],
+      "services": [],
+      "apis": [
+        "route_88fe637beab8"
+      ],
+      "schemas": [],
+      "entities": [],
+      "events": [],
+      "permissions": [],
+      "telemetry": [],
+      "tests": [
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e"
+      ],
+      "dependencies": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ],
+      "risks": [],
+      "expected_outcomes": [
+        "Session isolation"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "routes": [
+        "route_88fe637beab8"
+      ],
+      "surfaces": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c"
+      ]
+    },
+    {
+      "id": "workspace-process-tools",
+      "name": "Workspace and process tools",
+      "purpose": "Workspace execution",
+      "owner": "UNKNOWN",
+      "domain": "Developer workflow",
+      "capability": "Workspace execution",
+      "personas": [
+        "Developer",
+        "UNKNOWN"
+      ],
+      "jobs_to_be_done": [
+        "UNKNOWN"
+      ],
+      "trigger": "UNKNOWN",
+      "preconditions": [],
+      "user_inputs": [],
+      "system_inputs": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ],
+      "business_rules": [],
+      "workflows": [],
+      "ui_states": [],
+      "commands": [],
+      "queries": [],
+      "services": [],
+      "apis": [
+        "route_88fe637beab8"
+      ],
+      "schemas": [],
+      "entities": [],
+      "events": [],
+      "permissions": [],
+      "telemetry": [],
+      "tests": [
+        "test_3bc068b7a3cb",
+        "test_d8bc151faa06",
+        "test_6b5ebc97d966",
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e",
+        "test_9518f8ac5193",
+        "test_578f628d84b0"
+      ],
+      "dependencies": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ],
+      "risks": [],
+      "expected_outcomes": [
+        "Workspace execution"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "routes": [
+        "route_88fe637beab8"
+      ],
+      "surfaces": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c"
+      ]
+    },
+    {
+      "id": "durable-write-idempotency",
+      "name": "Durable write idempotency",
+      "purpose": "Idempotent writes",
+      "owner": "UNKNOWN",
+      "domain": "Reliability",
+      "capability": "Idempotent writes",
+      "personas": [
+        "Developer",
+        "UNKNOWN"
+      ],
+      "jobs_to_be_done": [
+        "UNKNOWN"
+      ],
+      "trigger": "UNKNOWN",
+      "preconditions": [],
+      "user_inputs": [],
+      "system_inputs": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ],
+      "business_rules": [],
+      "workflows": [],
+      "ui_states": [],
+      "commands": [],
+      "queries": [],
+      "services": [],
+      "apis": [],
+      "schemas": [],
+      "entities": [],
+      "events": [],
+      "permissions": [],
+      "telemetry": [],
+      "tests": [
+        "test_dbe3d59f09a2",
+        "test_9518f8ac5193"
+      ],
+      "dependencies": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ],
+      "risks": [],
+      "expected_outcomes": [
+        "Idempotent writes"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "routes": [],
+      "surfaces": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c"
+      ]
+    },
+    {
+      "id": "selective-language-loading",
+      "name": "Selective language catalog and lazy loading",
+      "purpose": "Lazy language loading",
+      "owner": "UNKNOWN",
+      "domain": "Frontend performance",
+      "capability": "Lazy language loading",
+      "personas": [
+        "Developer",
+        "UNKNOWN"
+      ],
+      "jobs_to_be_done": [
+        "UNKNOWN"
+      ],
+      "trigger": "UNKNOWN",
+      "preconditions": [],
+      "user_inputs": [],
+      "system_inputs": [
+        "src/ui/language-catalog.ts"
+      ],
+      "business_rules": [],
+      "workflows": [],
+      "ui_states": [],
+      "commands": [],
+      "queries": [],
+      "services": [],
+      "apis": [],
+      "schemas": [],
+      "entities": [],
+      "events": [],
+      "permissions": [],
+      "telemetry": [],
+      "tests": [
+        "test_3bc068b7a3cb",
+        "test_d8bc151faa06",
+        "test_6b5ebc97d966",
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e",
+        "test_9518f8ac5193",
+        "test_578f628d84b0"
+      ],
+      "dependencies": [
+        "src/ui/language-catalog.ts"
+      ],
+      "risks": [],
+      "expected_outcomes": [
+        "Lazy language loading"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "routes": [],
+      "surfaces": [
+        "surface_451923c6e2ed"
+      ]
+    },
+    {
+      "id": "cli-doctor-runtime",
+      "name": "CLI runtime doctor",
+      "purpose": "Runtime diagnosis",
+      "owner": "UNKNOWN",
+      "domain": "Operations",
+      "capability": "Runtime diagnosis",
+      "personas": [
+        "Developer",
+        "UNKNOWN"
+      ],
+      "jobs_to_be_done": [
+        "UNKNOWN"
+      ],
+      "trigger": "UNKNOWN",
+      "preconditions": [],
+      "user_inputs": [],
+      "system_inputs": [
+        "src/cli.ts"
+      ],
+      "business_rules": [],
+      "workflows": [],
+      "ui_states": [],
+      "commands": [],
+      "queries": [],
+      "services": [],
+      "apis": [],
+      "schemas": [],
+      "entities": [],
+      "events": [],
+      "permissions": [],
+      "telemetry": [],
+      "tests": [
+        "test_3bc068b7a3cb",
+        "test_d8bc151faa06",
+        "test_6b5ebc97d966",
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e",
+        "test_9518f8ac5193",
+        "test_578f628d84b0"
+      ],
+      "dependencies": [
+        "src/cli.ts"
+      ],
+      "risks": [],
+      "expected_outcomes": [
+        "Runtime diagnosis"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "routes": [],
+      "surfaces": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c"
+      ]
+    }
+  ],
+  "workflows": [],
+  "routes": [
+    {
+      "id": "route_88fe637beab8",
+      "path": "/mcp",
+      "methods": [
+        "POST"
+      ],
+      "kind": "MCP",
+      "purpose": "Authenticated MCP transport",
+      "authentication": [
+        "OAuth/Bearer"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/mcp",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "route_15a99506b4e1",
+      "path": "/healthz",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "kind": "HTTP",
+      "purpose": "Health/readiness",
+      "authentication": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/healthz",
+          "confidence": 0.99
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "component_a15f20fdcb07",
+      "name": "card-types.test.ts",
+      "source_location": "src/ui/card-types.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/card-types.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_d8f4c86ba13b",
+      "name": "card-types.ts",
+      "source_location": "src/ui/card-types.ts",
+      "exports": [
+        "isToolName",
+        "isReadTool",
+        "isWriteTool",
+        "isEditTool",
+        "isPatchTool",
+        "isSearchTool",
+        "isShellTool",
+        "isReviewTool",
+        "isToolResultCard",
+        "payloadText",
+        "summaryNumber",
+        "isExpandableCard",
+        "isInitiallyExpandedCard"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/card-types.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_4b229e840ff2",
+      "name": "diff-payload.tsx",
+      "source_location": "src/ui/diff-payload.tsx",
+      "exports": [
+        "DiffPayload"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/diff-payload.tsx",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_e8f84b43b43e",
+      "name": "file-payload.tsx",
+      "source_location": "src/ui/file-payload.tsx",
+      "exports": [
+        "FilePayload"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/file-payload.tsx",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_a83677ff28e3",
+      "name": "heavy-payload.tsx",
+      "source_location": "src/ui/heavy-payload.tsx",
+      "exports": [
+        "mountHeavyPayload"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/heavy-payload.tsx",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_75c01bd3a17c",
+      "name": "icons.ts",
+      "source_location": "src/ui/icons.ts",
+      "exports": [
+        "toolIcons",
+        "getProviderLogo",
+        "renderIcon"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/icons.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_e374f641999c",
+      "name": "language-catalog.test.ts",
+      "source_location": "src/ui/language-catalog.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_1e909298e107",
+      "name": "language-catalog.ts",
+      "source_location": "src/ui/language-catalog.ts",
+      "exports": [
+        "selectFileLanguage",
+        "isHeavyLanguage"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_cddb811068b6",
+      "name": "patch-display.test.ts",
+      "source_location": "src/ui/patch-display.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/patch-display.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_378416fcc243",
+      "name": "patch-display.ts",
+      "source_location": "src/ui/patch-display.ts",
+      "exports": [
+        "getPatchDisplayParts",
+        "getFileChangeKind",
+        "getRenderedFileChangeKind",
+        "getFileChangePathDisplay",
+        "getRenderedFileChangePathDisplay",
+        "fileChangeKindLabel"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/patch-display.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_8563b3ffee79",
+      "name": "review-payload.tsx",
+      "source_location": "src/ui/review-payload.tsx",
+      "exports": [
+        "mountReviewPayload"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/review-payload.tsx",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_7835bd2afd21",
+      "name": "scrollbar.ts",
+      "source_location": "src/ui/scrollbar.ts",
+      "exports": [
+        "pierrePrettyScrollbarCss"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/scrollbar.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_9b6246bea38b",
+      "name": "tool-display.test.ts",
+      "source_location": "src/ui/tool-display.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/tool-display.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_4b936d483363",
+      "name": "tool-display.ts",
+      "source_location": "src/ui/tool-display.ts",
+      "exports": [
+        "getToolDisplay",
+        "getToolHeaderSummary"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/tool-display.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_f6966b81a411",
+      "name": "vite-env.d.ts",
+      "source_location": "src/ui/vite-env.d.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/vite-env.d.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_8e83ab9e643b",
+      "name": "workspace-app.tsx",
+      "source_location": "src/ui/workspace-app.tsx",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/workspace-app.tsx",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    }
+  ],
+  "apis": [
+    {
+      "id": "route_88fe637beab8",
+      "path": "/mcp",
+      "methods": [
+        "POST"
+      ],
+      "kind": "MCP",
+      "purpose": "Authenticated MCP transport",
+      "authentication": [
+        "OAuth/Bearer"
+      ],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/mcp",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "route_15a99506b4e1",
+      "path": "/healthz",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "kind": "HTTP",
+      "purpose": "Health/readiness",
+      "authentication": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/healthz",
+          "confidence": 0.99
+        }
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "contract_canonical_manifest",
+      "name": "Canonical 360 manifest",
+      "schema": "schemas/canonical-360-manifest.schema.json",
+      "evidence_status": "EXPLICIT",
+      "confidence": 1
+    }
+  ],
+  "entities": [],
+  "events": [],
+  "tests": [
+    {
+      "id": "test_3bc068b7a3cb",
+      "path": "scripts/audit-ui-bundle.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/audit-ui-bundle.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_d8bc151faa06",
+      "path": "scripts/canonical-360.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/canonical-360.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_6b5ebc97d966",
+      "path": "scripts/dev-command.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/dev-command.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_dbe3d59f09a2",
+      "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_58bf0909c5a7",
+      "path": "scripts/e2e-http-mcp-negative.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_79f91807593e",
+      "path": "scripts/e2e-http-mcp.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_9518f8ac5193",
+      "path": "scripts/e2e-idempotency-p1.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-idempotency-p1.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_578f628d84b0",
+      "path": "src/apply-patch.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/apply-patch.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_edfde0016435",
+      "path": "src/artifact-download.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/artifact-download.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_c6e5a6551503",
+      "path": "src/cli.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_3d568f154201",
+      "path": "src/config.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/config.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_d0c48b734aed",
+      "path": "src/incoming-artifacts.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/incoming-artifacts.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_256e60d2da2b",
+      "path": "src/local-agent-adapters.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/local-agent-adapters.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_926ad95b499e",
+      "path": "src/local-agent-availability.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/local-agent-availability.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_a38be99306d7",
+      "path": "src/local-agent-profiles.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/local-agent-profiles.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_d4f9d8ce2b6e",
+      "path": "src/local-agent-runtime.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/local-agent-runtime.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_a92fd9e898fd",
+      "path": "src/local-agent-store.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/local-agent-store.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_8f35bd0c1c45",
+      "path": "src/local-agent-targets.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/local-agent-targets.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_17566866b891",
+      "path": "src/mcp-sessions.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/mcp-sessions.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_2481f1ebca49",
+      "path": "src/oauth-store.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-store.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_faf78054b92c",
+      "path": "src/process-platform.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-platform.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_76404f90283a",
+      "path": "src/process-sessions.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_e49dee9006c1",
+      "path": "src/request-meta.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/request-meta.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_7c589cd4ee8a",
+      "path": "src/review-checkpoints.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/review-checkpoints.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_86de4eb4fdef",
+      "path": "src/roots.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/roots.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_2ec9bb28f426",
+      "path": "src/server-shutdown.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server-shutdown.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_99636b5e2b3a",
+      "path": "src/server.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_972cee8a7357",
+      "path": "src/skills.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/skills.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_a15f20fdcb07",
+      "path": "src/ui/card-types.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/card-types.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_e374f641999c",
+      "path": "src/ui/language-catalog.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_cddb811068b6",
+      "path": "src/ui/patch-display.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/patch-display.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_9b6246bea38b",
+      "path": "src/ui/tool-display.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/tool-display.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_6c8cfdc69808",
+      "path": "src/workspace-conversation.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/workspace-conversation.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_008cbd460864",
+      "path": "src/workspaces.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/workspaces.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    }
+  ],
+  "metrics": [],
+  "integrations": [
+    {
+      "id": "integration_de2d5024d63a",
+      "name": "@modelcontextprotocol/ext-apps",
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.98
+    },
+    {
+      "id": "integration_f7c05f392430",
+      "name": "@modelcontextprotocol/sdk",
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.98
+    },
+    {
+      "id": "integration_696a1c4c4439",
+      "name": "better-sqlite3",
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.98
+    },
+    {
+      "id": "integration_008231aaf999",
+      "name": "express",
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.98
+    }
+  ],
+  "infrastructure": [
+    {
+      "id": "ci_github_actions",
+      "kind": "CI/CD",
+      "path": ".github/workflows/ci.yml",
+      "evidence_status": "EXPLICIT",
+      "confidence": 1
+    }
+  ],
+  "environments": [
+    {
+      "id": "env_local",
+      "name": "local",
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.8
+    },
+    {
+      "id": "env_ci",
+      "name": "CI",
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.9
+    }
+  ],
+  "evidence": [
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "package-lock.json",
+      "detector": "package-manager",
+      "raw_signal": "package-lock.json",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src",
+      "detector": "topology",
+      "raw_signal": "src/",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "topology",
+      "raw_signal": "server entrypoint",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui",
+      "detector": "topology",
+      "raw_signal": "UI source directory",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/cli.ts",
+      "detector": "surface-detector",
+      "raw_signal": "src/cli.ts",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "package.json",
+      "detector": "surface-detector",
+      "raw_signal": "package.json",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "surface-detector",
+      "raw_signal": "src/server.ts",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "surface-detector",
+      "raw_signal": "src/server.ts",
+      "confidence": 0.98
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui",
+      "detector": "surface-detector",
+      "raw_signal": "src/ui",
+      "confidence": 0.96
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "vite.config.ts",
+      "detector": "surface-detector",
+      "raw_signal": "vite.config.ts",
+      "confidence": 0.96
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "README.md",
+      "detector": "surface-detector",
+      "raw_signal": "README.md",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "docs",
+      "detector": "surface-detector",
+      "raw_signal": "docs",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "package.json",
+      "detector": "surface-detector",
+      "raw_signal": "package.json",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "package-lock.json",
+      "detector": "surface-detector",
+      "raw_signal": "package-lock.json",
+      "confidence": 1
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "route-detector",
+      "raw_signal": "/mcp",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "route-detector",
+      "raw_signal": "/healthz",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/server.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/oauth-provider.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/oauth-provider.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp.test.mjs",
+      "detector": "feature-detector",
+      "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/server.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-negative.test.mjs",
+      "detector": "feature-detector",
+      "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/server.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/process-sessions.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/process-sessions.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/idempotency-store.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/idempotency-store.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/server.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+      "detector": "feature-detector",
+      "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/language-catalog.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/ui/language-catalog.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/cli.ts",
+      "detector": "feature-detector",
+      "raw_signal": "src/cli.ts",
+      "confidence": 0.9
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/card-types.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/card-types.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/diff-payload.tsx",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/file-payload.tsx",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/heavy-payload.tsx",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/icons.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/language-catalog.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/language-catalog.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/patch-display.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/patch-display.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/review-payload.tsx",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/scrollbar.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/tool-display.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/tool-display.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/vite-env.d.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/workspace-app.tsx",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/audit-ui-bundle.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/canonical-360.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/dev-command.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-negative.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-idempotency-p1.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/apply-patch.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/artifact-download.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/cli.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/config.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/incoming-artifacts.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/local-agent-adapters.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/local-agent-availability.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/local-agent-profiles.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/local-agent-runtime.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/local-agent-store.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/local-agent-targets.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/mcp-sessions.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/oauth-store.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/process-platform.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/process-sessions.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/request-meta.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/review-checkpoints.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/roots.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server-shutdown.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/server.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/skills.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/card-types.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/language-catalog.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/patch-display.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/tool-display.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/workspace-conversation.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/workspaces.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    }
+  ],
+  "orphans": [
+    {
+      "id": "finding_8de6a7608bd0",
+      "kind": "feature_without_owner",
+      "title": "Feature sem owner: OAuth PKCE authenticated MCP handshake",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_48032dc921f3",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: OAuth PKCE authenticated MCP handshake",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_d3a4615cb49b",
+      "kind": "feature_without_owner",
+      "title": "Feature sem owner: MCP session binding and isolation",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_2d27047c9c54",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: MCP session binding and isolation",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_3faa7744f185",
+      "kind": "feature_without_owner",
+      "title": "Feature sem owner: Workspace and process tools",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ]
+    },
+    {
+      "id": "finding_06758159b732",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Workspace and process tools",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ]
+    },
+    {
+      "id": "finding_d5ba433d2440",
+      "kind": "feature_without_owner",
+      "title": "Feature sem owner: Durable write idempotency",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_a126770598b4",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Durable write idempotency",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_5bddce32f1ff",
+      "kind": "feature_without_owner",
+      "title": "Feature sem owner: Selective language catalog and lazy loading",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/ui/language-catalog.ts"
+      ]
+    },
+    {
+      "id": "finding_67c68b2508d2",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Selective language catalog and lazy loading",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/ui/language-catalog.ts"
+      ]
+    },
+    {
+      "id": "finding_9760c10d0b61",
+      "kind": "feature_without_owner",
+      "title": "Feature sem owner: CLI runtime doctor",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/cli.ts"
+      ]
+    },
+    {
+      "id": "finding_30e094a0a1d7",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: CLI runtime doctor",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/cli.ts"
+      ]
+    },
+    {
+      "id": "finding_896fe383b168",
+      "kind": "route_without_feature",
+      "title": "Route sem feature: /healthz",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Endpoint detectado sem relação explícita com uma feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/healthz",
+          "confidence": 0.99
+        }
+      ],
+      "confidence": 0.99,
+      "affected_paths": [
+        "/healthz"
+      ]
+    }
+  ],
+  "drift": [
+    {
+      "id": "finding_14634ced368b",
+      "kind": "deployment_provenance_unknown",
+      "title": "Proveniência de deployment não observada",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "CI foi observada, mas deploy/release runtime não foi localizado.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": ".github/workflows/ci.yml",
+          "detector": "deployment-detector",
+          "raw_signal": "CI workflow without deploy evidence",
+          "confidence": 0.85
+        }
+      ],
+      "confidence": 0.85,
+      "affected_paths": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "id": "finding_3190d0c05f40",
+      "kind": "runtime_telemetry_unknown",
+      "title": "Runtime telemetry não observada no self-scan",
+      "status": "UNKNOWN",
+      "severity": "P1",
+      "description": "Não declarar runtime drift sem evidência de runtime observada.",
+      "evidence": [],
+      "confidence": 0.2,
+      "affected_paths": []
+    },
+    {
+      "id": "finding_5247a130de06",
+      "kind": "documentation_drift_unknown",
+      "title": "Documentação e runtime não formalmente reconciliados",
+      "status": "EXPLICIT",
+      "severity": "P2",
+      "description": "Documentação existe, mas não há matriz intended/documented/implemented/tested/deployed/observed versionada.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "README.md",
+          "detector": "drift-detector",
+          "raw_signal": "documentation exists",
+          "confidence": 0.92
+        }
+      ],
+      "confidence": 0.92,
+      "affected_paths": [
+        "README.md",
+        "docs"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "finding_48032dc921f3",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: OAuth PKCE authenticated MCP handshake",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_2d27047c9c54",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: MCP session binding and isolation",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_06758159b732",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Workspace and process tools",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ]
+    },
+    {
+      "id": "finding_a126770598b4",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Durable write idempotency",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_67c68b2508d2",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Selective language catalog and lazy loading",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/ui/language-catalog.ts"
+      ]
+    },
+    {
+      "id": "finding_30e094a0a1d7",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: CLI runtime doctor",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/cli.ts"
+      ]
+    },
+    {
+      "id": "finding_896fe383b168",
+      "kind": "route_without_feature",
+      "title": "Route sem feature: /healthz",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Endpoint detectado sem relação explícita com uma feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/healthz",
+          "confidence": 0.99
+        }
+      ],
+      "confidence": 0.99,
+      "affected_paths": [
+        "/healthz"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "id": "finding_48032dc921f3",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: OAuth PKCE authenticated MCP handshake",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_2d27047c9c54",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: MCP session binding and isolation",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_06758159b732",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Workspace and process tools",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ]
+    },
+    {
+      "id": "finding_a126770598b4",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Durable write idempotency",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ]
+    },
+    {
+      "id": "finding_67c68b2508d2",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: Selective language catalog and lazy loading",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/ui/language-catalog.ts"
+      ]
+    },
+    {
+      "id": "finding_30e094a0a1d7",
+      "kind": "unknown_persona",
+      "title": "Persona não observada: CLI runtime doctor",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "confidence": 0.9,
+      "affected_paths": [
+        "src/cli.ts"
+      ]
+    },
+    {
+      "id": "finding_896fe383b168",
+      "kind": "route_without_feature",
+      "title": "Route sem feature: /healthz",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "Endpoint detectado sem relação explícita com uma feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/healthz",
+          "confidence": 0.99
+        }
+      ],
+      "confidence": 0.99,
+      "affected_paths": [
+        "/healthz"
+      ]
+    },
+    {
+      "id": "finding_14634ced368b",
+      "kind": "deployment_provenance_unknown",
+      "title": "Proveniência de deployment não observada",
+      "status": "EXPLICIT",
+      "severity": "P1",
+      "description": "CI foi observada, mas deploy/release runtime não foi localizado.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": ".github/workflows/ci.yml",
+          "detector": "deployment-detector",
+          "raw_signal": "CI workflow without deploy evidence",
+          "confidence": 0.85
+        }
+      ],
+      "confidence": 0.85,
+      "affected_paths": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "id": "finding_3190d0c05f40",
+      "kind": "runtime_telemetry_unknown",
+      "title": "Runtime telemetry não observada no self-scan",
+      "status": "UNKNOWN",
+      "severity": "P1",
+      "description": "Não declarar runtime drift sem evidência de runtime observada.",
+      "evidence": [],
+      "confidence": 0.2,
+      "affected_paths": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "CANONICAL-P1-001",
+      "title": "Persona não observada: Workspace and process tools",
+      "priority": "P1",
+      "domain": "Product",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-002",
+      "title": "Proveniência de deployment não observada",
+      "priority": "P1",
+      "domain": "Operations",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "CI foi observada, mas deploy/release runtime não foi localizado.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": ".github/workflows/ci.yml",
+          "detector": "deployment-detector",
+          "raw_signal": "CI workflow without deploy evidence",
+          "confidence": 0.85
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        ".github/workflows/ci.yml"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-003",
+      "title": "Persona não observada: MCP session binding and isolation",
+      "priority": "P1",
+      "domain": "Product",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-004",
+      "title": "Persona não observada: CLI runtime doctor",
+      "priority": "P1",
+      "domain": "Product",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/cli.ts"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-005",
+      "title": "Runtime telemetry não observada no self-scan",
+      "priority": "P1",
+      "domain": "Operations",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não declarar runtime drift sem evidência de runtime observada.",
+      "evidence": [],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-006",
+      "title": "Persona não observada: OAuth PKCE authenticated MCP handshake",
+      "priority": "P1",
+      "domain": "Product",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-007",
+      "title": "Persona não observada: Selective language catalog and lazy loading",
+      "priority": "P1",
+      "domain": "Product",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/ui/language-catalog.ts"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-008",
+      "title": "Route sem feature: /healthz",
+      "priority": "P1",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Endpoint detectado sem relação explícita com uma feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "route-detector",
+          "raw_signal": "/healthz",
+          "confidence": 0.99
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "/healthz"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P1-009",
+      "title": "Persona não observada: Durable write idempotency",
+      "priority": "P1",
+      "domain": "Product",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Não existe fonte explícita de personas/JTBD para esta feature.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Impede rastreabilidade ou promoção segura",
+      "risk": "Decisão crítica sem evidência suficiente",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-010",
+      "title": "Feature sem owner: Workspace and process tools",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/process-sessions.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/process-sessions.ts",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/server.ts",
+        "src/process-sessions.ts"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-011",
+      "title": "Documentação e runtime não formalmente reconciliados",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Documentação existe, mas não há matriz intended/documented/implemented/tested/deployed/observed versionada.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "README.md",
+          "detector": "drift-detector",
+          "raw_signal": "documentation exists",
+          "confidence": 0.92
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "README.md",
+        "docs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-012",
+      "title": "Feature sem owner: Selective language catalog and lazy loading",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/language-catalog.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/ui/language-catalog.ts",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/ui/language-catalog.ts"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-013",
+      "title": "Feature sem owner: OAuth PKCE authenticated MCP handshake",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/oauth-provider.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/oauth-provider.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/server.ts",
+        "src/oauth-provider.ts",
+        "scripts/e2e-http-mcp.test.mjs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-014",
+      "title": "Feature sem owner: CLI runtime doctor",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/cli.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/cli.ts",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/cli.ts"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-015",
+      "title": "Feature sem owner: MCP session binding and isolation",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-negative.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/server.ts",
+        "scripts/e2e-http-mcp-negative.test.mjs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    },
+    {
+      "id": "CANONICAL-P2-016",
+      "title": "Feature sem owner: Durable write idempotency",
+      "priority": "P2",
+      "domain": "Architecture",
+      "capability": "Reverse traceability and evidence completeness",
+      "finding": "Ownership de produto não foi observada na codebase.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/idempotency-store.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/idempotency-store.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "feature-detector",
+          "raw_signal": "src/server.ts",
+          "confidence": 0.9
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "detector": "feature-detector",
+          "raw_signal": "scripts/e2e-http-mcp-idempotency.test.mjs",
+          "confidence": 0.9
+        }
+      ],
+      "impact": "Reduzir qualidade de documentação e ownership",
+      "risk": "Drift ou backlog silencioso",
+      "scope": "Canonical 360° PRD Reverse Engineering",
+      "affected_paths": [
+        "src/idempotency-store.ts",
+        "src/server.ts",
+        "scripts/e2e-http-mcp-idempotency.test.mjs"
+      ],
+      "acceptance_criteria": [
+        "Finding possui evidência ou UNKNOWN explícito",
+        "Saída permanece determinística",
+        "Teste ou verificação executável"
+      ],
+      "dor": [
+        "scope conhecido",
+        "source of truth identificado",
+        "critério de validação definido"
+      ],
+      "dod": [
+        "implementação integrada",
+        "schema validado",
+        "teste executado",
+        "evidência publicada"
+      ],
+      "dependencies": [],
+      "verification_command": "npm run prd:reverse -- --strict --fail-on P1"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "name": "DISCOVERED",
+      "state": "PASS",
+      "critical": true,
+      "rationale": "Discovery executado.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G1",
+      "name": "MAPPED",
+      "state": "PASS",
+      "critical": true,
+      "rationale": "Topologia, surfaces, rotas e features mapeadas.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G2",
+      "name": "CONTRACTED",
+      "state": "PASS",
+      "critical": true,
+      "rationale": "Manifest e schema produzidos.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G3",
+      "name": "IMPLEMENTED",
+      "state": "PASS",
+      "critical": true,
+      "rationale": "Capability integrada ao source tree.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G4",
+      "name": "VERIFIED",
+      "state": "PASS",
+      "critical": true,
+      "rationale": "Self-scan executado e outputs validados.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G5",
+      "name": "RELEASED",
+      "state": "UNKNOWN",
+      "critical": true,
+      "rationale": "Deployment/release não observado.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G6",
+      "name": "OBSERVED",
+      "state": "UNKNOWN",
+      "critical": true,
+      "rationale": "Runtime telemetry não observada.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G7",
+      "name": "OUTCOME_VERIFIED",
+      "state": "UNKNOWN",
+      "critical": true,
+      "rationale": "Outcomes de negócio não observados.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G8",
+      "name": "REVERSE_TRACEABLE",
+      "state": "BLOCKED",
+      "critical": true,
+      "rationale": "WHY/WHO/JTBD permanecem UNKNOWN.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "id": "G9",
+      "name": "AGENT_READY",
+      "state": "PASS",
+      "critical": false,
+      "rationale": "CLI, manifest, schema, gates e backlog disponíveis.",
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "package-lock.json",
+          "detector": "package-manager",
+          "raw_signal": "package-lock.json",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src",
+          "detector": "topology",
+          "raw_signal": "src/",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/server.ts",
+          "detector": "topology",
+          "raw_signal": "server entrypoint",
+          "confidence": 1
+        },
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui",
+          "detector": "topology",
+          "raw_signal": "UI source directory",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
+  "dor": {
+    "status": "PASS_WITH_UNKNOWN",
+    "criteria": [
+      "scope conhecido",
+      "package manager conhecido",
+      "test framework conhecido",
+      "source of truth conhecido",
+      "estratégia de validação definida",
+      "breaking change avaliado"
+    ],
+    "unknowns": [
+      "WHY",
+      "WHO",
+      "JTBD",
+      "runtime telemetry",
+      "deployment provenance"
+    ]
+  },
+  "dod": {
+    "status": "IN_PROGRESS",
+    "criteria": [
+      "code created",
+      "integration completed",
+      "schema validates",
+      "formatter/linter",
+      "typecheck",
+      "unit/integration/E2E tests",
+      "CLI executes",
+      "self-scan outputs",
+      "regressions corrected",
+      "evidence recorded"
+    ],
+    "completed": [
+      "discovery",
+      "scanner implementation",
+      "manifest generator pending execution"
+    ]
+  },
+  "scoring": {
+    "Business_Alignment": 0,
+    "Product_Coherence": 35,
+    "Surface_Coverage": 90,
+    "Architecture": 82,
+    "Data": 45,
+    "Security": 84,
+    "Testing": 100,
+    "Observability": 35,
+    "Operations": 78,
+    "Reverse_Traceability": 100,
+    "Evidence_Coverage": 100,
+    "Unknown_Surface": 0,
+    "Drift_Risk": 75,
+    "Agent_Readiness": 82,
+    "criteria": "Evidence coverage is explicit-node coverage; UNKNOWN is preserved rather than promoted to truth."
+  },
+  "traceability": {
+    "forward": {
+      "WHY": "UNKNOWN",
+      "WHO": "UNKNOWN",
+      "JTBD": "UNKNOWN",
+      "DOMAIN": "domains",
+      "CAPABILITY": "capabilities",
+      "FEATURE": [
+        "oauth-pkce-mcp-auth",
+        "mcp-session-isolation",
+        "workspace-process-tools",
+        "durable-write-idempotency",
+        "selective-language-loading",
+        "cli-doctor-runtime"
+      ],
+      "SURFACE": [
+        "surface_03b51a594e8b",
+        "surface_5d95b490f9fe",
+        "surface_2c906eee076c",
+        "surface_451923c6e2ed",
+        "surface_f27f28db5b26",
+        "surface_cf302234e82b"
+      ],
+      "ROUTE": [
+        "route_88fe637beab8",
+        "route_15a99506b4e1"
+      ],
+      "TEST": [
+        "test_3bc068b7a3cb",
+        "test_d8bc151faa06",
+        "test_6b5ebc97d966",
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e",
+        "test_9518f8ac5193",
+        "test_578f628d84b0",
+        "test_edfde0016435",
+        "test_c6e5a6551503",
+        "test_3d568f154201",
+        "test_d0c48b734aed",
+        "test_256e60d2da2b",
+        "test_926ad95b499e",
+        "test_a38be99306d7",
+        "test_d4f9d8ce2b6e",
+        "test_a92fd9e898fd",
+        "test_8f35bd0c1c45",
+        "test_17566866b891",
+        "test_2481f1ebca49",
+        "test_faf78054b92c",
+        "test_76404f90283a",
+        "test_e49dee9006c1",
+        "test_7c589cd4ee8a",
+        "test_86de4eb4fdef",
+        "test_2ec9bb28f426",
+        "test_99636b5e2b3a",
+        "test_972cee8a7357",
+        "test_a15f20fdcb07",
+        "test_e374f641999c",
+        "test_cddb811068b6",
+        "test_9b6246bea38b",
+        "test_6c8cfdc69808",
+        "test_008cbd460864"
+      ],
+      "OUTCOME": "UNKNOWN"
+    },
+    "reverse": {
+      "OUTCOME": "UNKNOWN",
+      "TEST": [
+        "test_3bc068b7a3cb",
+        "test_d8bc151faa06",
+        "test_6b5ebc97d966",
+        "test_dbe3d59f09a2",
+        "test_58bf0909c5a7",
+        "test_79f91807593e",
+        "test_9518f8ac5193",
+        "test_578f628d84b0",
+        "test_edfde0016435",
+        "test_c6e5a6551503",
+        "test_3d568f154201",
+        "test_d0c48b734aed",
+        "test_256e60d2da2b",
+        "test_926ad95b499e",
+        "test_a38be99306d7",
+        "test_d4f9d8ce2b6e",
+        "test_a92fd9e898fd",
+        "test_8f35bd0c1c45",
+        "test_17566866b891",
+        "test_2481f1ebca49",
+        "test_faf78054b92c",
+        "test_76404f90283a",
+        "test_e49dee9006c1",
+        "test_7c589cd4ee8a",
+        "test_86de4eb4fdef",
+        "test_2ec9bb28f426",
+        "test_99636b5e2b3a",
+        "test_972cee8a7357",
+        "test_a15f20fdcb07",
+        "test_e374f641999c",
+        "test_cddb811068b6",
+        "test_9b6246bea38b",
+        "test_6c8cfdc69808",
+        "test_008cbd460864"
+      ],
+      "ROUTE": [
+        "route_88fe637beab8",
+        "route_15a99506b4e1"
+      ],
+      "FEATURE": [
+        "oauth-pkce-mcp-auth",
+        "mcp-session-isolation",
+        "workspace-process-tools",
+        "durable-write-idempotency",
+        "selective-language-loading",
+        "cli-doctor-runtime"
+      ],
+      "WHY": "UNKNOWN"
+    },
+    "confidence": 1
+  },
+  "ignored_paths": [
+    ".git",
+    "coverage",
+    "dist",
+    "node_modules"
+  ]
+}
