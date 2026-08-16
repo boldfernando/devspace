@@ -1679,6 +1679,7 @@ export function createServer(
     ...(allowedHosts ? { allowedHosts } : {}),
   });
   const transports = new McpSessionRegistry<Transport>();
+  const sessionBindings = new Map<string, { clientId: string; resource: string }>();
   const mcpUrl = new URL("/mcp", config.publicBaseUrl);
   const resourceServerUrl = resourceUrlFromServerUrl(mcpUrl);
   const oauthProvider = new SingleUserOAuthProvider(config.oauth, mcpUrl, config.stateDir);
@@ -1825,11 +1826,42 @@ export function createServer(
           sendJsonRpcError(res, 404, -32000, "Unknown MCP session");
           return;
         }
+        const binding = sessionBindings.get(sessionId);
+        const auth = req.auth;
+        const resource = auth?.resource?.href;
+        if (
+          !binding ||
+          !auth?.clientId ||
+          !resource ||
+          binding.clientId !== auth.clientId ||
+          binding.resource !== resource
+        ) {
+          logEvent(config.logging, "warn", "auth_denied", {
+            requestId,
+            method: req.method,
+            path: requestPath(req),
+            reason: "mcp_session_binding_mismatch",
+            sessionIdPresent: true,
+            sessionIdPrefix: sessionIdPrefix(sessionId),
+            ...requestLogFields(req, config),
+          });
+          sendJsonRpcError(res, 403, -32003, "MCP session is bound to another client");
+          return;
+        }
       } else if (initializeRequest) {
         transport = new StreamableHTTPServerTransport({
           sessionIdGenerator: () => randomUUID(),
           onsessioninitialized: (newSessionId) => {
-            if (transport) transports.register(newSessionId, transport);
+            if (transport) {
+              transports.register(newSessionId, transport);
+              const auth = req.auth;
+              if (auth?.clientId && auth.resource?.href) {
+                sessionBindings.set(newSessionId, {
+                  clientId: auth.clientId,
+                  resource: auth.resource.href,
+                });
+              }
+            }
             logEvent(config.logging, "info", "mcp_session_created", {
               requestId,
               sessionIdPrefix: sessionIdPrefix(newSessionId),
@@ -1841,6 +1873,7 @@ export function createServer(
         transport.onclose = () => {
           const closedSessionId = transport?.sessionId;
           if (closedSessionId && transports.remove(closedSessionId)) {
+            sessionBindings.delete(closedSessionId);
             logEvent(config.logging, "info", "mcp_session_closed", {
               reason: "transport_close",
               sessionIdPrefix: sessionIdPrefix(closedSessionId),
@@ -1882,6 +1915,7 @@ export function createServer(
     close: () => {
       closePromise ??= (async () => {
         clearInterval(sessionCleanupTimer);
+        sessionBindings.clear();
         const results = await transports.closeAll();
         logSessionCloseResults("server_shutdown", results);
         processSessions.shutdown();

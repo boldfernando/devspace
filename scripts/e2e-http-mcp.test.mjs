@@ -6,10 +6,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-const port = 17677;
-const baseUrl = `http://127.0.0.1:${port}`;
-const ownerToken = "e2e-owner-token-that-is-long-enough";
-const redirectUri = "http://127.0.0.1:17679/callback";
+const port = Number(process.env.E2E_PORT ?? 17677);
+const baseUrl = process.env.E2E_BASE_URL ?? `http://127.0.0.1:${port}`;
+const ownerToken = process.env.E2E_OWNER_TOKEN ?? "e2e-owner-token-that-is-long-enough";
+const redirectUri = process.env.E2E_REDIRECT_URI ?? "http://127.0.0.1:17679/callback";
 
 /*
  * OAuth PKCE/MCP E2E contract:
@@ -68,7 +68,7 @@ async function rpc(accessToken, body, sessionId) {
 
 test("real OAuth PKCE flow completes an authenticated MCP handshake", async () => {
   const stateDir = await mkdtemp(join(tmpdir(), "devspace-e2e-"));
-  const child = spawn(process.execPath, ["dist/server.js"], { cwd: process.cwd(), env: { ...process.env, HOST: "127.0.0.1", PORT: String(port), DEVSPACE_STATE_DIR: stateDir, DEVSPACE_ALLOWED_ROOTS: process.cwd(), DEVSPACE_PUBLIC_BASE_URL: baseUrl, DEVSPACE_OAUTH_OWNER_TOKEN: ownerToken }, stdio: "ignore" });
+  const child = process.env.E2E_BASE_URL ? null : spawn(process.execPath, ["dist/server.js"], { cwd: process.cwd(), env: { ...process.env, HOST: "127.0.0.1", PORT: String(port), DEVSPACE_STATE_DIR: stateDir, DEVSPACE_ALLOWED_ROOTS: process.cwd(), DEVSPACE_PUBLIC_BASE_URL: baseUrl, DEVSPACE_OAUTH_OWNER_TOKEN: ownerToken }, stdio: "ignore" });
   try {
     await waitForHealth();
     const unauthenticated = await fetch(`${baseUrl}/mcp`, { method: "POST", headers: { "content-type": "application/json", accept: "application/json, text/event-stream" }, body: JSON.stringify({ jsonrpc: "2.0", id: 99, method: "initialize", params: {} }) });
@@ -90,9 +90,33 @@ test("real OAuth PKCE flow completes an authenticated MCP handshake", async () =
     assert.equal(openWorkspace.status, 200);
     const openPayload = parseRpc(await openWorkspace.text());
     assert.equal(openPayload.error, undefined);
+
+    const loadSamples = Number(process.env.MCP_LOAD_SAMPLES ?? "20");
+    const loadStarted = performance.now();
+    const latencies = [];
+    for (let index = 0; index < loadSamples; index += 1) {
+      const requestStarted = performance.now();
+      const initResponse = await rpc(accessToken, { jsonrpc: "2.0", id: 1000 + index, method: "initialize", params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "devspace-load", version: "1.0.0" } } });
+      const initBody = parseRpc(await initResponse.text());
+      if (initResponse.status !== 200 || initBody.error) {
+        throw new Error(`MCP load initialize ${index} failed: status=${initResponse.status} body=${JSON.stringify(initBody)}`);
+      }
+      const sampleSession = initResponse.headers.get("mcp-session-id");
+      assert.ok(sampleSession);
+      const initializedResponse = await rpc(accessToken, { jsonrpc: "2.0", method: "notifications/initialized" }, sampleSession);
+      assert.ok([200, 202].includes(initializedResponse.status));
+      const listResponse = await rpc(accessToken, { jsonrpc: "2.0", id: 2000 + index, method: "tools/list", params: {} }, sampleSession);
+      const listBody = parseRpc(await listResponse.text());
+      if (listResponse.status !== 200 || listBody.error) {
+        throw new Error(`MCP load tools/list ${index} failed: status=${listResponse.status} body=${JSON.stringify(listBody)}`);
+      }
+      latencies.push(performance.now() - requestStarted);
+    }
+    const sortedLatencies = [...latencies].sort((a, b) => a - b);
+    const percentile = (ratio) => sortedLatencies[Math.min(sortedLatencies.length - 1, Math.floor(sortedLatencies.length * ratio))];
+    console.log(JSON.stringify({ event: "mcp_load", samples: loadSamples, wallMs: performance.now() - loadStarted, p50Ms: percentile(0.5), p95Ms: percentile(0.95), maxMs: sortedLatencies.at(-1) }));
   } finally {
-    child.kill();
-    await new Promise((resolve) => child.once("exit", resolve));
+    if (child) { child.kill(); await new Promise((resolve) => child.once("exit", resolve)); }
     await rm(stateDir, { recursive: true, force: true });
   }
 });

@@ -6,3 +6,7 @@ releases/
 
 coverage/
 artifacts/
+
+# Runtime monitoring logs
+artifacts/mcp-monitor.log
+artifacts/mcp-load.log

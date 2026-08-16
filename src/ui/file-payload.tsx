@@ -2,10 +2,12 @@ import { useEffect, useMemo, useRef } from "react";
 import { FileStream, getFiletypeFromFileName, type FileStreamOptions } from "@pierre/diffs";
 import type { HostContext } from "./card-types.js";
 import { pierrePrettyScrollbarCss } from "./scrollbar.js";
+import { selectFileLanguage } from "./language-catalog.js";
 
 export function FilePayload({ path, text, startLine, themeType }: { path: string; text: string; startLine: number; themeType: "light" | "dark"; }) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const fileOptions: FileStreamOptions = useMemo(() => ({ theme: { light: "pierre-light", dark: "pierre-dark" }, themeType, overflow: "scroll", unsafeCSS: pierrePrettyScrollbarCss }), [themeType]);
+  const fileOptions: FileStreamOptions = useMemo(() => ({
+    lang: selectFileLanguage(path), theme: { light: "pierre-light", dark: "pierre-dark" }, themeType, overflow: "scroll", unsafeCSS: pierrePrettyScrollbarCss }), [themeType]);
   useEffect(() => {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
