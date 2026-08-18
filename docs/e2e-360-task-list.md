@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `9441e41`
+**Commit de referência:** `268deed`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -40,7 +40,7 @@
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 81 raws arquivados byte a byte, 983.793 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 85 raws arquivados byte a byte, 1.122.564 bytes, 0 divergências SHA-256; inclui carga autenticada e Swarm resilience. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -167,10 +167,11 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P2-PERF-002 | UI | Implementar catálogo seletivo de linguagens e carregar grammars sob demanda. | Parcial | P2-PERF-001 | Caminho inicial sem módulos opcionais e seleção funcional. |
 | P2-PERF-003 | UI | Comparar entrypoint, TTI, requests, parse cost e regressão antes/depois. | Backlog | P2-PERF-002 | Melhoria demonstrada por métricas comparáveis. |
 | P2-PERF-004 | CI | Separar budgets de entrypoint, lazy chunks e requests. | Parcial | P2-PERF-003 | Cada budget falha somente por seu próprio limite. |
-| P2-LOAD-001 | MCP | Manter smoke, baseline, ramp, sustained, burst e soak autenticados. | Concluída localmente; hosted UNKNOWN | P0-MCP-001, P1-OBS-006 | Wave 3 4/4 pass; job hospedado ainda necessário. |
-| P2-LOAD-002 | MCP | Exercitar timeout, 429, 5xx, disconnect, reconnect e overload fail-closed. | Parcial | P2-LOAD-001 | Retry limitado, `Retry-After` respeitado, sem efeito duplicado. |
+| P2-LOAD-001 | MCP | Manter smoke, baseline, ramp, sustained, burst e soak autenticados. | Concluída localmente; hosted UNKNOWN | P0-MCP-001, P1-OBS-006 | Wave 3 4/4 pass; carga local 120 amostras/concorrência 8 com p50=40 ms, p95=58 ms, p99=61 ms; job hospedado ainda necessário. |
+| P2-LOAD-002 | MCP | Exercitar timeout, 429, 5xx, disconnect, reconnect e overload fail-closed. | Parcial — isolamento/replay/recovery local aprovados | P2-LOAD-001 | Swarm report comprova 8/8 cross-client rejeitados, 8/8 close/replay rejeitados e 8/8 recovery; timeout/429/5xx/disconnect/overload hosted permanecem pendentes. |
 | P2-LOAD-003 | MCP | Calibrar thresholds por região/tool em três execuções independentes. | Backlog | P2-LOAD-001 | Variabilidade, intervalo e baseline versionados. |
-| P2-RES-001 | Operação | Simular indisponibilidade, restart e recuperação de sessões. | Concluída localmente | P1-OBS-004 | Wave 2 comprovou health/metrics após restart; ampliar reauth. |
+| P2-SWARM-001 | Agents Swarm | Simular agentes lógicos concorrentes sobre sessões MCP, com isolamento por client, close/replay e recovery. | Concluída localmente; provider/model runtime UNKNOWN | P2-LOAD-001, P1-SESSION-001 | 8 agentes lógicos, 6 rounds, 96/96 operações PASS, p50=41 ms, p95=44 ms, p99=45 ms, 8/8 isolation rejection, 8/8 replay rejection, 8/8 recovery e cleanup; não prova inferência real de subagentes. |
+| P2-RES-001 | Operação | Simular indisponibilidade, restart e recuperação de sessões. | Concluída localmente | P1-OBS-004 | Wave 2 comprovou health/metrics após restart; Swarm local comprovou 8 sessões, cleanup, close/replay e recovery; ampliar reauth hosted. |
 | P2-RES-002 | Operação | Testar SQLite cheio/lock, filesystem read-only, root ausente e processo filho falho. | Backlog | P1-OBS-001 | Erro sanitizado, fail-closed e cleanup. |
 | P2-FS-001 | Filesystem | Cobrir arquivos grandes/binários, symlink, case-insensitive e permissões por OS. | Parcial — symlink containment local aprovado | P1-SEC-002 | `path-containment-report.json` comprova read/write/cwd symlink bloqueados e filesystem inalterado; faltam arquivo grande/binário, case-insensitive e matriz OS. |
 | P2-PROC-001 | Processos | Cobrir bash, `write_stdin`, timeout, abort, process group, crash e PID reuse. | Parcial | P0-IDEMP-001 | Não reexecutar comandos cegamente; stdin com sequence/ack. |
