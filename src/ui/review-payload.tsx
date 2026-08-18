@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { parsePatchFiles, type FileDiffMetadata, type FileDiffOptions } from "@pierre/diffs";
 import { FileDiff } from "@pierre/diffs/react";
@@ -17,7 +17,6 @@ interface PayloadRendererOptions {
   card: ToolResultCard;
   hostContext?: HostContext;
   errorMessage?: string | null;
-  visibleFileCount?: number;
 }
 
 interface MountedPayload {
@@ -30,11 +29,14 @@ export function mountReviewPayload(
   options: PayloadRendererOptions,
 ): MountedPayload {
   const root = createRoot(container);
-  root.render(<ReviewPayload {...options} />);
+  let currentOptions = options;
+  root.render(<ReviewPayload {...currentOptions} />);
 
   return {
     update(nextOptions) {
-      root.render(<ReviewPayload {...nextOptions} />);
+      if (reviewOptionsEqual(currentOptions, nextOptions)) return;
+      currentOptions = nextOptions;
+      root.render(<ReviewPayload {...currentOptions} />);
     },
     unmount() {
       root.unmount();
@@ -42,29 +44,36 @@ export function mountReviewPayload(
   };
 }
 
-function ReviewPayload({
+const ReviewPayload = memo(function ReviewPayload({
   card,
   hostContext,
   errorMessage = null,
-  visibleFileCount,
 }: PayloadRendererOptions) {
   const patch = card.payload?.patch;
   const themeType: ThemeType = hostContext?.theme === "light" ? "light" : "dark";
   const files = useMemo(() => parseFiles(patch), [patch]);
-  const visibleFiles = typeof visibleFileCount === "number"
-    ? files.slice(0, visibleFileCount)
-    : files;
   const [openFiles, setOpenFiles] = useState(() => new Set<string>());
+  const [showAllFiles, setShowAllFiles] = useState(false);
+  const visibleFiles = useMemo(
+    () => showAllFiles ? files : files.slice(0, 3),
+    [files, showAllFiles],
+  );
+  const hiddenCount = Math.max(0, files.length - visibleFiles.length);
+  const options = useMemo(() => diffOptions(themeType), [themeType]);
 
   if (errorMessage) return <StatusLine message={errorMessage} tone="error" />;
   if (!patch) return <StatusLine message="Diff payload is not available." />;
   if (files.length === 0) return <StatusLine message="No diff hunks to review." />;
 
-  const options = diffOptions(themeType);
-
   if (files.length === 1) {
+    const fileLabel = files[0].name ?? "file";
     return (
-      <div className="review-single-file">
+      <div
+        className="review-single-file"
+        role="region"
+        aria-label={`Diff for ${fileLabel}`}
+        tabIndex={0}
+      >
         <FileDiff
           fileDiff={files[0]}
           options={options}
@@ -75,8 +84,8 @@ function ReviewPayload({
   }
 
   return (
-    <div className="review-diff pretty-scrollbar">
-      <div className="review-diff-files">
+    <div className="review-diff pretty-scrollbar" aria-label="Changed files">
+      <div id="review-diff-files" className="review-diff-files" role="list" aria-label="Changed files">
         {visibleFiles.map((fileDiff, index) => {
           const key = fileDiff.cacheKey ?? `${fileDiff.prevName ?? ""}->${fileDiff.name}-${index}`;
           const stats = diffStats(fileDiff);
@@ -99,12 +108,16 @@ function ReviewPayload({
             index,
           );
 
+          const fileId = `review-file-${index}`;
+          const fileLabel = pathDisplay?.title ?? fileDiff.name;
           return (
-            <div className="review-diff-file" key={key}>
+            <div className="review-diff-file" key={key} role="listitem">
               <button
                 type="button"
                 className="review-diff-file-header"
                 aria-expanded={isOpen}
+                aria-controls={fileId}
+                aria-label={`${fileChangeKindLabel(changeKind)} file ${fileLabel}. ${stats.additions} additions, ${stats.removals} removals. ${isOpen ? "Collapse" : "Expand"} diff`}
                 onClick={() => {
                   const next = new Set(openFiles);
                   if (next.has(key)) {
@@ -141,24 +154,51 @@ function ReviewPayload({
                     {pathDisplay?.current ?? fileDiff.name}
                   </span>
                 )}
-                <span className="review-diff-file-stats">
+                <span className="review-diff-file-stats" aria-hidden="true">
                   <span className="add">+{stats.additions}</span>
                   <span className="remove">-{stats.removals}</span>
                 </span>
               </button>
               {isOpen ? (
-                <FileDiff
-                  fileDiff={fileDiff}
-                  options={options}
-                  className="pierre-diff pretty-scrollbar"
-                />
+                <div
+                  id={fileId}
+                  className="review-diff-file-panel"
+                  role="region"
+                  aria-label={`Diff for ${fileLabel}`}
+                  tabIndex={0}
+                >
+                  <FileDiff
+                    fileDiff={fileDiff}
+                    options={options}
+                    className="pierre-diff pretty-scrollbar"
+                  />
+                </div>
               ) : null}
             </div>
           );
         })}
       </div>
+      {hiddenCount > 0 ? (
+        <button
+          type="button"
+          className="review-more"
+          aria-controls="review-diff-files"
+          onClick={() => setShowAllFiles(true)}
+        >
+          Show {hiddenCount} more {hiddenCount === 1 ? "file" : "files"}
+        </button>
+      ) : null}
     </div>
-  );
+    );
+}, reviewOptionsEqual);
+
+function reviewOptionsEqual(
+  previous: PayloadRendererOptions,
+  next: PayloadRendererOptions,
+): boolean {
+  return previous.card === next.card
+    && previous.errorMessage === next.errorMessage
+    && previous.hostContext?.theme === next.hostContext?.theme;
 }
 
 function fileChangeSymbol(kind: FileChangeKind): string {

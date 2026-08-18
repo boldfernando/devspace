@@ -234,9 +234,20 @@ export class SqliteDeviceAuthorizationStore {
   }
 
   cleanup(now = Date.now()): number {
-    return this.database.sqlite
-      .prepare("delete from oauth_device_authorizations where (status in ('consumed', 'denied', 'expired') and coalesce(consumed_at, denied_at, expires_at) < ?) or expires_at < ?")
-      .run(now - DEVICE_RETENTION_MS, now - DEVICE_RETENTION_MS).changes;
+    const cutoff = now - DEVICE_RETENTION_MS;
+    const cleanup = this.database.sqlite.transaction(() => {
+      const consumed = this.database.sqlite
+        .prepare("delete from oauth_device_authorizations where status = 'consumed' and consumed_at < ?")
+        .run(cutoff).changes;
+      const denied = this.database.sqlite
+        .prepare("delete from oauth_device_authorizations where status = 'denied' and denied_at < ?")
+        .run(cutoff).changes;
+      const expired = this.database.sqlite
+        .prepare("delete from oauth_device_authorizations where expires_at < ?")
+        .run(cutoff).changes;
+      return consumed + denied + expired;
+    });
+    return cleanup();
   }
 
   close(): void {

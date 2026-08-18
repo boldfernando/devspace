@@ -48,6 +48,23 @@ async function testDatabaseConfiguration(stateDir: string): Promise<void> {
       { version: 5, name: "write-idempotency" },
       { version: 6, name: "oauth-device-authorization" },
       { version: 7, name: "oauth-token-subjects" },
+      { version: 8, name: "query-performance-indexes" },
+    ]);
+    const indexes = database.sqlite
+      .prepare("select name from sqlite_master where type = 'index' and name in (?, ?, ?, ?, ?)")
+      .all(
+        "local_agent_sessions_updated_at_idx",
+        "write_idempotency_retained_active_idx",
+        "oauth_device_authorizations_expires_at_idx",
+        "oauth_device_authorizations_status_consumed_at_idx",
+        "oauth_device_authorizations_status_denied_at_idx",
+      ) as Array<{ name: string }>;
+    assert.deepEqual(indexes.map((row) => row.name).sort(), [
+      "local_agent_sessions_updated_at_idx",
+      "oauth_device_authorizations_expires_at_idx",
+      "oauth_device_authorizations_status_consumed_at_idx",
+      "oauth_device_authorizations_status_denied_at_idx",
+      "write_idempotency_retained_active_idx",
     ]);
     for (const table of ["oauth_access_tokens", "oauth_refresh_tokens"]) {
       const columns = database.sqlite.prepare(`pragma table_info(${table})`).all() as Array<{ name: string }>;

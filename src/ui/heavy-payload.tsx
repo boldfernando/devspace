@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, memo, Suspense } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import {
   isEditTool,
@@ -31,11 +31,14 @@ export function mountHeavyPayload(
   options: PayloadRendererOptions,
 ): MountedPayload {
   const root = createRoot(container);
-  root.render(<HeavyPayload {...options} />);
+  let currentOptions = options;
+  root.render(<HeavyPayload {...currentOptions} />);
 
   return {
     update(nextOptions) {
-      root.render(<HeavyPayload {...nextOptions} />);
+      if (payloadOptionsEqual(currentOptions, nextOptions)) return;
+      currentOptions = nextOptions;
+      root.render(<HeavyPayload {...currentOptions} />);
     },
     unmount() {
       root.unmount();
@@ -45,7 +48,7 @@ export function mountHeavyPayload(
 
 export type { MountedPayload, PayloadRendererOptions };
 
-function HeavyPayload({
+const HeavyPayload = memo(function HeavyPayload({
   card,
   hostContext,
   errorMessage = null,
@@ -79,7 +82,24 @@ function HeavyPayload({
     );
   }
 
-  return <pre className={`text-payload pretty-scrollbar ${card.tool}`}>{text}</pre>;
+  return (
+    <pre
+      className={`text-payload pretty-scrollbar ${card.tool}`}
+      tabIndex={0}
+      aria-label={`${card.tool} output. Scroll to read the complete result.`}
+    >
+      {text}
+    </pre>
+  );
+}, payloadOptionsEqual);
+
+function payloadOptionsEqual(
+  previous: PayloadRendererOptions,
+  next: PayloadRendererOptions,
+): boolean {
+  return previous.card === next.card
+    && previous.errorMessage === next.errorMessage
+    && previous.hostContext?.theme === next.hostContext?.theme;
 }
 
 function StatusLine({
@@ -89,5 +109,14 @@ function StatusLine({
   message: string;
   tone?: "muted" | "error";
 }) {
-  return <div className={`status ${tone}`}>{message}</div>;
+  return (
+    <div
+      className={`status ${tone}`}
+      role={tone === "error" ? "alert" : "status"}
+      aria-live={tone === "error" ? "assertive" : "polite"}
+      aria-atomic="true"
+    >
+      {message}
+    </div>
+  );
 }

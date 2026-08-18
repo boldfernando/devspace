@@ -56,6 +56,7 @@ import { createReviewCheckpointManager } from "./review-checkpoints.js";
 import { openAiConversationScopeId } from "./request-meta.js";
 import { shutdownHttpServer } from "./server-shutdown.js";
 import { formatPathForPrompt } from "./skills.js";
+import { requiredScopeForMcpRequest } from "./mcp-request-policy.js";
 import { createWorkspaceStore } from "./workspace-store.js";
 import { openDatabase } from "./db/client.js";
 import { IdempotencyAmbiguousError, IdempotencyConflictError, IdempotencyFailedError, IdempotencyPendingError, WriteIdempotencyStore } from "./idempotency-store.js";
@@ -179,16 +180,6 @@ const toolNames = {
   ls: "ls",
   shell: "bash",
 } as const;
-
-function requiredScopeForMcpRequest(req: Request): "read" | "write" | undefined {
-  if (req.method !== "POST") return undefined;
-  if (req.body?.method === "initialize" || req.body?.method === "tools/list") return "read";
-  if (req.body?.method !== "tools/call") return undefined;
-  const name = typeof req.body?.params?.name === "string" ? req.body.params.name : "";
-  if ([toolNames.openWorkspace, toolNames.write, toolNames.edit, toolNames.shell, "write_stdin"].includes(name)) return "write";
-  if ([toolNames.read, toolNames.grep, toolNames.glob, toolNames.ls, "tools/list"].includes(name)) return "read";
-  return name ? "read" : undefined;
-}
 
 const workspaceIdDescription =
   "Workspace to use. Reuse the current project's workspaceId.";
@@ -568,15 +559,27 @@ function processToolResponse(
   };
 }
 
+interface CodexProcessToolContext {
+  config: ServerConfig;
+  workspaces: WorkspaceRegistry;
+  processSessions: ProcessSessionManager;
+  idempotencyStore?: WriteIdempotencyStore;
+  runtimeMetrics?: RuntimeMetrics;
+  sessionClientId?: string | null;
+  sessionResource?: string | null;
+}
+
 function registerCodexProcessTools(
   server: McpServer,
-  config: ServerConfig,
-  workspaces: WorkspaceRegistry,
-  processSessions: ProcessSessionManager,
-  idempotencyStore?: WriteIdempotencyStore,
-  runtimeMetrics?: RuntimeMetrics,
-  sessionClientId?: string | null,
-  sessionResource?: string | null,
+  {
+    config,
+    workspaces,
+    processSessions,
+    idempotencyStore,
+    runtimeMetrics,
+    sessionClientId,
+    sessionResource,
+  }: CodexProcessToolContext,
 ): void {
   registerAppTool(
     server,
@@ -1844,8 +1847,7 @@ export function createMcpServer(
   }
 
   if (config.toolMode === "codex") {
-    registerCodexProcessTools(
-      server,
+    registerCodexProcessTools(server, {
       config,
       workspaces,
       processSessions,
@@ -1853,7 +1855,7 @@ export function createMcpServer(
       runtimeMetrics,
       sessionClientId,
       sessionResource,
-    );
+    });
   }
 
   if (config.artifactsEnabled && isArtifactDownloadSupportedPlatform()) {

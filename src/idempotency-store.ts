@@ -119,6 +119,9 @@ export function ensureIdempotencySchema(sqlite: Database.Database): void {
       on write_idempotency(state, retained_until);
     create index if not exists write_idempotency_pending_idx
       on write_idempotency(state, pending_until);
+    create index if not exists write_idempotency_retained_active_idx
+      on write_idempotency(retained_until)
+      where state <> 'pending';
   `);
 }
 

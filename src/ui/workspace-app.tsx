@@ -17,6 +17,16 @@ import {
 } from "./card-types.js";
 import { getProviderLogo, renderIcon, toolIcons, type ToolIcon } from "./icons.js";
 import {
+  completedJourneyStages,
+  initialJourneyProgress,
+  journeyProgressPercent,
+  journeyStageLabel,
+  journeyStages,
+  nextJourneyStep,
+  updateJourneyProgress,
+  type JourneyProgress,
+} from "./journey-progress.js";
+import {
   getToolDisplay,
   getToolHeaderSummary,
   type ToolDisplay,
@@ -28,7 +38,6 @@ interface MountedPayload {
     card: ToolResultCard;
     hostContext?: HostContext;
     errorMessage?: string | null;
-    visibleFileCount?: number;
   }): void;
   unmount(): void;
 }
@@ -41,12 +50,15 @@ let connectionError: string | null = null;
 let hostContext: HostContext | undefined;
 let card: ToolResultCard | null = null;
 let expanded = false;
-let reviewFilesExpanded = false;
 let errorMessage: string | null = null;
 let currentPayload: MountedPayload | null = null;
 let currentPayloadContainer: HTMLElement | null = null;
 let openWorkspaceInstructionKey: string | null = null;
 let showAvailableWorkspaceInstructions = false;
+let journeyProgress: JourneyProgress = initialJourneyProgress();
+let journeyProgressExpanded = false;
+let milestoneMessage: string | null = null;
+let journeyProgressContainer: HTMLElement | null = null;
 
 const maybeAppRoot = document.querySelector<HTMLElement>("#app");
 
@@ -59,12 +71,24 @@ const appRoot = maybeAppRoot;
 void boot();
 
 async function boot(): Promise<void> {
+  connected = false;
+  connectionError = null;
+  app = null;
   render();
 
-  app = new extAppsModule!.App(
-    { name: "devspace-tool-cards", version: "0.4.0" },
-    {},
-  );
+  try {
+    extAppsModule = await import("@modelcontextprotocol/ext-apps");
+    app = new extAppsModule.App(
+      { name: "devspace-tool-cards", version: "0.4.0" },
+      {},
+    );
+  } catch (loadError) {
+    connectionError = loadError instanceof Error
+      ? loadError.message
+      : "The host client could not be loaded.";
+    render();
+    return;
+  }
 
   app.ontoolresult = (result) => {
     const structuredContent = getStructuredContent<Partial<ToolResultCard>>(result);
@@ -77,18 +101,21 @@ async function boot(): Promise<void> {
     if (!tool || !isToolResultCard(structured)) {
       card = null;
       expanded = false;
-      reviewFilesExpanded = false;
       openWorkspaceInstructionKey = null;
       showAvailableWorkspaceInstructions = false;
-      errorMessage = "No result card is available for this tool result.";
+      errorMessage = "This tool result could not be displayed. Ask the host to retry the operation.";
       render();
       return;
     }
 
     const nextCard = { ...structured, tool };
     card = nextCard;
+    const progressUpdate = updateJourneyProgress(journeyProgress, tool);
+    journeyProgress = progressUpdate.progress;
+    milestoneMessage = progressUpdate.completedStage
+      ? `${journeyStageLabel(progressUpdate.completedStage)}. ${nextJourneyStep(journeyProgress)}`
+      : null;
     expanded = isInitiallyExpandedCard(nextCard);
-    reviewFilesExpanded = false;
     openWorkspaceInstructionKey = null;
     showAvailableWorkspaceInstructions = false;
     errorMessage = null;
@@ -145,17 +172,17 @@ function render(): void {
   unmountPayload();
 
   if (connectionError) {
-    renderEmpty(connectionError, "error");
+    renderConnectionError(connectionError);
     return;
   }
 
   if (!connected) {
-    renderEmpty("Connecting to host...");
+    renderConnecting();
     return;
   }
 
   if (!card) {
-    renderEmpty(errorMessage ?? "Waiting for a tool result.", errorMessage ? "error" : "muted");
+    renderWaiting(errorMessage ?? "Waiting for a tool result.", Boolean(errorMessage));
     return;
   }
 
@@ -166,14 +193,21 @@ function render(): void {
   }
 
   const expandable = isExpandableCard(card);
+  const detailsId = "tool-card-details";
   const main = element("main", { className: "shell" });
+  main.append(renderJourneyProgress());
   const section = element("section", {
     className: toolCardClassName(display),
+    ariaLabel: `${display.title} result`,
   });
   const button = element("button", {
     className: "tool-header",
     type: "button",
     ariaExpanded: String(expanded),
+    ariaControls: expandable ? detailsId : undefined,
+    ariaLabel: expandable
+      ? `${display.title}${display.label ? `, ${display.label}` : ""}. ${expanded ? "Collapse" : "Expand"} details`
+      : `${display.title}${display.label ? `, ${display.label}` : ""} result`,
     disabled: !expandable,
   });
 
@@ -188,7 +222,11 @@ function render(): void {
   icon.append(renderIcon(display.icon));
 
   const toolMain = element("span", { className: "tool-main" });
-  const title = element("span", { className: "tool-title", text: display.title });
+  const title = element("span", {
+    className: "tool-title",
+    text: display.title,
+    id: "tool-card-title",
+  });
   toolMain.append(title);
   if (display.label) {
     toolMain.append(element("span", {
@@ -207,7 +245,12 @@ function render(): void {
   section.append(button);
 
   if (expanded) {
-    const body = element("div", { className: "tool-body" });
+    const body = element("div", {
+      className: "tool-body",
+      id: detailsId,
+      role: "region",
+      ariaLabel: `${display.title} details`,
+    });
     currentPayloadContainer = body;
     section.append(body);
   }
@@ -217,9 +260,178 @@ function render(): void {
   renderPayloadIfNeeded();
 }
 
+function renderWaiting(message: string, isError: boolean): void {
+  const main = element("main", { className: "shell" });
+  main.append(renderJourneyProgress());
+  main.append(element("section", {
+    className: `empty journey-waiting${isError ? " error" : ""}`,
+    text: message,
+    role: isError ? "alert" : "status",
+    ariaLive: isError ? "assertive" : "polite",
+    ariaAtomic: "true",
+  }));
+  appRoot.replaceChildren(main);
+}
+
+function renderJourneyProgress(): HTMLElement {
+  const completed = completedJourneyStages(journeyProgress);
+  const percent = journeyProgressPercent(journeyProgress);
+  const detailsId = "journey-progress-details";
+  const section = element("section", {
+    className: "journey-progress",
+    ariaLabel: "Workflow progress",
+  });
+  journeyProgressContainer = section;
+  const header = element("div", { className: "journey-progress-header" });
+  const titleGroup = element("div", { className: "journey-progress-title-group" });
+  titleGroup.append(
+    element("strong", { className: "journey-progress-title", text: "Workflow progress" }),
+    element("span", {
+      className: "journey-progress-count",
+      text: `${completed}/${journeyStages.length} milestones`,
+    }),
+  );
+  const toggle = element("button", {
+    className: "journey-progress-toggle",
+    type: "button",
+    text: journeyProgressExpanded ? "Hide steps" : "View steps",
+    ariaExpanded: String(journeyProgressExpanded),
+    ariaControls: detailsId,
+    ariaLabel: journeyProgressExpanded
+      ? "Hide workflow milestones"
+      : "View workflow milestones",
+  });
+  toggle.addEventListener("click", () => {
+    journeyProgressExpanded = !journeyProgressExpanded;
+    if (journeyProgressContainer?.isConnected) {
+      journeyProgressContainer.replaceWith(renderJourneyProgress());
+    } else {
+      render();
+    }
+  });
+  header.append(titleGroup, toggle);
+
+  const track = element("div", {
+    className: "journey-progress-track",
+    role: "progressbar",
+    ariaLabel: `Workflow progress: ${percent}% complete`,
+  });
+  track.setAttribute("aria-valuemin", "0");
+  track.setAttribute("aria-valuemax", "100");
+  track.setAttribute("aria-valuenow", String(percent));
+  const fill = element("span", { className: "journey-progress-fill" });
+  fill.style.width = `${percent}%`;
+  track.append(fill);
+
+  section.append(header, track, element("span", {
+    className: "journey-progress-next",
+    text: nextJourneyStep(journeyProgress),
+  }));
+
+  if (milestoneMessage) {
+    section.append(element("div", {
+      className: "journey-milestone",
+      text: milestoneMessage,
+      role: "status",
+      ariaLive: "polite",
+      ariaAtomic: "true",
+    }));
+  }
+
+  if (journeyProgressExpanded) {
+    const steps = element("ol", {
+      className: "journey-progress-steps",
+      id: detailsId,
+      ariaLabel: "Workflow milestones",
+    });
+    for (const stage of journeyStages) {
+      const complete = journeyProgress[stage];
+      const step = element("li", {
+        className: `journey-progress-step${complete ? " complete" : ""}`,
+      });
+      step.append(
+        element("span", {
+          className: "journey-progress-step-mark",
+          text: complete ? "✓" : "○",
+          ariaHidden: "true",
+        }),
+        element("span", {
+          className: "journey-progress-step-label",
+          text: journeyStageLabel(stage),
+        }),
+      );
+      steps.append(step);
+    }
+    section.append(steps);
+  }
+
+  return section;
+}
+
+function renderConnecting(): void {
+  const main = element("main", { className: "shell" });
+  const panel = element("section", {
+    className: "empty connection-loading",
+    role: "status",
+    ariaLabel: "Connecting to the host",
+    ariaLive: "polite",
+    ariaAtomic: "true",
+    ariaBusy: "true",
+  });
+  panel.append(
+    element("strong", {
+      className: "connection-loading-title",
+      text: "Connecting to host…",
+    }),
+    element("span", {
+      className: "connection-loading-detail",
+      text: "Waiting for the host handshake before showing tool results.",
+    }),
+  );
+  main.append(panel);
+  appRoot.replaceChildren(main);
+}
+
+function renderConnectionError(message: string): void {
+  const main = element("main", { className: "shell" });
+  const panel = element("section", {
+    className: "empty error connection-error",
+    role: "alert",
+    ariaLabel: "Unable to connect to the host",
+    ariaLive: "assertive",
+    ariaAtomic: "true",
+  });
+  const title = element("strong", {
+    className: "connection-error-title",
+    text: "Unable to connect to the host",
+  });
+  const detail = element("span", {
+    className: "connection-error-detail",
+    text: message,
+  });
+  const retry = element("button", {
+    className: "connection-retry",
+    type: "button",
+    text: "Try again",
+    ariaLabel: "Try connecting to the host again",
+  });
+  retry.addEventListener("click", () => {
+    void boot();
+  });
+  panel.append(title, detail, retry);
+  main.append(panel);
+  appRoot.replaceChildren(main);
+}
+
 function renderEmpty(message: string, tone: "muted" | "error" = "muted"): void {
   const main = element("main", { className: "shell" });
-  main.append(element("section", { className: `empty ${tone}`, text: message }));
+  main.append(element("section", {
+    className: `empty ${tone}`,
+    text: message,
+    role: tone === "error" ? "alert" : "status",
+    ariaLive: tone === "error" ? "assertive" : "polite",
+    ariaAtomic: "true",
+  }));
   appRoot.replaceChildren(main);
 }
 
@@ -270,12 +482,8 @@ async function renderPayloadIfNeeded(): Promise<void> {
   }
 
   if (isReviewTool(card.tool) || isPatchTool(card.tool)) {
-    const visibleFileCount = isReviewTool(card.tool) && !reviewFilesExpanded
-      ? Math.max(3, (card.files ?? []).slice(0, 3).length)
-      : undefined;
-
     if (currentPayload) {
-      currentPayload.update({ card, hostContext, errorMessage, visibleFileCount });
+      currentPayload.update({ card, hostContext, errorMessage });
       return;
     }
 
@@ -288,7 +496,6 @@ async function renderPayloadIfNeeded(): Promise<void> {
       card,
       hostContext,
       errorMessage,
-      visibleFileCount,
     });
     return;
   }
@@ -323,7 +530,13 @@ function renderStatus(
   tone: "muted" | "error" = "muted",
 ): void {
   unmountCurrentPayload();
-  container.replaceChildren(element("div", { className: `status ${tone}`, text: message }));
+  container.replaceChildren(element("div", {
+    className: `status ${tone}`,
+    text: message,
+    role: tone === "error" ? "alert" : "status",
+    ariaLive: tone === "error" ? "assertive" : "polite",
+    ariaAtomic: "true",
+  }));
 }
 
 function renderPrePayload(
@@ -335,6 +548,8 @@ function renderPrePayload(
   container.replaceChildren(element("pre", {
     className: `text-payload pretty-scrollbar ${tool}`,
     text,
+    tabIndex: 0,
+    ariaLabel: `${tool} output. Scroll to read the complete result.`,
   }));
 }
 
@@ -343,10 +558,13 @@ function renderHeaderSummary(card: ToolResultCard): HTMLElement {
 
   if (summary.kind === "diff") {
     const stats = element("span", { className: "stats" });
-    stats.setAttribute("aria-label", "Diff statistics");
+    stats.setAttribute(
+      "aria-label",
+      `Diff statistics: ${summary.additions} additions, ${summary.removals} removals`,
+    );
     stats.append(
-      element("span", { className: "add", text: `+${String(summary.additions)}` }),
-      element("span", { className: "remove", text: `-${String(summary.removals)}` }),
+      element("span", { className: "add", text: `+${String(summary.additions)}`, ariaHidden: "true" }),
+      element("span", { className: "remove", text: `-${String(summary.removals)}`, ariaHidden: "true" }),
     );
     return stats;
   }
@@ -356,22 +574,27 @@ function renderHeaderSummary(card: ToolResultCard): HTMLElement {
     text: summary.kind === "text" ? summary.text : "",
   });
   if (summary.kind === "empty") meta.setAttribute("aria-hidden", "true");
+  if (summary.kind === "text") meta.setAttribute("aria-label", summary.text);
   return meta;
 }
 
 function renderReviewCard(card: ToolResultCard, display: ToolDisplay): void {
-  unmountPayload();
-
-  const files = card.files ?? [];
-  const visibleFiles = reviewFilesExpanded ? files : files.slice(0, 3);
-  const hiddenCount = Math.max(0, files.length - visibleFiles.length);
   const expandable = isExpandableCard(card);
+  const detailsId = "review-card-details";
   const main = element("main", { className: "shell" });
-  const section = element("section", { className: toolCardClassName(display) });
+  main.append(renderJourneyProgress());
+  const section = element("section", {
+    className: toolCardClassName(display),
+    ariaLabel: `${display.title} result`,
+  });
   const header = element("button", {
     className: "tool-header review-header",
     type: "button",
     ariaExpanded: String(expanded),
+    ariaControls: expandable ? detailsId : undefined,
+    ariaLabel: expandable
+      ? `${display.title}${display.label ? `, ${display.label}` : ""}. ${expanded ? "Collapse" : "Expand"} details`
+      : `${display.title}${display.label ? `, ${display.label}` : ""} result`,
     disabled: !expandable,
   });
 
@@ -386,7 +609,11 @@ function renderReviewCard(card: ToolResultCard, display: ToolDisplay): void {
   icon.append(renderIcon(display.icon));
   const titleGroup = element("span", { className: "tool-main review-title-group" });
 
-  titleGroup.append(element("span", { className: "tool-title", text: display.title }));
+  titleGroup.append(element("span", {
+    className: "tool-title",
+    text: display.title,
+    id: "review-card-title",
+  }));
   if (display.label) {
     titleGroup.append(element("span", {
       className: "tool-label",
@@ -403,23 +630,15 @@ function renderReviewCard(card: ToolResultCard, display: ToolDisplay): void {
 
   section.append(header);
   if (expanded) {
-    const body = element("div", { className: "review-summary" });
+    const body = element("div", {
+      className: "review-summary",
+      id: detailsId,
+      role: "region",
+      ariaLabel: `${display.title} details`,
+    });
     const payload = element("div", { className: "review-payload" });
     currentPayloadContainer = payload;
     body.append(payload);
-
-    if (hiddenCount > 0) {
-      const showMore = element("button", {
-        className: "review-more",
-        type: "button",
-        text: `Show ${hiddenCount} more ${hiddenCount === 1 ? "file" : "files"}`,
-      });
-      showMore.addEventListener("click", () => {
-        reviewFilesExpanded = true;
-        render();
-      });
-      body.append(showMore);
-    }
 
     section.append(body);
   }
@@ -890,17 +1109,31 @@ function element<K extends keyof HTMLElementTagNameMap>(
     ariaHidden?: string;
     ariaLabel?: string;
     ariaExpanded?: string;
+    ariaControls?: string;
+    ariaBusy?: string;
+    ariaLive?: string;
+    ariaAtomic?: string;
+    role?: string;
+    id?: string;
+    tabIndex?: number;
     disabled?: boolean;
   } = {},
 ): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
   if (options.className) node.className = options.className;
+  if (options.id) node.id = options.id;
   if (options.text !== undefined) node.textContent = options.text;
   if (options.type !== undefined && "type" in node) node.setAttribute("type", options.type);
   if (options.title !== undefined) node.title = options.title;
   if (options.ariaHidden !== undefined) node.setAttribute("aria-hidden", options.ariaHidden);
   if (options.ariaLabel !== undefined) node.setAttribute("aria-label", options.ariaLabel);
   if (options.ariaExpanded !== undefined) node.setAttribute("aria-expanded", options.ariaExpanded);
+  if (options.ariaControls !== undefined) node.setAttribute("aria-controls", options.ariaControls);
+  if (options.ariaBusy !== undefined) node.setAttribute("aria-busy", options.ariaBusy);
+  if (options.ariaLive !== undefined) node.setAttribute("aria-live", options.ariaLive);
+  if (options.ariaAtomic !== undefined) node.setAttribute("aria-atomic", options.ariaAtomic);
+  if (options.role !== undefined) node.setAttribute("role", options.role);
+  if (options.tabIndex !== undefined) node.tabIndex = options.tabIndex;
   if (options.disabled !== undefined && "disabled" in node) {
     (node as HTMLButtonElement).disabled = options.disabled;
   }

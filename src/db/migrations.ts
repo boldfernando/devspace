@@ -42,6 +42,11 @@ const migrations: Migration[] = [
     name: "oauth-token-subjects",
     up: migrateOAuthTokenSubjects,
   },
+  {
+    version: 8,
+    name: "query-performance-indexes",
+    up: migrateQueryPerformanceIndexes,
+  },
 ];
 
 export function migrateDatabase(sqlite: Database.Database): void {
@@ -239,6 +244,26 @@ function migrateWriteIdempotency(sqlite: Database.Database): void {
 function migrateOAuthTokenSubjects(sqlite: Database.Database): void {
   addColumnIfMissing(sqlite, "oauth_access_tokens", "subject_id", "text not null default 'owner'");
   addColumnIfMissing(sqlite, "oauth_refresh_tokens", "subject_id", "text not null default 'owner'");
+}
+
+function migrateQueryPerformanceIndexes(sqlite: Database.Database): void {
+  sqlite.exec(`
+    create index if not exists local_agent_sessions_updated_at_idx
+      on local_agent_sessions(updated_at desc, id);
+
+    create index if not exists write_idempotency_retained_active_idx
+      on write_idempotency(retained_until)
+      where state <> 'pending';
+
+    create index if not exists oauth_device_authorizations_expires_at_idx
+      on oauth_device_authorizations(expires_at);
+
+    create index if not exists oauth_device_authorizations_status_consumed_at_idx
+      on oauth_device_authorizations(status, consumed_at);
+
+    create index if not exists oauth_device_authorizations_status_denied_at_idx
+      on oauth_device_authorizations(status, denied_at);
+  `);
 }
 
 function migrateOAuthDeviceAuthorization(sqlite: Database.Database): void {
