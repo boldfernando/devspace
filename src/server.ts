@@ -34,9 +34,10 @@ import {
   logEvent,
   requestIp,
   requestPath,
-  commandPreview,
   sessionIdPrefix,
 } from "./logger.js";
+import { classifyError } from "./error-policy.js";
+
 import { createRuntimeMetrics, type RuntimeMetrics } from "./metrics.js";
 import {
   editFileTool,
@@ -188,7 +189,9 @@ const workspaceIdDescription =
   "Workspace to use. Reuse the current project's workspaceId.";
 
 interface ToolLogFields {
+  [key: string]: unknown;
   tool: string;
+
   workspaceId?: string;
   path?: string;
   workingDirectory?: string;
@@ -196,7 +199,10 @@ interface ToolLogFields {
   commandLength?: number;
   success: boolean;
   durationMs: number;
-  error?: string;
+  errorCode?: string;
+  errorCategory?: string;
+  retryable?: boolean;
+
 }
 
 function serverInstructions(config: ServerConfig): string {
@@ -334,11 +340,7 @@ function requestLogFields(req: Request, config: ServerConfig): Record<string, un
 function logToolCall(config: ServerConfig, fields: ToolLogFields): void {
   if (!config.logging.toolCalls) return;
 
-  const { command, ...safeFields } = fields;
-  logEvent(config.logging, fields.success ? "info" : "warn", "tool_call", {
-    ...safeFields,
-    commandPreview: config.logging.shellCommands && command ? commandPreview(command) : undefined,
-  });
+  logEvent(config.logging, fields.success ? "info" : "warn", "tool_call", fields);
 }
 
 function contentText(content: ToolContent[]): string {
@@ -350,24 +352,29 @@ function contentText(content: ToolContent[]): string {
     .join("\n");
 }
 
-function toolErrorPreview(content: ToolContent[]): string | undefined {
-  const text = contentText(content).replace(/\s+/g, " ").trim();
-  if (!text) return undefined;
-  return text.length > 240 ? `${text.slice(0, 237)}...` : text;
-}
+
+
+
+
 
 function logFailedToolResponse(
   config: ServerConfig,
-  fields: Omit<ToolLogFields, "success" | "durationMs" | "error">,
+  fields: { tool: string } & Omit<ToolLogFields, "success" | "durationMs" | "error" | "tool">,
   content: ToolContent[],
   startedAt: number,
 ): void {
+  const descriptor = classifyError(contentText(content));
   logToolCall(config, {
     ...fields,
+    tool: fields.tool,
     success: false,
     durationMs: Math.round(performance.now() - startedAt),
-    error: toolErrorPreview(content),
+
+    errorCode: descriptor.code,
+    errorCategory: descriptor.category,
+    retryable: descriptor.retryable,
   });
+
 }
 
 function textBlock(text: string): ToolContent {
@@ -1952,9 +1959,11 @@ export function createServer(
   app.use((req, res, next) => {
     const requestId = randomUUID();
     const startedAt = performance.now();
-    res.locals.requestId = requestId;
+        res.locals.requestId = requestId;
+    res.setHeader("x-request-id", requestId);
 
     res.on("finish", () => {
+
       const path = requestPath(req);
       if (!config.logging.requests) return;
       if (!config.logging.assets && path.startsWith("/mcp-app-assets")) return;
@@ -2188,15 +2197,19 @@ export function createServer(
       }
 
       await transport.handleRequest(req, res, req.body);
-    } catch (error) {
+        } catch (error) {
+      const descriptor = classifyError(error);
       logEvent(config.logging, "error", "mcp_request_error", {
         requestId,
-        error: error instanceof Error ? error.message : String(error),
+        errorCode: descriptor.code,
+        errorCategory: descriptor.category,
+        retryable: descriptor.retryable,
       });
       if (!res.headersSent) {
         sendJsonRpcError(res, 500, -32603, "Internal server error");
       }
     }
+
   });
 
   let closePromise: Promise<void> | undefined;

@@ -32,6 +32,7 @@ test("MCP policy classifies every mutating tool as write", () => {
     "write",
     "edit",
     "bash",
+    "exec_command",
     "write_stdin",
     "apply_patch",
     "download_artifact",

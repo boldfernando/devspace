@@ -15,6 +15,7 @@ const WRITE_TOOL_NAMES = new Set([
   "write",
   "edit",
   "bash",
+  "exec_command",
   "write_stdin",
   "apply_patch",
   "download_artifact",

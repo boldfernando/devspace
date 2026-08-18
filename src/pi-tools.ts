@@ -17,6 +17,7 @@ import {
   type AgentToolResult,
 } from "@earendil-works/pi-coding-agent";
 import { resolveAllowedPathReal } from "./roots.js";
+import { safeToolErrorContent } from "./error-policy.js";
 
 type McpContent = { type: "text"; text: string } | { type: "image"; data: string; mimeType: string };
 export type ToolResponse<TDetails = unknown> = {
@@ -46,8 +47,7 @@ function toMcpContent(result: AgentToolResult<unknown>): McpContent[] {
 }
 
 function formatToolError(error: unknown): McpContent[] {
-  const message = error instanceof Error ? error.message : String(error);
-  return [{ type: "text", text: message }];
+  return [{ type: "text", text: safeToolErrorContent(error) }];
 }
 
 async function runTool<TInput, TDetails = unknown>(

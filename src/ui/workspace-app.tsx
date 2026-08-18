@@ -32,6 +32,7 @@ import {
   type ToolDisplay,
 } from "./tool-display.js";
 import { withContentFallback } from "./card-result-normalizer.js";
+import { classifyError } from "../error-policy.js";
 import { shouldUpdateToolResultInPlace } from "./render-strategy.js";
 import {
   beginConnection,
@@ -108,9 +109,7 @@ async function boot(): Promise<void> {
     app = nextApp;
   } catch (loadError) {
     if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
-    connectionError = loadError instanceof Error
-      ? loadError.message
-      : "The host client could not be loaded.";
+    connectionError = classifyError(loadError).userMessage;
     render();
     return;
   }
@@ -196,9 +195,7 @@ async function boot(): Promise<void> {
     connected = true;
   } catch (connectError) {
     if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
-    connectionError = connectError instanceof Error
-      ? connectError.message
-      : String(connectError);
+    connectionError = classifyError(connectError).userMessage;
   }
 
   if (isCurrentConnection(uiSyncState, connectionEpoch)) render();

@@ -1,4 +1,5 @@
 import type { Request } from "express";
+import { createHash } from "node:crypto";
 
 export type LogLevel = "silent" | "error" | "warn" | "info" | "debug";
 export type LogFormat = "json" | "pretty";
@@ -39,7 +40,8 @@ export function logEvent(
     ts: new Date().toISOString(),
     level,
     event,
-    ...fields,
+    ...sanitizeLogFields(fields),
+
   };
 
   const line = config.format === "pretty" ? formatPretty(entry) : JSON.stringify(entry);
@@ -52,7 +54,71 @@ export function logEvent(
   }
 }
 
+export function sanitizeLogFields(fields: LogFields): LogFields {
+  const safe: LogFields = {};
+  for (const [key, value] of Object.entries(fields)) {
+    if (value === undefined || isSensitiveLogKey(key)) continue;
+
+    if (HASHED_LOG_KEYS.has(key)) {
+      if (typeof value === "string") safe[`${key}Hash`] = stableLogHash(value);
+      continue;
+    }
+
+    if (key === "sessionIdPrefix") {
+      if (typeof value === "string") safe.sessionIdHash = stableLogHash(value);
+      continue;
+    }
+
+    if (SAFE_STRING_KEYS.has(key)) {
+      if (typeof value === "string") safe[key] = value.slice(0, 128);
+      continue;
+    }
+
+    if (typeof value === "number" || typeof value === "boolean") {
+      safe[key] = value;
+    }
+  }
+  return safe;
+}
+
+export function stableLogHash(value: string): string {
+  return createHash("sha256").update(value).digest("hex").slice(0, 16);
+}
+
+const HASHED_LOG_KEYS = new Set([
+  "ip",
+  "host",
+  "userAgent",
+  "origin",
+  "referer",
+  "path",
+  "root",
+  "workingDirectory",
+  "workspaceId",
+  "resource",
+  "downloadUrlHostname",
+]);
+
+const SAFE_STRING_KEYS = new Set([
+  "tool",
+  "reason",
+  "outcome",
+  "state",
+  "errorCode",
+  "errorCategory",
+  "requiredScope",
+  "fileReferenceShape",
+  "method",
+  "requestId",
+  "transport",
+]);
+
+function isSensitiveLogKey(key: string): boolean {
+  return /authorization|token|secret|cookie|password|payload|stdout|stderr|command|preview|content|error$|errorMessage|stack|verifier|challenge|chars|edits/i.test(key);
+}
+
 export function requestIp(req: Request, trustProxy: boolean): string | undefined {
+
   if (trustProxy) {
     const cfConnectingIp = firstHeaderValue(req.header("cf-connecting-ip"));
     if (cfConnectingIp) return cfConnectingIp;
@@ -72,10 +138,6 @@ export function sessionIdPrefix(sessionId: string | undefined): string | undefin
   return sessionId ? sessionId.slice(0, 8) : undefined;
 }
 
-export function commandPreview(command: string): string {
-  const normalized = command.replace(/\s+/g, " ").trim();
-  return normalized.length > 120 ? `${normalized.slice(0, 117)}...` : normalized;
-}
 
 function firstHeaderValue(value: string | undefined): string | undefined {
   return value?.split(",")[0]?.trim() || undefined;

@@ -20,7 +20,9 @@ import {
   IncomingArtifactAdapterRegistry,
   type IncomingArtifactAdapter,
 } from "./incoming-artifacts.js";
+import { classifyError, safeToolErrorContent } from "./error-policy.js";
 import { logEvent } from "./logger.js";
+
 import type { WorkspaceRegistry } from "./workspaces.js";
 
 const ARTIFACT_WRITE_ANNOTATIONS = {
@@ -326,11 +328,13 @@ async function executeArtifactTool(
         tool: "download_artifact",
         ...artifactToolLogFields(input),
         success: false,
-        errorCode: error instanceof ArtifactError ? error.code : "internal_error",
+        errorCode: classifyError(error).code,
         durationMs: Math.round(performance.now() - startedAt),
+
       });
     }
-    throw error;
+    if (error instanceof ArtifactError) throw error;
+    throw new ArtifactError("artifact_internal_error", safeToolErrorContent(error));
   }
 }
 
