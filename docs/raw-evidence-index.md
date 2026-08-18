@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 97
-- **Total archived bytes:** 1189419
+- **Total archived bytes:** 1197815
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -19,7 +19,7 @@
 | RAW-004 | canonical-360 | [artifacts/canonical-360/manifest.json](../artifacts/canonical-360/manifest.json) | [evidence/raw/canonical-360/manifest.json](../evidence/raw/canonical-360/manifest.json) | 140504 | `9e3aff3534a8db7f28e79b3ea1e9a23377a5c2a321a60d9cea632282439b47c9` | clean |
 | RAW-005 | canonical-360 | [artifacts/canonical-360/report.md](../artifacts/canonical-360/report.md) | [evidence/raw/canonical-360/report.md](../evidence/raw/canonical-360/report.md) | 8750 | `96836a17c0079bcd2f6d0a01d88237ece275c3ae25dce85d5b0462b1d1ea20ab` | clean |
 | RAW-006 | other-evidence | [artifacts/consolidated-metrics.json](../artifacts/consolidated-metrics.json) | [evidence/raw/consolidated-metrics.json](../evidence/raw/consolidated-metrics.json) | 5998 | `e263b6a01f74445a659bbf77bb5335f483fc02433f94e595315f72fcf96afc18` | clean |
-| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 190239 | `abf26f919c9d0e00efb9f4c358d1c11caffecc7d29eddd334434e094420d28d7` | clean |
+| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 198639 | `754f685deae24b90df76b1a84d2ea5b07e226ca1c9c9e97852a9236db6430061` | clean |
 | RAW-008 | other-evidence | [artifacts/e2e-360-presentation-script.md](../artifacts/e2e-360-presentation-script.md) | [evidence/raw/e2e-360-presentation-script.md](../evidence/raw/e2e-360-presentation-script.md) | 814 | `3562c4e0fdf7513adaf3b39eb518ba531adf5c6eb95143c65ebf9bf4410e2963` | clean |
 | RAW-009 | other-evidence | [artifacts/e2e-security-summary.md](../artifacts/e2e-security-summary.md) | [evidence/raw/e2e-security-summary.md](../evidence/raw/e2e-security-summary.md) | 121 | `943902c7dc53cdc4ae71690d9b303bfbf6449f9537c6a6ed4af2920fd3aa7295` | clean |
 | RAW-010 | other-evidence | [artifacts/e2e360-authz-baseline.json](../artifacts/e2e360-authz-baseline.json) | [evidence/raw/e2e360-authz-baseline.json](../evidence/raw/e2e360-authz-baseline.json) | 397 | `9b3bf7b8ddc2cfd37c43e2db3a5950490d679e5605f6dd1184cbafd0fe4ac134` | clean |
@@ -58,7 +58,7 @@
 | RAW-043 | mcp | [artifacts/mcp-monitor.log](../artifacts/mcp-monitor.log) | [evidence/raw/mcp-monitor.log](../evidence/raw/mcp-monitor.log) | 351480 | `876c85fdd575002b76842c7e005916614725415b963fc863027619e9e861f4b5` | clean |
 | RAW-044 | other-evidence | [artifacts/mount-marker.txt](../artifacts/mount-marker.txt) | [evidence/raw/mount-marker.txt](../evidence/raw/mount-marker.txt) | 15 | `cce760f2f237080fe0f0b7a8148015366e431590e27b7464b14294b184693ac5` | clean |
 | RAW-045 | other-evidence | [artifacts/oauth-device-cli-security-report.json](../artifacts/oauth-device-cli-security-report.json) | [evidence/raw/oauth-device-cli-security-report.json](../evidence/raw/oauth-device-cli-security-report.json) | 312 | `8c4fda6e1431f1ed752668b15eb8e0867ca9466b8becd545bdb61ec114864b9c` | clean |
-| RAW-046 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3218 | `52c8e50a8e9cfcfdfc61669fbc36b82ebaf220d90d728fa1b9f3b6b98a795b5f` | clean |
+| RAW-046 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3214 | `c47b764b88323de08da658737a60cd56f37db2d27ac09c152311798e21286d7d` | clean |
 | RAW-047 | other-evidence | [artifacts/observability-contract-report.json](../artifacts/observability-contract-report.json) | [evidence/raw/observability-contract-report.json](../evidence/raw/observability-contract-report.json) | 249 | `ae8eb2ac4745d38d781027fd6b8e288e61823966e5f7ba44eafedf630a705a7a` | clean |
 | RAW-048 | other-evidence | [artifacts/p0-sim-fail-report.json](../artifacts/p0-sim-fail-report.json) | [evidence/raw/p0-sim-fail-report.json](../evidence/raw/p0-sim-fail-report.json) | 1678 | `fe6afa7ffd4c8daa851f17dd13bf641ce6768bdcc7a177f6f8851554b418a1dd` | clean |
 | RAW-049 | other-evidence | [artifacts/p0-sim-fail-summary.md](../artifacts/p0-sim-fail-summary.md) | [evidence/raw/p0-sim-fail-summary.md](../evidence/raw/p0-sim-fail-summary.md) | 132 | `c0afdce82c6005d1b2fb972d803e66362f679341e6168ea49e65fdc9a1495e80` | clean |

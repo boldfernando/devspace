@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T22:57:50.601Z",
+  "generated_at": "2026-08-18T23:28:18.537Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -13,7 +13,7 @@
     "raw_content_rewritten": false
   },
   "count": 97,
-  "total_bytes": 1189419,
+  "total_bytes": 1197815,
   "records": [
     {
       "id": "RAW-001",
@@ -99,9 +99,9 @@
       "archive_path": "evidence/raw/dev-server.log",
       "category": "other-evidence",
       "extension": ".log",
-      "bytes": 190239,
-      "source_sha256": "abf26f919c9d0e00efb9f4c358d1c11caffecc7d29eddd334434e094420d28d7",
-      "archive_sha256": "abf26f919c9d0e00efb9f4c358d1c11caffecc7d29eddd334434e094420d28d7",
+      "bytes": 198639,
+      "source_sha256": "754f685deae24b90df76b1a84d2ea5b07e226ca1c9c9e97852a9236db6430061",
+      "archive_sha256": "754f685deae24b90df76b1a84d2ea5b07e226ca1c9c9e97852a9236db6430061",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
@@ -606,9 +606,9 @@
       "archive_path": "evidence/raw/oauth-mcp-negative-report.json",
       "category": "mcp",
       "extension": ".json",
-      "bytes": 3218,
-      "source_sha256": "52c8e50a8e9cfcfdfc61669fbc36b82ebaf220d90d728fa1b9f3b6b98a795b5f",
-      "archive_sha256": "52c8e50a8e9cfcfdfc61669fbc36b82ebaf220d90d728fa1b9f3b6b98a795b5f",
+      "bytes": 3214,
+      "source_sha256": "c47b764b88323de08da658737a60cd56f37db2d27ac09c152311798e21286d7d",
+      "archive_sha256": "c47b764b88323de08da658737a60cd56f37db2d27ac09c152311798e21286d7d",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
