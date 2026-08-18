@@ -1,0 +1,11 @@
+{
+  "schema": "devspace/oauth-device-cli-security/v1",
+  "status": "passed",
+  "platform": "win32",
+  "acl_equivalent_0600": true,
+  "configurable_poll_timeout": true,
+  "ctrl_c_cancelled": true,
+  "timers_and_process_cleanup": true,
+  "credential_persisted_only_on_success": true,
+  "secrets_included": false
+}

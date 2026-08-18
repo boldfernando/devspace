@@ -314,7 +314,7 @@ function printHelp(): void {
       "  devspace                 Run first-time setup if needed, then start the server",
       "  devspace serve           Start the server",
       "  devspace prd-reverse    Generate Canonical 360 manifest",
-      "  devspace auth login --device  Login with OAuth device code",
+      "  devspace auth login --device [--poll-timeout-seconds N]  Login with OAuth device code",
       "  devspace init            Create or update ~/.devspace/config.json and auth.json",
       "  devspace doctor          Show config, runtime, and native dependency status",
       "  devspace config get      Print persisted config",

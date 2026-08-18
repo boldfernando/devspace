@@ -54,6 +54,13 @@ jobs:
         run: npm run e2e:oauth-device
       - name: OAuth device CLI E2E
         run: npm run e2e:oauth-device-cli
+      - name: Upload OAuth device CLI security artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oauth-device-cli-security-${{ matrix.os }}
+          path: artifacts/oauth-device-cli-security-report.json
+          if-no-files-found: ignore
 
       - name: Canonical 360 contract tests
         run: npm run test:prd-reverse

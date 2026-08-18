@@ -1,14 +1,15 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
-import { chmodSync } from "node:fs";
 import { platform } from "node:os";
+import { setTimeout as delay } from "node:timers/promises";
 import { loadDevspaceFiles, writeDevspaceAuth } from "./user-config.js";
 
 const DEVICE_GRANT = "urn:ietf:params:oauth:grant-type:device_code";
 const DEFAULT_SERVER = "http://127.0.0.1:7676";
 const DEFAULT_SCOPE = "devspace";
-const POLL_TIMEOUT_MS = 10 * 60 * 1000;
+const DEFAULT_POLL_TIMEOUT_SECONDS = 10 * 60;
+const MAX_POLL_TIMEOUT_SECONDS = 24 * 60 * 60;
 
 type OAuthMetadata = {
   issuer: string;
@@ -59,6 +60,17 @@ function resourceUrl(args: string[], server: URL): URL {
 function scopes(args: string[]): string[] {
   const value = optionValue(args, "--scope") ?? DEFAULT_SCOPE;
   return [...new Set(value.split(/\s+/).filter(Boolean))];
+}
+
+function pollTimeoutSeconds(args: string[]): number {
+  const raw = optionValue(args, "--poll-timeout-seconds")
+    ?? process.env.DEVSPACE_OAUTH_POLL_TIMEOUT_SECONDS
+    ?? String(DEFAULT_POLL_TIMEOUT_SECONDS);
+  const value = Number(raw);
+  if (!Number.isInteger(value) || value < 1 || value > MAX_POLL_TIMEOUT_SECONDS) {
+    throw new Error(`--poll-timeout-seconds must be an integer between 1 and ${MAX_POLL_TIMEOUT_SECONDS}`);
+  }
+  return value;
 }
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
@@ -128,7 +140,6 @@ function saveToken(server: URL, resource: URL, clientId: string, scopes: string[
     expiresAt: Math.floor(Date.now() / 1000) + token.expires_in,
   };
   const path = writeDevspaceAuth(auth);
-  try { chmodSync(path, 0o600); } catch { /* Windows ACLs are managed by the OS. */ }
   return path;
 }
 
@@ -152,27 +163,47 @@ async function loginDevice(args: string[]): Promise<void> {
   console.log(`Abra: ${device.verification_uri}`);
   console.log(`Digite o código: ${device.user_code}`);
   if (device.verification_uri_complete && !hasFlag(args, "--no-browser")) openBrowser(device.verification_uri_complete);
-  const deadline = Date.now() + Math.min(POLL_TIMEOUT_MS, device.expires_in * 1000);
-  let intervalSeconds = Math.max(5, device.interval ?? 5);
-  while (Date.now() < deadline) {
-    await new Promise((resolve) => setTimeout(resolve, intervalSeconds * 1000));
-    const form = new URLSearchParams({ grant_type: DEVICE_GRANT, device_code: device.device_code, client_id: clientId, resource: resource.href });
-    const response = await fetch(metadata.token_endpoint, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: form, signal: AbortSignal.timeout(15_000) });
-    const text = await response.text();
-    let payload: (TokenResponse & { error?: string; error_description?: string }) | undefined;
-    try { payload = JSON.parse(text) as typeof payload; } catch { payload = undefined; }
-    if (response.ok && payload?.access_token) {
-      const path = saveToken(server, resource, clientId, requestedScopes, payload);
-      console.log(`Login concluído. Credencial salva em ${path}`);
-      return;
+  const controller = new AbortController();
+  const cancel = () => controller.abort();
+  const cancelFromInput = (chunk: Buffer | string) => {
+    if (String(chunk).includes("\u0003")) cancel();
+  };
+  process.once("SIGINT", cancel);
+  process.once("SIGTERM", cancel);
+  process.stdin.on("data", cancelFromInput);
+  try {
+    const deadline = Date.now() + Math.min(pollTimeoutSeconds(args) * 1000, device.expires_in * 1000);
+    let intervalSeconds = Math.max(5, device.interval ?? 5);
+    while (Date.now() < deadline) {
+      try {
+        await delay(intervalSeconds * 1000, undefined, { signal: controller.signal });
+      } catch (error) {
+        if (controller.signal.aborted) throw new Error("Device authorization cancelled");
+        throw error;
+      }
+      const form = new URLSearchParams({ grant_type: DEVICE_GRANT, device_code: device.device_code, client_id: clientId, resource: resource.href });
+      const response = await fetch(metadata.token_endpoint, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: form, signal: AbortSignal.any([controller.signal, AbortSignal.timeout(15_000)]) });
+      const text = await response.text();
+      let payload: (TokenResponse & { error?: string; error_description?: string }) | undefined;
+      try { payload = JSON.parse(text) as typeof payload; } catch { payload = undefined; }
+      if (response.ok && payload?.access_token) {
+        const path = saveToken(server, resource, clientId, requestedScopes, payload);
+        console.log(`Login concluído. Credencial salva em ${path}`);
+        return;
+      }
+      const error = payload?.error;
+      if (error === "authorization_pending") { process.stdout.write("."); continue; }
+      if (error === "slow_down") { intervalSeconds += 5; process.stdout.write("."); continue; }
+      if (error === "access_denied" || error === "expired_token") throw new Error(payload?.error_description ?? error);
+      throw new Error(payload?.error_description ?? `Device token request failed with HTTP ${response.status}`);
     }
-    const error = payload?.error;
-    if (error === "authorization_pending") { process.stdout.write("."); continue; }
-    if (error === "slow_down") { intervalSeconds += 5; process.stdout.write("."); continue; }
-    if (error === "access_denied" || error === "expired_token") throw new Error(payload?.error_description ?? error);
-    throw new Error(payload?.error_description ?? `Device token request failed with HTTP ${response.status}`);
+    throw new Error("Device authorization timed out");
+  } finally {
+    process.removeListener("SIGINT", cancel);
+    process.removeListener("SIGTERM", cancel);
+    process.stdin.removeListener("data", cancelFromInput);
+    if (!process.stdin.isTTY) process.stdin.pause();
   }
-  throw new Error("Device authorization timed out");
 }
 
 async function loginPkce(args: string[]): Promise<void> {
@@ -206,7 +237,7 @@ async function loginPkce(args: string[]): Promise<void> {
     authorization.search = new URLSearchParams({ response_type: "code", client_id: clientId, redirect_uri: redirectUri, code_challenge: challenge, code_challenge_method: "S256", scope: requestedScopes.join(" "), resource: resource.href, state }).toString();
     console.log(`Abra: ${authorization.href}`);
     if (!hasFlag(args, "--no-browser")) openBrowser(authorization.href);
-    const result = await Promise.race([callback, new Promise<never>((_, reject) => setTimeout(() => reject(new Error("PKCE authorization timed out")), POLL_TIMEOUT_MS))]);
+    const result = await Promise.race([callback, new Promise<never>((_, reject) => setTimeout(() => reject(new Error("PKCE authorization timed out")), pollTimeoutSeconds(args) * 1000))]);
     if (result.state !== state) throw new Error("OAuth state mismatch");
     const token = await fetchJson<TokenResponse>(metadata.token_endpoint, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ grant_type: "authorization_code", code: result.code, client_id: clientId, redirect_uri: redirectUri, code_verifier: verifier, resource: resource.href }) });
     const path = saveToken(server, resource, clientId, requestedScopes, token);
@@ -238,5 +269,5 @@ export async function runAuthCommand(args: string[]): Promise<void> {
   if (subcommand === "login") { await loginDevice(rest); return; }
   if (subcommand === "status") { authStatus(); return; }
   if (subcommand === "logout") { authLogout(); return; }
-  throw new Error("Uso: devspace auth login [--device|--pkce] [--server URL] [--scope scope] [--resource URL] | status | logout");
+  throw new Error("Uso: devspace auth login [--device|--pkce] [--server URL] [--scope scope] [--resource URL] [--poll-timeout-seconds N] | status | logout");
 }

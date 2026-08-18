@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `a9b653f`
+**Commit de referência:** `4fe2270`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -34,13 +34,13 @@
 | Baseline e Canonical 360º | Concluído; scanner, schema, manifest, report, DoR/DoD e backlog gerados. | `artifacts/canonical-360/manifest.json`, `report.md`, `gates-dor-dod.md` |
 | Onda 1 P0 | 16/16 gates aprovados; HTTP/MCP real, OAuth, segurança e cleanup. | `artifacts/wave1-p0/summary.json` |
 | Matriz negativa | 23/23 IDs OAuth/Bearer/MCP aprovados fail-closed. | `scripts/run-p0-negative-matrix.py`, `artifacts/oauth-mcp-negative-report.json` |
-| Device Authorization | Grant HTTP/CLI, migration, hashes HMAC, polling, TTL e consumo único implementados. | `scripts/e2e-oauth-device.test.mjs`, `scripts/e2e-oauth-device-cli.test.mjs` |
+| Device Authorization | Grant HTTP/CLI, migration, hashes HMAC, polling, TTL, consumo único, ACL privada e cancelamento configurável implementados localmente; matriz OS/identidade real permanece UNKNOWN. | `scripts/e2e-oauth-device.test.mjs`, `scripts/e2e-oauth-device-cli.test.mjs`, `artifacts/oauth-device-cli-security-report.json` |
 | Idempotência P1 | IDEMP-P1-001..008 aprovados; `effect_count=5`; sem secret leak. | `artifacts/idempotency-p1-report.json` |
 | Onda 2 Chaos | 11/11 cenários aprovados; restart, indisponibilidade e recovery comprovados. | `artifacts/wave2-chaos/summary.json` |
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 79 raws arquivados byte a byte, 983.015 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 80 raws arquivados byte a byte, 983.330 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -145,8 +145,8 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P1-DEVICE-009 | Substituir owner-token form por sessão de usuário autenticada na aprovação web. | Parcial — trusted gateway local; identidade real UNKNOWN | P0-DEVICE-004 | Modo `trusted_header`, HMAC subject-bound, UI sem owner field e Device E2E passam; falta gateway de identidade real, ACL e audit trail hosted. |
 | P1-DEVICE-010 | Implementar refresh-token rotation e revocation endpoint. | Concluída localmente; hosted UNKNOWN | P0-DEVICE-006 | `/revoke` anunciado no metadata, refresh antigo falha após rotation/replay e access revogado retorna 401. |
 | P1-DEVICE-011 | Completar `verification_uri_complete` e UX de copiar código sem browser. | Concluída | P0-DEVICE-006 | URL/código informados sem vazar token. |
-| P1-DEVICE-012 | Validar armazenamento local e ACL equivalente a 0600 em Windows/macOS/Linux. | Parcial | P0-DEVICE-006 | Usuário não autorizado não lê credencial. |
-| P1-DEVICE-013 | Tornar timeout e cancelamento de polling configuráveis. | Parcial | P0-DEVICE-006 | Ctrl-C encerra polling, timers e processos. |
+| P1-DEVICE-012 | Validar armazenamento local e ACL equivalente a 0600 em Windows/macOS/Linux. | Concluída localmente em Windows; macOS/Linux UNKNOWN | P0-DEVICE-006 | `credential-security.ts` aplica/inspeciona modo 0600 em POSIX e ACL sem herança em Windows; E2E Windows PASS; falta executar matriz macOS/Linux. |
+| P1-DEVICE-013 | Tornar timeout e cancelamento de polling configuráveis. | Concluída localmente em Windows; matriz OS/hosted UNKNOWN | P0-DEVICE-006 | `--poll-timeout-seconds`, `DEVSPACE_OAUTH_POLL_TIMEOUT_SECONDS`, Ctrl-C/byte ETX, timers e cleanup de processo passam no E2E real; falta matriz OS e operação hosted. |
 
 ### 5.3. Observabilidade e recuperação
 
@@ -198,7 +198,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P3-OPS-001 | Operação | Documentar comandos de deps, dev env, build, test, deploy, actions, tasks, auth e diagnostics. | Parcial | P0-BUILD-001 | Novo operador executa caminhos principais. |
 | P3-OPS-002 | Agendamento | Automatizar monitoramento via Windows Task Scheduler ou alternativa suportada. | Parcial | P1-OBS-005 | Wrapper PowerShell, intervalo, amostras, output e fail-on-alert estão implementados; falta registrar a tarefa, definir conta/ACL e validar restart/rollback operacional. |
 | P3-OPS-003 | Evidência | Manter screenshots/vídeos como suporte, nunca substituto de assertions. | Parcial | P0-MCP-001 | Artifacts visuais sanitizados e vinculados por RAW-ID. |
-| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 78 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
+| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 80 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
 
 ## 8. Tasks P4 — produto, arquitetura e maturidade
 
@@ -263,6 +263,7 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `scripts/index-raw-evidence.mjs`, `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md`
 - `scripts/mcp-monitor.mjs`, `scripts/mcp-monitor.ps1`, `scripts/e2e-mcp-monitor.test.mjs`, `artifacts/mcp-monitor-contract.json`
 - `scripts/e2e-block1-identity.test.mjs`, `artifacts/block1-identity-report.json`, `src/db/migrations.ts` migration 7, `mcp_oauth_device_event_total`
+- `src/credential-security.ts`, `src/credential-security.test.ts`, `scripts/e2e-oauth-device-cli.test.mjs`, `artifacts/oauth-device-cli-security-report.json`
 - `scripts/e2e-http-mcp-idempotency-recovery.test.mjs`, `artifacts/idempotency-recovery-report.json`, `WriteIdempotencyStore.reconcileExpiredPending`
 - `.github/workflows/ci.yml`, especialmente o job `staging-load`
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`

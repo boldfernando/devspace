@@ -8,6 +8,7 @@ import {
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { expandHomePath } from "./roots.js";
+import { hardenPrivateFile } from "./credential-security.js";
 
 export interface DevspaceUserConfig {
   host?: string;
@@ -136,4 +137,5 @@ function readJsonFile<T>(filePath: string): T {
 
 function writeJsonFile(filePath: string, value: unknown, mode: number): void {
   writeFileSync(filePath, JSON.stringify(value, null, 2) + "\n", { mode });
+  if (mode === 0o600) hardenPrivateFile(filePath);
 }
