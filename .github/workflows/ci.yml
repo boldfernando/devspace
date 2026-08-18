@@ -74,6 +74,17 @@ jobs:
       - name: End-to-end HTTP/MCP OAuth P0
         run: npm run e2e
 
+      - name: MCP monitor contract E2E
+        run: npm run test:mcp-monitor
+
+      - name: Upload MCP monitor evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcp-monitor-contract-${{ matrix.os }}
+          path: artifacts/mcp-monitor-contract.json
+          if-no-files-found: ignore
+
       - name: OAuth/MCP P0 negative matrix
         run: npm run security:p0
       - name: Upload OAuth/MCP security artifacts

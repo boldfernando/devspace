@@ -1,0 +1,22 @@
+{
+  "schema": "devspace.mcp-monitor-contract.v1",
+  "status": "passed",
+  "samples": 2,
+  "events": [
+    "mcp_monitor_ok",
+    "mcp_monitor_ok"
+  ],
+  "statuses": [
+    {
+      "health": 200,
+      "unauthenticated": 401,
+      "authenticated": 200
+    },
+    {
+      "health": 200,
+      "unauthenticated": 401,
+      "authenticated": 200
+    }
+  ],
+  "secrets_included": false
+}

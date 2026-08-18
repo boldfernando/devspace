@@ -40,7 +40,7 @@
 | Observabilidade | Métricas, alertas, dashboard e validator local aprovados. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 76 raws arquivados byte a byte, 981.882 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 77 raws arquivados byte a byte, 982.264 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -132,7 +132,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P1-OBS-002 | Implantar alertas Prometheus/Grafana para ambiguous, lease lost, pending age e contention. | Parcial | P1-OBS-001 | Alert firing real, recovery e ausência de secrets no telemetry. |
 | P1-OBS-003 | Instrumentar polling device, pending, slow_down, denied, expired e replay. | Backlog | P0-DEVICE-004 | Taxas e percentis sem código/token sensível. |
 | P1-OBS-004 | Definir recovery pós-crash em pending sem reexecutar efeito não compensável. | Parcial | IDEMP-P1-005 | Drill de processo real, reconciliação explícita e evidência. |
-| P1-OBS-005 | Monitorar continuamente MCP e alertar falhas Bearer. | Backlog | P1-OBS-001 | Falhas consecutivas geram alerta, log rotacionável e recovery. |
+| P1-OBS-005 | Monitorar continuamente MCP e alertar falhas Bearer. | Concluída localmente; scheduler/hosted UNKNOWN | P1-OBS-001 | `scripts/mcp-monitor.mjs` e wrapper PowerShell validam health, 401 anônimo, Bearer 200/401, configuração ausente, JSONL sanitizado e `--fail-on-alert`; falta instalar/agendar no ambiente operacional. |
 | P1-OBS-006 | Persistir carga com p50/p95/p99, throughput, erros e amostras sanitizadas. | Concluída localmente | P1-OBS-001 | Baseline e Wave 3 versionados; hosted ainda UNKNOWN. |
 
 ## 6. Tasks P2 — performance, resiliência, filesystem e integrações
@@ -172,9 +172,9 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P3-DOC-001 | Documentação | Manter matriz de fluxos, aceite, DoR/DoD e mapa de evidências. | Concluída | P0-DISC-003 | Cada finding referencia artifact ou `UNKNOWN`. |
 | P3-DOC-002 | Documentação | Gerar roteiros, slides e notas sem contradizer evidências. | Parcial | P3-DOC-001 | Decks apresentam fontes, riscos e status correto. |
 | P3-OPS-001 | Operação | Documentar comandos de deps, dev env, build, test, deploy, actions, tasks, auth e diagnostics. | Parcial | P0-BUILD-001 | Novo operador executa caminhos principais. |
-| P3-OPS-002 | Agendamento | Automatizar monitoramento via Windows Task Scheduler ou alternativa suportada. | Backlog | P1-OBS-005 | Task idempotente, logs, retry limitado, stop/rollback e sem secrets em args. |
+| P3-OPS-002 | Agendamento | Automatizar monitoramento via Windows Task Scheduler ou alternativa suportada. | Parcial | P1-OBS-005 | Wrapper PowerShell, intervalo, amostras, output e fail-on-alert estão implementados; falta registrar a tarefa, definir conta/ACL e validar restart/rollback operacional. |
 | P3-OPS-003 | Evidência | Manter screenshots/vídeos como suporte, nunca substituto de assertions. | Parcial | P0-MCP-001 | Artifacts visuais sanitizados e vinculados por RAW-ID. |
-| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 76 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
+| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 77 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
 
 ## 8. Tasks P4 — produto, arquitetura e maturidade
 
@@ -237,6 +237,7 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `scripts/run-p0-negative-matrix.py`
 - `scripts/run-wave1-p0.mjs`, `scripts/run-wave2-chaos.mjs`, `scripts/run-wave3-performance.mjs`
 - `scripts/index-raw-evidence.mjs`, `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md`
+- `scripts/mcp-monitor.mjs`, `scripts/mcp-monitor.ps1`, `scripts/e2e-mcp-monitor.test.mjs`, `artifacts/mcp-monitor-contract.json`
 - `.github/workflows/ci.yml`, especialmente o job `staging-load`
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`
 

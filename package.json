@@ -34,6 +34,7 @@
     "wave2:chaos": "node scripts/run-wave2-chaos.mjs --repo . --base-url http://127.0.0.1:7676 --chaos-port 17678",
     "wave3:performance": "node scripts/run-wave3-performance.mjs --repo . --isolated-port 17679",
     "evidence:index": "node scripts/index-raw-evidence.mjs --repo .",
+    "test:mcp-monitor": "node --test scripts/e2e-mcp-monitor.test.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",
@@ -50,7 +51,8 @@
     "bundle:audit:check": "node scripts/audit-ui-bundle.mjs --check",
     "test:bundle-audit": "node --test scripts/audit-ui-bundle.test.mjs",
     "mcp:monitor": "powershell -ExecutionPolicy Bypass -File scripts/mcp-monitor.ps1",
-    "mcp:monitor:once": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\mcp-monitor.ps1 -IntervalSeconds 0\"",
+    "mcp:monitor:once": "node scripts/mcp-monitor.mjs --samples 1 --fail-on-alert",
+    "mcp:monitor:continuous": "node scripts/mcp-monitor.mjs",
     "mcp:load:log": "node scripts/mcp-load-log.mjs",
     "presentation:script": "node scripts/generate-e2e-presentation-script.mjs",
     "security:p0": "python scripts/run-p0-negative-matrix.py --repo . --command \"node --test scripts/e2e-http-mcp-negative.test.mjs\""
