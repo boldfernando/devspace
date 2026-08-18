@@ -1,0 +1,14 @@
+{
+  "schema": "devspace/frontend-state-sync-baseline/v1",
+  "status": "passed",
+  "commit": "5c79bb5",
+  "branch": "main",
+  "working_tree": "clean_before_changes",
+  "gates": {
+    "typecheck": "passed",
+    "test": "passed",
+    "build": "passed"
+  },
+  "known_warning": "The existing UI chunk larger than 500 kB remains a non-regression warning.",
+  "secrets_included": false
+}

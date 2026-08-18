@@ -1,0 +1,32 @@
+{
+  "schema": "devspace/frontend-state-sync/v1",
+  "status": "passed",
+  "baseline_commit": "5c79bb5",
+  "implementation_commit_pending": true,
+  "changes": [
+    "connectionEpoch invalidates stale boot, tool-result, host-context, and teardown callbacks",
+    "renderRevision prevents lazy payload imports from mounting into a newer shell",
+    "retry clears stale card and payload state before starting a new connection",
+    "teardown clears active UI state only for the current connection epoch",
+    "same-tool incremental updates remain compatible with the new lifecycle guards"
+  ],
+  "tests": {
+    "sync_state_contracts": 3,
+    "accessibility_contracts": 5,
+    "status": "passed"
+  },
+  "gates": {
+    "npm_test": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "bundle_audit": "passed",
+    "authenticated_http_mcp_e2e": "passed",
+    "security_p0": "passed",
+    "observability": "passed"
+  },
+  "residual_unknown": [
+    "browser-host trace for event ordering and DOM commit timing",
+    "cross-browser visual teardown/reconnect validation"
+  ],
+  "secrets_included": false
+}

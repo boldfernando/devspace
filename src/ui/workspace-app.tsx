@@ -33,6 +33,13 @@ import {
 } from "./tool-display.js";
 import { withContentFallback } from "./card-result-normalizer.js";
 import { shouldUpdateToolResultInPlace } from "./render-strategy.js";
+import {
+  beginConnection,
+  beginRender,
+  initialUiSyncState,
+  isCurrentConnection,
+  isCurrentRender,
+} from "./sync-state.js";
 import "./workspace-app.css";
 
 interface MountedPayload {
@@ -61,6 +68,8 @@ let journeyProgress: JourneyProgress = initialJourneyProgress();
 let journeyProgressExpanded = false;
 let milestoneMessage: string | null = null;
 let journeyProgressContainer: HTMLElement | null = null;
+let uiSyncState = initialUiSyncState;
+let activeRenderRevision = 0;
 
 const maybeAppRoot = document.querySelector<HTMLElement>("#app");
 
@@ -73,18 +82,32 @@ const appRoot = maybeAppRoot;
 void boot();
 
 async function boot(): Promise<void> {
+  const connectionStart = beginConnection(uiSyncState);
+  uiSyncState = connectionStart.state;
+  const connectionEpoch = connectionStart.value;
   connected = false;
   connectionError = null;
+  card = null;
+  expanded = false;
+  errorMessage = null;
+  openWorkspaceInstructionKey = null;
+  showAvailableWorkspaceInstructions = false;
+  unmountPayload();
   app = null;
   render();
 
+  let nextApp: App;
   try {
-    extAppsModule = await import("@modelcontextprotocol/ext-apps");
-    app = new extAppsModule.App(
+    const nextExtAppsModule = await import("@modelcontextprotocol/ext-apps");
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
+    extAppsModule = nextExtAppsModule;
+    nextApp = new extAppsModule.App(
       { name: "devspace-tool-cards", version: "0.4.0" },
       {},
     );
+    app = nextApp;
   } catch (loadError) {
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
     connectionError = loadError instanceof Error
       ? loadError.message
       : "The host client could not be loaded.";
@@ -92,7 +115,9 @@ async function boot(): Promise<void> {
     return;
   }
 
-  app.ontoolresult = (result) => {
+  nextApp.ontoolresult = (result) => {
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
+
     const structuredContent = getStructuredContent<Partial<ToolResultCard>>(result);
     const metaCard = cardFromMeta(result);
     const structured = metaCard
@@ -138,8 +163,10 @@ async function boot(): Promise<void> {
 
   };
 
-  app.onhostcontextchanged = (ctx) => {
+    nextApp.onhostcontextchanged = (ctx) => {
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
     hostContext = {
+
       ...hostContext,
       ...ctx,
     };
@@ -149,24 +176,33 @@ async function boot(): Promise<void> {
     if (card?.tool !== "open_workspace") renderPayloadIfNeeded();
   };
 
-  app.onteardown = async () => {
+    nextApp.onteardown = async () => {
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return {};
+    connected = false;
+    card = null;
+    expanded = false;
+    errorMessage = null;
     unmountPayload();
+    render();
     return {};
   };
 
   try {
-    await app.connect();
-    const initialContext = app.getHostContext();
+    await nextApp.connect();
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
+    const initialContext = nextApp.getHostContext();
     if (initialContext) hostContext = initialContext;
     applyHostContext();
     connected = true;
   } catch (connectError) {
+    if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
     connectionError = connectError instanceof Error
       ? connectError.message
       : String(connectError);
   }
 
-  render();
+  if (isCurrentConnection(uiSyncState, connectionEpoch)) render();
+
 }
 
 function updateRenderedCardInPlace(nextCard: ToolResultCard): boolean {
@@ -212,6 +248,9 @@ function applyHostContext(): void {
 }
 
 function render(): void {
+  const renderStart = beginRender(uiSyncState);
+  uiSyncState = renderStart.state;
+  activeRenderRevision = renderStart.value;
   unmountPayload();
 
   if (connectionError) {
@@ -478,7 +517,10 @@ function renderEmpty(message: string, tone: "muted" | "error" = "muted"): void {
   appRoot.replaceChildren(main);
 }
 
-async function renderPayloadIfNeeded(): Promise<void> {
+async function renderPayloadIfNeeded(
+  expectedRenderRevision = activeRenderRevision,
+): Promise<void> {
+  if (!isCurrentRender(uiSyncState, expectedRenderRevision)) return;
   if (!card || !currentPayloadContainer || !expanded) return;
 
   const target = currentPayloadContainer;
@@ -503,7 +545,12 @@ async function renderPayloadIfNeeded(): Promise<void> {
 
     try {
       const { mountHeavyPayload } = await import("./heavy-payload.js");
-      if (target !== currentPayloadContainer || !expanded || !card) return;
+      if (
+        !isCurrentRender(uiSyncState, expectedRenderRevision) ||
+        target !== currentPayloadContainer ||
+        !expanded ||
+        !card
+      ) return;
 
       setPayloadLoading(target, false);
       currentPayload = mountHeavyPayload(target, {
@@ -533,7 +580,11 @@ async function renderPayloadIfNeeded(): Promise<void> {
     renderStatus(target, isReviewTool(card.tool) ? "Loading review..." : "Loading diff...");
 
     const { mountReviewPayload } = await import("./review-payload.js");
-    if (target !== currentPayloadContainer || !card) return;
+    if (
+      !isCurrentRender(uiSyncState, expectedRenderRevision) ||
+      target !== currentPayloadContainer ||
+      !card
+    ) return;
 
     currentPayload = mountReviewPayload(target, {
       card,
