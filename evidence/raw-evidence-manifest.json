@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T22:56:28.685Z",
+  "generated_at": "2026-08-18T22:57:50.601Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -13,7 +13,7 @@
     "raw_content_rewritten": false
   },
   "count": 97,
-  "total_bytes": 1189422,
+  "total_bytes": 1189419,
   "records": [
     {
       "id": "RAW-001",
@@ -242,9 +242,9 @@
       "archive_path": "evidence/raw/frontend-state-sync-report.json",
       "category": "other-evidence",
       "extension": ".json",
-      "bytes": 1105,
-      "source_sha256": "929af1379f96d48660c54683981b17df57cdb5f71d16af1209f405df3f14799d",
-      "archive_sha256": "929af1379f96d48660c54683981b17df57cdb5f71d16af1209f405df3f14799d",
+      "bytes": 1102,
+      "source_sha256": "3c6d7ceb8f26792828c53df8b21a7403d39fe5147cc93563499d4f07e2689e46",
+      "archive_sha256": "3c6d7ceb8f26792828c53df8b21a7403d39fe5147cc93563499d4f07e2689e46",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"

@@ -2,7 +2,7 @@
   "schema": "devspace/frontend-state-sync/v1",
   "status": "passed",
   "baseline_commit": "5c79bb5",
-  "implementation_commit_pending": true,
+  "implementation_commit": "e1afdd2",
   "changes": [
     "connectionEpoch invalidates stale boot, tool-result, host-context, and teardown callbacks",
     "renderRevision prevents lazy payload imports from mounting into a newer shell",

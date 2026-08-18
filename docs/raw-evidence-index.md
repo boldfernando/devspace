@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 97
-- **Total archived bytes:** 1189422
+- **Total archived bytes:** 1189419
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -30,7 +30,7 @@
 | RAW-015 | other-evidence | [artifacts/frontend-backend-performance-baseline.json](../artifacts/frontend-backend-performance-baseline.json) | [evidence/raw/frontend-backend-performance-baseline.json](../evidence/raw/frontend-backend-performance-baseline.json) | 458 | `8eec27b823c2b9144ce7e3e38b0a26793b90bc651a1cc0bf48d42dc96014a9c1` | clean |
 | RAW-016 | other-evidence | [artifacts/frontend-backend-performance-report.json](../artifacts/frontend-backend-performance-report.json) | [evidence/raw/frontend-backend-performance-report.json](../evidence/raw/frontend-backend-performance-report.json) | 2210 | `ccee48d341773efe518abcbd49d3e61c578cc9836ec2e9c466fa8bb0a82512f3` | clean |
 | RAW-017 | other-evidence | [artifacts/frontend-state-sync-baseline.json](../artifacts/frontend-state-sync-baseline.json) | [evidence/raw/frontend-state-sync-baseline.json](../evidence/raw/frontend-state-sync-baseline.json) | 381 | `ec4bc0738f8a2d0e30abaf0e79a0c42135c777456bf2360c7bb7d57110b8a881` | clean |
-| RAW-018 | other-evidence | [artifacts/frontend-state-sync-report.json](../artifacts/frontend-state-sync-report.json) | [evidence/raw/frontend-state-sync-report.json](../evidence/raw/frontend-state-sync-report.json) | 1105 | `929af1379f96d48660c54683981b17df57cdb5f71d16af1209f405df3f14799d` | clean |
+| RAW-018 | other-evidence | [artifacts/frontend-state-sync-report.json](../artifacts/frontend-state-sync-report.json) | [evidence/raw/frontend-state-sync-report.json](../evidence/raw/frontend-state-sync-report.json) | 1102 | `3c6d7ceb8f26792828c53df8b21a7403d39fe5147cc93563499d4f07e2689e46` | clean |
 | RAW-019 | green-status | [artifacts/green-status/build.log](../artifacts/green-status/build.log) | [evidence/raw/green-status/build.log](../evidence/raw/green-status/build.log) | 28985 | `91766bd62cd5d46799a683821d12794c73924a9290c468486a9d7632e61d49cc` | clean |
 | RAW-020 | green-status | [artifacts/green-status/bundle-audit.log](../artifacts/green-status/bundle-audit.log) | [evidence/raw/green-status/bundle-audit.log](../evidence/raw/green-status/bundle-audit.log) | 1821 | `12173c8652b3ed7a73907ed588790425ef5f39035b1b0e1d77e7ddee9e80df9c` | clean |
 | RAW-021 | green-status | [artifacts/green-status/coverage.log](../artifacts/green-status/coverage.log) | [evidence/raw/green-status/coverage.log](../evidence/raw/green-status/coverage.log) | 17922 | `4748fd8e0f5492fbdbfd33a33cedac83cdd1dac9dc776c1f3ae56eef605a450b` | clean |
