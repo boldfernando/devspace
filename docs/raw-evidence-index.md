@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 95
-- **Total archived bytes:** 1185532
+- **Total archived bytes:** 1186009
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -19,7 +19,7 @@
 | RAW-004 | canonical-360 | [artifacts/canonical-360/manifest.json](../artifacts/canonical-360/manifest.json) | [evidence/raw/canonical-360/manifest.json](../evidence/raw/canonical-360/manifest.json) | 140504 | `9e3aff3534a8db7f28e79b3ea1e9a23377a5c2a321a60d9cea632282439b47c9` | clean |
 | RAW-005 | canonical-360 | [artifacts/canonical-360/report.md](../artifacts/canonical-360/report.md) | [evidence/raw/canonical-360/report.md](../evidence/raw/canonical-360/report.md) | 8750 | `96836a17c0079bcd2f6d0a01d88237ece275c3ae25dce85d5b0462b1d1ea20ab` | clean |
 | RAW-006 | other-evidence | [artifacts/consolidated-metrics.json](../artifacts/consolidated-metrics.json) | [evidence/raw/consolidated-metrics.json](../evidence/raw/consolidated-metrics.json) | 5998 | `e263b6a01f74445a659bbf77bb5335f483fc02433f94e595315f72fcf96afc18` | clean |
-| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 187839 | `1f610c902df39618f9c80bda570af32d6825c366cc4c5e01ffcade3c051ce09c` | clean |
+| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 188319 | `d8477c1459bad7a9841fc4e4ec7fd3d4e6987b4246df3197ca04a555bf9ccada` | clean |
 | RAW-008 | other-evidence | [artifacts/e2e-360-presentation-script.md](../artifacts/e2e-360-presentation-script.md) | [evidence/raw/e2e-360-presentation-script.md](../evidence/raw/e2e-360-presentation-script.md) | 814 | `3562c4e0fdf7513adaf3b39eb518ba531adf5c6eb95143c65ebf9bf4410e2963` | clean |
 | RAW-009 | other-evidence | [artifacts/e2e-security-summary.md](../artifacts/e2e-security-summary.md) | [evidence/raw/e2e-security-summary.md](../evidence/raw/e2e-security-summary.md) | 121 | `943902c7dc53cdc4ae71690d9b303bfbf6449f9537c6a6ed4af2920fd3aa7295` | clean |
 | RAW-010 | other-evidence | [artifacts/e2e360-authz-baseline.json](../artifacts/e2e360-authz-baseline.json) | [evidence/raw/e2e360-authz-baseline.json](../evidence/raw/e2e360-authz-baseline.json) | 397 | `9b3bf7b8ddc2cfd37c43e2db3a5950490d679e5605f6dd1184cbafd0fe4ac134` | clean |
@@ -28,7 +28,7 @@
 | RAW-013 | other-evidence | [artifacts/frontend-backend-flow-load-run-3.json](../artifacts/frontend-backend-flow-load-run-3.json) | [evidence/raw/frontend-backend-flow-load-run-3.json](../evidence/raw/frontend-backend-flow-load-run-3.json) | 361 | `039dde0b3c7a127087a778217399ae3a7a0aeb292daafa85cea12ff229f98abf` | clean |
 | RAW-014 | other-evidence | [artifacts/frontend-backend-flow-load.json](../artifacts/frontend-backend-flow-load.json) | [evidence/raw/frontend-backend-flow-load.json](../evidence/raw/frontend-backend-flow-load.json) | 360 | `0ad1aebfcc4e5edc804fc24337d5ec999f5fd85b63f6dd7bdbb7d90da48b46c0` | clean |
 | RAW-015 | other-evidence | [artifacts/frontend-backend-performance-baseline.json](../artifacts/frontend-backend-performance-baseline.json) | [evidence/raw/frontend-backend-performance-baseline.json](../evidence/raw/frontend-backend-performance-baseline.json) | 458 | `8eec27b823c2b9144ce7e3e38b0a26793b90bc651a1cc0bf48d42dc96014a9c1` | clean |
-| RAW-016 | other-evidence | [artifacts/frontend-backend-performance-report.json](../artifacts/frontend-backend-performance-report.json) | [evidence/raw/frontend-backend-performance-report.json](../evidence/raw/frontend-backend-performance-report.json) | 2213 | `caf093d39014996100a6913fd1cdd7770b0e5d09bc489c0504ec56d549d7d4be` | clean |
+| RAW-016 | other-evidence | [artifacts/frontend-backend-performance-report.json](../artifacts/frontend-backend-performance-report.json) | [evidence/raw/frontend-backend-performance-report.json](../evidence/raw/frontend-backend-performance-report.json) | 2210 | `ccee48d341773efe518abcbd49d3e61c578cc9836ec2e9c466fa8bb0a82512f3` | clean |
 | RAW-017 | green-status | [artifacts/green-status/build.log](../artifacts/green-status/build.log) | [evidence/raw/green-status/build.log](../evidence/raw/green-status/build.log) | 28985 | `91766bd62cd5d46799a683821d12794c73924a9290c468486a9d7632e61d49cc` | clean |
 | RAW-018 | green-status | [artifacts/green-status/bundle-audit.log](../artifacts/green-status/bundle-audit.log) | [evidence/raw/green-status/bundle-audit.log](../evidence/raw/green-status/bundle-audit.log) | 1821 | `12173c8652b3ed7a73907ed588790425ef5f39035b1b0e1d77e7ddee9e80df9c` | clean |
 | RAW-019 | green-status | [artifacts/green-status/coverage.log](../artifacts/green-status/coverage.log) | [evidence/raw/green-status/coverage.log](../evidence/raw/green-status/coverage.log) | 17922 | `4748fd8e0f5492fbdbfd33a33cedac83cdd1dac9dc776c1f3ae56eef605a450b` | clean |

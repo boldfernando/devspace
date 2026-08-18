@@ -1,7 +1,7 @@
 {
   "schema": "devspace/frontend-backend-performance/v1",
   "status": "passed",
-  "optimization_commit_pending": true,
+  "optimization_commit": "f46378f",
   "profile": {
     "samples_per_run": 20,
     "concurrency": 4,
