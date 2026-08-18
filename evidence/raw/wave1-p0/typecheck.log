@@ -1,0 +1,4 @@
+
+> @waishnav/devspace@1.0.7 typecheck
+> tsc -p tsconfig.json --noEmit
+

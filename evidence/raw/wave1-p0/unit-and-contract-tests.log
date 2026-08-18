@@ -1,0 +1,165 @@
+
+> @waishnav/devspace@1.0.7 test
+> node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts
+
+✔ the dev server launches tsx through Node without a shell (0.8182ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46.7941
+✔ undefined request metadata has no conversation scope (0.4611ms)
+✔ missing session metadata has no conversation scope (0.0669ms)
+✔ an empty session string has no conversation scope (0.0508ms)
+✔ a non-string session value has no conversation scope (0.0461ms)
+✔ valid OpenAI session metadata returns the raw opaque session value (0.0621ms)
+✔ unrelated metadata fields do not alter the selected conversation scope (0.0459ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6.0731
+✔ the supported coding tools are recognized as card tools (0.4681ms)
+✔ tool classification distinguishes patch, edit, and shell operations (0.0813ms)
+✔ a patch card expands only when it contains patch content (0.096ms)
+✔ a single-file patch opens immediately (0.0609ms)
+✔ a multi-file patch stays collapsed (0.0656ms)
+✔ show changes still opens immediately (0.5025ms)
+✔ a workspace card expands when it contains provider metadata (0.0617ms)
+✔ a workspace card with details opens immediately (0.0462ms)
+✔ a workspace card expands when it contains agent metadata (0.0819ms)
+✔ a workspace card expands when it contains available instruction files (0.0981ms)
+✔ an empty workspace card stays collapsed (0.0488ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6.587
+Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-2asntF\project\.devspace\agents\custom.md: Subagent profile provider must be codex, claude, opencode, pi, cursor, or copilot: C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-2asntF\project\.devspace\agents\custom.md
+✔ a checkout exposes initial and nested instruction context while filtering outside symlinks (80.5309ms)
+✔ opening a missing checkout creates its workspace root (35.5078ms)
+✔ worktree opens require Git and create an isolated managed workspace (597.6378ms)
+✔ persisted checkout and worktree sessions restore after recreating the registry (447.3232ms)
+✔ workspace paths outside the allowed roots are rejected (4.6277ms)
+﹣ a symlinked allowed root preserves checkout and worktree path behavior (0.0763ms) # SKIP
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 1168.5204
+✔ a conversation reuses its checkout context (84.5969ms)
+✔ different conversations receive separate checkout workspaces (77.969ms)
+✔ conversation bindings distinguish canonical projects (84.0099ms)
+✔ concurrent checkout opens reuse one workspace and return matching context (41.5825ms)
+✔ a checkout without a conversation scope does not use conversation reuse (69.1978ms)
+✔ worktree requests remain fresh without replacing the reusable checkout (519.7936ms)
+✔ a worktree-first conversation creates and then reuses its checkout (362.0467ms)
+✔ concurrent worktree opens remain fresh and return complete context (390.7025ms)
+✔ checkout reuse survives a registry restart (129.1726ms)
+✔ a failed first context load does not consume bootstrap (153.1255ms)
+✔ a context-loading failure preserves a valid checkout binding (91.7969ms)
+✔ a deleted checkout is replaced with a new workspace (202.7551ms)
+✔ canonical checkout identity remains stable when the requested target starts missing (84.0295ms)
+✔ canonical checkout identity survives equivalent path and symlink aliases (130.8744ms)
+﹣ canonical checkout identity survives macOS var path aliases (0.0858ms) # SKIP
+✔ an invalid persisted checkout binding is not reused (150.8016ms)
+✔ an inactive persisted checkout binding is not reused (155.9659ms)
+✔ a checkout replaced by a file reports the filesystem error (117.2149ms)
+✔ unexpected storage errors are not mistaken for stale bindings (148.8734ms)
+﹣ unexpected filesystem errors are propagated without replacing the binding (0.0755ms) # SKIP
+ℹ tests 20
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 2999.7632
+✔ a clean workspace reports no changes from the last-shown checkpoint (654.3776ms)
+✔ show_changes reports and advances the last-shown checkpoint (1015.0247ms)
+✔ review checkpoints survive a manager restart (883.6611ms)
+✔ concurrent initialization produces one usable checkpoint state (859.0127ms)
+✔ a missing last-shown checkpoint falls back after restart and can be re-established (1207.2446ms)
+✔ a checkpoint workspace rejects a different root without changing its state (823.8911ms)
+✔ a concurrent review rejects a different root after initialization (583.6068ms)
+✔ an unborn repository becomes reviewable after its first commit (755.8356ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6786.8839
+{"ts":"2026-08-18T05:03:32.504Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_2a4e372e29","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-12p573\\project","success":true,"durationMs":42}
+{"ts":"2026-08-18T05:03:32.510Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_2a4e372e29","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-12p573\\project","success":true,"durationMs":4}
+✔ open_workspace keeps lifecycle flags out of model output and preserves complete card metadata (88.6696ms)
+{"ts":"2026-08-18T05:03:32.572Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_17ad4dcb0f","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-VVG4Vf\\project","success":true,"durationMs":35}
+{"ts":"2026-08-18T05:03:32.572Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_17ad4dcb0f","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-VVG4Vf\\project","success":true,"durationMs":35}
+✔ concurrent checkout opens return one full context and one reuse instruction (49.6366ms)
+{"ts":"2026-08-18T05:03:32.789Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_096939e51a","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-unVnpi\\project","success":true,"durationMs":31}
+{"ts":"2026-08-18T05:03:32.939Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_298aef05da","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-unVnpi\\.worktrees\\project-e404bcec","success":true,"durationMs":150}
+{"ts":"2026-08-18T05:03:33.096Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_a207817b1a","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-unVnpi\\.worktrees\\project-4ad97d91","success":true,"durationMs":157}
+{"ts":"2026-08-18T05:03:33.101Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_096939e51a","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-unVnpi\\project","success":true,"durationMs":4}
+✔ new worktrees always receive a fresh workspace and complete worktree context (531.4299ms)
+{"ts":"2026-08-18T05:03:33.450Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_594b14b8bd","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-rzMSUg\\.worktrees\\project-b4bc9518","success":true,"durationMs":169}
+{"ts":"2026-08-18T05:03:33.508Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_270d8a26fb","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-rzMSUg\\project","success":true,"durationMs":58}
+{"ts":"2026-08-18T05:03:33.515Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_270d8a26fb","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-rzMSUg\\project","success":true,"durationMs":7}
+✔ checkout opened after a worktree receives its own complete context (418.0411ms)
+{"ts":"2026-08-18T05:03:33.647Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_38651b5e08","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-5VBUtm\\project","success":true,"durationMs":103}
+{"ts":"2026-08-18T05:03:33.704Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_a90f55c65e","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-5VBUtm\\project","success":true,"durationMs":56}
+✔ a host without conversation metadata receives normal explicit-workspace behavior (195.0157ms)
+{"ts":"2026-08-18T05:03:33.789Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_6d74c73756","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-8ppmIh\\project","success":true,"durationMs":48}
+{"ts":"2026-08-18T05:03:33.855Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_6d74c73756","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-8ppmIh\\project","success":true,"durationMs":57}
+✔ checkout reuse and context suppression survive a registry restart (142.3817ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1428.2382
+✔ device store creates a sanitized public record and enforces polling interval (62.2003ms)
+✔ device store approval emits one token opportunity and rejects replay (21.3711ms)
+✔ device store denies pending requests and does not disclose invalid user codes (14.0096ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 474.1875
+✔ selective language catalog falls back heavy grammars to text (0.48ms)
+✔ selective language catalog allows explicit heavy-language opt in (0.0864ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11.8754
+✔ runtime metrics render safe dimensions and stable Prometheus names (6.101ms)
+✔ runtime metrics sanitize unsafe label values (0.1248ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13.2324

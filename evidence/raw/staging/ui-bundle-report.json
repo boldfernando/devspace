@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-08-14T13:41:20.053Z",
+  "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\dist\\ui",
+  "manifest": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\dist\\ui\\.vite\\manifest.json",
+  "maxInitialBytes": 500000,
+  "entries": [
+    {
+      "name": "workspace-app.html",
+      "file": "assets/workspace-app-DlOA5zYA.js",
+      "initialBytes": 32551,
+      "dynamicImports": [
+        "heavy-payload.tsx",
+        "review-payload.tsx"
+      ]
+    }
+  ],
+  "largestAssets": [
+    {
+      "file": "assets/emacs-lisp-C9PiwqqW.js",
+      "bytes": 779847
+    },
+    {
+      "file": "assets/cpp-BPdUlE36.js",
+      "bytes": 626127
+    },
+    {
+      "file": "assets/wasm-BnjxR4X6.js",
+      "bytes": 622325
+    },
+    {
+      "file": "assets/scrollbar-C9BNu4_M.js",
+      "bytes": 263280
+    },
+    {
+      "file": "assets/wolfram-DLL8P-h_.js",
+      "bytes": 262384
+    },
+    {
+      "file": "assets/vue-vine-UylEakwz.js",
+      "bytes": 190058
+    },
+    {
+      "file": "assets/client-C9ozm1rP.js",
+      "bytes": 189804
+    },
+    {
+      "file": "assets/angular-ts-C6pYJTpI.js",
+      "bytes": 183731
+    },
+    {
+      "file": "assets/typescript-Bg9PLOIF.js",
+      "bytes": 181136
+    },
+    {
+      "file": "assets/jsx-BndDxgF-.js",
+      "bytes": 177848
+    },
+    {
+      "file": "assets/tsx-CBC4H8GA.js",
+      "bytes": 175592
+    },
+    {
+      "file": "assets/javascript-Cm42D31c.js",
+      "bytes": 174883
+    },
+    {
+      "file": "assets/objective-cpp-BsSzOQcm.js",
+      "bytes": 171965
+    },
+    {
+      "file": "assets/useFileDiffInstance-BJvJiT2M.js",
+      "bytes": 167352
+    },
+    {
+      "file": "assets/mdx-DQZ5AkYe.js",
+      "bytes": 136107
+    },
+    {
+      "file": "assets/asciidoc-DE70LPWp.js",
+      "bytes": 131520
+    },
+    {
+      "file": "assets/php-5l7onE6r.js",
+      "bytes": 111053
+    },
+    {
+      "file": "assets/objective-c-D1A_Heim.js",
+      "bytes": 105406
+    },
+    {
+      "file": "assets/blade-C8XcUnG5.js",
+      "bytes": 104976
+    },
+    {
+      "file": "assets/less-DVTAwKKz.js",
+      "bytes": 97626
+    }
+  ]
+}

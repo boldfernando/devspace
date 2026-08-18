@@ -1,0 +1,1 @@
+# OAuth/MCP P0 negative matrix\n\n- Status: **passed**\n- Scenarios: **23/23**\n- Secret leak: **False**\n- Missing: ``\n

@@ -1,0 +1,14 @@
+
+> @waishnav/devspace@1.0.7 test:bundle-audit
+> node --test scripts/audit-ui-bundle.test.mjs
+
+✔ bundle audit reports initial entrypoint and lazy assets (52.3805ms)
+✔ bundle audit rejects an entrypoint over budget (46.902ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 151.051

@@ -1,0 +1,245 @@
+{
+  "schema": "devspace.wave1-p0.v1",
+  "status": "passed",
+  "started_at": "2026-08-18T05:05:10.172Z",
+  "repository": "devspace",
+  "branch": "local",
+  "gates": [
+    {
+      "name": "health",
+      "command": [
+        "node",
+        "-e",
+        "fetch(\"http://127.0.0.1:7676/healthz\").then(async r=>{if(r.status!==200)process.exit(1);console.log('health=200')}).catch(()=>process.exit(1))"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 66,
+      "log": "<repo>\\artifacts\\wave1-p0\\health.log"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 3313,
+      "log": "<repo>\\artifacts\\wave1-p0\\typecheck.log"
+    },
+    {
+      "name": "unit-and-contract-tests",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 64175,
+      "log": "<repo>\\artifacts\\wave1-p0\\unit-and-contract-tests.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 4646,
+      "log": "<repo>\\artifacts\\wave1-p0\\build.log"
+    },
+    {
+      "name": "observability-contract",
+      "command": [
+        "npm",
+        "run",
+        "test:observability"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 287,
+      "log": "<repo>\\artifacts\\wave1-p0\\observability-contract.log"
+    },
+    {
+      "name": "bundle-audit-tests",
+      "command": [
+        "npm",
+        "run",
+        "test:bundle-audit"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 447,
+      "log": "<repo>\\artifacts\\wave1-p0\\bundle-audit-tests.log"
+    },
+    {
+      "name": "bundle-budget",
+      "command": [
+        "npm",
+        "run",
+        "bundle:audit:check"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 313,
+      "log": "<repo>\\artifacts\\wave1-p0\\bundle-budget.log"
+    },
+    {
+      "name": "coverage",
+      "command": [
+        "npm",
+        "run",
+        "coverage:check"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 45347,
+      "log": "<repo>\\artifacts\\wave1-p0\\coverage.log"
+    },
+    {
+      "name": "e2e-http-mcp-positive",
+      "command": [
+        "npm",
+        "run",
+        "e2e"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 5816,
+      "log": "<repo>\\artifacts\\wave1-p0\\e2e-http-mcp-positive.log"
+    },
+    {
+      "name": "e2e-http-mcp-idempotency",
+      "command": [
+        "npm",
+        "run",
+        "e2e:idempotency"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 5573,
+      "log": "<repo>\\artifacts\\wave1-p0\\e2e-http-mcp-idempotency.log"
+    },
+    {
+      "name": "idempotency-p1-matrix",
+      "command": [
+        "npm",
+        "run",
+        "test:idempotency:p1"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 765,
+      "log": "<repo>\\artifacts\\wave1-p0\\idempotency-p1-matrix.log"
+    },
+    {
+      "name": "oauth-device-http",
+      "command": [
+        "npm",
+        "run",
+        "e2e:oauth-device"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 7444,
+      "log": "<repo>\\artifacts\\wave1-p0\\oauth-device-http.log"
+    },
+    {
+      "name": "oauth-device-cli",
+      "command": [
+        "npm",
+        "run",
+        "e2e:oauth-device-cli"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 12866,
+      "log": "<repo>\\artifacts\\wave1-p0\\oauth-device-cli.log"
+    },
+    {
+      "name": "oauth-mcp-negative-p0",
+      "command": [
+        "npm",
+        "run",
+        "security:p0"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 3478,
+      "log": "<repo>\\artifacts\\wave1-p0\\oauth-mcp-negative-p0.log"
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "node",
+        "dist/cli.js",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 1137,
+      "log": "<repo>\\artifacts\\wave1-p0\\doctor.log"
+    },
+    {
+      "name": "canonical-self-scan",
+      "command": [
+        "npm",
+        "run",
+        "prd:reverse"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 441,
+      "log": "<repo>\\artifacts\\wave1-p0\\canonical-self-scan.log"
+    }
+  ],
+  "required_domains": [
+    "discovery",
+    "build",
+    "oauth-pkce",
+    "bearer",
+    "mcp-session",
+    "negative-security",
+    "idempotency",
+    "device-flow",
+    "observability",
+    "bundle",
+    "coverage",
+    "doctor",
+    "canonical-scan"
+  ],
+  "idempotency_validation": {
+    "required_cases": [
+      "IDEMP-P1-001",
+      "IDEMP-P1-002",
+      "IDEMP-P1-003",
+      "IDEMP-P1-004",
+      "IDEMP-P1-005",
+      "IDEMP-P1-006",
+      "IDEMP-P1-007",
+      "IDEMP-P1-008"
+    ],
+    "real_http_mcp": true,
+    "secret_scan_required": true
+  }
+}

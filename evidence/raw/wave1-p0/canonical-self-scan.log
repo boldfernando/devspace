@@ -1,0 +1,4 @@
+
+> @waishnav/devspace@1.0.7 prd:reverse
+> tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both
+

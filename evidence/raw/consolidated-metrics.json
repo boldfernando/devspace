@@ -1,0 +1,236 @@
+{
+  "schema": "devspace.consolidated-metrics.v1",
+  "generated_at": "2026-08-18T16:09:53.2516669Z",
+  "repository": "devspace",
+  "baseline": {
+    "commit": "16c1df2",
+    "branch": "main",
+    "working_tree": "clean"
+  },
+  "wave1_p0": {
+    "status": "passed",
+    "gate_count": 16,
+    "real_http_mcp": true,
+    "source": "artifacts/wave1-p0/summary.json"
+  },
+  "wave2_chaos": {
+    "status": "passed",
+    "scenario_count": 11,
+    "scenario_names": [
+      "CHAOS-001-restart-recovery",
+      "CHAOS-002-idempotency-real",
+      "CHAOS-003-idempotency-p1",
+      "CHAOS-004-http-mcp-positive",
+      "CHAOS-005-oauth-device-http",
+      "CHAOS-006-oauth-device-cli",
+      "CHAOS-007-negative-security",
+      "CHAOS-008-authenticated-load",
+      "CHAOS-009-observability-contract",
+      "CHAOS-010-bundle-and-coverage",
+      "CHAOS-011-doctor"
+    ],
+    "restart_recovery": {
+      "status": "passed",
+      "first_ready": true,
+      "unavailable_rejected": true,
+      "second_ready": true,
+      "health_status_after_restart": 200,
+      "metrics_status_after_restart": 200
+    },
+    "secret_leak_detected": false,
+    "source": "artifacts/wave2-chaos/summary.json"
+  },
+  "authenticated_load_baseline": {
+    "status": "passed",
+    "samples": 20,
+    "concurrency": 4,
+    "p50_ms": 14,
+    "p95_ms": 19,
+    "p99_ms": 19,
+    "source": "artifacts/mcp-load-log.json"
+  },
+  "idempotency_p1": {
+    "status": "passed",
+    "suite": "IDEMP-P1-001..008",
+    "case_count": 8,
+    "effect_count": 5,
+    "secret_leak_detected": false,
+    "source": "artifacts/idempotency-p1-report.json"
+  },
+  "coverage_gate": {
+    "status": "passed",
+    "measured": "UNKNOWN",
+    "thresholds": {
+      "lines": 60,
+      "functions": 55,
+      "branches": 45,
+      "statements": 60
+    },
+    "note": "The available evidence confirms the gate passed; per-metric measured percentages were not present in the retained artifact.",
+    "source": "package.json scripts.coverage:check and artifacts/green-status/coverage.log"
+  },
+  "bundle_audit": {
+    "status": "passed",
+    "largestAssets": [
+      {
+        "file": "assets/emacs-lisp-C9PiwqqW.js",
+        "bytes": 779847
+      },
+      {
+        "file": "assets/cpp-BPdUlE36.js",
+        "bytes": 626127
+      },
+      {
+        "file": "assets/wasm-BnjxR4X6.js",
+        "bytes": 622325
+      },
+      {
+        "file": "assets/scrollbar-CAd-OuBV.js",
+        "bytes": 263280
+      },
+      {
+        "file": "assets/wolfram-DLL8P-h_.js",
+        "bytes": 262384
+      },
+      {
+        "file": "assets/vue-vine-UylEakwz.js",
+        "bytes": 190058
+      },
+      {
+        "file": "assets/client-C9ozm1rP.js",
+        "bytes": 189804
+      },
+      {
+        "file": "assets/angular-ts-C6pYJTpI.js",
+        "bytes": 183731
+      },
+      {
+        "file": "assets/typescript-Bg9PLOIF.js",
+        "bytes": 181136
+      },
+      {
+        "file": "assets/jsx-BndDxgF-.js",
+        "bytes": 177848
+      },
+      {
+        "file": "assets/tsx-CBC4H8GA.js",
+        "bytes": 175592
+      },
+      {
+        "file": "assets/javascript-Cm42D31c.js",
+        "bytes": 174883
+      },
+      {
+        "file": "assets/objective-cpp-BsSzOQcm.js",
+        "bytes": 171965
+      },
+      {
+        "file": "assets/useFileDiffInstance-p07QiOOW.js",
+        "bytes": 167352
+      },
+      {
+        "file": "assets/mdx-DQZ5AkYe.js",
+        "bytes": 136107
+      },
+      {
+        "file": "assets/asciidoc-DE70LPWp.js",
+        "bytes": 131520
+      },
+      {
+        "file": "assets/php-5l7onE6r.js",
+        "bytes": 111053
+      },
+      {
+        "file": "assets/objective-c-D1A_Heim.js",
+        "bytes": 105406
+      },
+      {
+        "file": "assets/blade-C8XcUnG5.js",
+        "bytes": 104976
+      },
+      {
+        "file": "assets/less-DVTAwKKz.js",
+        "bytes": 97626
+      }
+    ],
+    "source": "artifacts/ui-bundle-report.json"
+  },
+  "evidence_policy": {
+    "sanitized": true,
+    "secrets_included": false,
+    "unknowns_explicit": true
+  },
+  "wave3_performance": {
+    "schema": "devspace.wave3-performance.v1",
+    "status": "passed",
+    "execution_mode": "isolated_staging_server",
+    "isolated_port": 17679,
+    "profiles": [
+      {
+        "name": "ramp",
+        "status": "passed",
+        "samples": 40,
+        "concurrency": 16,
+        "wall_ms": 662,
+        "throughput_rps": 60.42,
+        "p50_ms": 37,
+        "p95_ms": 47,
+        "p99_ms": 47,
+        "max_ms": 47,
+        "slo_passed": true
+      },
+      {
+        "name": "sustained",
+        "status": "passed",
+        "samples": 20,
+        "concurrency": 4,
+        "wall_ms": 156,
+        "throughput_rps": 128.21,
+        "p50_ms": 30,
+        "p95_ms": 36,
+        "p99_ms": 36,
+        "max_ms": 36,
+        "slo_passed": true
+      },
+      {
+        "name": "burst",
+        "status": "passed",
+        "samples": 40,
+        "concurrency": 8,
+        "wall_ms": 167,
+        "throughput_rps": 239.52,
+        "p50_ms": 31,
+        "p95_ms": 36,
+        "p99_ms": 37,
+        "max_ms": 37,
+        "slo_passed": true
+      },
+      {
+        "name": "soak",
+        "status": "passed",
+        "samples": 60,
+        "concurrency": 4,
+        "wall_ms": 449,
+        "throughput_rps": 133.63,
+        "p50_ms": 25,
+        "p95_ms": 47,
+        "p99_ms": 51,
+        "max_ms": 51,
+        "slo_passed": true
+      }
+    ],
+    "thresholds": {
+      "p50_max_ms": 50,
+      "p95_max_ms": 100,
+      "sustained_p50_gate": true
+    },
+    "invariants": {
+      "real_http_mcp": true,
+      "all_profiles_executed": true,
+      "artifacts_sanitized": true,
+      "secrets_included": false,
+      "failed_closed_on_missing_report": true
+    },
+    "source": "artifacts/wave3-performance/summary.json"
+  }
+}

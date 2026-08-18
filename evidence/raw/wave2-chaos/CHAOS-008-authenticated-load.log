@@ -1,0 +1,14 @@
+
+> @waishnav/devspace@1.0.7 mcp:load:log
+> node scripts/mcp-load-log.mjs
+
+{"schema":"devspace.mcp-load.v1","event":"mcp_load","status":"passed","samples":20,"wallMs":78,"p50Ms":14,"p95Ms":19,"p99Ms":19,"maxMs":19}
+✔ real OAuth PKCE flow completes an authenticated MCP handshake (1634.7716ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1687.6685

@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-08-18T04:41:08.9972498Z",
+  "repo": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "dev_env": {
+    "health_url": "http://127.0.0.1:7676/healthz",
+    "health_before": false,
+    "health_after": true,
+    "started_by_runner": true,
+    "process_id": 45148
+  },
+  "gates": [
+    {
+      "name": "typecheck",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 11857,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\typecheck.log"
+    },
+    {
+      "name": "test",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 44174,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\test.log"
+    },
+    {
+      "name": "build",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 5443,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\build.log"
+    },
+    {
+      "name": "bundle-audit",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 480,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\bundle-audit.log"
+    },
+    {
+      "name": "coverage",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 41726,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\coverage.log"
+    },
+    {
+      "name": "idempotency-p1",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 1033,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\idempotency-p1.log"
+    },
+    {
+      "name": "e2e-idempotency",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 6689,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\e2e-idempotency.log"
+    },
+    {
+      "name": "e2e-oauth-device",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 7798,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\e2e-oauth-device.log"
+    },
+    {
+      "name": "e2e-oauth-device-cli",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 13222,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\e2e-oauth-device-cli.log"
+    },
+    {
+      "name": "e2e-http-mcp",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 6591,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\e2e-http-mcp.log"
+    },
+    {
+      "name": "security-p0",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 3796,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\security-p0.log"
+    },
+    {
+      "name": "doctor",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 1388,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\doctor.log"
+    },
+    {
+      "name": "prd-reverse",
+      "exit_code": 0,
+      "status": "passed",
+      "duration_ms": 686,
+      "log": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\green-status\\prd-reverse.log"
+    }
+  ],
+  "green": true
+}

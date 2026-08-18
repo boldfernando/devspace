@@ -1,0 +1,40 @@
+
+> @waishnav/devspace@1.0.7 dev
+> node scripts/dev-server.mjs
+
+devspace listening on http://127.0.0.1:7676/mcp
+public base url: http://127.0.0.1:7676
+allowed roots: C:\Users\fjuni\.copilot\repos\devspace
+allowed hosts: localhost, 127.0.0.1, ::1
+auth: Owner password approval required
+logging: info json
+{"ts":"2026-08-18T04:38:44.083Z","level":"info","event":"http_request","requestId":"1b79c59c-b038-498f-a0f0-5a222efdd200","method":"GET","path":"/healthz","status":200,"durationMs":5,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T04:43:06.738Z","level":"info","event":"http_request","requestId":"f106edf0-663c-4e84-9042-ec83bcf7987a","method":"GET","path":"/healthz","status":200,"durationMs":1,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T04:43:06.751Z","level":"info","event":"http_request","requestId":"8fadcc84-4458-4346-8a50-1f9d253b6493","method":"GET","path":"/metrics","status":200,"durationMs":1,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T04:43:13.876Z","level":"info","event":"http_request","requestId":"7817a771-647a-42d9-80b2-2beaded84122","method":"GET","path":"/healthz","status":200,"durationMs":0,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T04:43:13.890Z","level":"info","event":"http_request","requestId":"c8aaf07d-5bb7-4df6-bbc3-ced652060587","method":"GET","path":"/metrics","status":200,"durationMs":1,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T04:48:26.435Z","level":"info","event":"http_request","requestId":"78f706c2-c60d-4cbf-916c-9169f12f3b52","method":"GET","path":"/healthz","status":200,"durationMs":1,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T04:49:31.228Z","level":"info","event":"http_request","requestId":"e08845ee-5274-4986-a30d-b18d8a17a12c","method":"GET","path":"/healthz","status":200,"durationMs":0,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"node"}
+{"ts":"2026-08-18T04:50:01.488Z","level":"info","event":"http_request","requestId":"93ad82eb-3c94-47f6-b397-54fc8d1286b5","method":"GET","path":"/healthz","status":200,"durationMs":0,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"node"}
+devspace listening on http://127.0.0.1:7676/mcp
+public base url: http://127.0.0.1:7676
+allowed roots: C:\Users\fjuni\.copilot\repos\devspace
+allowed hosts: localhost, 127.0.0.1, ::1
+auth: Owner password approval required
+logging: info json
+{"ts":"2026-08-18T04:59:06.838Z","level":"info","event":"http_request","requestId":"2f877ef3-cdbb-4979-be79-d0d7103835cb","method":"GET","path":"/healthz","status":200,"durationMs":4,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+devspace listening on http://127.0.0.1:7676/mcp
+public base url: http://127.0.0.1:7676
+allowed roots: C:\Users\fjuni\.copilot\repos\devspace
+allowed hosts: localhost, 127.0.0.1, ::1
+auth: Owner password approval required
+logging: info json
+devspace listening on http://127.0.0.1:7676/mcp
+public base url: http://127.0.0.1:7676
+allowed roots: C:\Users\fjuni\.copilot\repos\devspace
+allowed hosts: localhost, 127.0.0.1, ::1
+auth: Owner password approval required
+logging: info json
+{"ts":"2026-08-18T05:02:34.115Z","level":"info","event":"http_request","requestId":"d1b35ff4-1c1e-4c4a-9239-fb8c3a87f256","method":"GET","path":"/healthz","status":200,"durationMs":5,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"node"}
+{"ts":"2026-08-18T05:05:54.456Z","level":"info","event":"http_request","requestId":"bf31f872-1671-49ee-ac2b-5f740ce97d74","method":"GET","path":"/healthz","status":200,"durationMs":1,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}
+{"ts":"2026-08-18T05:17:57.913Z","level":"info","event":"http_request","requestId":"d7da1b4e-a2ab-43c7-98fa-1b8d7c6b7e75","method":"GET","path":"/healthz","status":200,"durationMs":1,"ip":"127.0.0.1","host":"127.0.0.1:7676","userAgent":"Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; pt-BR) PowerShell/7.6.4"}

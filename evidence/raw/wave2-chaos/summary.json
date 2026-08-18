@@ -1,0 +1,160 @@
+{
+  "schema": "devspace.wave2-chaos.v1",
+  "status": "passed",
+  "started_at": "2026-08-18T15:35:53.911Z",
+  "repository": "devspace",
+  "base_url": "http://127.0.0.1:7676",
+  "chaos_port": 17678,
+  "scenarios": [
+    {
+      "name": "CHAOS-001-restart-recovery",
+      "status": "passed",
+      "duration_ms": 3254,
+      "details": {
+        "first_ready": true,
+        "unavailable_rejected": true,
+        "second_ready": true,
+        "health_status_after_restart": 200,
+        "metrics_status_after_restart": 200
+      }
+    },
+    {
+      "name": "CHAOS-002-idempotency-real",
+      "command": [
+        "npm",
+        "run",
+        "e2e:idempotency"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 6595,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-002-idempotency-real.log"
+    },
+    {
+      "name": "CHAOS-003-idempotency-p1",
+      "command": [
+        "npm",
+        "run",
+        "test:idempotency:p1"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 779,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-003-idempotency-p1.log"
+    },
+    {
+      "name": "CHAOS-004-http-mcp-positive",
+      "command": [
+        "npm",
+        "run",
+        "e2e"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 6648,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-004-http-mcp-positive.log"
+    },
+    {
+      "name": "CHAOS-005-oauth-device-http",
+      "command": [
+        "npm",
+        "run",
+        "e2e:oauth-device"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 7613,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-005-oauth-device-http.log"
+    },
+    {
+      "name": "CHAOS-006-oauth-device-cli",
+      "command": [
+        "npm",
+        "run",
+        "e2e:oauth-device-cli"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 13050,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-006-oauth-device-cli.log"
+    },
+    {
+      "name": "CHAOS-007-negative-security",
+      "command": [
+        "npm",
+        "run",
+        "security:p0"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 3432,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-007-negative-security.log"
+    },
+    {
+      "name": "CHAOS-008-authenticated-load",
+      "command": [
+        "npm",
+        "run",
+        "mcp:load:log"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 1996,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-008-authenticated-load.log"
+    },
+    {
+      "name": "CHAOS-009-observability-contract",
+      "command": [
+        "npm",
+        "run",
+        "test:observability"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 275,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-009-observability-contract.log"
+    },
+    {
+      "name": "CHAOS-010-bundle-and-coverage",
+      "command": [
+        "npm",
+        "run",
+        "coverage:check"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 38759,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-010-bundle-and-coverage.log"
+    },
+    {
+      "name": "CHAOS-011-doctor",
+      "command": [
+        "node",
+        "dist/cli.js",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "status": "passed",
+      "duration_ms": 1222,
+      "log": "<repo>\\artifacts\\wave2-chaos\\CHAOS-011-doctor.log"
+    }
+  ],
+  "invariants": [
+    "restart recovery returns health and metrics without cross-session context",
+    "unavailable endpoint fails closed",
+    "idempotency replay/conflict/concurrency produce no duplicate effect",
+    "P0 rejected requests remain effect-free",
+    "cleanup removes isolated roots/state and no orphan process remains",
+    "artifacts are sanitized and secret flags remain false"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "suite": "IDEMP-P1-001..008",
+  "mode": "real HTTP fixture with SQLite transaction store",
+  "status": "passed",
+  "passed": 8,
+  "total": 8,
+  "effect_count": 5,
+  "cases": [
+    {
+      "id": "IDEMP-P1-001",
+      "status": "passed",
+      "detail": "first claim succeeded and created one file effect"
+    },
+    {
+      "id": "IDEMP-P1-002",
+      "status": "passed",
+      "detail": "same key and canonical payload replayed persisted result"
+    },
+    {
+      "id": "IDEMP-P1-003",
+      "status": "passed",
+      "detail": "payload hash mismatch returned 409 without effect"
+    },
+    {
+      "id": "IDEMP-P1-004",
+      "status": "passed",
+      "detail": "two concurrent requests produced one owner and one pending response"
+    },
+    {
+      "id": "IDEMP-P1-005",
+      "status": "passed",
+      "detail": "lost response replays committed result; expired lease is surfaced as ambiguous without automatic re-execution"
+    },
+    {
+      "id": "IDEMP-P1-006",
+      "status": "passed",
+      "detail": "same key in different scopes produced independent effects"
+    },
+    {
+      "id": "IDEMP-P1-007",
+      "status": "passed",
+      "detail": "retention expiry removed only completed record and accepted a new explicit intent"
+    },
+    {
+      "id": "IDEMP-P1-008",
+      "status": "passed",
+      "detail": "fixture effect log and test evidence passed the secret scan"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "IDEMP-P1-001",
+      "status": "passed",
+      "detail": "first claim succeeded and created one file effect"
+    },
+    {
+      "id": "IDEMP-P1-002",
+      "status": "passed",
+      "detail": "same key and canonical payload replayed persisted result"
+    },
+    {
+      "id": "IDEMP-P1-003",
+      "status": "passed",
+      "detail": "payload hash mismatch returned 409 without effect"
+    },
+    {
+      "id": "IDEMP-P1-004",
+      "status": "passed",
+      "detail": "two concurrent requests produced one owner and one pending response"
+    },
+    {
+      "id": "IDEMP-P1-005",
+      "status": "passed",
+      "detail": "lost response replays committed result; expired lease is surfaced as ambiguous without automatic re-execution"
+    },
+    {
+      "id": "IDEMP-P1-006",
+      "status": "passed",
+      "detail": "same key in different scopes produced independent effects"
+    },
+    {
+      "id": "IDEMP-P1-007",
+      "status": "passed",
+      "detail": "retention expiry removed only completed record and accepted a new explicit intent"
+    },
+    {
+      "id": "IDEMP-P1-008",
+      "status": "passed",
+      "detail": "fixture effect log and test evidence passed the secret scan"
+    }
+  ],
+  "secret_leak_detected": false
+}

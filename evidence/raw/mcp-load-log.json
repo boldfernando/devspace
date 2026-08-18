@@ -1,0 +1,11 @@
+{
+  "schema": "devspace.mcp-load.v1",
+  "event": "mcp_load",
+  "status": "passed",
+  "samples": 20,
+  "wallMs": 78,
+  "p50Ms": 14,
+  "p95Ms": 19,
+  "p99Ms": 19,
+  "maxMs": 19
+}

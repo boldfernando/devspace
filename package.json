@@ -33,6 +33,7 @@
     "wave1:p0": "node scripts/run-wave1-p0.mjs --repo . --base-url http://127.0.0.1:7676",
     "wave2:chaos": "node scripts/run-wave2-chaos.mjs --repo . --base-url http://127.0.0.1:7676 --chaos-port 17678",
     "wave3:performance": "node scripts/run-wave3-performance.mjs --repo . --isolated-port 17679",
+    "evidence:index": "node scripts/index-raw-evidence.mjs --repo .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",

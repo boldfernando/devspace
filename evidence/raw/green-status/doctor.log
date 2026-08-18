@@ -1,0 +1,13 @@
+Config dir: C:\Users\fjuni\.devspace
+Config file: C:\Users\fjuni\.devspace\config.json
+Auth file: C:\Users\fjuni\.devspace\auth.json
+Node: v24.18.0 (supported >=20.12 <27)
+Node ABI: 137
+Platform: win32 x64
+Git: git version 2.55.0.windows.4
+Bash shell: C:\Windows\System32\bash.exe -s
+SQLite native dependency: ok
+Local MCP URL: http://127.0.0.1:7676/mcp
+Public MCP URL: http://127.0.0.1:7676/mcp
+Allowed roots: C:\Users\fjuni\.copilot\repos\devspace
+Allowed hosts: localhost, 127.0.0.1, ::1
