@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `ca6867a`
+**Commit de referência:** `9441e41`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -40,7 +40,7 @@
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 81 raws arquivados byte a byte, 983.794 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 81 raws arquivados byte a byte, 983.793 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
