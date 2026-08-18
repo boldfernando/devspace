@@ -40,6 +40,7 @@
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",
     "e2e:idempotency:recovery": "npm run build && node --test scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+    "e2e:path-containment": "npm run build && node --test scripts/e2e-http-mcp-path-containment.test.mjs",
     "test:idempotency:p1": "tsx --test scripts/e2e-idempotency-p1.test.ts",
     "prd:reverse": "tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both",
     "prd:reverse:strict": "tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both --strict --fail-on P1",

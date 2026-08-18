@@ -40,7 +40,7 @@
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 80 raws arquivados byte a byte, 983.330 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 81 raws arquivados byte a byte, 983.794 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -135,7 +135,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | ID | Task | Status | Dependências | Critério de aceite / próxima evidência |
 |---|---|---|---|---|
 | P1-SEC-001 | Rate limiting para request device, approval e polling por client/IP. | Parcial — local aprovado, hosted UNKNOWN | P0-DEVICE-004 | 429/`slow_down`, `Retry-After`, legítimo preservado e métrica consultável. |
-| P1-SEC-002 | Cobrir traversal, symlink escape, roots allowlist, hosts e origins por OS. | Parcial | P0-MCP-001 | Matriz filesystem sem acesso fora do root. |
+| P1-SEC-002 | Cobrir traversal, symlink escape, roots allowlist, hosts e origins por OS. | Concluída localmente em Windows; traversal/OS matrix UNKNOWN | P0-MCP-001 | `resolveAllowedPathReal` bloqueia symlink e parent symlink em `read`, `write` e `bash` antes do efeito; E2E HTTP/MCP Windows PASS; falta matriz macOS/Linux, hosts/origins e traversal completo. |
 | P1-SEC-003 | Validar scopes por ferramenta, resource e cliente. | Concluída localmente; gateway/hosted UNKNOWN | P0-AUTH-003 | `read` permite leitura, bloqueia escrita/processo com 403, resource/client binding e matriz negativa passam; falta prova hosted do gateway. |
 | P1-SEC-004 | Cobrir expiração, revogação e rotação de tokens PKCE/device. | Concluída localmente; key rotation UNKNOWN | P0-AUTH-001, P0-DEVICE-004 | Refresh rotation, replay denial, `/revoke`, Bearer 401 e persistência após restart passam; rotação de chaves ainda não executada. |
 | P1-SESSION-001 | Rejeitar replay após close, reconexão parcial, ID desconhecido e lifecycle inválido. | Concluída | P0-AUTH-004 | Casos SESSION negativos aprovados. |
@@ -172,7 +172,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P2-LOAD-003 | MCP | Calibrar thresholds por região/tool em três execuções independentes. | Backlog | P2-LOAD-001 | Variabilidade, intervalo e baseline versionados. |
 | P2-RES-001 | Operação | Simular indisponibilidade, restart e recuperação de sessões. | Concluída localmente | P1-OBS-004 | Wave 2 comprovou health/metrics após restart; ampliar reauth. |
 | P2-RES-002 | Operação | Testar SQLite cheio/lock, filesystem read-only, root ausente e processo filho falho. | Backlog | P1-OBS-001 | Erro sanitizado, fail-closed e cleanup. |
-| P2-FS-001 | Filesystem | Cobrir arquivos grandes/binários, symlink, case-insensitive e permissões por OS. | Parcial | P1-SEC-002 | Limites antes do efeito e nenhum acesso fora do root. |
+| P2-FS-001 | Filesystem | Cobrir arquivos grandes/binários, symlink, case-insensitive e permissões por OS. | Parcial — symlink containment local aprovado | P1-SEC-002 | `path-containment-report.json` comprova read/write/cwd symlink bloqueados e filesystem inalterado; faltam arquivo grande/binário, case-insensitive e matriz OS. |
 | P2-PROC-001 | Processos | Cobrir bash, `write_stdin`, timeout, abort, process group, crash e PID reuse. | Parcial | P0-IDEMP-001 | Não reexecutar comandos cegamente; stdin com sequence/ack. |
 | P2-LLAMA-001 | LlamaParse MCP | Validar documentação, endpoint, schemas, OAuth, quotas e região autorizada com acesso real. | UNKNOWN | P0-MCP-001 | Não marcar como executada sem endpoint/credencial autorizados. |
 | P2-LLAMA-002 | LlamaParse MCP | Executar carga de documentos pequenos/grandes, tool mix, timeout, 429/5xx e retries. | Backlog | P2-LLAMA-001, P2-LOAD-001 | Métricas por MB/tool e isolamento de sessão. |
@@ -264,6 +264,7 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `scripts/mcp-monitor.mjs`, `scripts/mcp-monitor.ps1`, `scripts/e2e-mcp-monitor.test.mjs`, `artifacts/mcp-monitor-contract.json`
 - `scripts/e2e-block1-identity.test.mjs`, `artifacts/block1-identity-report.json`, `src/db/migrations.ts` migration 7, `mcp_oauth_device_event_total`
 - `src/credential-security.ts`, `src/credential-security.test.ts`, `scripts/e2e-oauth-device-cli.test.mjs`, `artifacts/oauth-device-cli-security-report.json`
+- `src/roots.ts`, `src/roots.test.ts`, `src/pi-tools.ts`, `src/workspaces.ts`, `scripts/e2e-http-mcp-path-containment.test.mjs`, `artifacts/path-containment-report.json`
 - `scripts/e2e-http-mcp-idempotency-recovery.test.mjs`, `artifacts/idempotency-recovery-report.json`, `WriteIdempotencyStore.reconcileExpiredPending`
 - `.github/workflows/ci.yml`, especialmente o job `staging-load`
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`

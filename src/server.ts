@@ -616,7 +616,7 @@ function registerCodexProcessTools(
     async ({ workspaceId, cmd, tty, columns, rows, workingDirectory, yieldTimeMs, maxOutputTokens }) => {
       const startedAt = performance.now();
       const workspace = workspaces.getWorkspace(workspaceId);
-      const cwd = workspaces.resolveWorkingDirectory(workspace, workingDirectory);
+      const cwd = await workspaces.resolveWorkingDirectory(workspace, workingDirectory);
       const snapshot = await processSessions.start({
         workspaceId,
         command: cmd,
@@ -1701,7 +1701,7 @@ export function createMcpServer(
     async ({ workspaceId, workingDirectory, ...input }) => {
       const startedAt = performance.now();
       const workspace = workspaces.getWorkspace(workspaceId);
-      const cwd = workspaces.resolveWorkingDirectory(
+      const cwd = await workspaces.resolveWorkingDirectory(
         workspace,
         workingDirectory,
       );

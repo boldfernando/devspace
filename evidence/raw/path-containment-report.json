@@ -1,0 +1,11 @@
+{
+  "schema": "devspace/path-containment/v1",
+  "status": "failed",
+  "real_http_mcp": true,
+  "read_symlink_blocked": true,
+  "write_symlink_blocked": true,
+  "working_directory_symlink_blocked": true,
+  "filesystem_unchanged": true,
+  "cleanup": false,
+  "secrets_included": false
+}

@@ -15,6 +15,7 @@ import {
   assertAllowedPath,
   isPathInsideRoot,
   resolveAllowedPath,
+  resolveAllowedPathReal,
 } from "./roots.js";
 import {
   loadWorkspaceSkills,
@@ -320,9 +321,9 @@ export class WorkspaceRegistry {
     }
   }
 
-  resolveWorkingDirectory(workspace: Workspace, workingDirectory: string | undefined): string {
+  async resolveWorkingDirectory(workspace: Workspace, workingDirectory: string | undefined): Promise<string> {
     const directory = workingDirectory ? this.resolvePath(workspace, workingDirectory) : workspace.root;
-    return assertAllowedPath(directory, [workspace.root]);
+    return resolveAllowedPathReal(directory, workspace.root, [workspace.root]);
   }
 
   private async openCheckoutWorkspace(path: string): Promise<WorkspaceContext> {

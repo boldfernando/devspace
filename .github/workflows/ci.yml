@@ -62,6 +62,16 @@ jobs:
           path: artifacts/oauth-device-cli-security-report.json
           if-no-files-found: ignore
 
+      - name: Path containment HTTP/MCP E2E
+        run: npm run e2e:path-containment
+      - name: Upload path containment artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: path-containment-${{ matrix.os }}
+          path: artifacts/path-containment-report.json
+          if-no-files-found: ignore
+
       - name: Canonical 360 contract tests
         run: npm run test:prd-reverse
       - name: Canonical 360 self-scan
