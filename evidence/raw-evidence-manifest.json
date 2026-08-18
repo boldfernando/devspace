@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T18:45:42.427Z",
+  "generated_at": "2026-08-18T18:47:31.572Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -13,7 +13,7 @@
     "raw_content_rewritten": false
   },
   "count": 81,
-  "total_bytes": 983794,
+  "total_bytes": 983793,
   "records": [
     {
       "id": "RAW-001",
@@ -554,9 +554,9 @@
       "archive_path": "evidence/raw/path-containment-report.json",
       "category": "other-evidence",
       "extension": ".json",
-      "bytes": 285,
-      "source_sha256": "853d28ab59ba7cc8cd959e6010689b07b771dc441da9011d5687bec8158096a1",
-      "archive_sha256": "853d28ab59ba7cc8cd959e6010689b07b771dc441da9011d5687bec8158096a1",
+      "bytes": 284,
+      "source_sha256": "8ccd71d00ee649313acb388d931eb1b8ce7aa0c323b4c6290ec51709275773ab",
+      "archive_sha256": "8ccd71d00ee649313acb388d931eb1b8ce7aa0c323b4c6290ec51709275773ab",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"

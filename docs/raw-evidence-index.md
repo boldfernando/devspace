@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 81
-- **Total archived bytes:** 983794
+- **Total archived bytes:** 983793
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -54,7 +54,7 @@
 | RAW-039 | other-evidence | [artifacts/p0-sim-fail-summary.md](../artifacts/p0-sim-fail-summary.md) | [evidence/raw/p0-sim-fail-summary.md](../evidence/raw/p0-sim-fail-summary.md) | 132 | `c0afdce82c6005d1b2fb972d803e66362f679341e6168ea49e65fdc9a1495e80` | clean |
 | RAW-040 | other-evidence | [artifacts/p0-sim-pass-report.json](../artifacts/p0-sim-pass-report.json) | [evidence/raw/p0-sim-pass-report.json](../evidence/raw/p0-sim-pass-report.json) | 1687 | `01001652e29da0e58bc962ef455e604237a5ca6427095fed2b6c08ca3c6a3fa2` | clean |
 | RAW-041 | other-evidence | [artifacts/p0-sim-pass-summary.md](../artifacts/p0-sim-pass-summary.md) | [evidence/raw/p0-sim-pass-summary.md](../evidence/raw/p0-sim-pass-summary.md) | 121 | `668112f296e84c5d9be650898b05ba6c649807583e7c012e4750acc736fff3ab` | clean |
-| RAW-042 | other-evidence | [artifacts/path-containment-report.json](../artifacts/path-containment-report.json) | [evidence/raw/path-containment-report.json](../evidence/raw/path-containment-report.json) | 285 | `853d28ab59ba7cc8cd959e6010689b07b771dc441da9011d5687bec8158096a1` | clean |
+| RAW-042 | other-evidence | [artifacts/path-containment-report.json](../artifacts/path-containment-report.json) | [evidence/raw/path-containment-report.json](../evidence/raw/path-containment-report.json) | 284 | `8ccd71d00ee649313acb388d931eb1b8ce7aa0c323b4c6290ec51709275773ab` | clean |
 | RAW-043 | staging | [artifacts/staging/ui-bundle-report.json](../artifacts/staging/ui-bundle-report.json) | [evidence/raw/staging/ui-bundle-report.json](../evidence/raw/staging/ui-bundle-report.json) | 2089 | `efd0d7c540acda401eeebf5651d8a0faa8b6b78798955db829253ce7b9fec03a` | clean |
 | RAW-044 | other-evidence | [artifacts/ui-bundle-report.json](../artifacts/ui-bundle-report.json) | [evidence/raw/ui-bundle-report.json](../evidence/raw/ui-bundle-report.json) | 2089 | `72e07edefddc29148e3d0c3c9f587eca5d4858ace38e714faf216d17c16ed976` | clean |
 | RAW-045 | wave1-p0 | [artifacts/wave1-p0/build.log](../artifacts/wave1-p0/build.log) | [evidence/raw/wave1-p0/build.log](../evidence/raw/wave1-p0/build.log) | 12282 | `177f4ce45c24f41ee70a97a1808e6057d316bad6145333fe702e1fbde97ba206` | clean |

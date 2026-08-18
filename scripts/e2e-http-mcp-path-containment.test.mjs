@@ -64,13 +64,14 @@ function startServer() {
 }
 
 async function stopServer() {
-  if (!server || server.exitCode !== null) return;
+  if (!server || server.exitCode !== null) return true;
   server.kill("SIGTERM");
-  await Promise.race([
-    new Promise((resolve) => server.once("exit", resolve)),
-    delay(5_000),
+  const exited = await Promise.race([
+    new Promise((resolve) => server.once("exit", () => resolve(true))),
+    delay(5_000).then(() => false),
   ]);
-  if (server.exitCode === null) server.kill("SIGKILL");
+  if (!exited && server.exitCode === null) server.kill("SIGKILL");
+  return exited;
 }
 
 async function oauthFlow() {
@@ -242,11 +243,10 @@ test("P1-SEC-002 blocks symlink escape across read, write and process cwd", asyn
     await assertMissing(outsideWrite);
     results.filesystemUnchanged = true;
   } finally {
-    await stopServer();
+    results.cleanup = await stopServer();
     await rm(rootDir, { recursive: true, force: true });
     await rm(outsideDir, { recursive: true, force: true });
     await rm(stateDir, { recursive: true, force: true });
-    results.cleanup = server?.exitCode !== null;
   }
 });
 
