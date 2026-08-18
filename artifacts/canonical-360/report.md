@@ -1,6 +1,6 @@
 # Canonical 360° PRD Reverse Engineering
 
-Generated: 2026-08-18T05:05:10.145Z
+Generated: 2026-08-18T15:36:26.908Z
 
 ## Discovery
 
