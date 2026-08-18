@@ -22,6 +22,9 @@ test("workspace shell exposes accessible disclosure and live-status contracts", 
   assert.match(source, /role: "progressbar"/);
   assert.match(source, /journey-progress-details/);
   assert.match(source, /journey-milestone/);
+  assert.match(source, /shouldUpdateToolResultInPlace/);
+  assert.match(source, /updateRenderedCardInPlace/);
+  assert.match(source, /withContentFallback/);
 });
 
 test("React payload renderers use stable memoized boundaries", () => {

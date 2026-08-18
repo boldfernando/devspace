@@ -31,6 +31,8 @@ import {
   getToolHeaderSummary,
   type ToolDisplay,
 } from "./tool-display.js";
+import { withContentFallback } from "./card-result-normalizer.js";
+import { shouldUpdateToolResultInPlace } from "./render-strategy.js";
 import "./workspace-app.css";
 
 interface MountedPayload {
@@ -108,18 +110,32 @@ async function boot(): Promise<void> {
       return;
     }
 
-    const nextCard = { ...structured, tool };
+    const nextCard = withContentFallback({ ...structured, tool }, result);
+    const previousCard = card;
+    const previousExpanded = expanded;
+    const nextExpanded = previousCard?.tool === nextCard.tool
+      ? previousExpanded
+      : isInitiallyExpandedCard(nextCard);
+    const updateInPlace = shouldUpdateToolResultInPlace(
+      previousCard,
+      nextCard,
+      previousExpanded,
+      nextExpanded,
+      Boolean(currentPayload),
+    );
     card = nextCard;
     const progressUpdate = updateJourneyProgress(journeyProgress, tool);
     journeyProgress = progressUpdate.progress;
     milestoneMessage = progressUpdate.completedStage
       ? `${journeyStageLabel(progressUpdate.completedStage)}. ${nextJourneyStep(journeyProgress)}`
       : null;
-    expanded = isInitiallyExpandedCard(nextCard);
+    expanded = nextExpanded;
     openWorkspaceInstructionKey = null;
     showAvailableWorkspaceInstructions = false;
     errorMessage = null;
+    if (updateInPlace && updateRenderedCardInPlace(nextCard)) return;
     render();
+
   };
 
   app.onhostcontextchanged = (ctx) => {
@@ -153,7 +169,34 @@ async function boot(): Promise<void> {
   render();
 }
 
+function updateRenderedCardInPlace(nextCard: ToolResultCard): boolean {
+  const header = appRoot.querySelector<HTMLButtonElement>(".tool-header");
+  const display = getToolDisplay(nextCard);
+  if (!header) return false;
+
+  const existingLabel = header.querySelector<HTMLElement>(".tool-label");
+  if (Boolean(existingLabel) !== Boolean(display.label)) return false;
+  if (existingLabel && display.label) {
+    existingLabel.textContent = display.label;
+    existingLabel.title = display.label;
+  }
+
+  const summary = header.querySelector<HTMLElement>(".stats, .header-meta");
+  if (summary) summary.replaceWith(renderHeaderSummary(nextCard));
+  header.setAttribute(
+    "aria-label",
+    `${display.title}${display.label ? `, ${display.label}` : ""}. ${expanded ? "Collapse" : "Expand"} details`,
+  );
+
+  if (journeyProgressContainer?.isConnected) {
+    journeyProgressContainer.replaceWith(renderJourneyProgress());
+  }
+  void renderPayloadIfNeeded();
+  return true;
+}
+
 function applyHostContext(): void {
+
   if (hostContext?.theme && extAppsModule) extAppsModule.applyDocumentTheme(hostContext.theme);
   if (hostContext?.styles?.variables) {
     extAppsModule?.applyHostStyleVariables(hostContext.styles.variables);
@@ -1090,6 +1133,7 @@ function toolNameFromMeta(result: CallToolResult): ToolName | undefined {
 }
 
 function cardFromMeta(result: CallToolResult): Partial<ToolResultCard> | undefined {
+
   const meta = result._meta as Record<string, unknown> | undefined;
   const metaCard = meta?.card;
   return metaCard && typeof metaCard === "object" ? metaCard : undefined;

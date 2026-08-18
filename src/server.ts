@@ -553,7 +553,7 @@ function processToolResponse(
       card: {
         workspaceId,
         summary: { ...summary, ...outputSummary },
-        payload: { content },
+        payload: {},
       },
     },
     structuredContent: {
@@ -1156,7 +1156,7 @@ export function createMcpServer(
             workspaceId,
             path: input.path,
             summary,
-            payload: { content: response.content },
+            payload: {},
           },
         },
         structuredContent: {
@@ -1318,10 +1318,7 @@ export function createMcpServer(
             workspaceId,
             path: input.path,
             summary,
-            payload: {
-              content: response.content,
-              patch,
-            },
+            payload: { patch },
           },
         },
         structuredContent: {
@@ -1616,7 +1613,7 @@ export function createMcpServer(
               workspaceId,
               path: input.path,
               summary,
-              payload: { content: response.content },
+              payload: {},
             },
           },
           structuredContent: {
@@ -1686,7 +1683,7 @@ export function createMcpServer(
               workspaceId,
               path: input.path,
               summary,
-              payload: { content: response.content },
+              payload: {},
             },
           },
           structuredContent: {
@@ -1752,7 +1749,7 @@ export function createMcpServer(
               workspaceId,
               path: input.path,
               summary,
-              payload: { content: response.content },
+              payload: {},
             },
           },
           structuredContent: {
@@ -1844,7 +1841,7 @@ export function createMcpServer(
             workspaceId,
             path: workingDirectory,
             summary,
-            payload: { content: response.content },
+            payload: {},
           },
         },
         structuredContent: {

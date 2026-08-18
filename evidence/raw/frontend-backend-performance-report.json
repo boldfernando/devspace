@@ -1,0 +1,63 @@
+{
+  "schema": "devspace/frontend-backend-performance/v1",
+  "status": "passed",
+  "optimization_commit_pending": true,
+  "profile": {
+    "samples_per_run": 20,
+    "concurrency": 4,
+    "transport": "real HTTP/MCP with OAuth PKCE",
+    "server": "isolated child process",
+    "secrets_included": false
+  },
+  "baseline": {
+    "commit": "9d16545",
+    "artifact": "artifacts/mcp-load-log.json",
+    "p50_ms": 14,
+    "p95_ms": 24,
+    "p99_ms": 24,
+    "wall_ms": 86
+  },
+  "optimized_runs": [
+    {
+      "artifact": "artifacts/frontend-backend-flow-load-run-1.json",
+      "p50_ms": 17,
+      "p95_ms": 25,
+      "p99_ms": 25,
+      "wall_ms": 94
+    },
+    {
+      "artifact": "artifacts/frontend-backend-flow-load-run-2.json",
+      "p50_ms": 19,
+      "p95_ms": 26,
+      "p99_ms": 26,
+      "wall_ms": 108
+    },
+    {
+      "artifact": "artifacts/frontend-backend-flow-load-run-3.json",
+      "p50_ms": 23,
+      "p95_ms": 39,
+      "p99_ms": 39,
+      "wall_ms": 133
+    }
+  ],
+  "optimized_medians": {
+    "p50_ms": 19,
+    "p95_ms": 26,
+    "p99_ms": 26
+  },
+  "interpretation": "The current real-server load profile does not prove a latency reduction; handshake/process startup variance dominates these 20-sample runs. The implemented optimization targets response amplification and perceived UI latency: duplicated card content is removed from _meta.card.payload, top-level MCP content is restored in the frontend, and same-tool updates preserve mounted payloads instead of unmounting and rebuilding the shell. Browser render timing and serialized byte reduction require a dedicated host/browser trace to quantify.",
+  "changes": [
+    "server response shaping retains structural card payloads without duplicating response.content",
+    "frontend card-result-normalizer reconstructs content from top-level MCP results",
+    "same-tool expanded results use an incremental update path when a payload is mounted",
+    "pure unit and source contracts cover fallback, render strategy, and response shaping"
+  ],
+  "gates": {
+    "focused_contracts": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "bundle_audit": "passed",
+    "security_p0": "passed",
+    "observability": "passed"
+  }
+}
