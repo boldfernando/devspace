@@ -158,6 +158,34 @@ export class WriteIdempotencyStore {
     return result.changes;
   }
 
+  reconcileExpiredPending(scopeKey: string, idempotencyKey: string, now = new Date()): IdempotencyRecord | undefined {
+    const existing = this.get(scopeKey, idempotencyKey);
+    if (!existing) return undefined;
+    if (existing.state !== "pending") return existing;
+    const pendingUntil = existing.pendingUntil ? Date.parse(existing.pendingUntil) : Number.POSITIVE_INFINITY;
+    if (pendingUntil > now.getTime()) {
+      throw new IdempotencyPendingError(scopeKey, idempotencyKey);
+    }
+    const result = this.sqlite
+      .prepare(`update write_idempotency
+        set state = 'failed', error_code = ?, error_message = ?, lease_token = null, pending_until = null, updated_at = ?
+        where scope_key = ? and idempotency_key = ? and state = 'pending' and pending_until <= ?`)
+      .run(
+        "IDEMPOTENCY_AMBIGUOUS_RECONCILED",
+        "The expired pending effect was reconciled without automatic re-execution",
+        now.toISOString(),
+        scopeKey,
+        idempotencyKey,
+        now.toISOString(),
+      );
+    if (result.changes !== 1) {
+      const current = this.get(scopeKey, idempotencyKey);
+      if (current?.state === "pending") throw new IdempotencyPendingError(scopeKey, idempotencyKey);
+      return current;
+    }
+    return this.get(scopeKey, idempotencyKey);
+  }
+
   async run<T>(
     scopeKey: string,
     idempotencyKey: string,

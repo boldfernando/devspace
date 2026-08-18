@@ -1,7 +1,8 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { access, realpath } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { setTimeout as delay } from "node:timers/promises";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
 import { mcpAuthRouter, getOAuthProtectedResourceMetadataUrl } from "@modelcontextprotocol/sdk/server/auth/router.js";
@@ -1103,11 +1104,23 @@ export function createMcpServer(
             isError: true,
           };
         } else if (idempotencyStore && sessionClientId && sessionResource && idempotencyKey) {
-          const scopeKey = `${sessionClientId}|${sessionResource}|${workspaceId}|${toolNames.write}`;
+          const stableWorkspaceScope = createHash("sha256").update(workspace.root).digest("hex").slice(0, 32);
+          const scopeKey = `${sessionClientId}|${sessionResource}|${stableWorkspaceScope}|${toolNames.write}`;
+          const testPendingLeaseMs = process.env.DEVSPACE_TEST_MODE === "true"
+            ? Number(process.env.DEVSPACE_TEST_IDEMPOTENCY_PENDING_LEASE_MS ?? 0)
+            : 0;
           const run = await idempotencyStore.run(scopeKey, idempotencyKey, {
             path: input.path,
             content: input.content,
-          }, executeWrite);
+          }, async () => {
+            if (process.env.DEVSPACE_TEST_MODE === "true") {
+              const faultDelayMs = Number(process.env.DEVSPACE_TEST_IDEMPOTENCY_EFFECT_DELAY_MS ?? 0);
+              if (Number.isFinite(faultDelayMs) && faultDelayMs > 0) await delay(Math.min(faultDelayMs, 60_000));
+            }
+            return executeWrite();
+          }, Number.isFinite(testPendingLeaseMs) && testPendingLeaseMs > 0
+            ? { pendingLeaseMs: Math.min(testPendingLeaseMs, 60_000) }
+            : undefined);
           response = run.value;
           runtimeMetrics?.recordIdempotencyClaim(toolNames.write, run.replayed ? "replay" : "owner");
           if (!run.replayed) runtimeMetrics?.recordIdempotencyEffect(toolNames.write, "started");

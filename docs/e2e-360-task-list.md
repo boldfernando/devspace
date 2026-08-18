@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `fb40f38`
+**Commit de referência:** `PENDING-RECONCILIATION-COMMIT`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -40,7 +40,7 @@
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 78 raws arquivados byte a byte, 982.689 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 79 raws arquivados byte a byte, 983.015 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -74,9 +74,9 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 |---:|---|---|---|
 | 1 | `P1-OBS-002` | Alertas Prometheus/Grafana em ambiente operacional | Alert firing, recovery, scrape externo e ausência de secrets comprovados. |
 | 2 | `P1-DEVICE-009` | Gateway de identidade real | Sessão autenticada, ACL, audit trail e headers forjados bloqueados em staging/produção. |
-| 3 | `IDEMP-P1-005`, `P1-OBS-004` | Crash/reconciliation | Drill real pós-commit, estado ambiguous e reconciliação sem retry cego. |
-| 4 | `P1-DEVICE-012..013` | ACL e cancelamento CLI | Matriz OS, Ctrl-C, timers, credenciais e cleanup comprovados. |
-| 5 | `P3-CI-002`, `P2-LOAD-002..003` | Carga hosted e calibração | `staging-load` publicado, três rodadas calibradas e artifacts versionados. |
+| 3 | `P1-DEVICE-012..013` | ACL e cancelamento CLI | Matriz OS, Ctrl-C, timers, credenciais e cleanup comprovados. |
+| 4 | `P3-CI-002`, `P2-LOAD-002..003` | Carga hosted e calibração | `staging-load` publicado, três rodadas calibradas e artifacts versionados. |
+| 5 | `P2-PROC-001`, `P2-RES-002` | Processos e infraestrutura | `write_stdin`, bash, SQLite lock/cheio, filesystem read-only e cleanup comprovados. |
 
 ## 3. Tasks P0 — descoberta, contratos, segurança e release
 
@@ -124,7 +124,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | IDEMP-P1-002 | Replay de mesma chave/payload retorna resultado persistido sem segundo efeito. | Concluída | IDEMP-P1-001 | Filesystem e banco sem mutação adicional. |
 | IDEMP-P1-003 | Mesma chave com payload diferente retorna conflito 409. | Concluída | IDEMP-P1-002 | Hash divergente rejeitado antes do efeito. |
 | IDEMP-P1-004 | Claims concorrentes mantêm um owner efetivo. | Concluída | P0-IDEMP-002 | Um lease executa; concorrente recebe pending/conflict. |
-| IDEMP-P1-005 | Timeout pós-commit é tratado como `ambiguous`, sem retry cego. | Parcial | IDEMP-P1-004 | Completar drill real de crash e reconciliação operacional. |
+| IDEMP-P1-005 | Timeout pós-commit é tratado como `ambiguous`, sem retry cego. | Concluída localmente; interface operacional UNKNOWN | IDEMP-P1-004 | E2E HTTP/MCP real mata servidor entre claim e efeito, preserva pending, retorna ambiguous, reconcilia explicitamente e bloqueia retry; falta superfície operacional autenticada. |
 | IDEMP-P1-006 | Mesma chave em scopes diferentes permanece isolada. | Concluída | P0-IDEMP-001 | Dois scopes produzem efeitos independentes. |
 | IDEMP-P1-007 | Retenção expirada exige nova intenção explícita. | Parcial | IDEMP-P1-002 | Validar retenção durante operação prolongada e restart. |
 | IDEMP-P1-008 | Banco, logs e artifacts não contêm secrets/payloads sensíveis. | Concluída | P0-SEC-002 | Report P1 e archive RAW sem potential match. |
@@ -155,7 +155,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P1-OBS-001 | Instrumentar claim, replay, conflict, pending age, lease lost, ambiguous e SQLite busy. | Concluída localmente; scrape externo UNKNOWN | P0-IDEMP-002 | `/metrics`, dimensões seguras, unit/E2E e scan. |
 | P1-OBS-002 | Implantar alertas Prometheus/Grafana para idempotência e Device Flow. | Parcial — contrato local aprovado; hosted UNKNOWN | P1-OBS-001 | 9/9 alertas, 9/9 métricas e 7 painéis validados sem secrets; falta scrape, alert firing e recovery em Prometheus/Grafana operacional. |
 | P1-OBS-003 | Instrumentar polling device, pending, slow_down, denied, expired e replay. | Concluída localmente; alerting hosted UNKNOWN | P0-DEVICE-004 | `mcp_oauth_device_event_total` registra requested/pending/slow_down/approved/consumed/denied/expired/rejected/rate_limited; E2E confirma requested/approved/consumed e sem secrets. |
-| P1-OBS-004 | Definir recovery pós-crash em pending sem reexecutar efeito não compensável. | Parcial | IDEMP-P1-005 | Drill de processo real, reconciliação explícita e evidência. |
+| P1-OBS-004 | Definir recovery pós-crash em pending sem reexecutar efeito não compensável. | Concluída localmente; runbook/hosted UNKNOWN | IDEMP-P1-005 | Crash drill real, métricas ambiguous/pending age, reconciliação explícita, retry bloqueado e artifact sanitizado passam. |
 | P1-OBS-005 | Monitorar continuamente MCP e alertar falhas Bearer. | Concluída localmente; scheduler/hosted UNKNOWN | P1-OBS-001 | `scripts/mcp-monitor.mjs` e wrapper PowerShell validam health, 401 anônimo, Bearer 200/401, configuração ausente, JSONL sanitizado e `--fail-on-alert`; falta instalar/agendar no ambiente operacional. |
 | P1-OBS-006 | Persistir carga com p50/p95/p99, throughput, erros e amostras sanitizadas. | Concluída localmente | P1-OBS-001 | Baseline e Wave 3 versionados; hosted ainda UNKNOWN. |
 
@@ -263,6 +263,7 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `scripts/index-raw-evidence.mjs`, `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md`
 - `scripts/mcp-monitor.mjs`, `scripts/mcp-monitor.ps1`, `scripts/e2e-mcp-monitor.test.mjs`, `artifacts/mcp-monitor-contract.json`
 - `scripts/e2e-block1-identity.test.mjs`, `artifacts/block1-identity-report.json`, `src/db/migrations.ts` migration 7, `mcp_oauth_device_event_total`
+- `scripts/e2e-http-mcp-idempotency-recovery.test.mjs`, `artifacts/idempotency-recovery-report.json`, `WriteIdempotencyStore.reconcileExpiredPending`
 - `.github/workflows/ci.yml`, especialmente o job `staging-load`
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`
 

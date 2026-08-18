@@ -1,0 +1,12 @@
+{
+  "schema": "devspace.idempotency-recovery.v1",
+  "status": "passed",
+  "real_http_mcp": true,
+  "restart_recovered": true,
+  "pending_preserved": true,
+  "ambiguous_fail_closed": true,
+  "explicit_reconciliation": true,
+  "retry_after_reconciliation_blocked": true,
+  "effect_replayed": false,
+  "secrets_included": false
+}

@@ -96,6 +96,17 @@ jobs:
           path: artifacts/block1-identity-report.json
           if-no-files-found: ignore
 
+      - name: Idempotency crash and reconciliation E2E
+        run: npm run e2e:idempotency:recovery
+
+      - name: Upload idempotency recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: idempotency-recovery-${{ matrix.os }}
+          path: artifacts/idempotency-recovery-report.json
+          if-no-files-found: ignore
+
       - name: OAuth/MCP P0 negative matrix
         run: npm run security:p0
       - name: Upload OAuth/MCP security artifacts
