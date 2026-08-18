@@ -1,6 +1,6 @@
 {
   "schema": "devspace.consolidated-metrics.v1",
-  "generated_at": "2026-08-18T16:07:01.2507004Z",
+  "generated_at": "2026-08-18T16:09:53.2516669Z",
   "repository": "devspace",
   "baseline": {
     "commit": "16c1df2",
@@ -10,7 +10,7 @@
   "wave1_p0": {
     "status": "passed",
     "gate_count": 16,
-    "real_http_mcp": null,
+    "real_http_mcp": true,
     "source": "artifacts/wave1-p0/summary.json"
   },
   "wave2_chaos": {
@@ -37,7 +37,7 @@
       "health_status_after_restart": 200,
       "metrics_status_after_restart": 200
     },
-    "secret_leak_detected": null,
+    "secret_leak_detected": false,
     "source": "artifacts/wave2-chaos/summary.json"
   },
   "authenticated_load_baseline": {
