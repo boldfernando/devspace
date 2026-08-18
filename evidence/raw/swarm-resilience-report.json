@@ -1,0 +1,101 @@
+{
+  "schema": "devspace/swarm-resilience/v1",
+  "status": "passed",
+  "base_url_class": "loopback",
+  "agent_count": 8,
+  "agent_profiles": [
+    {
+      "id": "agent-01",
+      "profile": "planner"
+    },
+    {
+      "id": "agent-02",
+      "profile": "coder"
+    },
+    {
+      "id": "agent-03",
+      "profile": "reviewer"
+    },
+    {
+      "id": "agent-04",
+      "profile": "tester"
+    },
+    {
+      "id": "agent-05",
+      "profile": "security"
+    },
+    {
+      "id": "agent-06",
+      "profile": "docs"
+    },
+    {
+      "id": "agent-07",
+      "profile": "ops"
+    },
+    {
+      "id": "agent-08",
+      "profile": "integrator"
+    }
+  ],
+  "rounds": 6,
+  "auth_clients": 2,
+  "load": {
+    "requested_operations": 96,
+    "succeeded_operations": 96,
+    "failed_operations": 0,
+    "p50_ms": 41,
+    "p95_ms": 44,
+    "p99_ms": 45,
+    "max_ms": 45
+  },
+  "isolation": {
+    "attempts": 8,
+    "rejected": 8,
+    "failed": 0,
+    "statuses": [
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403,
+      403
+    ]
+  },
+  "close_replay": {
+    "attempts": 8,
+    "closed": 8,
+    "replayRejected": 8,
+    "failed": 0,
+    "statuses": [
+      200,
+      404,
+      200,
+      404,
+      200,
+      404,
+      200,
+      404,
+      200,
+      404,
+      200,
+      404,
+      200,
+      404,
+      200,
+      404
+    ]
+  },
+  "recovery": {
+    "attempts": 8,
+    "succeeded": 8,
+    "failed": 0,
+    "p50_ms": 39,
+    "p95_ms": 43,
+    "p99_ms": 43
+  },
+  "cleanup": true,
+  "failed_scenarios": [],
+  "secrets_included": false
+}

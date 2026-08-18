@@ -1,0 +1,75 @@
+{
+  "schema": "devspace/swarm-resilience/v1",
+  "status": "failed",
+  "base_url_class": "loopback",
+  "agent_count": 8,
+  "agent_profiles": [
+    {
+      "id": "agent-01",
+      "profile": "planner"
+    },
+    {
+      "id": "agent-02",
+      "profile": "coder"
+    },
+    {
+      "id": "agent-03",
+      "profile": "reviewer"
+    },
+    {
+      "id": "agent-04",
+      "profile": "tester"
+    },
+    {
+      "id": "agent-05",
+      "profile": "security"
+    },
+    {
+      "id": "agent-06",
+      "profile": "docs"
+    },
+    {
+      "id": "agent-07",
+      "profile": "ops"
+    },
+    {
+      "id": "agent-08",
+      "profile": "integrator"
+    }
+  ],
+  "rounds": 1,
+  "auth_clients": 0,
+  "load": {
+    "requested_operations": 0,
+    "succeeded_operations": 0,
+    "failed_operations": 0,
+    "p50_ms": 0,
+    "p95_ms": 0,
+    "p99_ms": 0,
+    "max_ms": 0
+  },
+  "isolation": {
+    "attempts": 0,
+    "rejected": 0,
+    "failed": 0,
+    "statuses": []
+  },
+  "close_replay": {
+    "attempts": 0,
+    "closed": 0,
+    "replayRejected": 0,
+    "failed": 0,
+    "statuses": []
+  },
+  "recovery": {
+    "attempts": 0,
+    "succeeded": 0,
+    "failed": 0,
+    "p50_ms": 0,
+    "p95_ms": 0,
+    "p99_ms": 0
+  },
+  "cleanup": false,
+  "failed_scenarios": [],
+  "secrets_included": false
+}
