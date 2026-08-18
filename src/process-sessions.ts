@@ -392,7 +392,13 @@ export class ProcessSessionManager {
     };
     child.stdout.on("data", (data: Buffer) => this.append(session, data.toString("utf8")));
     child.stderr.on("data", (data: Buffer) => this.append(session, data.toString("utf8")));
-    child.on("error", (error) => this.append(session, `${error.message}\n`));
+    child.on("error", () => {
+      // Spawn errors can contain absolute cwd/command details. Keep the process
+      // contract deterministic and sanitized: callers receive a terminal,
+      // non-zero snapshot and can retry only after fixing the boundary.
+      this.append(session, "PROCESS_START_FAILED: child process could not be started.\n");
+      this.finish(session, 1);
+    });
     child.on("close", (code, signal) => this.finish(session, code ?? undefined, signal ?? undefined));
   }
 

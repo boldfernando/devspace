@@ -1,10 +1,10 @@
 # DevSpace — Backlog de Tasks E2E 360º
 
-**Data de revisão:** 18 de agosto de 2026  
-**Repositório:** `devspace`  
-**Branch:** `main`  
-**Commit de referência:** `7fd9f76`
-**Working tree:** clean após commit da onda write_stdin
+**Data de revisão:** 18 de agosto de 2026
+**Repositório:** `devspace`
+**Branch:** `main`
+**Commit de referência:** `8660adf`
+**Working tree:** dirty somente pela atualização documental desta revisão; a implementação foi commitada em `8660adf`
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
 
@@ -45,6 +45,12 @@
 | Agents Swarm — chaos extension | 7/7 cenários PASS: timeout, 429, 503 e disconnect transitórios recuperados; 429/503/timeout persistentes exauridos fail-closed; fan-out 4/4. | `artifacts/swarm-chaos-report.json`, `scripts/e2e-swarm-chaos.test.mjs` |
 | Retenção de raws | 87 raws arquivados byte a byte, 1.151.010 bytes, 0 divergências SHA-256 na última indexação; inclui a evidência de write_stdin. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
+| UI accessibility/responsive/journey | Concluído localmente: landmarks, disclosure/live status, foco/teclado, touch targets, três bandas responsivas, recuperação de conexão, progresso de jornada e camada de gamificação session-scoped; validação visual manual no browser permanece UNKNOWN. | `src/ui/workspace-app.tsx`, `src/ui/workspace-app.css`, `src/ui/accessibility-contract.test.ts`, `src/ui/journey-progress.test.ts`, commit `8660adf` |
+| React rendering performance | Concluído localmente: renderers de payload com `memo`, opções estáveis e guards de atualização para reduzir rerenders desnecessários. | `src/ui/heavy-payload.tsx`, `src/ui/review-payload.tsx`, `src/ui/diff-payload.tsx`, `src/ui/file-payload.tsx`, `src/ui/accessibility-contract.test.ts` |
+| API structure and policy | Concluído localmente: classificação de escopo MCP extraída para módulo puro testável e contexto nomeado para registro de processos Codex; compatibilidade de comandos preservada. | `src/mcp-request-policy.ts`, `src/mcp-request-policy.test.ts`, `src/server.ts`, commit `8660adf` |
+| REST endpoint review | Revisão documentada sem alteração breaking: matriz de rotas, semântica HTTP, compatibilidade e recomendações futuras registradas. | `docs/rest-endpoint-review.md` |
+| Database schema/query performance | Concluído localmente: migration 8 aditiva com cinco índices, cleanup OAuth reescrito em predicates index-friendly e regressão `EXPLAIN QUERY PLAN`; migration e build passam. | `src/db/migrations.ts`, `src/db/schema.ts`, `src/db/query-performance.test.ts`, `src/oauth-device-store.ts`, commit `8660adf` |
+| P2-RES-002 resource resilience | Concluído localmente; hosted/OS matrix permanece UNKNOWN: runner HTTP/MCP real prova missing-root creation, filesystem write failure, failed child sanitized, filesystem unchanged e cleanup; suite SQLite prova lock bounded, SQLITE_FULL e readonly rejection. | `scripts/e2e-http-mcp-resilience.test.mjs`, `artifacts/p2-res-002-report.json`, `src/db/resilience.test.ts`, commit pendente desta revisão |
 
 ### 2.1. Métricas da Onda 3
 
@@ -70,16 +76,17 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | Bloco 1 de identidade | Trusted identity HMAC, scopes por tool, token subject, rotation e `/revoke` concluídos localmente. | `f018a7b`, `evidence/raw/block1-identity-report.json` |
 | Observabilidade Device Flow | Eventos requested/pending/slow_down/approved/consumed/denied/expired/rejected/rate_limited instrumentados e observados no `/metrics`. | `6df43d3`, `99d7e9d`, `mcp_oauth_device_event_total` |
 | Retenção de evidências | Raws preservados byte a byte com manifest SHA-256 e índice navegável. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| P2-RES-002 evidence | Artifact sanitizado com `status=passed`, HTTP/MCP real, cleanup e `secrets_included=false`; fault tests separados preservam oráculos SQLite. | `artifacts/p2-res-002-report.json`, `src/db/resilience.test.ts` |
 
 ### 2.3. Próximos cortes de maior impacto
 
 | Ordem | Issue | Foco | Condição de encerramento |
 |---:|---|---|---|
-| 1 | `P1-OBS-002` | Alertas Prometheus/Grafana em ambiente operacional | Alert firing, recovery, scrape externo e ausência de secrets comprovados. |
-| 2 | `P1-DEVICE-009` | Gateway de identidade real | Sessão autenticada, ACL, audit trail e headers forjados bloqueados em staging/produção. |
-| 3 | `P1-DEVICE-012..013` | ACL e cancelamento CLI | Matriz OS, Ctrl-C, timers, credenciais e cleanup comprovados. |
-| 4 | `P3-CI-002`, `P2-LOAD-002..003` | Carga hosted e calibração | `staging-load` publicado, três rodadas calibradas e artifacts versionados. |
-| 5 | `P2-PROC-001`, `P2-RES-002` | Processos e infraestrutura | Completar timeout/abort/process group/PID reuse, SQLite lock/cheio, filesystem read-only e cleanup comprovados. |
+| 1 | `P2-RES-002` | Resiliência de SQLite, filesystem, roots e processos filhos | Erro sanitizado, fail-closed, cleanup determinístico e evidência real para lock/cheio, read-only, root ausente e child failure. |
+| 2 | `P1-OBS-002` | Alertas Prometheus/Grafana em ambiente operacional | Alert firing, recovery, scrape externo e ausência de secrets comprovados. |
+| 3 | `P1-DEVICE-009` | Gateway de identidade real | Sessão autenticada, ACL, audit trail e headers forjados bloqueados em staging/produção. |
+| 4 | `P2-LOAD-003` | Calibração por região e ferramenta | Três execuções independentes, variabilidade, intervalos e thresholds versionados. |
+| 5 | `P3-REL-001` | Supply chain e proveniência | SBOM, dependency audit, secret scan, provenance e checksum/assinatura reproduzíveis. |
 
 ## 3. Tasks P0 — descoberta, contratos, segurança e release
 
@@ -170,15 +177,19 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P2-PERF-002 | UI | Implementar catálogo seletivo de linguagens e carregar grammars sob demanda. | Parcial | P2-PERF-001 | Caminho inicial sem módulos opcionais e seleção funcional. |
 | P2-PERF-003 | UI | Comparar entrypoint, TTI, requests, parse cost e regressão antes/depois. | Backlog | P2-PERF-002 | Melhoria demonstrada por métricas comparáveis. |
 | P2-PERF-004 | CI | Separar budgets de entrypoint, lazy chunks e requests. | Parcial | P2-PERF-003 | Cada budget falha somente por seu próprio limite. |
+| P2-UI-001 | UI | Consolidar acessibilidade, responsividade, recuperação da jornada, gamificação session-scoped e renderização eficiente dos payloads. | Concluída localmente; visual browser UNKNOWN | P0-PERF-002 | Contract tests, typecheck, testes e build passam; landmarks, foco, touch targets, breakpoints, retry, milestones e `memo()` estão versionados. |
+| P2-API-001 | API | Extrair políticas MCP testáveis e reduzir acoplamento do registro de processos sem breaking change. | Concluída | P0-MCP-001, P1-SEC-003 | Testes puros de read/write/unknown/malformed e contexto nomeado em `server.ts`; comandos existentes preservados. |
+| P2-REST-001 | API | Revisar endpoints REST quanto a recursos, métodos, status, erros e compatibilidade. | Concluída — documentação | P2-API-001 | Matriz e recomendações registradas sem mudança breaking; cada recomendação tem decisão explícita ou backlog. |
+| P2-DB-001 | Database | Otimizar índices e predicates de consultas quentes sem alterar semântica de retenção ou cleanup. | Concluída | P0-IDEMP-002, P0-DEVICE-001 | Migration 8 aditiva, cinco índices presentes, `EXPLAIN QUERY PLAN` cobre recency/cleanup e `oauth-device-store.cleanup()` usa deletes index-friendly. |
 | P2-LOAD-001 | MCP | Manter smoke, baseline, ramp, sustained, burst e soak autenticados. | Concluída localmente; hosted UNKNOWN | P0-MCP-001, P1-OBS-006 | Wave 3 4/4 pass; carga local 120 amostras/concorrência 8 com p50=40 ms, p95=58 ms, p99=61 ms; job hospedado ainda necessário. |
 | P2-LOAD-002 | MCP | Exercitar timeout, 429, 5xx, disconnect, reconnect e overload fail-closed. | Parcial — chaos local aprovado; hosted UNKNOWN | P2-LOAD-001 | `swarm-chaos-report.json` comprova timeout, 429, 503 e disconnect transitórios recuperados; 429/503/timeout persistentes exaurem em 3 tentativas fail-closed; fan-out 4/4, recovery e cleanup PASS; hosted permanece pendente. |
 | P2-LOAD-003 | MCP | Calibrar thresholds por região/tool em três execuções independentes. | Backlog | P2-LOAD-001 | Variabilidade, intervalo e baseline versionados. |
 | P2-SWARM-001 | Agents Swarm | Simular agentes lógicos concorrentes sobre sessões MCP, com isolamento por client, close/replay e recovery. | Concluída localmente; provider/model runtime UNKNOWN | P2-LOAD-001, P1-SESSION-001 | 8 agentes lógicos, 6 rounds, 96/96 operações PASS, p50=41 ms, p95=44 ms, p99=45 ms, 8/8 isolation rejection, 8/8 replay rejection, 8/8 recovery e cleanup; não prova inferência real de subagentes. |
 | P2-SWARM-002 | Agents Swarm | Executar chaos extension sobre o Swarm com falhas transitórias/persistentes de transporte e recuperação fail-closed. | Concluída localmente; rede externa/hosted UNKNOWN | P2-SWARM-001, P2-LOAD-002 | 7 cenários PASS: timeout/429/503/disconnect transitórios recuperam; 429/503/timeout persistentes exaurem em 3 tentativas, fan-out 4/4, cleanup PASS e `secrets_included=false`; não prova chaos externo nem provider/model runtime. |
 | P2-RES-001 | Operação | Simular indisponibilidade, restart e recuperação de sessões. | Concluída localmente | P1-OBS-004 | Wave 2 comprovou health/metrics após restart; Swarm local comprovou 8 sessões, cleanup, close/replay e recovery; ampliar reauth hosted. |
-| P2-RES-002 | Operação | Testar SQLite cheio/lock, filesystem read-only, root ausente e processo filho falho. | Backlog | P1-OBS-001 | Erro sanitizado, fail-closed e cleanup. |
+| P2-RES-002 | Operação | Testar SQLite cheio/lock, filesystem read-only, root ausente e processo filho falho. | Concluída localmente; hosted/OS matrix UNKNOWN | P1-OBS-001 | `p2-res-002-report.json` prova HTTP/MCP real, missing-root determinístico, falha de escrita sem mutação, child spawn sanitizado e cleanup; `src/db/resilience.test.ts` prova SQLITE_BUSY bounded, SQLITE_FULL e readonly rejection. |
 | P2-FS-001 | Filesystem | Cobrir arquivos grandes/binários, symlink, case-insensitive e permissões por OS. | Parcial — symlink containment local aprovado | P1-SEC-002 | `path-containment-report.json` comprova read/write/cwd symlink bloqueados e filesystem inalterado; faltam arquivo grande/binário, case-insensitive e matriz OS. |
-| P2-PROC-001 | Processos | Cobrir bash, `write_stdin`, timeout, abort, process group, crash e PID reuse. | Parcial — stdin sequence/poll/cleanup PASS; demais cenários pendentes | P0-IDEMP-001 | `write_stdin` E2E real usa sequence monotônica, replay/conflict/gap fail-closed e não reenvia input; faltam timeout, abort, process group, crash ambíguo e PID reuse. |
+| P2-PROC-001 | Processos | Cobrir bash, `write_stdin`, timeout, abort, process group, crash e PID reuse. | Parcial — stdin sequence/poll/cleanup e child-start failure sanitizado PASS; demais cenários pendentes | P0-IDEMP-001 | `write_stdin` E2E real usa sequence monotônica, replay/conflict/gap fail-closed e não reenvia input; P2-RES-002 adiciona `PROCESS_START_FAILED` sem comando/cwd; faltam timeout, abort, process group, crash ambíguo e PID reuse. |
 | P2-LLAMA-001 | LlamaParse MCP | Validar documentação, endpoint, schemas, OAuth, quotas e região autorizada com acesso real. | UNKNOWN | P0-MCP-001 | Não marcar como executada sem endpoint/credencial autorizados. |
 | P2-LLAMA-002 | LlamaParse MCP | Executar carga de documentos pequenos/grandes, tool mix, timeout, 429/5xx e retries. | Backlog | P2-LLAMA-001, P2-LOAD-001 | Métricas por MB/tool e isolamento de sessão. |
 | P2-LLAMA-003 | LlamaParse MCP | Validar cross-tenant, sessão transferida, duplicidade e cleanup externo. | Backlog | P2-LLAMA-001 | Nenhum documento/contexto cruza identidade. |
@@ -269,6 +280,9 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `scripts/mcp-monitor.mjs`, `scripts/mcp-monitor.ps1`, `scripts/e2e-mcp-monitor.test.mjs`, `artifacts/mcp-monitor-contract.json`
 - `scripts/e2e-block1-identity.test.mjs`, `artifacts/block1-identity-report.json`, `src/db/migrations.ts` migration 7, `mcp_oauth_device_event_total`
 - `src/credential-security.ts`, `src/credential-security.test.ts`, `scripts/e2e-oauth-device-cli.test.mjs`, `artifacts/oauth-device-cli-security-report.json`
+- `src/ui/workspace-app.tsx`, `src/ui/workspace-app.css`, `src/ui/accessibility-contract.test.ts`, `src/ui/journey-progress.ts`, `src/ui/journey-progress.test.ts`
+- `src/mcp-request-policy.ts`, `src/mcp-request-policy.test.ts`, `docs/rest-endpoint-review.md`
+- `src/db/migrations.ts` migration 8, `src/db/schema.ts`, `src/db/query-performance.test.ts`, `src/oauth-device-store.ts`
 - `src/roots.ts`, `src/roots.test.ts`, `src/pi-tools.ts`, `src/workspaces.ts`, `scripts/e2e-http-mcp-path-containment.test.mjs`, `artifacts/path-containment-report.json`
 - `scripts/e2e-http-mcp-idempotency-recovery.test.mjs`, `artifacts/idempotency-recovery-report.json`, `WriteIdempotencyStore.reconcileExpiredPending`
 - `scripts/e2e-swarm-resilience.test.mjs`, `artifacts/swarm-resilience-report.json`

@@ -8,7 +8,7 @@ import { promisify } from "node:util";
 import { loadConfig, type ServerConfig } from "./config.js";
 import { GitWorktreeError } from "./git-worktrees.js";
 import { SqliteWorkspaceStore } from "./workspace-store.js";
-import { WorkspaceRegistry } from "./workspaces.js";
+import { ensureCheckoutWorkspaceRoot, WorkspaceRegistry } from "./workspaces.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -71,6 +71,29 @@ test("opening a missing checkout creates its workspace root", async (t) => {
   const opened = await context.registry.openWorkspace(missingRoot);
   assert.equal(opened.workspace.root, missingRoot);
   assert.equal((await stat(missingRoot)).isDirectory(), true);
+});
+
+test("missing checkout root creation propagates filesystem failure without a partial root", async () => {
+  let statCalls = 0;
+  let mkdirCalls = 0;
+  const failure = Object.assign(new Error("permission denied"), { code: "EACCES" });
+
+  await assert.rejects(
+    () => ensureCheckoutWorkspaceRoot("/disposable/missing-root", {
+      stat: async () => {
+        statCalls += 1;
+        const missing = Object.assign(new Error("missing"), { code: "ENOENT" });
+        throw missing;
+      },
+      mkdir: async () => {
+        mkdirCalls += 1;
+        throw failure;
+      },
+    }),
+    (error: unknown) => error === failure,
+  );
+  assert.equal(statCalls, 1);
+  assert.equal(mkdirCalls, 1);
 });
 
 test("worktree opens require Git and create an isolated managed workspace", async (t) => {

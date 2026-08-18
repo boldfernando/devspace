@@ -1,0 +1,12 @@
+{
+  "schema": "devspace/p2-res-002/v1",
+  "status": "passed",
+  "real_http_mcp": true,
+  "missing_root_created": true,
+  "filesystem_write_failure": true,
+  "failed_child_sanitized": true,
+  "filesystem_unchanged": true,
+  "cleanup": true,
+  "sqlite_lock_full_readonly": "covered_by_src/db/resilience.test.ts",
+  "secrets_included": false
+}

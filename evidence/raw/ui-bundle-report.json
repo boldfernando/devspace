@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-08-18T16:45:36.390Z",
+  "generatedAt": "2026-08-18T21:01:46.006Z",
   "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\dist\\ui",
   "manifest": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\dist\\ui\\.vite\\manifest.json",
   "maxInitialBytes": 500000,
   "entries": [
     {
       "name": "workspace-app.html",
-      "file": "assets/workspace-app-DKeS611W.js",
-      "initialBytes": 32551,
+      "file": "assets/workspace-app-BV5f-GSn.js",
+      "initialBytes": 37673,
       "dynamicImports": [
+        "../../node_modules/@modelcontextprotocol/ext-apps/dist/src/app.js",
         "heavy-payload.tsx",
         "review-payload.tsx"
       ]
@@ -20,55 +21,59 @@
       "bytes": 779847
     },
     {
-      "file": "assets/cpp-BPdUlE36.js",
-      "bytes": 626127
+      "file": "assets/cpp-CVHeO-Jk.js",
+      "bytes": 626126
     },
     {
       "file": "assets/wasm-BnjxR4X6.js",
       "bytes": 622325
     },
     {
-      "file": "assets/scrollbar-CAd-OuBV.js",
-      "bytes": 263280
+      "file": "assets/app-WbrAjV1C.js",
+      "bytes": 335262
+    },
+    {
+      "file": "assets/scrollbar-DhSds7EZ.js",
+      "bytes": 263278
     },
     {
       "file": "assets/wolfram-DLL8P-h_.js",
       "bytes": 262384
     },
     {
-      "file": "assets/vue-vine-UylEakwz.js",
+      "file": "assets/vue-vine-CNSGAWwc.js",
       "bytes": 190058
     },
     {
-      "file": "assets/client-C9ozm1rP.js",
-      "bytes": 189804
+      "file": "assets/client-CmqlmOiR.js",
+      "bytes": 189626
     },
     {
-      "file": "assets/angular-ts-C6pYJTpI.js",
+      "file": "assets/angular-ts-Bxh4-O1-.js",
       "bytes": 183731
     },
     {
-      "file": "assets/typescript-Bg9PLOIF.js",
-      "bytes": 181136
+      "file": "assets/typescript--ElHoFkw.js",
+      "bytes": 181135
     },
     {
-      "file": "assets/jsx-BndDxgF-.js",
-      "bytes": 177848
+      "file": "assets/jsx-04X2FT_1.js",
+      "bytes": 177847
     },
     {
-      "file": "assets/tsx-CBC4H8GA.js",
-      "bytes": 175592
+      "file": "assets/tsx-CTXzrBkN.js",
+      "bytes": 175591
     },
     {
-      "file": "assets/javascript-Cm42D31c.js",
-      "bytes": 174883
+      "file": "assets/javascript-DDTjKLlQ.js",
+      "bytes": 174882
     },
     {
       "file": "assets/objective-cpp-BsSzOQcm.js",
       "bytes": 171965
     },
     {
-      "file": "assets/useFileDiffInstance-p07QiOOW.js",
+      "file": "assets/useFileDiffInstance-sKg_Glk4.js",
       "bytes": 167352
     },
     {
@@ -80,7 +85,7 @@
       "bytes": 131520
     },
     {
-      "file": "assets/php-5l7onE6r.js",
+      "file": "assets/php-ChIeaAoF.js",
       "bytes": 111053
     },
     {
@@ -88,12 +93,8 @@
       "bytes": 105406
     },
     {
-      "file": "assets/blade-C8XcUnG5.js",
+      "file": "assets/blade-CdhVsmwq.js",
       "bytes": 104976
-    },
-    {
-      "file": "assets/less-DVTAwKKz.js",
-      "bytes": 97626
     }
   ]
 }

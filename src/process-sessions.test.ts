@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { mkdtemp, rm } from "node:fs/promises";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 import { HeadTailBuffer, ProcessInputSequenceError, ProcessSessionManager } from "./process-sessions.js";
 
 const smallBuffer = new HeadTailBuffer(100);
@@ -47,6 +50,22 @@ assert.equal(foreground.running, false);
 assert.equal(foreground.exitCode, 0);
 assert.match(foreground.output, /foreground/);
 assert.equal(foreground.sessionId, undefined);
+
+const missingCwd = await mkdtemp(join(tmpdir(), "devspace-process-failure-"));
+try {
+  const failedChild = await manager.start({
+    workspaceId: "workspace-a",
+    cwd: join(missingCwd, "does-not-exist"),
+    command: "echo should-not-run",
+    yieldTimeMs: 2_000,
+  });
+  assert.equal(failedChild.running, false);
+  assert.equal(failedChild.exitCode, 1);
+  assert.match(failedChild.output, /PROCESS_START_FAILED/);
+  assert.doesNotMatch(failedChild.output, /does-not-exist|should-not-run/);
+} finally {
+  await rm(missingCwd, { recursive: true, force: true });
+}
 
 const environment = await manager.start({
   workspaceId: "workspace-a",
