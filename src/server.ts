@@ -34,6 +34,7 @@ import {
   commandPreview,
   sessionIdPrefix,
 } from "./logger.js";
+import { createRuntimeMetrics, type RuntimeMetrics } from "./metrics.js";
 import {
   editFileTool,
   findFilesTool,
@@ -708,6 +709,7 @@ export function createMcpServer(
   localAgentProviders: LocalAgentProviderAvailability[],
   incomingArtifactAdapters: readonly IncomingArtifactAdapter[],
   idempotencyStore?: WriteIdempotencyStore,
+  runtimeMetrics?: RuntimeMetrics,
   sessionClientId?: string | null,
   sessionResource?: string | null,
 ): McpServer {
@@ -1097,6 +1099,8 @@ export function createMcpServer(
             content: input.content,
           }, executeWrite);
           response = run.value;
+          runtimeMetrics?.recordIdempotencyClaim(toolNames.write, run.replayed ? "replay" : "owner");
+          if (!run.replayed) runtimeMetrics?.recordIdempotencyEffect(toolNames.write, "started");
           const idempotencyDurationMs = Math.round(performance.now() - startedAt);
           logEvent(config.logging, "info", "idempotency_claim", {
             tool: toolNames.write,
@@ -1121,6 +1125,19 @@ export function createMcpServer(
               : error instanceof IdempotencyPendingError
                 ? "pending"
                 : "failed";
+          runtimeMetrics?.recordIdempotencyClaim(toolNames.write, outcome);
+          if (error instanceof IdempotencyPendingError) {
+            const pendingRecord = idempotencyStore?.get(error.scopeKey, error.idempotencyKey);
+            if (pendingRecord?.pendingUntil) {
+              const ageSeconds = Math.max(0, (Date.now() - Date.parse(pendingRecord.createdAt)) / 1000);
+              runtimeMetrics?.recordIdempotencyPendingAge(toolNames.write, ageSeconds);
+            }
+          }
+          if (error instanceof IdempotencyAmbiguousError) {
+            runtimeMetrics?.recordIdempotencyRecovery(toolNames.write, "ambiguous");
+            const ageSeconds = Math.max(0, (Date.now() - Date.parse(error.record.createdAt)) / 1000);
+            runtimeMetrics?.recordIdempotencyPendingAge(toolNames.write, ageSeconds);
+          }
           logEvent(config.logging, outcome === "failed" || outcome === "ambiguous" ? "error" : "warn", "idempotency_claim", {
             tool: toolNames.write,
             outcome,
@@ -1133,10 +1150,14 @@ export function createMcpServer(
           };
         } else {
           if (error instanceof Error && error.message === "idempotency lease was lost before completion") {
+            runtimeMetrics?.recordIdempotencyLeaseLost(toolNames.write);
             logEvent(config.logging, "error", "idempotency_lease_lost", {
               tool: toolNames.write,
               durationMs: Math.round(performance.now() - startedAt),
             });
+          }
+          if (error instanceof Error && /SQLITE_BUSY|database is locked/i.test(error.message)) {
+            runtimeMetrics?.recordSqliteBusy("write_idempotency");
           }
           throw error;
         }
@@ -1739,6 +1760,7 @@ export function createServer(
   const allowedHosts = config.allowedHosts.includes("*")
     ? undefined
     : Array.from(new Set([config.host, ...config.allowedHosts]));
+  const runtimeMetrics = createRuntimeMetrics();
   const app = createMcpExpressApp({
     host: config.host,
     ...(allowedHosts ? { allowedHosts } : {}),
@@ -1864,6 +1886,10 @@ export function createServer(
     }),
   );
 
+
+  app.get("/metrics", (_req, res) => {
+    res.type("text/plain; version=0.0.4").send(runtimeMetrics.renderPrometheus());
+  });
   app.get("/healthz", (_req, res) => {
     res.json({ ok: true, name: "devspace" });
   });
@@ -1973,6 +1999,7 @@ export function createServer(
           localAgentProviders,
           incomingArtifactAdapters,
           idempotencyStore,
+          runtimeMetrics,
           req.auth?.clientId ?? null,
           req.auth?.resource?.href ?? null,
         );

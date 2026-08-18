@@ -1,0 +1,69 @@
+groups:
+  - name: devspace-idempotency
+    interval: 30s
+    rules:
+      - alert: DevSpaceIdempotencyAmbiguousOutcome
+        expr: sum by (tool) (increase(mcp_idempotency_ambiguous_total[5m])) > 0
+        for: 0m
+        labels:
+          severity: critical
+          service: devspace-mcp
+          runbook: idempotency-ambiguous
+        annotations:
+          summary: "Outcome ambíguo em operação idempotente"
+          description: "A ferramenta {{ $labels.tool }} possui efeito possivelmente executado sem confirmação persistida. Bloquear retry automático e iniciar reconciliação."
+
+      - alert: DevSpaceIdempotencyLeaseLost
+        expr: sum by (tool) (increase(mcp_idempotency_lease_lost_total[5m])) > 0
+        for: 0m
+        labels:
+          severity: critical
+          service: devspace-mcp
+          runbook: idempotency-lease-lost
+        annotations:
+          summary: "Lease de idempotência perdido"
+          description: "A ferramenta {{ $labels.tool }} tentou finalizar sem fencing token válido. Investigar possível bypass ou concorrência incorreta."
+
+      - alert: DevSpaceIdempotencyPendingTooOld
+        expr: max by (tool) (mcp_idempotency_pending_age_seconds) > 600
+        for: 2m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: idempotency-pending-recovery
+        annotations:
+          summary: "Registro pending acima de duas vezes o lease"
+          description: "A ferramenta {{ $labels.tool }} possui pending com idade superior ao limite operacional inicial de 10 minutos. Verificar crash, worker lento ou SQLite bloqueado."
+
+      - alert: DevSpaceSQLiteContention
+        expr: sum by (operation) (increase(sqlite_busy_total[5m])) >= 5
+        for: 5m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: sqlite-contention
+        annotations:
+          summary: "Contenção SQLite no servidor MCP"
+          description: "A operação {{ $labels.operation }} acumulou pelo menos cinco eventos busy em cinco minutos. Verificar WAL, duração das transações e writers concorrentes."
+
+      - alert: DevSpaceIdempotencyEffectsExceedOwners
+        expr: sum by (tool) (increase(mcp_idempotency_effect_total{outcome="started"}[5m])) > sum by (tool) (increase(mcp_idempotency_claim_total{outcome="owner"}[5m]))
+        for: 2m
+        labels:
+          severity: critical
+          service: devspace-mcp
+          runbook: idempotency-effect-bypass
+        annotations:
+          summary: "Efeitos excedem claims proprietários"
+          description: "A ferramenta {{ $labels.tool }} iniciou mais efeitos do que claims owner no intervalo. Investigar bypass do store ou retry duplicado."
+
+      - alert: DevSpaceIdempotencyConflictBurst
+        expr: sum by (tool) (increase(mcp_idempotency_conflict_total[10m])) >= 10
+        for: 5m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: idempotency-conflict
+        annotations:
+          summary: "Burst de conflitos de idempotência"
+          description: "A ferramenta {{ $labels.tool }} registrou pelo menos dez reutilizações de key com payload diferente em dez minutos. Verificar cliente, retry policy ou abuso."

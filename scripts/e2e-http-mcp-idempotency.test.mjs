@@ -197,6 +197,13 @@ test("real MCP write_file enforces idempotency replay and conflict", async () =>
       mcpRequest(token, sessionId, 8, "tools/call", concurrentInput),
     ]);
     assert.ok(concurrent.every((result) => result.response.status === 200));
+
+    const metricsResponse = await fetch(`${baseUrl}/metrics`);
+    assert.equal(metricsResponse.status, 200);
+    const metricsText = await metricsResponse.text();
+    assert.match(metricsText, /mcp_idempotency_claim_total/);
+    assert.match(metricsText, /mcp_idempotency_effect_total/);
+    assert.doesNotMatch(metricsText, /real-mcp-write-key-00[12]|concurrent-content/);
     assert.equal(await readFile(join(workspaceRoot, "idempotency-concurrent.txt"), "utf8"), "concurrent-content");
   } finally {
     child.kill();

@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0.0",
-  "generated_at": "2026-08-16T21:52:43.002Z",
+  "generated_at": "2026-08-18T04:42:00.236Z",
   "repository": {
     "name": "@waishnav/devspace",
     "version": "1.0.7",
@@ -1801,6 +1801,24 @@
       ]
     },
     {
+      "id": "test_eb459c34bc64",
+      "path": "src/metrics.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/metrics.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "test_dfbd418d9660",
       "path": "src/oauth-device-store.test.ts",
       "framework": "tsx/node:test",
@@ -2664,6 +2682,14 @@
       "type": "file",
       "source": "repository",
       "path": "src/mcp-sessions.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/metrics.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -4993,6 +5019,7 @@
         "test_a92fd9e898fd",
         "test_8f35bd0c1c45",
         "test_17566866b891",
+        "test_eb459c34bc64",
         "test_dfbd418d9660",
         "test_2481f1ebca49",
         "test_faf78054b92c",
@@ -5036,6 +5063,7 @@
         "test_a92fd9e898fd",
         "test_8f35bd0c1c45",
         "test_17566866b891",
+        "test_eb459c34bc64",
         "test_dfbd418d9660",
         "test_2481f1ebca49",
         "test_faf78054b92c",

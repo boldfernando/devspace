@@ -1,0 +1,75 @@
+{
+  "title": "DevSpace MCP · Idempotência e Recovery",
+  "uid": "devspace-idempotency",
+  "schemaVersion": 39,
+  "refresh": "30s",
+  "time": {"from": "now-6h", "to": "now"},
+  "tags": ["devspace", "mcp", "idempotency", "crash-recovery"],
+  "templating": {
+    "list": [
+      {"name": "tool", "type": "query", "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"}, "query": "label_values(mcp_idempotency_claim_total, tool)", "includeAll": true, "multi": true}
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Ambiguous outcomes · 5m",
+      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 0},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "sum(increase(mcp_idempotency_ambiguous_total{tool=~\"$tool\"}[5m]))", "legendFormat": "ambiguous"}],
+      "fieldConfig": {"defaults": {"unit": "short", "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 1}]}}}
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Lease lost · 5m",
+      "gridPos": {"h": 5, "w": 6, "x": 6, "y": 0},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "sum(increase(mcp_idempotency_lease_lost_total{tool=~\"$tool\"}[5m]))", "legendFormat": "lease_lost"}],
+      "fieldConfig": {"defaults": {"unit": "short", "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 1}]}}}
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Pending age by tool",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 5},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "max by (tool) (mcp_idempotency_pending_age_seconds{tool=~\"$tool\"})", "legendFormat": "{{tool}}"}],
+      "fieldConfig": {"defaults": {"unit": "s", "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 300}, {"color": "red", "value": 600}]}}}
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Claims, replay e conflitos",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 5},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [
+        {"refId": "A", "expr": "sum by (tool, outcome) (rate(mcp_idempotency_claim_total{tool=~\"$tool\"}[5m]))", "legendFormat": "claim {{tool}}/{{outcome}}"},
+        {"refId": "B", "expr": "sum by (tool) (rate(mcp_idempotency_conflict_total{tool=~\"$tool\"}[5m]))", "legendFormat": "conflict {{tool}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "ops"}}
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Contenção SQLite",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 13},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "sum by (operation) (rate(sqlite_busy_total[5m]))", "legendFormat": "{{operation}}"}],
+      "fieldConfig": {"defaults": {"unit": "ops"}}
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Recovery e outcomes ambíguos",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 13},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [
+        {"refId": "A", "expr": "sum by (tool, outcome) (rate(mcp_idempotency_recovery_total{tool=~\"$tool\"}[5m]))", "legendFormat": "recovery {{tool}}/{{outcome}}"},
+        {"refId": "B", "expr": "sum by (tool) (rate(mcp_idempotency_ambiguous_total{tool=~\"$tool\"}[5m]))", "legendFormat": "ambiguous {{tool}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "ops"}}
+    }
+  ]
+}

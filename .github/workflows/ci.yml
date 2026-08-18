@@ -135,6 +135,8 @@ jobs:
         run: npm run build
       - name: Bundle budget gate
         run: npm run bundle:audit:check
+      - name: Observability contract gate
+        run: npm run test:observability
       - name: Authenticated MCP sustained load
         run: npm run mcp:load:log
       - name: Coverage gate
@@ -149,5 +151,6 @@ jobs:
           path: |
             artifacts/mcp-load-log.json
             artifacts/ui-bundle-report.json
+            artifacts/observability-contract-report.json
             coverage/
           if-no-files-found: ignore
