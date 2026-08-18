@@ -1,5 +1,5 @@
-import { timingSafeEqual, randomBytes, randomUUID, createHash } from "node:crypto";
-import type { Response } from "express";
+import { timingSafeEqual, randomBytes, randomUUID, createHash, createHmac } from "node:crypto";
+import type { Request, Response } from "express";
 import type { OAuthRegisteredClientsStore } from "@modelcontextprotocol/sdk/server/auth/clients.js";
 import { SqliteDeviceAuthorizationStore, type DeviceAuthorizationCreated, type DeviceAuthorizationPublicRecord, type DevicePollResult } from "./oauth-device-store.js";
 import type { OAuthServerProvider, AuthorizationParams } from "@modelcontextprotocol/sdk/server/auth/provider.js";
@@ -13,8 +13,12 @@ import type {
 import { checkResourceAllowed, resourceUrlFromServerUrl } from "@modelcontextprotocol/sdk/shared/auth-utils.js";
 import { SqliteOAuthClientsStore, SqliteOAuthStore } from "./oauth-store.js";
 
+export type OAuthApprovalMode = "owner_token" | "trusted_header";
+
 export interface OAuthConfig {
   ownerToken: string;
+  approvalMode?: OAuthApprovalMode;
+  approvalIdentitySecret?: string;
   devicePepper?: string;
   accessTokenTtlSeconds: number;
   refreshTokenTtlSeconds: number;
@@ -24,6 +28,7 @@ export interface OAuthConfig {
 
 interface AuthorizationCodeRecord {
   clientId: string;
+  subjectId?: string;
   params: AuthorizationParams;
   expiresAtMs: number;
 }
@@ -162,8 +167,8 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
       return;
     }
 
-    const providedToken = String(res.req.body?.owner_token ?? "");
-    if (!safeEquals(providedToken, this.config.ownerToken)) {
+    const subjectId = this.approvalSubject(client, params, res.req);
+    if (!subjectId) {
       res.status(401).setHeader("Content-Type", "text/html; charset=utf-8");
       res.send(
         formHtml({
@@ -180,6 +185,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     const code = `code-${randomUUID()}`;
     this.codes.set(code, {
       clientId: client.client_id,
+      subjectId,
       params,
       expiresAtMs: Date.now() + CODE_TTL_MS,
     });
@@ -214,7 +220,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     }
 
     this.codes.delete(authorizationCode);
-    return this.issueTokens(client.client_id, record.params.scopes ?? this.config.scopes, record.params.resource);
+    return this.issueTokens(client.client_id, record.params.scopes ?? this.config.scopes, record.params.resource, undefined, record.subjectId ?? "owner");
   }
 
   async exchangeRefreshToken(
@@ -242,6 +248,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
       requestedScopes,
       resource ?? (record.resource ? new URL(record.resource) : undefined),
       refreshTokenHash,
+      record.subjectId ?? "owner",
     );
   }
 
@@ -272,14 +279,24 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     return this.getDeviceStore().getByUserCode(userCode);
   }
 
-  approveDeviceAuthorization(userCode: string, ownerToken: string): boolean {
-    if (!safeEquals(ownerToken, this.config.ownerToken)) return false;
-    return this.getDeviceStore().approve(userCode, "owner");
+  approveDeviceAuthorization(userCode: string, ownerToken: string, subjectId?: string, proof?: string): boolean {
+    const approvedSubject = (this.config.approvalMode ?? "owner_token") === "trusted_header"
+      ? this.verifyTrustedDeviceApproval(userCode, subjectId, proof)
+      : safeEquals(ownerToken, this.config.ownerToken) ? "owner" : undefined;
+    if (!approvedSubject) return false;
+    return this.getDeviceStore().approve(userCode, approvedSubject);
   }
 
-  denyDeviceAuthorization(userCode: string, ownerToken: string): boolean {
-    if (!safeEquals(ownerToken, this.config.ownerToken)) return false;
+  denyDeviceAuthorization(userCode: string, ownerToken: string, subjectId?: string, proof?: string): boolean {
+    const authorized = (this.config.approvalMode ?? "owner_token") === "trusted_header"
+      ? Boolean(this.verifyTrustedDeviceApproval(userCode, subjectId, proof))
+      : safeEquals(ownerToken, this.config.ownerToken);
+    if (!authorized) return false;
     return this.getDeviceStore().deny(userCode);
+  }
+
+  usesTrustedApproval(): boolean {
+    return (this.config.approvalMode ?? "owner_token") === "trusted_header";
   }
 
   async exchangeDeviceCode(
@@ -303,7 +320,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     if (result.kind === "access_denied") throw new AccessDeniedError("Device authorization was denied");
     if (result.kind === "expired_token") throw new InvalidGrantError("expired_token");
     if (result.kind !== "approved") throw new InvalidGrantError("Invalid device authorization");
-    return this.issueTokens(clientId, result.scopes, requestedResource);
+    return this.issueTokens(clientId, result.scopes, requestedResource, undefined, result.subjectId);
   }
   async verifyAccessToken(token: string): Promise<AuthInfo> {
     const record = this.oauthStore.getAccessToken(hashToken(token));
@@ -331,6 +348,27 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     this.oauthStore.close();
   }
 
+  private approvalSubject(client: OAuthClientInformationFull, params: AuthorizationParams, req: Request): string | undefined {
+    if ((this.config.approvalMode ?? "owner_token") === "owner_token") {
+      const providedToken = String(req.body?.owner_token ?? "");
+      return safeEquals(providedToken, this.config.ownerToken) ? "owner" : undefined;
+    }
+    const subjectId = req.header("x-devspace-identity")?.trim();
+    const proof = req.header("x-devspace-identity-proof")?.trim();
+    if (!subjectId || !proof || !this.config.approvalIdentitySecret) return undefined;
+    const context = `${subjectId}|${client.client_id}|${params.redirectUri}|${params.resource?.href ?? ""}`;
+    const expected = createHmac("sha256", this.config.approvalIdentitySecret).update(context).digest("base64url");
+    return safeEquals(proof, expected) ? subjectId : undefined;
+  }
+
+  private verifyTrustedDeviceApproval(userCode: string, subjectId?: string, proof?: string): string | undefined {
+    const normalizedSubject = subjectId?.trim();
+    if (!normalizedSubject || !proof || !this.config.approvalIdentitySecret) return undefined;
+    const context = `${normalizedSubject}|${userCode}`;
+    const expected = createHmac("sha256", this.config.approvalIdentitySecret).update(context).digest("base64url");
+    return safeEquals(proof, expected) ? normalizedSubject : undefined;
+  }
+
   private validCodeRecord(
     client: OAuthClientInformationFull,
     authorizationCode: string,
@@ -347,6 +385,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     scopes: string[],
     resource?: URL,
     consumedRefreshTokenHash?: string,
+    subjectId = "owner",
   ): OAuthTokens {
     const now = Math.floor(Date.now() / 1000);
     const accessToken = randomToken();
@@ -362,6 +401,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
           scopes,
           expiresAt: accessExpiresAt,
           resource: resource?.href,
+          subjectId,
         },
         refreshTokenHash: hashToken(refreshToken),
         refreshToken: {
@@ -369,6 +409,7 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
           scopes,
           expiresAt: refreshExpiresAt,
           resource: resource?.href,
+          subjectId,
         },
       },
       consumedRefreshTokenHash,

@@ -58,12 +58,13 @@ function devicePage(params: {
   clientName?: string;
   resource?: string;
   scopes?: string[];
+  trustedApproval?: boolean;
 }): string {
   const status = params.status ? `<p class="status">${escapeHtml(params.status)}</p>` : "";
   const details = params.clientName
     ? `<dl><dt>Aplicação</dt><dd>${escapeHtml(params.clientName)}</dd><dt>Resource</dt><dd>${escapeHtml(params.resource ?? "DevSpace MCP")}</dd><dt>Scopes</dt><dd>${escapeHtml((params.scopes ?? []).join(" "))}</dd></dl>`
     : "";
-  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Autorizar DevSpace CLI</title><style>body{font-family:system-ui,sans-serif;max-width:560px;margin:48px auto;padding:0 20px;color:#172033}main{border:1px solid #d5d9e2;border-radius:12px;padding:28px}input,button{font:inherit;padding:10px;margin-top:6px;width:100%;box-sizing:border-box}button{cursor:pointer;background:#172033;color:white;border:0;border-radius:6px}.secondary{background:white;color:#172033;border:1px solid #aab2c0}.status{background:#eef7ee;padding:10px;border-radius:6px}dt{font-weight:700;margin-top:10px}dd{margin:4px 0;word-break:break-word}</style></head><body><main><h1>Autorizar DevSpace CLI</h1><p>Informe o código exibido no terminal para revisar a solicitação.</p>${status}<form method="get" action="/oauth/device"><label for="user_code">Código do dispositivo</label><input id="user_code" name="user_code" value="${escapeHtml(params.userCode)}" autocomplete="one-time-code" required><button type="submit">Continuar</button></form>${details}${params.clientName ? `<form method="post" action="/oauth/device/approve"><input type="hidden" name="user_code" value="${escapeHtml(params.userCode)}"><label for="owner_token">Owner token</label><input id="owner_token" name="owner_token" type="password" autocomplete="current-password" required><button name="decision" value="approve" type="submit">Autorizar</button><button class="secondary" name="decision" value="deny" type="submit">Negar</button></form>` : ""}</main></body></html>`;
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Autorizar DevSpace CLI</title><style>body{font-family:system-ui,sans-serif;max-width:560px;margin:48px auto;padding:0 20px;color:#172033}main{border:1px solid #d5d9e2;border-radius:12px;padding:28px}input,button{font:inherit;padding:10px;margin-top:6px;width:100%;box-sizing:border-box}button{cursor:pointer;background:#172033;color:white;border:0;border-radius:6px}.secondary{background:white;color:#172033;border:1px solid #aab2c0}.status{background:#eef7ee;padding:10px;border-radius:6px}dt{font-weight:700;margin-top:10px}dd{margin:4px 0;word-break:break-word}</style></head><body><main><h1>Autorizar DevSpace CLI</h1><p>Informe o código exibido no terminal para revisar a solicitação.</p>${status}<form method="get" action="/oauth/device"><label for="user_code">Código do dispositivo</label><input id="user_code" name="user_code" value="${escapeHtml(params.userCode)}" autocomplete="one-time-code" required><button type="submit">Continuar</button></form>${details}${params.clientName ? (params.trustedApproval ? `<p>Esta instância exige aprovação por identidade autenticada no gateway confiável.</p>` : `<form method="post" action="/oauth/device/approve"><input type="hidden" name="user_code" value="${escapeHtml(params.userCode)}"><label for="owner_token">Owner token</label><input id="owner_token" name="owner_token" type="password" autocomplete="current-password" required><button name="decision" value="approve" type="submit">Autorizar</button><button class="secondary" name="decision" value="deny" type="submit">Negar</button></form>`) : ""}</main></body></html>`;
 }
 
 function parseOptionalUrl(value: string): URL | undefined {
@@ -133,6 +134,7 @@ export function registerOAuthDeviceRoutes(
       clientName: record.clientId,
       resource: record.resource,
       scopes: record.scopes,
+      trustedApproval: provider.usesTrustedApproval(),
     }));
   });
 
@@ -141,11 +143,13 @@ export function registerOAuthDeviceRoutes(
     if (res.headersSent) return;
     const userCode = formValue(req, "user_code");
     const ownerToken = formValue(req, "owner_token");
+    const subjectId = req.header("x-devspace-identity")?.trim();
+    const proof = req.header("x-devspace-identity-proof")?.trim();
     const decision = formValue(req, "decision");
     const approved = decision !== "deny";
     const changed = approved
-      ? provider.approveDeviceAuthorization(userCode, ownerToken)
-      : provider.denyDeviceAuthorization(userCode, ownerToken);
+      ? provider.approveDeviceAuthorization(userCode, ownerToken, subjectId, proof)
+      : provider.denyDeviceAuthorization(userCode, ownerToken, subjectId, proof);
     if (!changed) {
       res.status(403).type("html").send(devicePage({ userCode, status: "A aprovação foi recusada ou expirou." }));
       return;

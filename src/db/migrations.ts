@@ -37,6 +37,11 @@ const migrations: Migration[] = [
     name: "oauth-device-authorization",
     up: migrateOAuthDeviceAuthorization,
   },
+  {
+    version: 7,
+    name: "oauth-token-subjects",
+    up: migrateOAuthTokenSubjects,
+  },
 ];
 
 export function migrateDatabase(sqlite: Database.Database): void {
@@ -231,6 +236,11 @@ function migrateWriteIdempotency(sqlite: Database.Database): void {
       on write_idempotency(state, pending_until);
   `);
 }
+function migrateOAuthTokenSubjects(sqlite: Database.Database): void {
+  addColumnIfMissing(sqlite, "oauth_access_tokens", "subject_id", "text not null default 'owner'");
+  addColumnIfMissing(sqlite, "oauth_refresh_tokens", "subject_id", "text not null default 'owner'");
+}
+
 function migrateOAuthDeviceAuthorization(sqlite: Database.Database): void {
   sqlite.exec(`
     create table if not exists oauth_device_authorizations (
@@ -259,7 +269,7 @@ function migrateOAuthDeviceAuthorization(sqlite: Database.Database): void {
 }
 function addColumnIfMissing(
   sqlite: Database.Database,
-  table: "workspace_sessions" | "local_agent_sessions",
+  table: string,
   column: string,
   definition: string,
 ): void {

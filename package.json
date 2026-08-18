@@ -35,6 +35,7 @@
     "wave3:performance": "node scripts/run-wave3-performance.mjs --repo . --isolated-port 17679",
     "evidence:index": "node scripts/index-raw-evidence.mjs --repo .",
     "test:mcp-monitor": "node --test scripts/e2e-mcp-monitor.test.mjs",
+    "e2e:block1:identity": "node --test scripts/e2e-block1-identity.test.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",

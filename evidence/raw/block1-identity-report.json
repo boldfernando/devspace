@@ -1,0 +1,17 @@
+{
+  "schema": "devspace.block1-identity.v1",
+  "status": "passed",
+  "approval_mode": "trusted_header",
+  "subject_bound": true,
+  "resource_bound": true,
+  "scopes_tested": [
+    "read",
+    "write"
+  ],
+  "read_scope_allowed": true,
+  "write_scope_denied": true,
+  "refresh_rotation": true,
+  "refresh_replay_denied": true,
+  "revocation_enforced": true,
+  "secrets_included": false
+}

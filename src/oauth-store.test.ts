@@ -47,7 +47,12 @@ async function testDatabaseConfiguration(stateDir: string): Promise<void> {
       { version: 4, name: "workspace-conversation-bindings" },
       { version: 5, name: "write-idempotency" },
       { version: 6, name: "oauth-device-authorization" },
+      { version: 7, name: "oauth-token-subjects" },
     ]);
+    for (const table of ["oauth_access_tokens", "oauth_refresh_tokens"]) {
+      const columns = database.sqlite.prepare(`pragma table_info(${table})`).all() as Array<{ name: string }>;
+      assert.ok(columns.some((column) => column.name === "subject_id"));
+    }
   } finally {
     database.close();
   }

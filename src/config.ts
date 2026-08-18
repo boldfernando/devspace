@@ -2,7 +2,7 @@ import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import { expandHomePath } from "./roots.js";
 import type { LoggingConfig, LogFormat, LogLevel } from "./logger.js";
-import type { OAuthConfig } from "./oauth-provider.js";
+import type { OAuthApprovalMode, OAuthConfig } from "./oauth-provider.js";
 import { devspaceAgentsDir, devspaceSkillsDir, loadDevspaceFiles } from "./user-config.js";
 
 export type ToolMode = "minimal" | "full" | "codex";
@@ -173,9 +173,20 @@ function parseRequiredSecret(value: string | undefined, name: string): string {
   return secret;
 }
 
+function parseOAuthApprovalMode(value: string | undefined): OAuthApprovalMode {
+  if (!value || value === "owner_token") return "owner_token";
+  if (value === "trusted_header") return "trusted_header";
+  throw new Error(`Invalid DEVSPACE_OAUTH_APPROVAL_MODE: ${value}`);
+}
+
 function parseOAuthConfig(env: NodeJS.ProcessEnv, ownerToken: string | undefined): OAuthConfig {
+  const approvalMode = parseOAuthApprovalMode(env.DEVSPACE_OAUTH_APPROVAL_MODE);
   return {
     ownerToken: parseRequiredSecret(env.DEVSPACE_OAUTH_OWNER_TOKEN ?? ownerToken, "DEVSPACE_OAUTH_OWNER_TOKEN"),
+    approvalMode,
+    approvalIdentitySecret: approvalMode === "trusted_header"
+      ? parseRequiredSecret(env.DEVSPACE_OAUTH_APPROVAL_IDENTITY_SECRET, "DEVSPACE_OAUTH_APPROVAL_IDENTITY_SECRET")
+      : undefined,
     devicePepper: parseRequiredSecret(env.DEVSPACE_OAUTH_DEVICE_PEPPER ?? env.DEVSPACE_OAUTH_OWNER_TOKEN ?? ownerToken, "DEVSPACE_OAUTH_DEVICE_PEPPER"),
     accessTokenTtlSeconds: parsePositiveInteger(
       env.DEVSPACE_OAUTH_ACCESS_TOKEN_TTL_SECONDS,

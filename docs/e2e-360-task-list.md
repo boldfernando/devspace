@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `537f567`  
+**Commit de referência:** `PENDING-BLOCK1-COMMIT`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -40,7 +40,7 @@
 | Observabilidade | Métricas, alertas, dashboard e validator local aprovados. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 77 raws arquivados byte a byte, 982.264 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 78 raws arquivados byte a byte, 982.652 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -81,7 +81,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 
 | ID | Task | Status | Dependências | Critério de aceite / evidência |
 |---|---|---|---|---|
-| P0-DEVICE-001 | Criar migration da tabela `oauth_device_authorizations`, estados, TTL, polling e timestamps. | Concluída | P0-BUILD-001 | Migration 6 atualiza estado existente sem destruição. |
+| P0-DEVICE-001 | Criar migration da tabela `oauth_device_authorizations`, estados, TTL, polling e timestamps. | Concluída | P0-BUILD-001 | Migration 6 atualiza estado existente sem destruição; migration 7 adiciona subject_id aos tokens. |
 | P0-DEVICE-002 | Gerar `device_code`/`user_code` e persistir apenas hashes HMAC com pepper configurável. | Concluída | P0-DEVICE-001 | Códigos em claro não aparecem no banco ou artifacts. |
 | P0-DEVICE-003 | Implementar pending/approved/denied/consumed/expired e consumo único. | Concluída | P0-DEVICE-002 | Replay retorna `invalid_grant`; estados finais não emitem token. |
 | P0-DEVICE-004 | Expor metadata, request device, verification web, aprovação/negação e token exchange. | Concluída | P0-DEVICE-003 | Grant compatível com RFC 8628 e erros sanitizados. |
@@ -112,14 +112,14 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 |---|---|---|---|---|
 | P1-SEC-001 | Rate limiting para request device, approval e polling por client/IP. | Parcial — local aprovado, hosted UNKNOWN | P0-DEVICE-004 | 429/`slow_down`, `Retry-After`, legítimo preservado e métrica consultável. |
 | P1-SEC-002 | Cobrir traversal, symlink escape, roots allowlist, hosts e origins por OS. | Parcial | P0-MCP-001 | Matriz filesystem sem acesso fora do root. |
-| P1-SEC-003 | Validar scopes por ferramenta, resource e cliente. | Parcial | P0-AUTH-003 | Token válido sem scope recebe rejeição sem efeito. |
-| P1-SEC-004 | Cobrir expiração, revogação e rotação de tokens PKCE/device. | Parcial | P0-AUTH-001, P0-DEVICE-004 | Token antigo falha após rotação/revogação; replay detectado. |
+| P1-SEC-003 | Validar scopes por ferramenta, resource e cliente. | Concluída localmente; gateway/hosted UNKNOWN | P0-AUTH-003 | `read` permite leitura, bloqueia escrita/processo com 403, resource/client binding e matriz negativa passam; falta prova hosted do gateway. |
+| P1-SEC-004 | Cobrir expiração, revogação e rotação de tokens PKCE/device. | Concluída localmente; key rotation UNKNOWN | P0-AUTH-001, P0-DEVICE-004 | Refresh rotation, replay denial, `/revoke`, Bearer 401 e persistência após restart passam; rotação de chaves ainda não executada. |
 | P1-SESSION-001 | Rejeitar replay após close, reconexão parcial, ID desconhecido e lifecycle inválido. | Concluída | P0-AUTH-004 | Casos SESSION negativos aprovados. |
 | P1-SESSION-002 | Adicionar binding workspace/tenant/region para evolução multi-tenant. | Backlog | P1-SEC-003 | Nenhuma transferência cross-tenant/workspace/region. |
 | P1-MCP-001 | Cobrir matriz tool-by-tool para leitura, escrita, processos e artifacts. | Parcial | P0-MCP-001 | Cada tool tem auth, scope, root e idempotência testados. |
 | P1-MCP-002 | Cobrir body inválido, tamanho máximo, JSON-RPC duplicado e content type. | Parcial | P0-MCP-002 | Falha não cria sessão nem efeito. |
-| P1-DEVICE-009 | Substituir owner-token form por sessão de usuário autenticada na aprovação web. | Backlog | P0-DEVICE-004 | Identidade real, audit trail e ausência de owner secret em UX. |
-| P1-DEVICE-010 | Implementar refresh-token rotation e revocation endpoint. | Parcial | P0-DEVICE-006 | Replay de refresh detectado e revogado. |
+| P1-DEVICE-009 | Substituir owner-token form por sessão de usuário autenticada na aprovação web. | Parcial — trusted gateway local; identidade real UNKNOWN | P0-DEVICE-004 | Modo `trusted_header`, HMAC subject-bound, UI sem owner field e Device E2E passam; falta gateway de identidade real, ACL e audit trail hosted. |
+| P1-DEVICE-010 | Implementar refresh-token rotation e revocation endpoint. | Concluída localmente; hosted UNKNOWN | P0-DEVICE-006 | `/revoke` anunciado no metadata, refresh antigo falha após rotation/replay e access revogado retorna 401. |
 | P1-DEVICE-011 | Completar `verification_uri_complete` e UX de copiar código sem browser. | Concluída | P0-DEVICE-006 | URL/código informados sem vazar token. |
 | P1-DEVICE-012 | Validar armazenamento local e ACL equivalente a 0600 em Windows/macOS/Linux. | Parcial | P0-DEVICE-006 | Usuário não autorizado não lê credencial. |
 | P1-DEVICE-013 | Tornar timeout e cancelamento de polling configuráveis. | Parcial | P0-DEVICE-006 | Ctrl-C encerra polling, timers e processos. |
@@ -174,7 +174,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P3-OPS-001 | Operação | Documentar comandos de deps, dev env, build, test, deploy, actions, tasks, auth e diagnostics. | Parcial | P0-BUILD-001 | Novo operador executa caminhos principais. |
 | P3-OPS-002 | Agendamento | Automatizar monitoramento via Windows Task Scheduler ou alternativa suportada. | Parcial | P1-OBS-005 | Wrapper PowerShell, intervalo, amostras, output e fail-on-alert estão implementados; falta registrar a tarefa, definir conta/ACL e validar restart/rollback operacional. |
 | P3-OPS-003 | Evidência | Manter screenshots/vídeos como suporte, nunca substituto de assertions. | Parcial | P0-MCP-001 | Artifacts visuais sanitizados e vinculados por RAW-ID. |
-| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 77 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
+| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 78 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
 
 ## 8. Tasks P4 — produto, arquitetura e maturidade
 
@@ -238,6 +238,7 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `scripts/run-wave1-p0.mjs`, `scripts/run-wave2-chaos.mjs`, `scripts/run-wave3-performance.mjs`
 - `scripts/index-raw-evidence.mjs`, `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md`
 - `scripts/mcp-monitor.mjs`, `scripts/mcp-monitor.ps1`, `scripts/e2e-mcp-monitor.test.mjs`, `artifacts/mcp-monitor-contract.json`
+- `scripts/e2e-block1-identity.test.mjs`, `artifacts/block1-identity-report.json`, `src/db/migrations.ts` migration 7
 - `.github/workflows/ci.yml`, especialmente o job `staging-load`
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`
 

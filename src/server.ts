@@ -179,6 +179,16 @@ const toolNames = {
   shell: "bash",
 } as const;
 
+function requiredScopeForMcpRequest(req: Request): "read" | "write" | undefined {
+  if (req.method !== "POST") return undefined;
+  if (req.body?.method === "initialize" || req.body?.method === "tools/list") return "read";
+  if (req.body?.method !== "tools/call") return undefined;
+  const name = typeof req.body?.params?.name === "string" ? req.body.params.name : "";
+  if ([toolNames.openWorkspace, toolNames.write, toolNames.edit, toolNames.shell, "write_stdin"].includes(name)) return "write";
+  if ([toolNames.read, toolNames.grep, toolNames.glob, toolNames.ls, "tools/list"].includes(name)) return "read";
+  return name ? "read" : undefined;
+}
+
 const workspaceIdDescription =
   "Workspace to use. Reuse the current project's workspaceId.";
 
@@ -1772,7 +1782,7 @@ export function createServer(
   const oauthProvider = new SingleUserOAuthProvider(config.oauth, mcpUrl, config.stateDir);
   const bearerAuth = requireBearerAuth({
     verifier: oauthProvider,
-    requiredScopes: [config.oauth.scopes[0] ?? "devspace"],
+    requiredScopes: [],
     resourceMetadataUrl: getOAuthProtectedResourceMetadataUrl(resourceServerUrl),
   });
   const workspaceStore = createWorkspaceStore(config.stateDir);
@@ -1851,6 +1861,7 @@ export function createServer(
       issuer: issuer.href,
       authorization_endpoint: new URL("/authorize", issuer).href,
       token_endpoint: new URL("/token", issuer).href,
+      revocation_endpoint: new URL("/revoke", issuer).href,
       registration_endpoint: new URL("/register", issuer).href,
       device_authorization_endpoint: new URL("/oauth/device/authorize", issuer).href,
       grant_types_supported: ["authorization_code", "refresh_token", "urn:ietf:params:oauth:grant-type:device_code"],
@@ -1860,6 +1871,16 @@ export function createServer(
       code_challenge_methods_supported: ["S256"],
     });
   });
+  app.post("/revoke", async (req, res) => {
+    const token = typeof req.body?.token === "string" ? req.body.token : "";
+    const clientId = typeof req.body?.client_id === "string" ? req.body.client_id : "";
+    const client = clientId ? await oauthProvider.clientsStore.getClient(clientId) : undefined;
+    if (token && client) {
+      await oauthProvider.revokeToken(client, { token });
+    }
+    res.status(200).json({});
+  });
+
   app.use(
     mcpAuthRouter({
       provider: oauthProvider,
@@ -1916,6 +1937,24 @@ export function createServer(
         ...requestLogFields(req, config),
       });
       sendJsonRpcError(res, 401, -32001, "Unauthorized");
+      return;
+    }
+
+    const requiredScope = requiredScopeForMcpRequest(req);
+    const tokenScopes = req.auth?.scopes ?? [];
+    const scopeAllowed = requiredScope
+      ? tokenScopes.includes(requiredScope) || tokenScopes.includes(`devspace:${requiredScope}`) || tokenScopes.includes("devspace")
+      : true;
+    if (requiredScope && !scopeAllowed) {
+      logEvent(config.logging, "warn", "auth_denied", {
+        requestId,
+        method: req.method,
+        path: requestPath(req),
+        reason: "insufficient_scope",
+        requiredScope,
+        ...requestLogFields(req, config),
+      });
+      sendJsonRpcError(res, 403, -32003, "Forbidden");
       return;
     }
 

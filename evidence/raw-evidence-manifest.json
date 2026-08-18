@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T16:47:05.003Z",
+  "generated_at": "2026-08-18T17:12:16.651Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -12,11 +12,24 @@
     "binary_secret_scan": "not_applicable_binary",
     "raw_content_rewritten": false
   },
-  "count": 77,
-  "total_bytes": 982264,
+  "count": 78,
+  "total_bytes": 982652,
   "records": [
     {
       "id": "RAW-001",
+      "source_path": "artifacts/block1-identity-report.json",
+      "archive_path": "evidence/raw/block1-identity-report.json",
+      "category": "other-evidence",
+      "extension": ".json",
+      "bytes": 387,
+      "source_sha256": "c74380e685e77e287738e54a081c2ee6361a4c3a7866041c0233d53a93e05ad4",
+      "archive_sha256": "c74380e685e77e287738e54a081c2ee6361a4c3a7866041c0233d53a93e05ad4",
+      "byte_equal": true,
+      "secret_scan": "clean",
+      "preservation": "exact_copy_source_unchanged"
+    },
+    {
+      "id": "RAW-002",
       "source_path": "artifacts/canonical-360/backlog.md",
       "archive_path": "evidence/raw/canonical-360/backlog.md",
       "category": "canonical-360",
@@ -29,7 +42,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-002",
+      "id": "RAW-003",
       "source_path": "artifacts/canonical-360/gates-dor-dod.md",
       "archive_path": "evidence/raw/canonical-360/gates-dor-dod.md",
       "category": "canonical-360",
@@ -42,7 +55,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-003",
+      "id": "RAW-004",
       "source_path": "artifacts/canonical-360/manifest.json",
       "archive_path": "evidence/raw/canonical-360/manifest.json",
       "category": "canonical-360",
@@ -55,7 +68,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-004",
+      "id": "RAW-005",
       "source_path": "artifacts/canonical-360/report.md",
       "archive_path": "evidence/raw/canonical-360/report.md",
       "category": "canonical-360",
@@ -68,7 +81,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-005",
+      "id": "RAW-006",
       "source_path": "artifacts/consolidated-metrics.json",
       "archive_path": "evidence/raw/consolidated-metrics.json",
       "category": "other-evidence",
@@ -81,7 +94,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-006",
+      "id": "RAW-007",
       "source_path": "artifacts/e2e-360-presentation-script.md",
       "archive_path": "evidence/raw/e2e-360-presentation-script.md",
       "category": "other-evidence",
@@ -94,7 +107,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-007",
+      "id": "RAW-008",
       "source_path": "artifacts/e2e-security-summary.md",
       "archive_path": "evidence/raw/e2e-security-summary.md",
       "category": "other-evidence",
@@ -107,7 +120,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-008",
+      "id": "RAW-009",
       "source_path": "artifacts/green-status/build.log",
       "archive_path": "evidence/raw/green-status/build.log",
       "category": "green-status",
@@ -120,7 +133,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-009",
+      "id": "RAW-010",
       "source_path": "artifacts/green-status/bundle-audit.log",
       "archive_path": "evidence/raw/green-status/bundle-audit.log",
       "category": "green-status",
@@ -133,7 +146,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-010",
+      "id": "RAW-011",
       "source_path": "artifacts/green-status/coverage.log",
       "archive_path": "evidence/raw/green-status/coverage.log",
       "category": "green-status",
@@ -146,7 +159,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-011",
+      "id": "RAW-012",
       "source_path": "artifacts/green-status/dev-env.stderr.log",
       "archive_path": "evidence/raw/green-status/dev-env.stderr.log",
       "category": "green-status",
@@ -159,7 +172,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-012",
+      "id": "RAW-013",
       "source_path": "artifacts/green-status/dev-env.stdout.log",
       "archive_path": "evidence/raw/green-status/dev-env.stdout.log",
       "category": "green-status",
@@ -172,7 +185,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-013",
+      "id": "RAW-014",
       "source_path": "artifacts/green-status/doctor.log",
       "archive_path": "evidence/raw/green-status/doctor.log",
       "category": "green-status",
@@ -185,7 +198,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-014",
+      "id": "RAW-015",
       "source_path": "artifacts/green-status/e2e-http-mcp.log",
       "archive_path": "evidence/raw/green-status/e2e-http-mcp.log",
       "category": "green-status",
@@ -198,7 +211,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-015",
+      "id": "RAW-016",
       "source_path": "artifacts/green-status/e2e-idempotency.log",
       "archive_path": "evidence/raw/green-status/e2e-idempotency.log",
       "category": "green-status",
@@ -211,7 +224,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-016",
+      "id": "RAW-017",
       "source_path": "artifacts/green-status/e2e-oauth-device-cli.log",
       "archive_path": "evidence/raw/green-status/e2e-oauth-device-cli.log",
       "category": "green-status",
@@ -224,7 +237,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-017",
+      "id": "RAW-018",
       "source_path": "artifacts/green-status/e2e-oauth-device.log",
       "archive_path": "evidence/raw/green-status/e2e-oauth-device.log",
       "category": "green-status",
@@ -237,7 +250,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-018",
+      "id": "RAW-019",
       "source_path": "artifacts/green-status/green-status-summary.json",
       "archive_path": "evidence/raw/green-status/green-status-summary.json",
       "category": "green-status",
@@ -250,7 +263,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-019",
+      "id": "RAW-020",
       "source_path": "artifacts/green-status/idempotency-p1.log",
       "archive_path": "evidence/raw/green-status/idempotency-p1.log",
       "category": "green-status",
@@ -263,7 +276,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-020",
+      "id": "RAW-021",
       "source_path": "artifacts/green-status/prd-reverse.log",
       "archive_path": "evidence/raw/green-status/prd-reverse.log",
       "category": "green-status",
@@ -276,7 +289,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-021",
+      "id": "RAW-022",
       "source_path": "artifacts/green-status/security-p0.log",
       "archive_path": "evidence/raw/green-status/security-p0.log",
       "category": "green-status",
@@ -289,7 +302,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-022",
+      "id": "RAW-023",
       "source_path": "artifacts/green-status/test.log",
       "archive_path": "evidence/raw/green-status/test.log",
       "category": "green-status",
@@ -302,7 +315,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-023",
+      "id": "RAW-024",
       "source_path": "artifacts/green-status/typecheck.log",
       "archive_path": "evidence/raw/green-status/typecheck.log",
       "category": "green-status",
@@ -315,7 +328,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-024",
+      "id": "RAW-025",
       "source_path": "artifacts/idempotency-p1-evidence.html",
       "archive_path": "evidence/raw/idempotency-p1-evidence.html",
       "category": "idempotency",
@@ -328,7 +341,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-025",
+      "id": "RAW-026",
       "source_path": "artifacts/idempotency-p1-evidence.mp4",
       "archive_path": "evidence/raw/idempotency-p1-evidence.mp4",
       "category": "idempotency",
@@ -341,7 +354,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-026",
+      "id": "RAW-027",
       "source_path": "artifacts/idempotency-p1-evidence.png",
       "archive_path": "evidence/raw/idempotency-p1-evidence.png",
       "category": "idempotency",
@@ -354,7 +367,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-027",
+      "id": "RAW-028",
       "source_path": "artifacts/idempotency-p1-report.json",
       "archive_path": "evidence/raw/idempotency-p1-report.json",
       "category": "idempotency",
@@ -367,7 +380,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-028",
+      "id": "RAW-029",
       "source_path": "artifacts/mcp-load-log.json",
       "archive_path": "evidence/raw/mcp-load-log.json",
       "category": "mcp",
@@ -380,7 +393,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-029",
+      "id": "RAW-030",
       "source_path": "artifacts/mcp-load.log",
       "archive_path": "evidence/raw/mcp-load.log",
       "category": "mcp",
@@ -393,7 +406,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-030",
+      "id": "RAW-031",
       "source_path": "artifacts/mcp-monitor-contract.json",
       "archive_path": "evidence/raw/mcp-monitor-contract.json",
       "category": "mcp",
@@ -406,7 +419,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-031",
+      "id": "RAW-032",
       "source_path": "artifacts/mcp-monitor.log",
       "archive_path": "evidence/raw/mcp-monitor.log",
       "category": "mcp",
@@ -419,7 +432,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-032",
+      "id": "RAW-033",
       "source_path": "artifacts/mount-marker.txt",
       "archive_path": "evidence/raw/mount-marker.txt",
       "category": "other-evidence",
@@ -432,20 +445,20 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-033",
+      "id": "RAW-034",
       "source_path": "artifacts/oauth-mcp-negative-report.json",
       "archive_path": "evidence/raw/oauth-mcp-negative-report.json",
       "category": "mcp",
       "extension": ".json",
-      "bytes": 3213,
-      "source_sha256": "437a117c29e255965c5ca98fdf11a5a14c3a2d6ceb2c3449b6dd44ef5eceff7c",
-      "archive_sha256": "437a117c29e255965c5ca98fdf11a5a14c3a2d6ceb2c3449b6dd44ef5eceff7c",
+      "bytes": 3214,
+      "source_sha256": "b9f11aa3235cab7710025e4e88ac89ce5581bf3669e4c5876cc1e70eb62dbc30",
+      "archive_sha256": "b9f11aa3235cab7710025e4e88ac89ce5581bf3669e4c5876cc1e70eb62dbc30",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-034",
+      "id": "RAW-035",
       "source_path": "artifacts/observability-contract-report.json",
       "archive_path": "evidence/raw/observability-contract-report.json",
       "category": "other-evidence",
@@ -458,7 +471,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-035",
+      "id": "RAW-036",
       "source_path": "artifacts/p0-sim-fail-report.json",
       "archive_path": "evidence/raw/p0-sim-fail-report.json",
       "category": "other-evidence",
@@ -471,7 +484,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-036",
+      "id": "RAW-037",
       "source_path": "artifacts/p0-sim-fail-summary.md",
       "archive_path": "evidence/raw/p0-sim-fail-summary.md",
       "category": "other-evidence",
@@ -484,7 +497,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-037",
+      "id": "RAW-038",
       "source_path": "artifacts/p0-sim-pass-report.json",
       "archive_path": "evidence/raw/p0-sim-pass-report.json",
       "category": "other-evidence",
@@ -497,7 +510,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-038",
+      "id": "RAW-039",
       "source_path": "artifacts/p0-sim-pass-summary.md",
       "archive_path": "evidence/raw/p0-sim-pass-summary.md",
       "category": "other-evidence",
@@ -510,7 +523,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-039",
+      "id": "RAW-040",
       "source_path": "artifacts/staging/ui-bundle-report.json",
       "archive_path": "evidence/raw/staging/ui-bundle-report.json",
       "category": "staging",
@@ -523,7 +536,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-040",
+      "id": "RAW-041",
       "source_path": "artifacts/ui-bundle-report.json",
       "archive_path": "evidence/raw/ui-bundle-report.json",
       "category": "other-evidence",
@@ -536,7 +549,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-041",
+      "id": "RAW-042",
       "source_path": "artifacts/wave1-p0/build.log",
       "archive_path": "evidence/raw/wave1-p0/build.log",
       "category": "wave1-p0",
@@ -549,7 +562,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-042",
+      "id": "RAW-043",
       "source_path": "artifacts/wave1-p0/bundle-audit-tests.log",
       "archive_path": "evidence/raw/wave1-p0/bundle-audit-tests.log",
       "category": "wave1-p0",
@@ -562,7 +575,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-043",
+      "id": "RAW-044",
       "source_path": "artifacts/wave1-p0/bundle-budget.log",
       "archive_path": "evidence/raw/wave1-p0/bundle-budget.log",
       "category": "wave1-p0",
@@ -575,7 +588,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-044",
+      "id": "RAW-045",
       "source_path": "artifacts/wave1-p0/canonical-self-scan.log",
       "archive_path": "evidence/raw/wave1-p0/canonical-self-scan.log",
       "category": "wave1-p0",
@@ -588,7 +601,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-045",
+      "id": "RAW-046",
       "source_path": "artifacts/wave1-p0/coverage.log",
       "archive_path": "evidence/raw/wave1-p0/coverage.log",
       "category": "wave1-p0",
@@ -601,7 +614,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-046",
+      "id": "RAW-047",
       "source_path": "artifacts/wave1-p0/doctor.log",
       "archive_path": "evidence/raw/wave1-p0/doctor.log",
       "category": "wave1-p0",
@@ -614,7 +627,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-047",
+      "id": "RAW-048",
       "source_path": "artifacts/wave1-p0/e2e-http-mcp-idempotency.log",
       "archive_path": "evidence/raw/wave1-p0/e2e-http-mcp-idempotency.log",
       "category": "wave1-p0",
@@ -627,7 +640,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-048",
+      "id": "RAW-049",
       "source_path": "artifacts/wave1-p0/e2e-http-mcp-positive.log",
       "archive_path": "evidence/raw/wave1-p0/e2e-http-mcp-positive.log",
       "category": "wave1-p0",
@@ -640,7 +653,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-049",
+      "id": "RAW-050",
       "source_path": "artifacts/wave1-p0/health.log",
       "archive_path": "evidence/raw/wave1-p0/health.log",
       "category": "wave1-p0",
@@ -653,7 +666,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-050",
+      "id": "RAW-051",
       "source_path": "artifacts/wave1-p0/idempotency-p1-matrix.log",
       "archive_path": "evidence/raw/wave1-p0/idempotency-p1-matrix.log",
       "category": "wave1-p0",
@@ -666,7 +679,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-051",
+      "id": "RAW-052",
       "source_path": "artifacts/wave1-p0/oauth-device-cli.log",
       "archive_path": "evidence/raw/wave1-p0/oauth-device-cli.log",
       "category": "wave1-p0",
@@ -679,7 +692,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-052",
+      "id": "RAW-053",
       "source_path": "artifacts/wave1-p0/oauth-device-http.log",
       "archive_path": "evidence/raw/wave1-p0/oauth-device-http.log",
       "category": "wave1-p0",
@@ -692,7 +705,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-053",
+      "id": "RAW-054",
       "source_path": "artifacts/wave1-p0/oauth-mcp-negative-p0.log",
       "archive_path": "evidence/raw/wave1-p0/oauth-mcp-negative-p0.log",
       "category": "wave1-p0",
@@ -705,7 +718,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-054",
+      "id": "RAW-055",
       "source_path": "artifacts/wave1-p0/observability-contract.log",
       "archive_path": "evidence/raw/wave1-p0/observability-contract.log",
       "category": "wave1-p0",
@@ -718,7 +731,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-055",
+      "id": "RAW-056",
       "source_path": "artifacts/wave1-p0/summary.json",
       "archive_path": "evidence/raw/wave1-p0/summary.json",
       "category": "wave1-p0",
@@ -731,7 +744,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-056",
+      "id": "RAW-057",
       "source_path": "artifacts/wave1-p0/typecheck.log",
       "archive_path": "evidence/raw/wave1-p0/typecheck.log",
       "category": "wave1-p0",
@@ -744,7 +757,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-057",
+      "id": "RAW-058",
       "source_path": "artifacts/wave1-p0/unit-and-contract-tests.log",
       "archive_path": "evidence/raw/wave1-p0/unit-and-contract-tests.log",
       "category": "wave1-p0",
@@ -757,7 +770,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-058",
+      "id": "RAW-059",
       "source_path": "artifacts/wave2-chaos/CHAOS-002-idempotency-real.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-002-idempotency-real.log",
       "category": "wave2-chaos",
@@ -770,7 +783,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-059",
+      "id": "RAW-060",
       "source_path": "artifacts/wave2-chaos/CHAOS-003-idempotency-p1.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-003-idempotency-p1.log",
       "category": "wave2-chaos",
@@ -783,7 +796,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-060",
+      "id": "RAW-061",
       "source_path": "artifacts/wave2-chaos/CHAOS-004-http-mcp-positive.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-004-http-mcp-positive.log",
       "category": "wave2-chaos",
@@ -796,7 +809,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-061",
+      "id": "RAW-062",
       "source_path": "artifacts/wave2-chaos/CHAOS-005-oauth-device-http.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-005-oauth-device-http.log",
       "category": "wave2-chaos",
@@ -809,7 +822,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-062",
+      "id": "RAW-063",
       "source_path": "artifacts/wave2-chaos/CHAOS-006-oauth-device-cli.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-006-oauth-device-cli.log",
       "category": "wave2-chaos",
@@ -822,7 +835,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-063",
+      "id": "RAW-064",
       "source_path": "artifacts/wave2-chaos/CHAOS-007-negative-security.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-007-negative-security.log",
       "category": "wave2-chaos",
@@ -835,7 +848,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-064",
+      "id": "RAW-065",
       "source_path": "artifacts/wave2-chaos/CHAOS-008-authenticated-load.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-008-authenticated-load.log",
       "category": "wave2-chaos",
@@ -848,7 +861,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-065",
+      "id": "RAW-066",
       "source_path": "artifacts/wave2-chaos/CHAOS-009-observability-contract.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-009-observability-contract.log",
       "category": "wave2-chaos",
@@ -861,7 +874,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-066",
+      "id": "RAW-067",
       "source_path": "artifacts/wave2-chaos/CHAOS-010-bundle-and-coverage.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-010-bundle-and-coverage.log",
       "category": "wave2-chaos",
@@ -874,7 +887,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-067",
+      "id": "RAW-068",
       "source_path": "artifacts/wave2-chaos/CHAOS-011-doctor.log",
       "archive_path": "evidence/raw/wave2-chaos/CHAOS-011-doctor.log",
       "category": "wave2-chaos",
@@ -887,7 +900,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-068",
+      "id": "RAW-069",
       "source_path": "artifacts/wave2-chaos/summary.json",
       "archive_path": "evidence/raw/wave2-chaos/summary.json",
       "category": "wave2-chaos",
@@ -900,7 +913,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-069",
+      "id": "RAW-070",
       "source_path": "artifacts/wave2-wave3-executive-script.md",
       "archive_path": "evidence/raw/wave2-wave3-executive-script.md",
       "category": "other-evidence",
@@ -913,7 +926,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-070",
+      "id": "RAW-071",
       "source_path": "artifacts/wave3-performance/profiles/burst.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/burst.json",
       "category": "wave3-performance",
@@ -926,7 +939,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-071",
+      "id": "RAW-072",
       "source_path": "artifacts/wave3-performance/profiles/ramp-1.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/ramp-1.json",
       "category": "wave3-performance",
@@ -939,7 +952,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-072",
+      "id": "RAW-073",
       "source_path": "artifacts/wave3-performance/profiles/ramp-2.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/ramp-2.json",
       "category": "wave3-performance",
@@ -952,7 +965,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-073",
+      "id": "RAW-074",
       "source_path": "artifacts/wave3-performance/profiles/ramp-3.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/ramp-3.json",
       "category": "wave3-performance",
@@ -965,7 +978,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-074",
+      "id": "RAW-075",
       "source_path": "artifacts/wave3-performance/profiles/ramp-4.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/ramp-4.json",
       "category": "wave3-performance",
@@ -978,7 +991,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-075",
+      "id": "RAW-076",
       "source_path": "artifacts/wave3-performance/profiles/soak.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/soak.json",
       "category": "wave3-performance",
@@ -991,7 +1004,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-076",
+      "id": "RAW-077",
       "source_path": "artifacts/wave3-performance/profiles/sustained.json",
       "archive_path": "evidence/raw/wave3-performance/profiles/sustained.json",
       "category": "wave3-performance",
@@ -1004,7 +1017,7 @@
       "preservation": "exact_copy_source_unchanged"
     },
     {
-      "id": "RAW-077",
+      "id": "RAW-078",
       "source_path": "artifacts/wave3-performance/summary.json",
       "archive_path": "evidence/raw/wave3-performance/summary.json",
       "category": "wave3-performance",
