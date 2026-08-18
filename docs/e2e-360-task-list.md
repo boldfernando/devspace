@@ -3,8 +3,8 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `52d2234` + alterações locais desta onda
-**Working tree:** dirty — aguardando commit da onda write_stdin
+**Commit de referência:** `7fd9f76`
+**Working tree:** clean após commit da onda write_stdin
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
 
