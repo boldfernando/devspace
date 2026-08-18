@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `6df43d3`
+**Commit de referência:** `99d7e9d`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -53,6 +53,30 @@
 | Soak | 60 | 4 | 133,63 req/s | 25 ms | 47 ms | 51 ms | PASS |
 
 Essas métricas qualificam o build e o servidor isolado testados. Não constituem, isoladamente, uma declaração de capacidade de produção, múltiplos nós, rede externa ou autoscaling.
+
+### 2.2. Linha do tempo consolidada do histórico
+
+| Marco | Resultado consolidado | Evidência/rastreabilidade |
+|---|---|---|
+| Reverse Engineering Canonical 360º | Scanner, schema, manifest, report, gates DoR/DoD e self-scan concluídos. | `7c10538f`, `artifacts/canonical-360/` |
+| OAuth Device Authorization | Migration, HMAC, TTL, polling, consumo único, endpoints HTTP, CLI e E2E concluídos. | `593d0779`, `scripts/e2e-oauth-device*.test.mjs` |
+| Wave 1 P0 | 16/16 gates aprovados contra HTTP/MCP real. | `acd2d8c`, `artifacts/wave1-p0/summary.json` |
+| Wave 2 Chaos | 11/11 cenários aprovados, incluindo restart e recuperação. | `16c1df2`, `artifacts/wave2-chaos/summary.json` |
+| Wave 3 Performance/Soak | Ramp, sustained, burst e soak aprovados com percentis e throughput. | `2c74ea2`, `e5dc207`, `artifacts/wave3-performance/summary.json` |
+| Monitor Bearer | Monitor Node/PowerShell, contrato E2E real e integração CI concluídos localmente. | `537f567`, `artifacts/mcp-monitor-contract.json` |
+| Bloco 1 de identidade | Trusted identity HMAC, scopes por tool, token subject, rotation e `/revoke` concluídos localmente. | `f018a7b`, `evidence/raw/block1-identity-report.json` |
+| Observabilidade Device Flow | Eventos requested/pending/slow_down/approved/consumed/denied/expired/rejected/rate_limited instrumentados e observados no `/metrics`. | `6df43d3`, `99d7e9d`, `mcp_oauth_device_event_total` |
+| Retenção de evidências | Raws preservados byte a byte com manifest SHA-256 e índice navegável. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+
+### 2.3. Próximos cortes de maior impacto
+
+| Ordem | Issue | Foco | Condição de encerramento |
+|---:|---|---|---|
+| 1 | `P1-OBS-002` | Alertas Prometheus/Grafana em ambiente operacional | Alert firing, recovery, scrape externo e ausência de secrets comprovados. |
+| 2 | `P1-DEVICE-009` | Gateway de identidade real | Sessão autenticada, ACL, audit trail e headers forjados bloqueados em staging/produção. |
+| 3 | `IDEMP-P1-005`, `P1-OBS-004` | Crash/reconciliation | Drill real pós-commit, estado ambiguous e reconciliação sem retry cego. |
+| 4 | `P1-DEVICE-012..013` | ACL e cancelamento CLI | Matriz OS, Ctrl-C, timers, credenciais e cleanup comprovados. |
+| 5 | `P3-CI-002`, `P2-LOAD-002..003` | Carga hosted e calibração | `staging-load` publicado, três rodadas calibradas e artifacts versionados. |
 
 ## 3. Tasks P0 — descoberta, contratos, segurança e release
 
