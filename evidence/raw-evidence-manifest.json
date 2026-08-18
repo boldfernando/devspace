@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T19:23:51.175Z",
+  "generated_at": "2026-08-18T19:48:53.975Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -12,8 +12,8 @@
     "binary_secret_scan": "not_applicable_binary",
     "raw_content_rewritten": false
   },
-  "count": 86,
-  "total_bytes": 1143679,
+  "count": 87,
+  "total_bytes": 1151010,
   "records": [
     {
       "id": "RAW-001",
@@ -99,9 +99,9 @@
       "archive_path": "evidence/raw/dev-server.log",
       "category": "other-evidence",
       "extension": ".log",
-      "bytes": 153011,
-      "source_sha256": "d1487cc08cbe19cd51eec728e59fdcc4a5bf192af627e2b73d134c9e507e98ce",
-      "archive_sha256": "d1487cc08cbe19cd51eec728e59fdcc4a5bf192af627e2b73d134c9e507e98ce",
+      "bytes": 158357,
+      "source_sha256": "e6dd61fe9363bff4df9c55fde2964ab768a16a2b05112cc858f456ffad1ac8a2",
+      "archive_sha256": "e6dd61fe9363bff4df9c55fde2964ab768a16a2b05112cc858f456ffad1ac8a2",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
@@ -489,9 +489,9 @@
       "archive_path": "evidence/raw/oauth-mcp-negative-report.json",
       "category": "mcp",
       "extension": ".json",
-      "bytes": 3214,
-      "source_sha256": "6859b5e0c1ea2e4efb2f7013427380122884d8b69b50c243c3844ba709cea190",
-      "archive_sha256": "6859b5e0c1ea2e4efb2f7013427380122884d8b69b50c243c3844ba709cea190",
+      "bytes": 3217,
+      "source_sha256": "dc581e39350ac0949cb7b654bce62a79f68e12064590acd8c64f38ad3aa3df65",
+      "archive_sha256": "dc581e39350ac0949cb7b654bce62a79f68e12064590acd8c64f38ad3aa3df65",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
@@ -1129,6 +1129,19 @@
       "bytes": 4657,
       "source_sha256": "05df98b7a1bf687296444a8645ac38e10709eaf1257a83a3dbee536a5484dc4c",
       "archive_sha256": "05df98b7a1bf687296444a8645ac38e10709eaf1257a83a3dbee536a5484dc4c",
+      "byte_equal": true,
+      "secret_scan": "clean",
+      "preservation": "exact_copy_source_unchanged"
+    },
+    {
+      "id": "RAW-087",
+      "source_path": "artifacts/write-stdin-idempotency-report.json",
+      "archive_path": "evidence/raw/write-stdin-idempotency-report.json",
+      "category": "idempotency",
+      "extension": ".json",
+      "bytes": 1982,
+      "source_sha256": "9522fc6c0ea11f1bce913ba2421a9d173b63a4bc2022e866dfe7290f2ecdb9f0",
+      "archive_sha256": "9522fc6c0ea11f1bce913ba2421a9d173b63a4bc2022e866dfe7290f2ecdb9f0",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "task": "P1-IDEMP-009",
+  "secondary_task": "P2-PROC-001",
+  "transport": "real-http-mcp",
+  "auth": "oauth-authorization-code-pkce-s256",
+  "tool_mode": "codex",
+  "cases": [
+    {
+      "id": "SETUP-001",
+      "status": "passed",
+      "server": "real-http-mcp",
+      "toolMode": "codex"
+    },
+    {
+      "id": "OAUTH-001",
+      "status": "passed",
+      "flow": "authorization_code_pkce_s256"
+    },
+    {
+      "id": "MCP-001",
+      "status": "passed",
+      "authenticatedSession": true
+    },
+    {
+      "id": "WORKSPACE-001",
+      "status": "passed",
+      "workspaceOpened": true
+    },
+    {
+      "id": "PROC-001",
+      "status": "passed",
+      "processStarted": true
+    },
+    {
+      "id": "IDEMP-P1-009-A",
+      "status": "passed",
+      "sequence": 0,
+      "effect": "one_owner"
+    },
+    {
+      "id": "IDEMP-P1-009-B",
+      "status": "passed",
+      "replay": true,
+      "duplicateEffect": false
+    },
+    {
+      "id": "IDEMP-P1-009-C",
+      "status": "passed",
+      "rejection": "payload_conflict"
+    },
+    {
+      "id": "IDEMP-P1-009-D",
+      "status": "passed",
+      "rejection": "PROCESS_INPUT_SEQUENCE_GAP"
+    },
+    {
+      "id": "IDEMP-P1-009-E",
+      "status": "passed",
+      "rejection": "PROCESS_INPUT_SEQUENCE_REPLAY"
+    },
+    {
+      "id": "IDEMP-P1-009-F",
+      "status": "passed",
+      "rejection": "missing_idempotency_key"
+    },
+    {
+      "id": "IDEMP-P1-009-G",
+      "status": "passed",
+      "rejection": "missing_input_sequence"
+    },
+    {
+      "id": "IDEMP-P1-009-H",
+      "status": "passed",
+      "sequence": 1,
+      "effect": "ordered_second_chunk"
+    },
+    {
+      "id": "IDEMP-P1-009-I",
+      "status": "passed",
+      "pollWithoutKey": true,
+      "processExited": true
+    },
+    {
+      "id": "IDEMP-P1-009-J",
+      "status": "passed",
+      "metricsSanitized": true
+    }
+  ],
+  "secret_leak_detected": false,
+  "raw_output_persisted": false
+}

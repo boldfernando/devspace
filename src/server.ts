@@ -51,7 +51,7 @@ import {
   McpSessionRegistry,
   type McpSessionCloseResult,
 } from "./mcp-sessions.js";
-import { ProcessSessionManager, type ProcessSnapshot } from "./process-sessions.js";
+import { ProcessInputSequenceError, ProcessSessionManager, type ProcessSnapshot } from "./process-sessions.js";
 import { createReviewCheckpointManager } from "./review-checkpoints.js";
 import { openAiConversationScopeId } from "./request-meta.js";
 import { shutdownHttpServer } from "./server-shutdown.js";
@@ -573,6 +573,10 @@ function registerCodexProcessTools(
   config: ServerConfig,
   workspaces: WorkspaceRegistry,
   processSessions: ProcessSessionManager,
+  idempotencyStore?: WriteIdempotencyStore,
+  runtimeMetrics?: RuntimeMetrics,
+  sessionClientId?: string | null,
+  sessionResource?: string | null,
 ): void {
   registerAppTool(
     server,
@@ -660,6 +664,8 @@ function registerCodexProcessTools(
         workspaceId: z.string().describe("Workspace identifier used to start the process."),
         sessionId: z.number().describe("Process session identifier returned by exec_command."),
         chars: z.string().optional().describe("Characters to write. Omit or pass an empty string to poll."),
+        idempotencyKey: z.string().min(1).max(256).optional().describe("Stable key for deduplicating a stdin mutation across retries."),
+        inputSequence: z.number().int().nonnegative().optional().describe("Monotonic zero-based sequence for a stdin mutation; required with chars in authenticated sessions."),
         columns: z.number().int().min(1).max(1_000).optional().describe("Resize a PTY to this width."),
         rows: z.number().int().min(1).max(1_000).optional().describe("Resize a PTY to this height."),
         yieldTimeMs: z
@@ -681,18 +687,99 @@ function registerCodexProcessTools(
       ...toolWidgetDescriptorMeta(config, "shell"),
       annotations: SHELL_TOOL_ANNOTATIONS,
     },
-    async ({ workspaceId, sessionId, chars, columns, rows, yieldTimeMs, maxOutputTokens }) => {
+    async ({ workspaceId, sessionId, chars, idempotencyKey, inputSequence, columns, rows, yieldTimeMs, maxOutputTokens }) => {
       const startedAt = performance.now();
-      workspaces.getWorkspace(workspaceId);
-      const snapshot = await processSessions.write({
-        workspaceId,
-        sessionId,
-        chars,
-        columns,
-        rows,
-        yieldTimeMs,
-        maxOutputTokens,
-      });
+      const workspace = workspaces.getWorkspace(workspaceId);
+      const inputMutation = (chars?.length ?? 0) > 0;
+      let snapshot: ProcessSnapshot;
+      let replayed = false;
+      let response: { content: ToolContent[]; isError?: boolean } | undefined;
+
+      try {
+        if (sessionClientId && sessionResource && inputMutation && !idempotencyKey) {
+          response = {
+            content: [{ type: "text" as const, text: "IDEMPOTENCY_KEY_REQUIRED_FOR_WRITE_STDIN: idempotencyKey is required for authenticated stdin mutations." }],
+            isError: true,
+          };
+        } else if (sessionClientId && sessionResource && inputMutation && inputSequence === undefined) {
+          response = {
+            content: [{ type: "text" as const, text: "PROCESS_INPUT_SEQUENCE_REQUIRED: inputSequence is required for authenticated stdin mutations." }],
+            isError: true,
+          };
+        } else if (sessionClientId && sessionResource && idempotencyKey && !inputMutation) {
+          response = {
+            content: [{ type: "text" as const, text: "IDEMPOTENCY_KEY_NOT_ALLOWED_FOR_POLL: idempotencyKey applies only to stdin mutations." }],
+            isError: true,
+          };
+        } else {
+          const executeWrite = () => processSessions.write({
+            workspaceId,
+            sessionId,
+            chars,
+            inputSequence,
+            columns,
+            rows,
+            yieldTimeMs,
+            maxOutputTokens,
+          });
+          if (idempotencyStore && sessionClientId && sessionResource && idempotencyKey && inputSequence !== undefined) {
+            const stableWorkspaceScope = createHash("sha256").update(workspace.root).digest("hex").slice(0, 32);
+            const scopeKey = `${sessionClientId}|${sessionResource}|${stableWorkspaceScope}|write_stdin|${sessionId}`;
+            const run = await idempotencyStore.run(scopeKey, idempotencyKey, {
+              sessionId,
+              inputSequence,
+              chars,
+              columns,
+              rows,
+            }, executeWrite);
+            snapshot = run.value;
+            replayed = run.replayed;
+            runtimeMetrics?.recordIdempotencyClaim("write_stdin", run.replayed ? "replay" : "owner");
+            if (!run.replayed) runtimeMetrics?.recordIdempotencyEffect("write_stdin", "started");
+            logEvent(config.logging, "info", "idempotency_claim", {
+              tool: "write_stdin",
+              outcome: run.replayed ? "replay" : "owner",
+              state: run.record.state,
+              durationMs: Math.round(performance.now() - startedAt),
+            });
+          } else {
+            snapshot = await executeWrite();
+          }
+        }
+      } catch (error) {
+        const outcome = error instanceof IdempotencyAmbiguousError
+          ? "ambiguous"
+          : error instanceof IdempotencyConflictError
+            ? "conflict"
+            : error instanceof IdempotencyPendingError
+              ? "pending"
+              : error instanceof ProcessInputSequenceError
+                ? error.code === "PROCESS_INPUT_SEQUENCE_REPLAY" ? "sequence_replay" : "sequence_gap"
+                : "failed";
+        if (error instanceof IdempotencyAmbiguousError || error instanceof IdempotencyConflictError || error instanceof IdempotencyPendingError || error instanceof IdempotencyFailedError || error instanceof ProcessInputSequenceError) {
+          response = {
+            content: [{ type: "text" as const, text: `${error.code}: ${error.message}` }],
+            isError: true,
+          };
+        } else {
+          throw error;
+        }
+        runtimeMetrics?.recordIdempotencyClaim("write_stdin", outcome);
+        logEvent(config.logging, outcome === "failed" || outcome === "ambiguous" ? "error" : "warn", "idempotency_claim", {
+          tool: "write_stdin",
+          outcome,
+          durationMs: Math.round(performance.now() - startedAt),
+        });
+      }
+
+      if (response?.isError) {
+        logFailedToolResponse(config, {
+          tool: "write_stdin",
+          workspaceId,
+          commandLength: chars?.length ?? 0,
+        }, response.content, startedAt);
+        return response;
+      }
 
       logToolCall(config, {
         tool: "write_stdin",
@@ -701,12 +788,13 @@ function registerCodexProcessTools(
         durationMs: Math.round(performance.now() - startedAt),
       });
 
-      return processToolResponse("write_stdin", workspaceId, snapshot, {
+      return processToolResponse("write_stdin", workspaceId, snapshot!, {
         sessionId,
+        inputSequence,
         charactersWritten: chars?.length ?? 0,
-        running: snapshot.running,
-        exitCode: snapshot.exitCode,
-        wallTimeMs: snapshot.wallTimeMs,
+        running: snapshot!.running,
+        exitCode: snapshot!.exitCode,
+        wallTimeMs: snapshot!.wallTimeMs,
       });
     },
   );
@@ -1756,7 +1844,16 @@ export function createMcpServer(
   }
 
   if (config.toolMode === "codex") {
-    registerCodexProcessTools(server, config, workspaces, processSessions);
+    registerCodexProcessTools(
+      server,
+      config,
+      workspaces,
+      processSessions,
+      idempotencyStore,
+      runtimeMetrics,
+      sessionClientId,
+      sessionResource,
+    );
   }
 
   if (config.artifactsEnabled && isArtifactDownloadSupportedPlatform()) {

@@ -124,6 +124,17 @@ jobs:
           path: artifacts/idempotency-recovery-report.json
           if-no-files-found: ignore
 
+      - name: write_stdin idempotency and sequence E2E
+        run: npm run e2e:write-stdin:idempotency
+
+      - name: Upload write_stdin idempotency evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: write-stdin-idempotency-${{ matrix.os }}
+          path: artifacts/write-stdin-idempotency-report.json
+          if-no-files-found: ignore
+
       - name: OAuth/MCP P0 negative matrix
         run: npm run security:p0
       - name: Upload OAuth/MCP security artifacts

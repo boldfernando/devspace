@@ -28,10 +28,21 @@ export interface WriteStdinInput {
   workspaceId: string;
   sessionId: number;
   chars?: string;
+  inputSequence?: number;
   columns?: number;
   rows?: number;
   yieldTimeMs?: number;
   maxOutputTokens?: number;
+}
+
+export class ProcessInputSequenceError extends Error {
+  readonly code: "PROCESS_INPUT_SEQUENCE_GAP" | "PROCESS_INPUT_SEQUENCE_REPLAY";
+
+  constructor(code: "PROCESS_INPUT_SEQUENCE_GAP" | "PROCESS_INPUT_SEQUENCE_REPLAY", message: string) {
+    super(message);
+    this.name = "ProcessInputSequenceError";
+    this.code = code;
+  }
 }
 
 export interface ProcessSnapshot {
@@ -64,6 +75,7 @@ interface ProcessSession {
   exitPromise: Promise<void>;
   resolveExit: () => void;
   cleanupTimer?: NodeJS.Timeout;
+  nextInputSequence: number;
 }
 
 interface ProcessSessionManagerOptions {
@@ -247,6 +259,40 @@ export class ProcessSessionManager {
     const chars = input.chars ?? "";
     const interactionRequested =
       chars.length > 0 || input.columns !== undefined || input.rows !== undefined;
+    const inputMutation = chars.length > 0;
+
+    if (input.inputSequence !== undefined) {
+      if (!inputMutation) {
+        throw new ProcessInputSequenceError(
+          "PROCESS_INPUT_SEQUENCE_GAP",
+          "inputSequence requires non-empty chars.",
+        );
+      }
+      if (!Number.isInteger(input.inputSequence) || input.inputSequence < 0) {
+        throw new ProcessInputSequenceError(
+          "PROCESS_INPUT_SEQUENCE_GAP",
+          "inputSequence must be a non-negative integer.",
+        );
+      }
+      if (!session.running) {
+        throw new ProcessInputSequenceError(
+          "PROCESS_INPUT_SEQUENCE_REPLAY",
+          "The process session is no longer running.",
+        );
+      }
+      if (input.inputSequence < session.nextInputSequence) {
+        throw new ProcessInputSequenceError(
+          "PROCESS_INPUT_SEQUENCE_REPLAY",
+          "The input sequence was already consumed.",
+        );
+      }
+      if (input.inputSequence > session.nextInputSequence) {
+        throw new ProcessInputSequenceError(
+          "PROCESS_INPUT_SEQUENCE_GAP",
+          "The input sequence has a gap.",
+        );
+      }
+    }
 
     if (input.columns !== undefined || input.rows !== undefined) {
       session.columns = terminalSize(input.columns, session.columns);
@@ -263,6 +309,7 @@ export class ProcessSessionManager {
     }
     const writableChars = chars.replaceAll("\u0003", "");
     if (writableChars && session.running) session.process?.write(writableChars);
+    if (input.inputSequence !== undefined) session.nextInputSequence += 1;
 
     if ((interactionRequested || !session.buffer.hasOutput()) && session.running) {
       const fallback = interactionRequested ? DEFAULT_INTERACTIVE_YIELD_MS : DEFAULT_POLL_YIELD_MS;
@@ -317,6 +364,7 @@ export class ProcessSessionManager {
       rows: terminalSize(input.rows, DEFAULT_ROWS),
       buffer: new HeadTailBuffer(this.maxBufferCharacters),
       running: true,
+      nextInputSequence: 0,
       exitPromise,
       resolveExit,
     };

@@ -3,8 +3,8 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `2ae4afd`
-**Working tree:** limpo  
+**Commit de referência:** `52d2234` + alterações locais desta onda
+**Working tree:** dirty — aguardando commit da onda write_stdin
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
 
@@ -36,13 +36,14 @@
 | Matriz negativa | 23/23 IDs OAuth/Bearer/MCP aprovados fail-closed. | `scripts/run-p0-negative-matrix.py`, `artifacts/oauth-mcp-negative-report.json` |
 | Device Authorization | Grant HTTP/CLI, migration, hashes HMAC, polling, TTL, consumo único, ACL privada e cancelamento configurável implementados localmente; matriz OS/identidade real permanece UNKNOWN. | `scripts/e2e-oauth-device.test.mjs`, `scripts/e2e-oauth-device-cli.test.mjs`, `artifacts/oauth-device-cli-security-report.json` |
 | Idempotência P1 | IDEMP-P1-001..008 aprovados; `effect_count=5`; sem secret leak. | `artifacts/idempotency-p1-report.json` |
+| write_stdin idempotency | E2E HTTP/MCP real em modo codex aprovado: OAuth PKCE, owner/replay único, conflito de payload, gap, replay de sequência, ausência de key/sequence, chunk ordenado, polling sem key e métricas sanitizadas. Crash entre write e confirmação permanece UNKNOWN. | `scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs`, `artifacts/write-stdin-idempotency-report.json` |
 | Onda 2 Chaos | 11/11 cenários aprovados; restart, indisponibilidade e recovery comprovados. | `artifacts/wave2-chaos/summary.json` |
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
 | Agents Swarm — resiliência | 8 agentes lógicos, 6 rounds, 96/96 operações PASS; isolamento 8/8, replay 8/8, recovery 8/8 e cleanup. Provider/model runtime permanece UNKNOWN. | `artifacts/swarm-resilience-report.json`, `scripts/e2e-swarm-resilience.test.mjs` |
 | Agents Swarm — chaos extension | 7/7 cenários PASS: timeout, 429, 503 e disconnect transitórios recuperados; 429/503/timeout persistentes exauridos fail-closed; fan-out 4/4. | `artifacts/swarm-chaos-report.json`, `scripts/e2e-swarm-chaos.test.mjs` |
-| Retenção de raws | 86 raws arquivados byte a byte, 1.143.679 bytes, 0 divergências SHA-256; inclui carga autenticada, Swarm resilience e chaos extension. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 87 raws arquivados byte a byte, 1.151.010 bytes, 0 divergências SHA-256 na última indexação; inclui a evidência de write_stdin. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -78,7 +79,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | 2 | `P1-DEVICE-009` | Gateway de identidade real | Sessão autenticada, ACL, audit trail e headers forjados bloqueados em staging/produção. |
 | 3 | `P1-DEVICE-012..013` | ACL e cancelamento CLI | Matriz OS, Ctrl-C, timers, credenciais e cleanup comprovados. |
 | 4 | `P3-CI-002`, `P2-LOAD-002..003` | Carga hosted e calibração | `staging-load` publicado, três rodadas calibradas e artifacts versionados. |
-| 5 | `P2-PROC-001`, `P2-RES-002` | Processos e infraestrutura | `write_stdin`, bash, SQLite lock/cheio, filesystem read-only e cleanup comprovados. |
+| 5 | `P2-PROC-001`, `P2-RES-002` | Processos e infraestrutura | Completar timeout/abort/process group/PID reuse, SQLite lock/cheio, filesystem read-only e cleanup comprovados. |
 
 ## 3. Tasks P0 — descoberta, contratos, segurança e release
 
@@ -130,7 +131,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | IDEMP-P1-006 | Mesma chave em scopes diferentes permanece isolada. | Concluída | P0-IDEMP-001 | Dois scopes produzem efeitos independentes. |
 | IDEMP-P1-007 | Retenção expirada exige nova intenção explícita. | Parcial | IDEMP-P1-002 | Validar retenção durante operação prolongada e restart. |
 | IDEMP-P1-008 | Banco, logs e artifacts não contêm secrets/payloads sensíveis. | Concluída | P0-SEC-002 | Report P1 e archive RAW sem potential match. |
-| P1-IDEMP-009 | Estender idempotência para `write_stdin` e comandos bash. | Backlog | IDEMP-P1-005, P2-PROC-001 | Replay, conflito, lease e crash sem reexecução cega. |
+| P1-IDEMP-009 | Estender idempotência para `write_stdin` e comandos bash. | Parcial — write_stdin replay/sequence/conflict concluídos; crash ambíguo UNKNOWN | IDEMP-P1-005, P2-PROC-001 | E2E real prova owner/replay sem segundo efeito, conflito, gap, replay de sequência, key/sequence obrigatórios e polling; falta drill de crash entre `write(chars)` e confirmação/ack de aplicação. |
 
 ### 5.2. Autorização, recursos, tools e CLI
 
@@ -177,7 +178,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P2-RES-001 | Operação | Simular indisponibilidade, restart e recuperação de sessões. | Concluída localmente | P1-OBS-004 | Wave 2 comprovou health/metrics após restart; Swarm local comprovou 8 sessões, cleanup, close/replay e recovery; ampliar reauth hosted. |
 | P2-RES-002 | Operação | Testar SQLite cheio/lock, filesystem read-only, root ausente e processo filho falho. | Backlog | P1-OBS-001 | Erro sanitizado, fail-closed e cleanup. |
 | P2-FS-001 | Filesystem | Cobrir arquivos grandes/binários, symlink, case-insensitive e permissões por OS. | Parcial — symlink containment local aprovado | P1-SEC-002 | `path-containment-report.json` comprova read/write/cwd symlink bloqueados e filesystem inalterado; faltam arquivo grande/binário, case-insensitive e matriz OS. |
-| P2-PROC-001 | Processos | Cobrir bash, `write_stdin`, timeout, abort, process group, crash e PID reuse. | Parcial | P0-IDEMP-001 | Não reexecutar comandos cegamente; stdin com sequence/ack. |
+| P2-PROC-001 | Processos | Cobrir bash, `write_stdin`, timeout, abort, process group, crash e PID reuse. | Parcial — stdin sequence/poll/cleanup PASS; demais cenários pendentes | P0-IDEMP-001 | `write_stdin` E2E real usa sequence monotônica, replay/conflict/gap fail-closed e não reenvia input; faltam timeout, abort, process group, crash ambíguo e PID reuse. |
 | P2-LLAMA-001 | LlamaParse MCP | Validar documentação, endpoint, schemas, OAuth, quotas e região autorizada com acesso real. | UNKNOWN | P0-MCP-001 | Não marcar como executada sem endpoint/credencial autorizados. |
 | P2-LLAMA-002 | LlamaParse MCP | Executar carga de documentos pequenos/grandes, tool mix, timeout, 429/5xx e retries. | Backlog | P2-LLAMA-001, P2-LOAD-001 | Métricas por MB/tool e isolamento de sessão. |
 | P2-LLAMA-003 | LlamaParse MCP | Validar cross-tenant, sessão transferida, duplicidade e cleanup externo. | Backlog | P2-LLAMA-001 | Nenhum documento/contexto cruza identidade. |
@@ -202,7 +203,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P3-OPS-001 | Operação | Documentar comandos de deps, dev env, build, test, deploy, actions, tasks, auth e diagnostics. | Parcial | P0-BUILD-001 | Novo operador executa caminhos principais. |
 | P3-OPS-002 | Agendamento | Automatizar monitoramento via Windows Task Scheduler ou alternativa suportada. | Parcial | P1-OBS-005 | Wrapper PowerShell, intervalo, amostras, output e fail-on-alert estão implementados; falta registrar a tarefa, definir conta/ACL e validar restart/rollback operacional. |
 | P3-OPS-003 | Evidência | Manter screenshots/vídeos como suporte, nunca substituto de assertions. | Parcial | P0-MCP-001 | Artifacts visuais sanitizados e vinculados por RAW-ID. |
-| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 86 arquivos, 1.143.679 bytes, byte-exatos, 0 divergências, `npm run evidence:index`. |
+| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 87 arquivos, 1.151.010 bytes, byte-exatos na última indexação, 0 divergências, `npm run evidence:index`. |
 
 ## 8. Tasks P4 — produto, arquitetura e maturidade
 

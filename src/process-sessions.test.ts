@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { HeadTailBuffer, ProcessSessionManager } from "./process-sessions.js";
+import { HeadTailBuffer, ProcessInputSequenceError, ProcessSessionManager } from "./process-sessions.js";
 
 const smallBuffer = new HeadTailBuffer(100);
 smallBuffer.append("hello\n");
@@ -121,6 +121,52 @@ const defaultInputResult = await manager.write({
 });
 assert.equal(defaultInputResult.running, false);
 assert.match(defaultInputResult.output, /default-input:hello/);
+
+const sequencedInteractive = await manager.start({
+  workspaceId: "workspace-a",
+  cwd: process.cwd(),
+  command: `${node} -e "process.stdin.once('data', data => { console.log('sequence:' + data.toString().trim()); setTimeout(() => process.exit(0), 500); })"`,
+  yieldTimeMs: 5,
+});
+assert.equal(sequencedInteractive.running, true);
+assert.ok(sequencedInteractive.sessionId);
+
+const sequenceZero = await manager.write({
+  workspaceId: "workspace-a",
+  sessionId: sequencedInteractive.sessionId,
+  chars: "first\n",
+  inputSequence: 0,
+  yieldTimeMs: 250,
+});
+assert.equal(sequenceZero.running, true);
+assert.match(sequenceZero.output, /sequence:first/);
+
+await assert.rejects(
+  manager.write({
+    workspaceId: "workspace-a",
+    sessionId: sequencedInteractive.sessionId,
+    chars: "gap\n",
+    inputSequence: 2,
+    yieldTimeMs: 1,
+  }),
+  (error) => error instanceof ProcessInputSequenceError && error.code === "PROCESS_INPUT_SEQUENCE_GAP",
+);
+await assert.rejects(
+  manager.write({
+    workspaceId: "workspace-a",
+    sessionId: sequencedInteractive.sessionId,
+    chars: "replay\n",
+    inputSequence: 0,
+    yieldTimeMs: 1,
+  }),
+  (error) => error instanceof ProcessInputSequenceError && error.code === "PROCESS_INPUT_SEQUENCE_REPLAY",
+);
+const sequenceCompleted = await manager.write({
+  workspaceId: "workspace-a",
+  sessionId: sequencedInteractive.sessionId,
+  yieldTimeMs: 2_000,
+});
+assert.equal(sequenceCompleted.running, false);
 
 const noisyInteractive = await manager.start({
   workspaceId: "workspace-a",

@@ -39,6 +39,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",
+    "e2e:write-stdin:idempotency": "npm run build && node --test scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
     "e2e:idempotency:recovery": "npm run build && node --test scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
     "e2e:path-containment": "npm run build && node --test scripts/e2e-http-mcp-path-containment.test.mjs",
     "e2e:swarm:resilience": "node --test scripts/e2e-swarm-resilience.test.mjs",

@@ -4,7 +4,9 @@ export type IdempotencyClaimOutcome =
   | "conflict"
   | "pending"
   | "failed"
-  | "ambiguous";
+  | "ambiguous"
+  | "sequence_replay"
+  | "sequence_gap";
 
 export type IdempotencyEffectOutcome = "started";
 export type OAuthDeviceFlowOutcome =

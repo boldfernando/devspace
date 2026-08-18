@@ -4,8 +4,8 @@
 
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
-- **Files indexed and archived:** 86
-- **Total archived bytes:** 1143679
+- **Files indexed and archived:** 87
+- **Total archived bytes:** 1151010
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -19,7 +19,7 @@
 | RAW-004 | canonical-360 | [artifacts/canonical-360/manifest.json](../artifacts/canonical-360/manifest.json) | [evidence/raw/canonical-360/manifest.json](../evidence/raw/canonical-360/manifest.json) | 140504 | `9e3aff3534a8db7f28e79b3ea1e9a23377a5c2a321a60d9cea632282439b47c9` | clean |
 | RAW-005 | canonical-360 | [artifacts/canonical-360/report.md](../artifacts/canonical-360/report.md) | [evidence/raw/canonical-360/report.md](../evidence/raw/canonical-360/report.md) | 8750 | `96836a17c0079bcd2f6d0a01d88237ece275c3ae25dce85d5b0462b1d1ea20ab` | clean |
 | RAW-006 | other-evidence | [artifacts/consolidated-metrics.json](../artifacts/consolidated-metrics.json) | [evidence/raw/consolidated-metrics.json](../evidence/raw/consolidated-metrics.json) | 5998 | `e263b6a01f74445a659bbf77bb5335f483fc02433f94e595315f72fcf96afc18` | clean |
-| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 153011 | `d1487cc08cbe19cd51eec728e59fdcc4a5bf192af627e2b73d134c9e507e98ce` | clean |
+| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 158357 | `e6dd61fe9363bff4df9c55fde2964ab768a16a2b05112cc858f456ffad1ac8a2` | clean |
 | RAW-008 | other-evidence | [artifacts/e2e-360-presentation-script.md](../artifacts/e2e-360-presentation-script.md) | [evidence/raw/e2e-360-presentation-script.md](../evidence/raw/e2e-360-presentation-script.md) | 814 | `3562c4e0fdf7513adaf3b39eb518ba531adf5c6eb95143c65ebf9bf4410e2963` | clean |
 | RAW-009 | other-evidence | [artifacts/e2e-security-summary.md](../artifacts/e2e-security-summary.md) | [evidence/raw/e2e-security-summary.md](../evidence/raw/e2e-security-summary.md) | 121 | `943902c7dc53cdc4ae71690d9b303bfbf6449f9537c6a6ed4af2920fd3aa7295` | clean |
 | RAW-010 | green-status | [artifacts/green-status/build.log](../artifacts/green-status/build.log) | [evidence/raw/green-status/build.log](../evidence/raw/green-status/build.log) | 28985 | `91766bd62cd5d46799a683821d12794c73924a9290c468486a9d7632e61d49cc` | clean |
@@ -49,7 +49,7 @@
 | RAW-034 | mcp | [artifacts/mcp-monitor.log](../artifacts/mcp-monitor.log) | [evidence/raw/mcp-monitor.log](../evidence/raw/mcp-monitor.log) | 351480 | `876c85fdd575002b76842c7e005916614725415b963fc863027619e9e861f4b5` | clean |
 | RAW-035 | other-evidence | [artifacts/mount-marker.txt](../artifacts/mount-marker.txt) | [evidence/raw/mount-marker.txt](../evidence/raw/mount-marker.txt) | 15 | `cce760f2f237080fe0f0b7a8148015366e431590e27b7464b14294b184693ac5` | clean |
 | RAW-036 | other-evidence | [artifacts/oauth-device-cli-security-report.json](../artifacts/oauth-device-cli-security-report.json) | [evidence/raw/oauth-device-cli-security-report.json](../evidence/raw/oauth-device-cli-security-report.json) | 312 | `8c4fda6e1431f1ed752668b15eb8e0867ca9466b8becd545bdb61ec114864b9c` | clean |
-| RAW-037 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3214 | `6859b5e0c1ea2e4efb2f7013427380122884d8b69b50c243c3844ba709cea190` | clean |
+| RAW-037 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3217 | `dc581e39350ac0949cb7b654bce62a79f68e12064590acd8c64f38ad3aa3df65` | clean |
 | RAW-038 | other-evidence | [artifacts/observability-contract-report.json](../artifacts/observability-contract-report.json) | [evidence/raw/observability-contract-report.json](../evidence/raw/observability-contract-report.json) | 249 | `ae8eb2ac4745d38d781027fd6b8e288e61823966e5f7ba44eafedf630a705a7a` | clean |
 | RAW-039 | other-evidence | [artifacts/p0-sim-fail-report.json](../artifacts/p0-sim-fail-report.json) | [evidence/raw/p0-sim-fail-report.json](../evidence/raw/p0-sim-fail-report.json) | 1678 | `fe6afa7ffd4c8daa851f17dd13bf641ce6768bdcc7a177f6f8851554b418a1dd` | clean |
 | RAW-040 | other-evidence | [artifacts/p0-sim-fail-summary.md](../artifacts/p0-sim-fail-summary.md) | [evidence/raw/p0-sim-fail-summary.md](../evidence/raw/p0-sim-fail-summary.md) | 132 | `c0afdce82c6005d1b2fb972d803e66362f679341e6168ea49e65fdc9a1495e80` | clean |
@@ -99,6 +99,7 @@
 | RAW-084 | wave3-performance | [artifacts/wave3-performance/profiles/soak.json](../artifacts/wave3-performance/profiles/soak.json) | [evidence/raw/wave3-performance/profiles/soak.json](../evidence/raw/wave3-performance/profiles/soak.json) | 681 | `3a6f2c0cd8655c248b3b50d842617bf8cd58b80252267e01fed8a56e97a5c46b` | clean |
 | RAW-085 | wave3-performance | [artifacts/wave3-performance/profiles/sustained.json](../artifacts/wave3-performance/profiles/sustained.json) | [evidence/raw/wave3-performance/profiles/sustained.json](../evidence/raw/wave3-performance/profiles/sustained.json) | 361 | `926d1c63d01ce6c6369e88ae5f4781bff008f483e952ece22f573e6a6525e707` | clean |
 | RAW-086 | wave3-performance | [artifacts/wave3-performance/summary.json](../artifacts/wave3-performance/summary.json) | [evidence/raw/wave3-performance/summary.json](../evidence/raw/wave3-performance/summary.json) | 4657 | `05df98b7a1bf687296444a8645ac38e10709eaf1257a83a3dbee536a5484dc4c` | clean |
+| RAW-087 | idempotency | [artifacts/write-stdin-idempotency-report.json](../artifacts/write-stdin-idempotency-report.json) | [evidence/raw/write-stdin-idempotency-report.json](../evidence/raw/write-stdin-idempotency-report.json) | 1982 | `9522fc6c0ea11f1bce913ba2421a9d173b63a4bc2022e866dfe7290f2ecdb9f0` | clean |
 
 ## Usage
 
