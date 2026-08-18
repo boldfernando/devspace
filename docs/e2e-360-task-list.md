@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `0d5b9ae`
+**Commit de referência:** `f21f658`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -40,6 +40,8 @@
 | Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
+| Agents Swarm — resiliência | 8 agentes lógicos, 6 rounds, 96/96 operações PASS; isolamento 8/8, replay 8/8, recovery 8/8 e cleanup. Provider/model runtime permanece UNKNOWN. | `artifacts/swarm-resilience-report.json`, `scripts/e2e-swarm-resilience.test.mjs` |
+| Agents Swarm — chaos extension | 7/7 cenários PASS: timeout, 429, 503 e disconnect transitórios recuperados; 429/503/timeout persistentes exauridos fail-closed; fan-out 4/4. | `artifacts/swarm-chaos-report.json`, `scripts/e2e-swarm-chaos.test.mjs` |
 | Retenção de raws | 86 raws arquivados byte a byte, 1.143.679 bytes, 0 divergências SHA-256; inclui carga autenticada, Swarm resilience e chaos extension. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
@@ -189,7 +191,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P3-SKILL-001 | Skills | Manter `e2e-360-engineering` como workflow reutilizável. | Concluída | P0-BUILD-001 | Skill contém workflow, critérios e teste próprio. |
 | P3-SKILL-002 | Skills | Manter `e2e-oauth-mcp-p0` com 23 IDs, runner e secret scan. | Concluída | P0-SEC-001 | IDs estáveis, pass/fail e CI. |
 | P3-SKILL-003 | Skills | Manter `e2e-idempotency-mcp-p1` com hash, lease, recovery e observabilidade. | Concluída | IDEMP-P1 | Fixture não é apresentada como E2E real. |
-| P3-SKILL-004 | Skills | Manter `devspace-wave1-p0-e2e`, `devspace-wave2-chaos-testing` e `devspace-wave3-performance-soak`. | Concluída | Ondas 1–3 | `quick_validate.py` passa e scripts são executáveis. |
+| P3-SKILL-004 | Skills | Manter `devspace-wave1-p0-e2e`, `devspace-wave2-chaos-testing`, `devspace-wave3-performance-soak`, `devspace-swarm-resilience` e `devspace-swarm-chaos-resilience`. | Concluída | Ondas 1–3, P2-SWARM-001..002 | `quick_validate.py` passa e runners são executáveis; provider/model runtime e chaos externo permanecem UNKNOWN. |
 | P3-CI-001 | CI/CD | Separar smoke rápido de PR, matriz completa e job noturno de carga/resiliência. | Parcial | P0-CI-001, P2-LOAD-001 | PR permanece rápido; nightly/release mantém cobertura completa. |
 | P3-CI-002 | CI/CD | Executar `staging-load` hospedado com `CI=true`, roots temporários e owner token exclusivo. | Parcial | P0-REL-001 | Job configurado e localmente reproduzido; execução hospedada ainda UNKNOWN. |
 | P3-REL-001 | Supply chain | Dependency audit, secret scan, SBOM, provenance e assinatura/checksum. | Backlog | P0-REL-001 | Artifact rastreável ao commit e sem credenciais. |
@@ -200,7 +202,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | P3-OPS-001 | Operação | Documentar comandos de deps, dev env, build, test, deploy, actions, tasks, auth e diagnostics. | Parcial | P0-BUILD-001 | Novo operador executa caminhos principais. |
 | P3-OPS-002 | Agendamento | Automatizar monitoramento via Windows Task Scheduler ou alternativa suportada. | Parcial | P1-OBS-005 | Wrapper PowerShell, intervalo, amostras, output e fail-on-alert estão implementados; falta registrar a tarefa, definir conta/ACL e validar restart/rollback operacional. |
 | P3-OPS-003 | Evidência | Manter screenshots/vídeos como suporte, nunca substituto de assertions. | Parcial | P0-MCP-001 | Artifacts visuais sanitizados e vinculados por RAW-ID. |
-| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 80 arquivos, byte-exatos, 0 divergências, `npm run evidence:index`. |
+| P3-EVID-001 | Retenção | Manter raws de execução em `evidence/raw` com manifest SHA-256. | Concluída | P3-DOC-001 | 86 arquivos, 1.143.679 bytes, byte-exatos, 0 divergências, `npm run evidence:index`. |
 
 ## 8. Tasks P4 — produto, arquitetura e maturidade
 
@@ -268,6 +270,8 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `src/credential-security.ts`, `src/credential-security.test.ts`, `scripts/e2e-oauth-device-cli.test.mjs`, `artifacts/oauth-device-cli-security-report.json`
 - `src/roots.ts`, `src/roots.test.ts`, `src/pi-tools.ts`, `src/workspaces.ts`, `scripts/e2e-http-mcp-path-containment.test.mjs`, `artifacts/path-containment-report.json`
 - `scripts/e2e-http-mcp-idempotency-recovery.test.mjs`, `artifacts/idempotency-recovery-report.json`, `WriteIdempotencyStore.reconcileExpiredPending`
+- `scripts/e2e-swarm-resilience.test.mjs`, `artifacts/swarm-resilience-report.json`
+- `scripts/e2e-swarm-chaos.test.mjs`, `artifacts/swarm-chaos-report.json`
 - `.github/workflows/ci.yml`, especialmente o job `staging-load`
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`
 
