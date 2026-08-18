@@ -130,6 +130,7 @@ test("real OAuth PKCE flow completes an authenticated MCP handshake", async () =
       p95Ms: Math.round(percentile(0.95)),
       p99Ms: Math.round(percentile(0.99)),
       maxMs: Math.round(sortedLatencies.at(-1)),
+      latenciesMs: sortedLatencies.map((value) => Math.round(value)),
     };
     await mkdir("artifacts", { recursive: true });
     await writeFile(process.env.MCP_LOAD_REPORT ?? "artifacts/mcp-load-log.json", `${JSON.stringify(loadSummary, null, 2)}\n`, "utf8");

@@ -1,0 +1,184 @@
+{
+  "schema": "devspace.wave3-performance.v1",
+  "status": "passed",
+  "started_at": "2026-08-18T16:04:42.081Z",
+  "completed_at": "2026-08-18T16:04:48.832Z",
+  "repository": "devspace",
+  "base_url": "http://127.0.0.1:17679",
+  "execution_mode": "isolated_staging_server",
+  "isolated_port": 17679,
+  "profiles": [
+    {
+      "name": "ramp",
+      "status": "passed",
+      "samples": 40,
+      "concurrency": 16,
+      "wall_ms": 662,
+      "throughput_rps": 60.42,
+      "p50_ms": 37,
+      "p95_ms": 47,
+      "p99_ms": 47,
+      "max_ms": 47,
+      "slo": {
+        "p50_max_ms": 50,
+        "p95_max_ms": 100,
+        "sustained_p50_gate": true,
+        "passed": true
+      },
+      "stages": [
+        {
+          "name": "ramp-1",
+          "status": "passed",
+          "samples": 10,
+          "concurrency": 1,
+          "wall_ms": 450,
+          "throughput_rps": 22.22,
+          "p50_ms": 46,
+          "p95_ms": 47,
+          "p99_ms": 47,
+          "max_ms": 47,
+          "slo": {
+            "p50_max_ms": 50,
+            "p95_max_ms": 100,
+            "sustained_p50_gate": true,
+            "passed": true
+          },
+          "duration_ms": 990,
+          "artifact": "artifacts\\wave3-performance\\profiles\\ramp-1.json"
+        },
+        {
+          "name": "ramp-2",
+          "status": "passed",
+          "samples": 10,
+          "concurrency": 4,
+          "wall_ms": 125,
+          "throughput_rps": 80,
+          "p50_ms": 39,
+          "p95_ms": 44,
+          "p99_ms": 44,
+          "max_ms": 44,
+          "slo": {
+            "p50_max_ms": 50,
+            "p95_max_ms": 100,
+            "sustained_p50_gate": true,
+            "passed": true
+          },
+          "duration_ms": 680,
+          "artifact": "artifacts\\wave3-performance\\profiles\\ramp-2.json"
+        },
+        {
+          "name": "ramp-3",
+          "status": "passed",
+          "samples": 10,
+          "concurrency": 8,
+          "wall_ms": 47,
+          "throughput_rps": 212.77,
+          "p50_ms": 30,
+          "p95_ms": 34,
+          "p99_ms": 34,
+          "max_ms": 34,
+          "slo": {
+            "p50_max_ms": 50,
+            "p95_max_ms": 100,
+            "sustained_p50_gate": true,
+            "passed": true
+          },
+          "duration_ms": 564,
+          "artifact": "artifacts\\wave3-performance\\profiles\\ramp-3.json"
+        },
+        {
+          "name": "ramp-4",
+          "status": "passed",
+          "samples": 10,
+          "concurrency": 16,
+          "wall_ms": 40,
+          "throughput_rps": 250,
+          "p50_ms": 35,
+          "p95_ms": 39,
+          "p99_ms": 39,
+          "max_ms": 39,
+          "slo": {
+            "p50_max_ms": 50,
+            "p95_max_ms": 100,
+            "sustained_p50_gate": true,
+            "passed": true
+          },
+          "duration_ms": 578,
+          "artifact": "artifacts\\wave3-performance\\profiles\\ramp-4.json"
+        }
+      ]
+    },
+    {
+      "name": "sustained",
+      "status": "passed",
+      "samples": 20,
+      "concurrency": 4,
+      "wall_ms": 156,
+      "throughput_rps": 128.21,
+      "p50_ms": 30,
+      "p95_ms": 36,
+      "p99_ms": 36,
+      "max_ms": 36,
+      "slo": {
+        "p50_max_ms": 50,
+        "p95_max_ms": 100,
+        "sustained_p50_gate": true,
+        "passed": true
+      },
+      "duration_ms": 677,
+      "artifact": "artifacts\\wave3-performance\\profiles\\sustained.json"
+    },
+    {
+      "name": "burst",
+      "status": "passed",
+      "samples": 40,
+      "concurrency": 8,
+      "wall_ms": 167,
+      "throughput_rps": 239.52,
+      "p50_ms": 31,
+      "p95_ms": 36,
+      "p99_ms": 37,
+      "max_ms": 37,
+      "slo": {
+        "p50_max_ms": 50,
+        "p95_max_ms": 100,
+        "sustained_p50_gate": true,
+        "passed": true
+      },
+      "duration_ms": 704,
+      "artifact": "artifacts\\wave3-performance\\profiles\\burst.json"
+    },
+    {
+      "name": "soak",
+      "status": "passed",
+      "samples": 60,
+      "concurrency": 4,
+      "wall_ms": 449,
+      "throughput_rps": 133.63,
+      "p50_ms": 25,
+      "p95_ms": 47,
+      "p99_ms": 51,
+      "max_ms": 51,
+      "slo": {
+        "p50_max_ms": 50,
+        "p95_max_ms": 100,
+        "sustained_p50_gate": true,
+        "passed": true
+      },
+      "duration_ms": 938,
+      "artifact": "artifacts\\wave3-performance\\profiles\\soak.json"
+    }
+  ],
+  "thresholds": {
+    "p50_max_ms": 50,
+    "p95_max_ms": 100,
+    "sustained_p50_gate": true
+  },
+  "invariants": {
+    "real_http_mcp": true,
+    "all_profiles_executed": true,
+    "artifacts_sanitized": true,
+    "secrets_included": false,
+    "failed_closed_on_missing_report": true
+  }
+}
