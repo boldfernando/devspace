@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T19:12:39.442Z",
+  "generated_at": "2026-08-18T19:15:30.922Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -13,7 +13,7 @@
     "raw_content_rewritten": false
   },
   "count": 85,
-  "total_bytes": 1055524,
+  "total_bytes": 1122564,
   "records": [
     {
       "id": "RAW-001",
@@ -99,9 +99,9 @@
       "archive_path": "evidence/raw/dev-server.log",
       "category": "other-evidence",
       "extension": ".log",
-      "bytes": 67721,
-      "source_sha256": "bb8f714cfb9b243071b972a96140877645370c8eab205220fd840d8dae670d07",
-      "archive_sha256": "bb8f714cfb9b243071b972a96140877645370c8eab205220fd840d8dae670d07",
+      "bytes": 134761,
+      "source_sha256": "7880cd2e77aa00039b9a31d92d392701e72b913b0f64f5ffc9df45db3a7534ef",
+      "archive_sha256": "7880cd2e77aa00039b9a31d92d392701e72b913b0f64f5ffc9df45db3a7534ef",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
@@ -620,8 +620,8 @@
       "category": "other-evidence",
       "extension": ".json",
       "bytes": 1564,
-      "source_sha256": "0d69beda0df70f30ceefe8c22cd6918eb8a2bf0c52bd2ed3abe73c79edbd8eda",
-      "archive_sha256": "0d69beda0df70f30ceefe8c22cd6918eb8a2bf0c52bd2ed3abe73c79edbd8eda",
+      "source_sha256": "73611111c379bc94cf1d6c3b29309622c6b5659ab56ace521340ef6083e7581e",
+      "archive_sha256": "73611111c379bc94cf1d6c3b29309622c6b5659ab56ace521340ef6083e7581e",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"

@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 85
-- **Total archived bytes:** 1055524
+- **Total archived bytes:** 1122564
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -19,7 +19,7 @@
 | RAW-004 | canonical-360 | [artifacts/canonical-360/manifest.json](../artifacts/canonical-360/manifest.json) | [evidence/raw/canonical-360/manifest.json](../evidence/raw/canonical-360/manifest.json) | 140504 | `9e3aff3534a8db7f28e79b3ea1e9a23377a5c2a321a60d9cea632282439b47c9` | clean |
 | RAW-005 | canonical-360 | [artifacts/canonical-360/report.md](../artifacts/canonical-360/report.md) | [evidence/raw/canonical-360/report.md](../evidence/raw/canonical-360/report.md) | 8750 | `96836a17c0079bcd2f6d0a01d88237ece275c3ae25dce85d5b0462b1d1ea20ab` | clean |
 | RAW-006 | other-evidence | [artifacts/consolidated-metrics.json](../artifacts/consolidated-metrics.json) | [evidence/raw/consolidated-metrics.json](../evidence/raw/consolidated-metrics.json) | 5998 | `e263b6a01f74445a659bbf77bb5335f483fc02433f94e595315f72fcf96afc18` | clean |
-| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 67721 | `bb8f714cfb9b243071b972a96140877645370c8eab205220fd840d8dae670d07` | clean |
+| RAW-007 | other-evidence | [artifacts/dev-server.log](../artifacts/dev-server.log) | [evidence/raw/dev-server.log](../evidence/raw/dev-server.log) | 134761 | `7880cd2e77aa00039b9a31d92d392701e72b913b0f64f5ffc9df45db3a7534ef` | clean |
 | RAW-008 | other-evidence | [artifacts/e2e-360-presentation-script.md](../artifacts/e2e-360-presentation-script.md) | [evidence/raw/e2e-360-presentation-script.md](../evidence/raw/e2e-360-presentation-script.md) | 814 | `3562c4e0fdf7513adaf3b39eb518ba531adf5c6eb95143c65ebf9bf4410e2963` | clean |
 | RAW-009 | other-evidence | [artifacts/e2e-security-summary.md](../artifacts/e2e-security-summary.md) | [evidence/raw/e2e-security-summary.md](../evidence/raw/e2e-security-summary.md) | 121 | `943902c7dc53cdc4ae71690d9b303bfbf6449f9537c6a6ed4af2920fd3aa7295` | clean |
 | RAW-010 | green-status | [artifacts/green-status/build.log](../artifacts/green-status/build.log) | [evidence/raw/green-status/build.log](../evidence/raw/green-status/build.log) | 28985 | `91766bd62cd5d46799a683821d12794c73924a9290c468486a9d7632e61d49cc` | clean |
@@ -59,7 +59,7 @@
 | RAW-044 | staging | [artifacts/staging/ui-bundle-report.json](../artifacts/staging/ui-bundle-report.json) | [evidence/raw/staging/ui-bundle-report.json](../evidence/raw/staging/ui-bundle-report.json) | 2089 | `efd0d7c540acda401eeebf5651d8a0faa8b6b78798955db829253ce7b9fec03a` | clean |
 | RAW-045 | other-evidence | [artifacts/swarm-authenticated-load-report.json](../artifacts/swarm-authenticated-load-report.json) | [evidence/raw/swarm-authenticated-load-report.json](../evidence/raw/swarm-authenticated-load-report.json) | 1162 | `fd6fe60ce22dd1ea4880728061eeb40d33597672e7cadff7cec8b666c0bdd069` | clean |
 | RAW-046 | other-evidence | [artifacts/swarm-resilience-diagnostic-report.json](../artifacts/swarm-resilience-diagnostic-report.json) | [evidence/raw/swarm-resilience-diagnostic-report.json](../evidence/raw/swarm-resilience-diagnostic-report.json) | 1284 | `c4a7172209d11ad7b07762cc3d94a8d09d8486233abc325b2c3d3529b4e08f22` | clean |
-| RAW-047 | other-evidence | [artifacts/swarm-resilience-report.json](../artifacts/swarm-resilience-report.json) | [evidence/raw/swarm-resilience-report.json](../evidence/raw/swarm-resilience-report.json) | 1564 | `0d69beda0df70f30ceefe8c22cd6918eb8a2bf0c52bd2ed3abe73c79edbd8eda` | clean |
+| RAW-047 | other-evidence | [artifacts/swarm-resilience-report.json](../artifacts/swarm-resilience-report.json) | [evidence/raw/swarm-resilience-report.json](../evidence/raw/swarm-resilience-report.json) | 1564 | `73611111c379bc94cf1d6c3b29309622c6b5659ab56ace521340ef6083e7581e` | clean |
 | RAW-048 | other-evidence | [artifacts/ui-bundle-report.json](../artifacts/ui-bundle-report.json) | [evidence/raw/ui-bundle-report.json](../evidence/raw/ui-bundle-report.json) | 2089 | `72e07edefddc29148e3d0c3c9f587eca5d4858ace38e714faf216d17c16ed976` | clean |
 | RAW-049 | wave1-p0 | [artifacts/wave1-p0/build.log](../artifacts/wave1-p0/build.log) | [evidence/raw/wave1-p0/build.log](../evidence/raw/wave1-p0/build.log) | 12282 | `177f4ce45c24f41ee70a97a1808e6057d316bad6145333fe702e1fbde97ba206` | clean |
 | RAW-050 | wave1-p0 | [artifacts/wave1-p0/bundle-audit-tests.log](../artifacts/wave1-p0/bundle-audit-tests.log) | [evidence/raw/wave1-p0/bundle-audit-tests.log](../evidence/raw/wave1-p0/bundle-audit-tests.log) | 340 | `af2e909d352728f73ae4fe5cae3ac0c0c1b756c680df855cd3ab31f8ed9d637c` | clean |
