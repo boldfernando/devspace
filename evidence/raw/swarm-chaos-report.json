@@ -1,0 +1,146 @@
+{
+  "schema": "devspace/swarm-chaos/v1",
+  "status": "passed",
+  "target_url_class": "loopback",
+  "agent_count": 4,
+  "max_attempts": 3,
+  "request_timeout_ms": 250,
+  "retry_delay_ms": 25,
+  "agents": [
+    {
+      "id": "agent-1",
+      "session_created": true
+    },
+    {
+      "id": "agent-2",
+      "session_created": true
+    },
+    {
+      "id": "agent-3",
+      "session_created": true
+    },
+    {
+      "id": "agent-4",
+      "session_created": true
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "timeout",
+      "injected_kind": "timeout",
+      "injected_status": null,
+      "persistent": false,
+      "injections": 1,
+      "attempts": 2,
+      "statuses": [
+        "timeout",
+        200
+      ],
+      "recovered": true,
+      "fail_closed": false,
+      "passed": true
+    },
+    {
+      "name": "429",
+      "injected_kind": "status",
+      "injected_status": 429,
+      "persistent": false,
+      "injections": 1,
+      "attempts": 2,
+      "statuses": [
+        429,
+        200
+      ],
+      "recovered": true,
+      "fail_closed": false,
+      "passed": true
+    },
+    {
+      "name": "5xx",
+      "injected_kind": "status",
+      "injected_status": 503,
+      "persistent": false,
+      "injections": 1,
+      "attempts": 2,
+      "statuses": [
+        503,
+        200
+      ],
+      "recovered": true,
+      "fail_closed": false,
+      "passed": true
+    },
+    {
+      "name": "disconnect",
+      "injected_kind": "disconnect",
+      "injected_status": null,
+      "persistent": false,
+      "injections": 1,
+      "attempts": 2,
+      "statuses": [
+        "unexpected",
+        200
+      ],
+      "recovered": true,
+      "fail_closed": false,
+      "passed": true
+    },
+    {
+      "name": "persistent-429",
+      "injected_kind": "status",
+      "injected_status": 429,
+      "persistent": true,
+      "injections": 3,
+      "attempts": 3,
+      "statuses": [
+        429,
+        429,
+        429
+      ],
+      "recovered": false,
+      "fail_closed": true,
+      "passed": true
+    },
+    {
+      "name": "persistent-5xx",
+      "injected_kind": "status",
+      "injected_status": 503,
+      "persistent": true,
+      "injections": 3,
+      "attempts": 3,
+      "statuses": [
+        503,
+        503,
+        503
+      ],
+      "recovered": false,
+      "fail_closed": true,
+      "passed": true
+    },
+    {
+      "name": "persistent-timeout",
+      "injected_kind": "timeout",
+      "injected_status": null,
+      "persistent": true,
+      "injections": 3,
+      "attempts": 3,
+      "statuses": [
+        "timeout",
+        "timeout",
+        "timeout"
+      ],
+      "recovered": false,
+      "fail_closed": true,
+      "passed": true
+    }
+  ],
+  "fanout": {
+    "requested": 4,
+    "succeeded": 4,
+    "failed": 0
+  },
+  "fail_closed": true,
+  "cleanup": true,
+  "failed_scenarios": [],
+  "secrets_included": false
+}
