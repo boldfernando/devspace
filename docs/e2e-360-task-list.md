@@ -3,7 +3,7 @@
 **Data de revisão:** 18 de agosto de 2026  
 **Repositório:** `devspace`  
 **Branch:** `main`  
-**Commit de referência:** `97493ca`
+**Commit de referência:** `PENDING-OBS-ALERTS-COMMIT`
 **Working tree:** limpo  
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
@@ -37,10 +37,10 @@
 | Device Authorization | Grant HTTP/CLI, migration, hashes HMAC, polling, TTL e consumo único implementados. | `scripts/e2e-oauth-device.test.mjs`, `scripts/e2e-oauth-device-cli.test.mjs` |
 | Idempotência P1 | IDEMP-P1-001..008 aprovados; `effect_count=5`; sem secret leak. | `artifacts/idempotency-p1-report.json` |
 | Onda 2 Chaos | 11/11 cenários aprovados; restart, indisponibilidade e recovery comprovados. | `artifacts/wave2-chaos/summary.json` |
-| Observabilidade | Métricas de idempotência e eventos Device Flow, alertas, dashboard e validator local aprovados. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
+| Observabilidade | Métricas de idempotência e eventos Device Flow, nove alertas, sete painéis e validator local aprovados; alert firing hosted permanece UNKNOWN. | `src/metrics.ts`, `observability/`, `artifacts/observability-contract-report.json`, `artifacts/block1-identity-report.json` |
 | Baseline de carga | 20 amostras, concorrência 4, p50=14 ms, p95=19 ms, p99=19 ms. | `artifacts/mcp-load-log.json` |
 | Onda 3 Performance/Soak | Ramp, sustained, burst e soak aprovados em servidor isolado real na porta 17679. | `artifacts/wave3-performance/summary.json` |
-| Retenção de raws | 78 raws arquivados byte a byte, 982.683 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
+| Retenção de raws | 78 raws arquivados byte a byte, 982.689 bytes, 0 divergências SHA-256. | `evidence/raw-evidence-manifest.json`, `docs/raw-evidence-index.md` |
 | Dev environment | `/healthz` respondeu HTTP 200 na última validação. | `http://127.0.0.1:7676/healthz` |
 
 ### 2.1. Métricas da Onda 3
@@ -153,7 +153,7 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 | ID | Task | Status | Dependências | Critério de aceite / próxima evidência |
 |---|---|---|---|---|
 | P1-OBS-001 | Instrumentar claim, replay, conflict, pending age, lease lost, ambiguous e SQLite busy. | Concluída localmente; scrape externo UNKNOWN | P0-IDEMP-002 | `/metrics`, dimensões seguras, unit/E2E e scan. |
-| P1-OBS-002 | Implantar alertas Prometheus/Grafana para ambiguous, lease lost, pending age e contention. | Parcial | P1-OBS-001 | Alert firing real, recovery e ausência de secrets no telemetry. |
+| P1-OBS-002 | Implantar alertas Prometheus/Grafana para idempotência e Device Flow. | Parcial — contrato local aprovado; hosted UNKNOWN | P1-OBS-001 | 9/9 alertas, 9/9 métricas e 7 painéis validados sem secrets; falta scrape, alert firing e recovery em Prometheus/Grafana operacional. |
 | P1-OBS-003 | Instrumentar polling device, pending, slow_down, denied, expired e replay. | Concluída localmente; alerting hosted UNKNOWN | P0-DEVICE-004 | `mcp_oauth_device_event_total` registra requested/pending/slow_down/approved/consumed/denied/expired/rejected/rate_limited; E2E confirma requested/approved/consumed e sem secrets. |
 | P1-OBS-004 | Definir recovery pós-crash em pending sem reexecutar efeito não compensável. | Parcial | IDEMP-P1-005 | Drill de processo real, reconciliação explícita e evidência. |
 | P1-OBS-005 | Monitorar continuamente MCP e alertar falhas Bearer. | Concluída localmente; scheduler/hosted UNKNOWN | P1-OBS-001 | `scripts/mcp-monitor.mjs` e wrapper PowerShell validam health, 401 anônimo, Bearer 200/401, configuração ausente, JSONL sanitizado e `--fail-on-alert`; falta instalar/agendar no ambiente operacional. |

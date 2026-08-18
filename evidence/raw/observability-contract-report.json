@@ -1,11 +1,11 @@
 {
   "schema": "devspace.observability-contract.v1",
   "status": "passed",
-  "required_alerts": 6,
-  "observed_alerts": 6,
-  "required_metrics": 8,
-  "observed_metrics": 8,
-  "dashboard_panels": 6,
+  "required_alerts": 9,
+  "observed_alerts": 9,
+  "required_metrics": 9,
+  "observed_metrics": 9,
+  "dashboard_panels": 7,
   "secret_leak_detected": false,
   "findings": []
 }

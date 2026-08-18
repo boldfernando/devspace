@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 78
-- **Total archived bytes:** 982683
+- **Total archived bytes:** 982689
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -46,8 +46,8 @@
 | RAW-031 | mcp | [artifacts/mcp-monitor-contract.json](../artifacts/mcp-monitor-contract.json) | [evidence/raw/mcp-monitor-contract.json](../evidence/raw/mcp-monitor-contract.json) | 382 | `35c3d09d1f5dc80a78f5845adf24906bf24aa6d345b47740443488d62bc5bb77` | clean |
 | RAW-032 | mcp | [artifacts/mcp-monitor.log](../artifacts/mcp-monitor.log) | [evidence/raw/mcp-monitor.log](../evidence/raw/mcp-monitor.log) | 351480 | `876c85fdd575002b76842c7e005916614725415b963fc863027619e9e861f4b5` | clean |
 | RAW-033 | other-evidence | [artifacts/mount-marker.txt](../artifacts/mount-marker.txt) | [evidence/raw/mount-marker.txt](../evidence/raw/mount-marker.txt) | 15 | `cce760f2f237080fe0f0b7a8148015366e431590e27b7464b14294b184693ac5` | clean |
-| RAW-034 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3210 | `61edaeb99a1f1feb36c5281250b434401c90f64b9ad229d57edc085e854fbf5e` | clean |
-| RAW-035 | other-evidence | [artifacts/observability-contract-report.json](../artifacts/observability-contract-report.json) | [evidence/raw/observability-contract-report.json](../evidence/raw/observability-contract-report.json) | 249 | `4f9880c9177678baad024341c40030bcda57ba2152cc7772b9bd6df460a8869b` | clean |
+| RAW-034 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3216 | `bef17d2e894bdbe742d4e98d1e3bfa3b0010c779cd699803cb0da2ff43e9105f` | clean |
+| RAW-035 | other-evidence | [artifacts/observability-contract-report.json](../artifacts/observability-contract-report.json) | [evidence/raw/observability-contract-report.json](../evidence/raw/observability-contract-report.json) | 249 | `ae8eb2ac4745d38d781027fd6b8e288e61823966e5f7ba44eafedf630a705a7a` | clean |
 | RAW-036 | other-evidence | [artifacts/p0-sim-fail-report.json](../artifacts/p0-sim-fail-report.json) | [evidence/raw/p0-sim-fail-report.json](../evidence/raw/p0-sim-fail-report.json) | 1678 | `fe6afa7ffd4c8daa851f17dd13bf641ce6768bdcc7a177f6f8851554b418a1dd` | clean |
 | RAW-037 | other-evidence | [artifacts/p0-sim-fail-summary.md](../artifacts/p0-sim-fail-summary.md) | [evidence/raw/p0-sim-fail-summary.md](../evidence/raw/p0-sim-fail-summary.md) | 132 | `c0afdce82c6005d1b2fb972d803e66362f679341e6168ea49e65fdc9a1495e80` | clean |
 | RAW-038 | other-evidence | [artifacts/p0-sim-pass-report.json](../artifacts/p0-sim-pass-report.json) | [evidence/raw/p0-sim-pass-report.json](../evidence/raw/p0-sim-pass-report.json) | 1687 | `01001652e29da0e58bc962ef455e604237a5ca6427095fed2b6c08ca3c6a3fa2` | clean |

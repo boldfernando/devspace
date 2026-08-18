@@ -67,3 +67,39 @@ groups:
         annotations:
           summary: "Burst de conflitos de idempotência"
           description: "A ferramenta {{ $labels.tool }} registrou pelo menos dez reutilizações de key com payload diferente em dez minutos. Verificar cliente, retry policy ou abuso."
+
+  - name: devspace-oauth-device
+    interval: 30s
+    rules:
+      - alert: DevSpaceOAuthDeviceSlowDown
+        expr: sum(increase(mcp_oauth_device_event_total{outcome="slow_down"}[5m])) > 0
+        for: 0m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: oauth-device-rate-limit
+        annotations:
+          summary: "Device Flow sofreu slow_down"
+          description: "O polling do Device Flow atingiu o limite operacional. Respeitar Retry-After e verificar cliente, carga ou abuso."
+
+      - alert: DevSpaceOAuthDeviceRejected
+        expr: sum(increase(mcp_oauth_device_event_total{outcome="rejected"}[5m])) >= 5
+        for: 2m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: oauth-device-rejection
+        annotations:
+          summary: "Burst de rejeições no Device Flow"
+          description: "O Device Flow acumulou rejeições acima do limiar inicial de operação. Verificar resource, scopes, identidade e cliente."
+
+      - alert: DevSpaceOAuthDeviceExpired
+        expr: sum(increase(mcp_oauth_device_event_total{outcome="expired"}[5m])) > 0
+        for: 0m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: oauth-device-expired
+        annotations:
+          summary: "Device Authorization expirou"
+          description: "Uma autorização Device expirou antes do consumo. Verificar tempo de aprovação, polling e disponibilidade do gateway."

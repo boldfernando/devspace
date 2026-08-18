@@ -20,6 +20,9 @@ const requiredAlerts = [
   "DevSpaceSQLiteContention",
   "DevSpaceIdempotencyEffectsExceedOwners",
   "DevSpaceIdempotencyConflictBurst",
+  "DevSpaceOAuthDeviceSlowDown",
+  "DevSpaceOAuthDeviceRejected",
+  "DevSpaceOAuthDeviceExpired",
 ];
 const requiredMetrics = [
   "mcp_idempotency_claim_total",
@@ -30,6 +33,7 @@ const requiredMetrics = [
   "mcp_idempotency_pending_age_seconds",
   "mcp_idempotency_recovery_total",
   "sqlite_busy_total",
+  "mcp_oauth_device_event_total",
 ];
 const secretLike = /(bearer\s+|owner[_-]?token|access[_-]?token|code[_-]?verifier|device[_-]?code|secret\s*[:=])/i;
 const missingAlerts = requiredAlerts.filter((name) => !rules.includes(`alert: ${name}`));
