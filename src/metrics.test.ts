@@ -12,6 +12,9 @@ test("runtime metrics render safe dimensions and stable Prometheus names", () =>
   metrics.recordIdempotencyRecovery("write_file", "ambiguous");
   metrics.recordIdempotencyPendingAge("write_file", 12.5);
   metrics.recordSqliteBusy("write_idempotency");
+  metrics.recordOAuthDeviceEvent("requested");
+  metrics.recordOAuthDeviceEvent("pending");
+  metrics.recordOAuthDeviceEvent("consumed");
   const text = metrics.renderPrometheus();
   assert.match(text, /mcp_idempotency_claim_total\{tool="write_file",outcome="owner"\} 1/);
   assert.match(text, /mcp_idempotency_conflict_total\{tool="write_file"\} 1/);
@@ -20,6 +23,9 @@ test("runtime metrics render safe dimensions and stable Prometheus names", () =>
   assert.match(text, /mcp_idempotency_recovery_total\{tool="write_file",outcome="ambiguous"\} 1/);
   assert.match(text, /mcp_idempotency_pending_age_seconds\{tool="write_file"\} 12\.5/);
   assert.match(text, /sqlite_busy_total\{tool="write_idempotency"\} 1/);
+  assert.match(text, /mcp_oauth_device_event_total\{tool="oauth_device",outcome="pending"\} 1/);
+  assert.match(text, /mcp_oauth_device_event_total\{tool="oauth_device",outcome="requested"\} 1/);
+  assert.match(text, /mcp_oauth_device_event_total\{tool="oauth_device",outcome="consumed"\} 1/);
   const samples = text.split("\\n").filter((line) => !line.startsWith("#")).join("\\n");
   assert.doesNotMatch(samples, /payload|token|secret|key-001/);
 });

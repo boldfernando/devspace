@@ -202,6 +202,13 @@ test("Block 1 identity and authorization production mitigation", async () => {
     });
     assert.equal(revoked.status, 401);
 
+    const metricsResponse = await fetch(`${baseUrl}/metrics`);
+    const metricsText = await metricsResponse.text();
+    assert.equal(metricsResponse.status, 200);
+    for (const outcome of ["requested", "approved", "consumed"]) {
+      assert.match(metricsText, new RegExp(`mcp_oauth_device_event_total\\{tool="oauth_device",outcome="${outcome}"\\} [1-9]`));
+    }
+
     await writeReport(repoRoot, {
       schema: "devspace.block1-identity.v1",
       status: "passed",
@@ -214,6 +221,7 @@ test("Block 1 identity and authorization production mitigation", async () => {
       refresh_rotation: true,
       refresh_replay_denied: true,
       revocation_enforced: true,
+      device_metrics_observed: true,
       secrets_included: false,
     });
   } finally {

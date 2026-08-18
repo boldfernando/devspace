@@ -13,5 +13,6 @@
   "refresh_rotation": true,
   "refresh_replay_denied": true,
   "revocation_enforced": true,
+  "device_metrics_observed": true,
   "secrets_included": false
 }

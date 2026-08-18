@@ -1,12 +1,13 @@
 import express, { type Express, type Request, type Response } from "express";
 import type { OAuthTokens } from "@modelcontextprotocol/sdk/shared/auth.js";
 import type { SingleUserOAuthProvider } from "./oauth-provider.js";
+import type { RuntimeMetrics } from "./metrics.js";
 
 const DEVICE_GRANT = "urn:ietf:params:oauth:grant-type:device_code";
 
 type DeviceRateLimitBucket = { windowStartedAt: number; count: number };
 
-function createDeviceRateLimiter(maxRequests: number, windowMs: number, description: string) {
+function createDeviceRateLimiter(maxRequests: number, windowMs: number, description: string, metrics?: RuntimeMetrics) {
   const buckets = new Map<string, DeviceRateLimitBucket>();
   return (req: Request, res: Response, next: () => void): void => {
     const now = Date.now();
@@ -23,7 +24,8 @@ function createDeviceRateLimiter(maxRequests: number, windowMs: number, descript
       ? { windowStartedAt: now, count: 0 }
       : current;
     if (!current || bucket !== current) buckets.set(key, bucket);
-    if (bucket.count >= maxRequests) {
+        if (bucket.count >= maxRequests) {
+      metrics?.recordOAuthDeviceEvent("rate_limited");
       const retryAfterSeconds = Math.max(1, Math.ceil((bucket.windowStartedAt + windowMs - now) / 1_000));
       res.setHeader("Retry-After", String(retryAfterSeconds));
       sendOAuthError(res, "slow_down", `${description} rate limit exceeded`, 429);
@@ -84,12 +86,13 @@ export function registerOAuthDeviceRoutes(
   app: Express,
   provider: SingleUserOAuthProvider,
   issuerUrl: URL,
+  metrics?: RuntimeMetrics,
 ): void {
   app.use(express.urlencoded({ extended: false, limit: "16kb" }));
 
-  const deviceAuthorizationRateLimiter = createDeviceRateLimiter(10, 60_000, "Device authorization");
-  const devicePollingRateLimiter = createDeviceRateLimiter(30, 60_000, "Device token polling");
-  const deviceApprovalRateLimiter = createDeviceRateLimiter(20, 60_000, "Device approval");
+  const deviceAuthorizationRateLimiter = createDeviceRateLimiter(10, 60_000, "Device authorization", metrics);
+  const devicePollingRateLimiter = createDeviceRateLimiter(30, 60_000, "Device token polling", metrics);
+  const deviceApprovalRateLimiter = createDeviceRateLimiter(20, 60_000, "Device approval", metrics);
 
   app.post("/oauth/device/authorize", async (req, res) => {
     deviceAuthorizationRateLimiter(req, res, () => undefined);
@@ -105,6 +108,7 @@ export function registerOAuthDeviceRoutes(
     try {
       const created = await provider.createDeviceAuthorization(clientId, scopes, resource);
       const verificationUri = new URL("/oauth/device", issuerUrl);
+      metrics?.recordOAuthDeviceEvent("requested");
       res.status(200).json({
         device_code: created.deviceCode,
         user_code: created.userCode,
@@ -114,6 +118,7 @@ export function registerOAuthDeviceRoutes(
         interval: created.intervalSeconds,
       });
     } catch (error) {
+      metrics?.recordOAuthDeviceEvent("rejected");
       sendOAuthError(res, "invalid_request", error instanceof Error ? error.message : "Invalid device authorization request");
     }
   });
@@ -151,9 +156,11 @@ export function registerOAuthDeviceRoutes(
       ? provider.approveDeviceAuthorization(userCode, ownerToken, subjectId, proof)
       : provider.denyDeviceAuthorization(userCode, ownerToken, subjectId, proof);
     if (!changed) {
+      metrics?.recordOAuthDeviceEvent("rejected");
       res.status(403).type("html").send(devicePage({ userCode, status: "A aprovação foi recusada ou expirou." }));
       return;
     }
+    metrics?.recordOAuthDeviceEvent(approved ? "approved" : "denied");
     res.redirect(303, `/oauth/device?user_code=${encodeURIComponent(userCode)}&status=${encodeURIComponent(approved ? "Autorização registrada. Retorne ao terminal." : "Solicitação negada.")}`);
   });
 
@@ -173,19 +180,25 @@ export function registerOAuthDeviceRoutes(
     }
     try {
       const tokens = await provider.exchangeDeviceCode(clientId, deviceCode, resource);
+      metrics?.recordOAuthDeviceEvent("consumed");
       tokenResponse(res, tokens);
     } catch (error) {
       const message = error instanceof Error ? error.message : "invalid_grant";
       if (message === "authorization_pending") {
+        metrics?.recordOAuthDeviceEvent("pending");
         sendOAuthError(res, "authorization_pending", "The user has not approved the request yet");
       } else if (message.startsWith("slow_down:")) {
+        metrics?.recordOAuthDeviceEvent("slow_down");
         res.setHeader("Retry-After", message.slice("slow_down:".length));
         sendOAuthError(res, "slow_down", "Polling too frequently");
       } else if (message === "expired_token") {
+        metrics?.recordOAuthDeviceEvent("expired");
         sendOAuthError(res, "expired_token", "The device code expired");
       } else if (message.includes("denied")) {
+        metrics?.recordOAuthDeviceEvent("denied");
         sendOAuthError(res, "access_denied", "The user denied the request");
       } else {
+        metrics?.recordOAuthDeviceEvent("rejected");
         sendOAuthError(res, "invalid_grant", "The device authorization is invalid");
       }
     }

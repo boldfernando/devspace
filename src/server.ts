@@ -1853,7 +1853,7 @@ export function createServer(
     next();
   });
 
-  registerOAuthDeviceRoutes(app, oauthProvider, new URL(config.publicBaseUrl));
+  registerOAuthDeviceRoutes(app, oauthProvider, new URL(config.publicBaseUrl), runtimeMetrics);
 
   app.get("/.well-known/oauth-authorization-server", (_req, res) => {
     const issuer = new URL(config.publicBaseUrl);

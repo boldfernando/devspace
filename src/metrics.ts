@@ -7,6 +7,16 @@ export type IdempotencyClaimOutcome =
   | "ambiguous";
 
 export type IdempotencyEffectOutcome = "started";
+export type OAuthDeviceFlowOutcome =
+  | "requested"
+  | "pending"
+  | "slow_down"
+  | "approved"
+  | "consumed"
+  | "denied"
+  | "expired"
+  | "rejected"
+  | "rate_limited";
 
 type CounterKey = string;
 
@@ -39,6 +49,7 @@ export interface RuntimeMetrics {
   recordIdempotencyRecovery(tool: string, outcome: "ambiguous"): void;
   recordIdempotencyPendingAge(tool: string, ageSeconds: number): void;
   recordSqliteBusy(operation: string): void;
+  recordOAuthDeviceEvent(outcome: OAuthDeviceFlowOutcome): void;
   snapshot(): MetricSnapshot;
   renderPrometheus(): string;
 }
@@ -88,6 +99,9 @@ export function createRuntimeMetrics(): RuntimeMetrics {
     recordSqliteBusy(operation) {
       increment("sqlite_busy_total", labels(operation));
     },
+    recordOAuthDeviceEvent(outcome) {
+      increment("mcp_oauth_device_event_total", labels("oauth_device", { outcome }));
+    },
     snapshot() {
       return {
         counters: Object.fromEntries(counters.entries()),
@@ -130,6 +144,12 @@ export function createRuntimeMetrics(): RuntimeMetrics {
         "# TYPE mcp_idempotency_lease_lost_total counter",
         ...Array.from(counters.entries())
           .filter(([key]) => key.startsWith("mcp_idempotency_lease_lost_total{"))
+          .sort(([left], [right]) => left.localeCompare(right))
+          .map(([key, value]) => `${key} ${value}`),
+        "# HELP mcp_oauth_device_event_total OAuth Device Flow events by sanitized outcome.",
+        "# TYPE mcp_oauth_device_event_total counter",
+        ...Array.from(counters.entries())
+          .filter(([key]) => key.startsWith("mcp_oauth_device_event_total{"))
           .sort(([left], [right]) => left.localeCompare(right))
           .map(([key, value]) => `${key} ${value}`),
         "# HELP sqlite_busy_total SQLite busy or locked events.",

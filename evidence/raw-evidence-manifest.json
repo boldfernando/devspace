@@ -1,6 +1,6 @@
 {
   "schema": "devspace.raw-evidence-manifest.v2",
-  "generated_at": "2026-08-18T17:12:16.651Z",
+  "generated_at": "2026-08-18T17:30:36.236Z",
   "repository": "devspace",
   "policy": {
     "source_files_unchanged": true,
@@ -13,7 +13,7 @@
     "raw_content_rewritten": false
   },
   "count": 78,
-  "total_bytes": 982652,
+  "total_bytes": 982683,
   "records": [
     {
       "id": "RAW-001",
@@ -21,9 +21,9 @@
       "archive_path": "evidence/raw/block1-identity-report.json",
       "category": "other-evidence",
       "extension": ".json",
-      "bytes": 387,
-      "source_sha256": "c74380e685e77e287738e54a081c2ee6361a4c3a7866041c0233d53a93e05ad4",
-      "archive_sha256": "c74380e685e77e287738e54a081c2ee6361a4c3a7866041c0233d53a93e05ad4",
+      "bytes": 422,
+      "source_sha256": "d347902daaeaf5c768ed7f665712c1139e33af8b4494b969c632615bebfd0222",
+      "archive_sha256": "d347902daaeaf5c768ed7f665712c1139e33af8b4494b969c632615bebfd0222",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"
@@ -450,9 +450,9 @@
       "archive_path": "evidence/raw/oauth-mcp-negative-report.json",
       "category": "mcp",
       "extension": ".json",
-      "bytes": 3214,
-      "source_sha256": "b9f11aa3235cab7710025e4e88ac89ce5581bf3669e4c5876cc1e70eb62dbc30",
-      "archive_sha256": "b9f11aa3235cab7710025e4e88ac89ce5581bf3669e4c5876cc1e70eb62dbc30",
+      "bytes": 3210,
+      "source_sha256": "61edaeb99a1f1feb36c5281250b434401c90f64b9ad229d57edc085e854fbf5e",
+      "archive_sha256": "61edaeb99a1f1feb36c5281250b434401c90f64b9ad229d57edc085e854fbf5e",
       "byte_equal": true,
       "secret_scan": "clean",
       "preservation": "exact_copy_source_unchanged"

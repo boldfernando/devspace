@@ -5,7 +5,7 @@
 - **Manifest:** [../evidence/raw-evidence-manifest.json](../evidence/raw-evidence-manifest.json)
 - **Schema:** `devspace.raw-evidence-manifest.v2`
 - **Files indexed and archived:** 78
-- **Total archived bytes:** 982652
+- **Total archived bytes:** 982683
 - **Integrity:** each record has source and archive SHA-256 hashes plus a byte-equality assertion.
 - **Sanitization:** text files use a deterministic potential-secret pattern scan; binary files are marked not applicable. A potential match requires review before publication.
 
@@ -13,7 +13,7 @@
 
 | ID | Category | Original source | Archived raw | Bytes | SHA-256 | Scan |
 | --- | --- | --- | --- | ---: | --- | --- |
-| RAW-001 | other-evidence | [artifacts/block1-identity-report.json](../artifacts/block1-identity-report.json) | [evidence/raw/block1-identity-report.json](../evidence/raw/block1-identity-report.json) | 387 | `c74380e685e77e287738e54a081c2ee6361a4c3a7866041c0233d53a93e05ad4` | clean |
+| RAW-001 | other-evidence | [artifacts/block1-identity-report.json](../artifacts/block1-identity-report.json) | [evidence/raw/block1-identity-report.json](../evidence/raw/block1-identity-report.json) | 422 | `d347902daaeaf5c768ed7f665712c1139e33af8b4494b969c632615bebfd0222` | clean |
 | RAW-002 | canonical-360 | [artifacts/canonical-360/backlog.md](../artifacts/canonical-360/backlog.md) | [evidence/raw/canonical-360/backlog.md](../evidence/raw/canonical-360/backlog.md) | 5521 | `8373d2cdeb469918bb7b73955297beb783dcff103f3b3d32e110fc20ede543d8` | clean |
 | RAW-003 | canonical-360 | [artifacts/canonical-360/gates-dor-dod.md](../artifacts/canonical-360/gates-dor-dod.md) | [evidence/raw/canonical-360/gates-dor-dod.md](../evidence/raw/canonical-360/gates-dor-dod.md) | 1210 | `54f3c9fbef6a28ea3f74a3767d0cd707dfc4526287d9a37f6e03651e9979cf18` | clean |
 | RAW-004 | canonical-360 | [artifacts/canonical-360/manifest.json](../artifacts/canonical-360/manifest.json) | [evidence/raw/canonical-360/manifest.json](../evidence/raw/canonical-360/manifest.json) | 140504 | `9e3aff3534a8db7f28e79b3ea1e9a23377a5c2a321a60d9cea632282439b47c9` | clean |
@@ -46,7 +46,7 @@
 | RAW-031 | mcp | [artifacts/mcp-monitor-contract.json](../artifacts/mcp-monitor-contract.json) | [evidence/raw/mcp-monitor-contract.json](../evidence/raw/mcp-monitor-contract.json) | 382 | `35c3d09d1f5dc80a78f5845adf24906bf24aa6d345b47740443488d62bc5bb77` | clean |
 | RAW-032 | mcp | [artifacts/mcp-monitor.log](../artifacts/mcp-monitor.log) | [evidence/raw/mcp-monitor.log](../evidence/raw/mcp-monitor.log) | 351480 | `876c85fdd575002b76842c7e005916614725415b963fc863027619e9e861f4b5` | clean |
 | RAW-033 | other-evidence | [artifacts/mount-marker.txt](../artifacts/mount-marker.txt) | [evidence/raw/mount-marker.txt](../evidence/raw/mount-marker.txt) | 15 | `cce760f2f237080fe0f0b7a8148015366e431590e27b7464b14294b184693ac5` | clean |
-| RAW-034 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3214 | `b9f11aa3235cab7710025e4e88ac89ce5581bf3669e4c5876cc1e70eb62dbc30` | clean |
+| RAW-034 | mcp | [artifacts/oauth-mcp-negative-report.json](../artifacts/oauth-mcp-negative-report.json) | [evidence/raw/oauth-mcp-negative-report.json](../evidence/raw/oauth-mcp-negative-report.json) | 3210 | `61edaeb99a1f1feb36c5281250b434401c90f64b9ad229d57edc085e854fbf5e` | clean |
 | RAW-035 | other-evidence | [artifacts/observability-contract-report.json](../artifacts/observability-contract-report.json) | [evidence/raw/observability-contract-report.json](../evidence/raw/observability-contract-report.json) | 249 | `4f9880c9177678baad024341c40030bcda57ba2152cc7772b9bd6df460a8869b` | clean |
 | RAW-036 | other-evidence | [artifacts/p0-sim-fail-report.json](../artifacts/p0-sim-fail-report.json) | [evidence/raw/p0-sim-fail-report.json](../evidence/raw/p0-sim-fail-report.json) | 1678 | `fe6afa7ffd4c8daa851f17dd13bf641ce6768bdcc7a177f6f8851554b418a1dd` | clean |
 | RAW-037 | other-evidence | [artifacts/p0-sim-fail-summary.md](../artifacts/p0-sim-fail-summary.md) | [evidence/raw/p0-sim-fail-summary.md](../evidence/raw/p0-sim-fail-summary.md) | 132 | `c0afdce82c6005d1b2fb972d803e66362f679341e6168ea49e65fdc9a1495e80` | clean |
