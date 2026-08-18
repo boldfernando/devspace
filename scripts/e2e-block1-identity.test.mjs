@@ -143,14 +143,49 @@ test("Block 1 identity and authorization production mitigation", async () => {
     assert.equal(typeof tokens.refresh_token, "string");
     assert.equal(tokens.scope, "read");
 
-    const readCall = await fetch(`${baseUrl}/mcp`, {
+    const initialize = await fetch(`${baseUrl}/mcp`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${tokens.access_token}`,
         accept: "application/json, text/event-stream",
         "content-type": "application/json",
       },
-      body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "read", arguments: { workspaceId: "missing", path: "missing" } } }),
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "block1-identity-e2e", version: "1.0.0" },
+        },
+      }),
+    });
+    assert.equal(initialize.status, 200);
+    const sessionId = initialize.headers.get("mcp-session-id");
+    assert.ok(sessionId);
+
+    const initializedNotification = await fetch(`${baseUrl}/mcp`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${tokens.access_token}`,
+        "mcp-session-id": sessionId,
+        accept: "application/json, text/event-stream",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized", params: {} }),
+    });
+    assert.ok([200, 202, 204].includes(initializedNotification.status));
+
+    const readCall = await fetch(`${baseUrl}/mcp`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${tokens.access_token}`,
+        "mcp-session-id": sessionId,
+        accept: "application/json, text/event-stream",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/call", params: { name: "read", arguments: { workspaceId: "missing", path: "missing" } } }),
     });
     assert.notEqual(readCall.status, 403);
 
@@ -158,12 +193,64 @@ test("Block 1 identity and authorization production mitigation", async () => {
       method: "POST",
       headers: {
         authorization: `Bearer ${tokens.access_token}`,
+        "mcp-session-id": sessionId,
         accept: "application/json, text/event-stream",
         "content-type": "application/json",
       },
-      body: JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/call", params: { name: "write", arguments: {} } }),
+      body: JSON.stringify({ jsonrpc: "2.0", id: 3, method: "tools/call", params: { name: "write", arguments: {} } }),
     });
     assert.equal(writeDenied.status, 403);
+
+    const unknownTool = await fetch(`${baseUrl}/mcp`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${tokens.access_token}`,
+        "mcp-session-id": sessionId,
+        accept: "application/json, text/event-stream",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ jsonrpc: "2.0", id: 4, method: "tools/call", params: { name: "future_tool", arguments: {} } }),
+    });
+    assert.equal(unknownTool.status, 403);
+
+    const secondDevice = await fetch(`${baseUrl}/oauth/device/authorize`, {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: form({ client_id: client.client_id, scope: "read", resource }),
+    });
+    assert.equal(secondDevice.status, 200);
+    const secondDeviceBody = await secondDevice.json();
+    const secondSubjectId = "user:production-456";
+    const secondApproval = await fetch(`${baseUrl}/oauth/device/approve`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "x-devspace-identity": secondSubjectId,
+        "x-devspace-identity-proof": trustedProof(secondSubjectId, secondDeviceBody.user_code),
+      },
+      body: form({ user_code: secondDeviceBody.user_code, decision: "approve" }),
+      redirect: "manual",
+    });
+    assert.equal(secondApproval.status, 303);
+    const secondTokenResponse = await tokenRequest({
+      grant_type: "urn:ietf:params:oauth:grant-type:device_code",
+      client_id: client.client_id,
+      device_code: secondDeviceBody.device_code,
+      resource,
+    });
+    assert.equal(secondTokenResponse.status, 200);
+    const secondTokens = await secondTokenResponse.json();
+    const subjectTransfer = await fetch(`${baseUrl}/mcp`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${secondTokens.access_token}`,
+        "mcp-session-id": sessionId,
+        accept: "application/json, text/event-stream",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ jsonrpc: "2.0", id: 5, method: "tools/call", params: { name: "read", arguments: { workspaceId: "missing", path: "missing" } } }),
+    });
+    assert.equal(subjectTransfer.status, 403);
 
     const refreshedResponse = await tokenRequest({
       grant_type: "refresh_token",
@@ -214,7 +301,11 @@ test("Block 1 identity and authorization production mitigation", async () => {
       status: "passed",
       approval_mode: "trusted_header",
       subject_bound: true,
+      principal_bound: true,
+      subject_transfer_denied: true,
       resource_bound: true,
+      mcp_handshake: true,
+      unknown_tool_denied: true,
       scopes_tested: ["read", "write"],
       read_scope_allowed: true,
       write_scope_denied: true,

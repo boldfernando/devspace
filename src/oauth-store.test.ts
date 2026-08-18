@@ -241,6 +241,7 @@ async function testProviderRestartRotationAndRevocation(stateDir: string): Promi
   try {
     const verified = await secondProvider.verifyAccessToken(issued.access_token);
     assert.equal(verified.clientId, client.client_id);
+    assert.equal(verified.extra?.principalId, "owner");
 
     const refreshed = await secondProvider.exchangeRefreshToken(
       client,

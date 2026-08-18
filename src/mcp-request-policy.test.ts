@@ -1,11 +1,17 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { requiredScopeForMcpRequest } from "./mcp-request-policy.js";
+import { classifyMcpRequest, requiredScopeForMcpRequest } from "./mcp-request-policy.js";
 
 test("MCP policy classifies protocol discovery and read calls", () => {
-  assert.equal(requiredScopeForMcpRequest({ method: "GET" }), undefined);
-  assert.equal(requiredScopeForMcpRequest({ method: "POST", body: { method: "initialize" } }), "read");
-  assert.equal(requiredScopeForMcpRequest({ method: "POST", body: { method: "tools/list" } }), "read");
+  assert.deepEqual(classifyMcpRequest({ method: "GET" }), { kind: "unprotected" });
+  assert.deepEqual(classifyMcpRequest({ method: "POST", body: { method: "initialize" } }), {
+    kind: "scope",
+    requiredScope: "read",
+  });
+  assert.deepEqual(classifyMcpRequest({ method: "POST", body: { method: "tools/list" } }), {
+    kind: "scope",
+    requiredScope: "read",
+  });
   assert.equal(requiredScopeForMcpRequest({
     method: "POST",
     body: { method: "tools/call", params: { name: "read" } },
@@ -14,10 +20,22 @@ test("MCP policy classifies protocol discovery and read calls", () => {
     method: "POST",
     body: { method: "tools/call", params: { name: "glob" } },
   }), "read");
+  assert.equal(requiredScopeForMcpRequest({
+    method: "POST",
+    body: { method: "tools/call", params: { name: "show_changes" } },
+  }), "read");
 });
 
-test("MCP policy classifies all mutating process and workspace calls as write", () => {
-  for (const name of ["open_workspace", "write", "edit", "bash", "write_stdin"]) {
+test("MCP policy classifies every mutating tool as write", () => {
+  for (const name of [
+    "open_workspace",
+    "write",
+    "edit",
+    "bash",
+    "write_stdin",
+    "apply_patch",
+    "download_artifact",
+  ]) {
     assert.equal(requiredScopeForMcpRequest({
       method: "POST",
       body: { method: "tools/call", params: { name } },
@@ -25,11 +43,18 @@ test("MCP policy classifies all mutating process and workspace calls as write", 
   }
 });
 
-test("MCP policy fails closed to read for unknown named tools and ignores malformed bodies", () => {
-  assert.equal(requiredScopeForMcpRequest({
+test("MCP policy denies unknown and malformed tool calls", () => {
+  assert.deepEqual(classifyMcpRequest({
     method: "POST",
     body: { method: "tools/call", params: { name: "future_tool" } },
-  }), "read");
-  assert.equal(requiredScopeForMcpRequest({ method: "POST", body: null }), undefined);
-  assert.equal(requiredScopeForMcpRequest({ method: "POST", body: { method: "notifications/initialized" } }), undefined);
+  }), { kind: "deny", reason: "unknown_tool" });
+  assert.deepEqual(classifyMcpRequest({
+    method: "POST",
+    body: { method: "tools/call", params: {} },
+  }), { kind: "deny", reason: "malformed_tool_call" });
+  assert.deepEqual(classifyMcpRequest({ method: "POST", body: null }), { kind: "unprotected" });
+  assert.deepEqual(classifyMcpRequest({
+    method: "POST",
+    body: { method: "notifications/initialized" },
+  }), { kind: "unprotected" });
 });

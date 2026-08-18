@@ -7,6 +7,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
 import { mcpAuthRouter, getOAuthProtectedResourceMetadataUrl } from "@modelcontextprotocol/sdk/server/auth/router.js";
 import { requireBearerAuth } from "@modelcontextprotocol/sdk/server/auth/middleware/bearerAuth.js";
+import type { AuthInfo } from "@modelcontextprotocol/sdk/server/auth/types.js";
+
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
 import { checkResourceAllowed, resourceUrlFromServerUrl } from "@modelcontextprotocol/sdk/shared/auth-utils.js";
@@ -56,7 +58,8 @@ import { createReviewCheckpointManager } from "./review-checkpoints.js";
 import { openAiConversationScopeId } from "./request-meta.js";
 import { shutdownHttpServer } from "./server-shutdown.js";
 import { formatPathForPrompt } from "./skills.js";
-import { requiredScopeForMcpRequest } from "./mcp-request-policy.js";
+import { classifyMcpRequest, type McpRequestPolicyDecision } from "./mcp-request-policy.js";
+
 import { createWorkspaceStore } from "./workspace-store.js";
 import { openDatabase } from "./db/client.js";
 import { IdempotencyAmbiguousError, IdempotencyConflictError, IdempotencyFailedError, IdempotencyPendingError, WriteIdempotencyStore } from "./idempotency-store.js";
@@ -311,7 +314,13 @@ function sendJsonRpcError(
   });
 }
 
+function authPrincipalId(auth: AuthInfo | undefined): string | undefined {
+  const principalId = auth?.extra?.principalId;
+  return typeof principalId === "string" && principalId.length > 0 ? principalId : undefined;
+}
+
 function requestLogFields(req: Request, config: ServerConfig): Record<string, unknown> {
+
   return {
     ip: requestIp(req, config.logging.trustProxy),
     host: req.header("host"),
@@ -1888,7 +1897,8 @@ export function createServer(
     ...(allowedHosts ? { allowedHosts } : {}),
   });
   const transports = new McpSessionRegistry<Transport>();
-  const sessionBindings = new Map<string, { clientId: string; resource: string }>();
+    const sessionBindings = new Map<string, { clientId: string; resource: string; principalId: string }>();
+
   const mcpUrl = new URL("/mcp", config.publicBaseUrl);
   const resourceServerUrl = resourceUrlFromServerUrl(mcpUrl);
   const oauthProvider = new SingleUserOAuthProvider(config.oauth, mcpUrl, config.stateDir);
@@ -2052,7 +2062,20 @@ export function createServer(
       return;
     }
 
-    const requiredScope = requiredScopeForMcpRequest(req);
+    const policyDecision: McpRequestPolicyDecision = classifyMcpRequest(req);
+    if (policyDecision.kind === "deny") {
+      logEvent(config.logging, "warn", "auth_denied", {
+        requestId,
+        method: req.method,
+        path: requestPath(req),
+        reason: policyDecision.reason === "unknown_tool" ? "unknown_mcp_tool" : "malformed_mcp_tool_call",
+        ...requestLogFields(req, config),
+      });
+      sendJsonRpcError(res, 403, -32003, "Forbidden");
+      return;
+    }
+
+    const requiredScope = policyDecision.kind === "scope" ? policyDecision.requiredScope : undefined;
     const tokenScopes = req.auth?.scopes ?? [];
     const scopeAllowed = requiredScope
       ? tokenScopes.includes(requiredScope) || tokenScopes.includes(`devspace:${requiredScope}`) || tokenScopes.includes("devspace")
@@ -2087,16 +2110,20 @@ export function createServer(
           sendJsonRpcError(res, 404, -32000, "Unknown MCP session");
           return;
         }
-        const binding = sessionBindings.get(sessionId);
+                const binding = sessionBindings.get(sessionId);
         const auth = req.auth;
         const resource = auth?.resource?.href;
+        const principalId = authPrincipalId(auth);
         if (
           !binding ||
           !auth?.clientId ||
           !resource ||
+          !principalId ||
           binding.clientId !== auth.clientId ||
-          binding.resource !== resource
+          binding.resource !== resource ||
+          binding.principalId !== principalId
         ) {
+
           logEvent(config.logging, "warn", "auth_denied", {
             requestId,
             method: req.method,
@@ -2115,13 +2142,16 @@ export function createServer(
           onsessioninitialized: (newSessionId) => {
             if (transport) {
               transports.register(newSessionId, transport);
-              const auth = req.auth;
-              if (auth?.clientId && auth.resource?.href) {
+                            const auth = req.auth;
+              const principalId = authPrincipalId(auth);
+              if (auth?.clientId && auth.resource?.href && principalId) {
                 sessionBindings.set(newSessionId, {
                   clientId: auth.clientId,
                   resource: auth.resource.href,
+                  principalId,
                 });
               }
+
             }
             logEvent(config.logging, "info", "mcp_session_created", {
               requestId,

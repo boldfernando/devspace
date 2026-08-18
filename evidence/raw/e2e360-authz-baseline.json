@@ -1,0 +1,15 @@
+{
+  "schema": "devspace/e2e360-authz-baseline/v1",
+  "status": "passed",
+  "commit": "fcb96e1",
+  "branch": "main",
+  "working_tree": "clean_before_changes",
+  "gates": {
+    "typecheck": "passed",
+    "test": "passed",
+    "build": "passed",
+    "doctor": "passed"
+  },
+  "known_non_regression_warning": "UI bundle contains a pre-existing chunk larger than 500 kB",
+  "secrets_included": false
+}

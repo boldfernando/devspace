@@ -3,7 +3,11 @@
   "status": "passed",
   "approval_mode": "trusted_header",
   "subject_bound": true,
+  "principal_bound": true,
+  "subject_transfer_denied": true,
   "resource_bound": true,
+  "mcp_handshake": true,
+  "unknown_tool_denied": true,
   "scopes_tested": [
     "read",
     "write"

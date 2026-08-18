@@ -334,6 +334,9 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
       scopes: record.scopes,
       expiresAt: record.expiresAt,
       resource: record.resource ? new URL(record.resource) : undefined,
+      extra: {
+        principalId: record.subjectId ?? "owner",
+      },
     };
   }
 

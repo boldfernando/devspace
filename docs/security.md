@@ -122,3 +122,15 @@ workspace-relative output path, byte count, hash, duration, and status metadata.
 references, native file IDs, bearer credentials, presigned URLs, host paths,
 temporary paths, and base64 chunks are never included in tool logs or tool
 results.
+
+## Authentication Profiles And Authorization
+
+DevSpace supports two approval profiles. `owner_token` is intended for controlled local single-owner use. `trusted_header` is intended for a user-controlled identity gateway that authenticates the subject and produces an HMAC proof bound to the request context. The identity headers are not an identity provider by themselves; the gateway must protect the signing secret, validate the upstream identity, and prevent forged or replayed assertions.
+
+Issued tokens carry an authenticated principal context in addition to client, resource, expiry, and scopes. MCP sessions are bound to the principal, client, and resource. A token for another principal cannot reuse an existing MCP session even when the client and resource are the same.
+
+Scopes remain compatibility controls. `read` permits discovery and read-only tools; `write` permits mutating workspace, process, patch, and artifact operations. The legacy umbrella `devspace` scope is broad and should be limited to controlled compatibility deployments until explicit role-based permissions are available.
+
+MCP tool authorization is fail-closed. Every known tool must have an explicit read or write classification. Unknown or malformed tool calls are rejected before handler dispatch rather than being implicitly treated as read-only. Shell execution, process input, artifact download, file writes, and patch application should be treated as high-risk operations and must not be exposed to a read-only token.
+
+This authorization layer does not replace filesystem containment or operating-system permissions. Shell commands execute with the local user's authority, so the allowed-root configuration, trusted client boundary, and gateway controls remain essential.

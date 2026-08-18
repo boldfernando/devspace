@@ -5,12 +5,19 @@ export interface McpRequestLike {
   body?: unknown;
 }
 
+export type McpRequestPolicyDecision =
+  | { kind: "unprotected" }
+  | { kind: "scope"; requiredScope: McpScope }
+  | { kind: "deny"; reason: "unknown_tool" | "malformed_tool_call" };
+
 const WRITE_TOOL_NAMES = new Set([
   "open_workspace",
   "write",
   "edit",
   "bash",
   "write_stdin",
+  "apply_patch",
+  "download_artifact",
 ]);
 
 const READ_TOOL_NAMES = new Set([
@@ -18,24 +25,40 @@ const READ_TOOL_NAMES = new Set([
   "grep",
   "glob",
   "ls",
-  "tools/list",
+  "show_changes",
 ]);
 
-export function requiredScopeForMcpRequest(
+export function classifyMcpRequest(
   request: McpRequestLike,
-): McpScope | undefined {
-  if (request.method !== "POST") return undefined;
+): McpRequestPolicyDecision {
+  if (request.method !== "POST") return { kind: "unprotected" };
 
   const body = asRecord(request.body);
   const method = typeof body.method === "string" ? body.method : "";
-  if (method === "initialize" || method === "tools/list") return "read";
-  if (method !== "tools/call") return undefined;
+  if (method === "initialize" || method === "tools/list") {
+    return { kind: "scope", requiredScope: "read" };
+  }
+  if (method !== "tools/call") return { kind: "unprotected" };
 
   const params = asRecord(body.params);
   const name = typeof params.name === "string" ? params.name : "";
-  if (WRITE_TOOL_NAMES.has(name)) return "write";
-  if (READ_TOOL_NAMES.has(name)) return "read";
-  return name ? "read" : undefined;
+  if (!name) return { kind: "deny", reason: "malformed_tool_call" };
+  if (WRITE_TOOL_NAMES.has(name)) return { kind: "scope", requiredScope: "write" };
+  if (READ_TOOL_NAMES.has(name)) return { kind: "scope", requiredScope: "read" };
+  return { kind: "deny", reason: "unknown_tool" };
+}
+
+/**
+ * Compatibility helper for callers that only need the legacy scope value.
+ * Callers enforcing authorization should use classifyMcpRequest() so that
+ * unknown and malformed tool calls remain fail-closed instead of becoming
+ * implicitly readable.
+ */
+export function requiredScopeForMcpRequest(
+  request: McpRequestLike,
+): McpScope | undefined {
+  const decision = classifyMcpRequest(request);
+  return decision.kind === "scope" ? decision.requiredScope : undefined;
 }
 
 function asRecord(value: unknown): Record<string, unknown> {
