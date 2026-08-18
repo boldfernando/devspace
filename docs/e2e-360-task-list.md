@@ -3,8 +3,8 @@
 **Data de revisão:** 18 de agosto de 2026
 **Repositório:** `devspace`
 **Branch:** `main`
-**Commit de referência:** `8660adf`
-**Working tree:** dirty somente pela atualização documental desta revisão; a implementação foi commitada em `8660adf`
+**Commit de referência:** `d8942c9`
+**Working tree:** clean após a implementação P2-RES-002 e a atualização documental desta revisão
 **Topologia Canonical 360º:** `MODULAR_MONOLITH`  
 **Objetivo:** manter uma matriz executável que prove os caminhos críticos de descoberta, autenticação, MCP, sessão, autorização, persistência, filesystem, processos, UI, performance, observabilidade, CI/CD, operação, release e maturidade de produto.
 
@@ -50,7 +50,7 @@
 | API structure and policy | Concluído localmente: classificação de escopo MCP extraída para módulo puro testável e contexto nomeado para registro de processos Codex; compatibilidade de comandos preservada. | `src/mcp-request-policy.ts`, `src/mcp-request-policy.test.ts`, `src/server.ts`, commit `8660adf` |
 | REST endpoint review | Revisão documentada sem alteração breaking: matriz de rotas, semântica HTTP, compatibilidade e recomendações futuras registradas. | `docs/rest-endpoint-review.md` |
 | Database schema/query performance | Concluído localmente: migration 8 aditiva com cinco índices, cleanup OAuth reescrito em predicates index-friendly e regressão `EXPLAIN QUERY PLAN`; migration e build passam. | `src/db/migrations.ts`, `src/db/schema.ts`, `src/db/query-performance.test.ts`, `src/oauth-device-store.ts`, commit `8660adf` |
-| P2-RES-002 resource resilience | Concluído localmente; hosted/OS matrix permanece UNKNOWN: runner HTTP/MCP real prova missing-root creation, filesystem write failure, failed child sanitized, filesystem unchanged e cleanup; suite SQLite prova lock bounded, SQLITE_FULL e readonly rejection. | `scripts/e2e-http-mcp-resilience.test.mjs`, `artifacts/p2-res-002-report.json`, `src/db/resilience.test.ts`, commit pendente desta revisão |
+| P2-RES-002 resource resilience | Concluído localmente; hosted/OS matrix permanece UNKNOWN: runner HTTP/MCP real prova missing-root creation, filesystem write failure, failed child sanitized, filesystem unchanged e cleanup; suite SQLite prova lock bounded, SQLITE_FULL e readonly rejection. | `scripts/e2e-http-mcp-resilience.test.mjs`, `artifacts/p2-res-002-report.json`, `src/db/resilience.test.ts`, commit `d8942c9` |
 
 ### 2.1. Métricas da Onda 3
 

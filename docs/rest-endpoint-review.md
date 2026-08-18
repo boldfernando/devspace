@@ -1,7 +1,7 @@
 # DevSpace REST Endpoint Review
 
 **Review date:** 2026-08-18
-**Reference commit:** `8660adf`
+**Reference commit:** `d8942c9`
 **Scope:** Express route surface surrounding OAuth discovery, revocation, health, metrics, static assets, and the authenticated MCP transport.
 
 ## Executive assessment
