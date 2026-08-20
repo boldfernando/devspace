@@ -2,8 +2,8 @@
 > @waishnav/devspace@1.0.7 evidence:index
 > node scripts/index-raw-evidence.mjs --repo .
 
-raw_evidence_archived=1274
-raw_evidence_bytes=11329066
+raw_evidence_archived=221
+raw_evidence_bytes=4107636
 raw_evidence_manifest=written
 raw_evidence_index=written
 evidence_index_exit_code=0
