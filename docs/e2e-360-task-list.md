@@ -302,3 +302,24 @@ A ordem deve ser mantida porque alertas, identidade real e reconciliação são 
 - `src/server.ts`, `src/idempotency-store.ts`, `src/metrics.ts`, `src/oauth-provider.ts`
 
 A lista deve ser revisada após cada onda. Um relatório pode declarar **Concluída localmente** sem declarar produção pronta; qualquer dependência externa, identidade real, alert firing, CI hospedado, provenance ou rollback não comprovado deve continuar como **Parcial** ou **UNKNOWN**.
+
+
+## 12. Canonical Platform Review 360 v3.0.0 — execução atual
+
+| Item | Status | Evidência / commit |
+|---|---|---|
+| Pacotes Review v3 + GitHub Intelligence inventariados, hashados e validados | Concluído | `03-review-v3-validate.log`, `GITHUB-INTELLIGENCE.json`, commit `9df73d4` |
+| Runtime instalado/integrado/inicializado em modo `READ_ONLY` | Concluído localmente; visibilidade nativa do host UNKNOWN | `04-install-review.log`, `05-active-applicable-receipt.json`, `06-runtime-state.json` |
+| Discovery, Git baseline e rollback anchor | Concluído | `STACK.json`, `GIT_BASELINE.json`, `ROLLBACK_POINT.json`, `00-discovery-and-git.log` |
+| BB/DAG e seleção dinâmica de especialistas | Concluído | `BB-DAG.json`, `DOR-DOD.json`, `SPECIALIST-REVIEW-LEDGER.json` |
+| OAuth/IAM/MCP local | GREEN | Block 1, device HTTP/CLI, 23 IDs negativos, MCP happy path; `platform-review-gate-matrix.json` |
+| Segurança/DAST | Parcial | Static/P0/URL hardening PASS; probe CSRF/XSS/SQLi não bindou a porta e permanece UNKNOWN; `artifacts/security-audit/10-probe-diagnosis.log` |
+| Testing/quality/performance | Parcial | Current reruns PASS; coverage lines 67,89%, functions 70,33%, branches 80,83%; Wave 1/2 aggregate RED históricos permanecem preservados |
+| Observabilidade/SRE | Parcial | 15 métricas, 13 alertas, 12 painéis e secret scan local PASS; hosted firing/recovery UNKNOWN |
+| CI/CD/release | RED no gate de deploy | Workflow e staging-load existem; deploy, SBOM/provenance, promoção, rollback e restore UNKNOWN |
+| Findings P1–P4 e AS-IS→TO-BE | Concluído | `RECONCILED_FINDINGS.json`, `PRIORITIZED-ROADMAP.md`, `PLATFORM-REVIEW-REPORT.md` |
+| Gate final | **NOT RELEASE-READY**; DoR `CONDITIONAL`; DoD `PARTIAL`; overall `YELLOW_WITH_RED_RELEASE_BLOCKER` | `platform-review-gate-matrix.json`, commit `9df73d4` |
+
+### 12.1. Próximo corte recomendado
+
+O próximo ciclo deve provisionar primeiro um alvo de staging/deploy autorizado para fechar `PR-001` (deploy, promoção, rollback e restore). Em paralelo, `PR-002` deve provar gateway de identidade/RBAC/key rotation e `PR-003` deve provar firing/recovery do Prometheus/Grafana. Nenhum raw ou artefato RED deve ser apagado para produzir um status verde; uma nova execução deve superseder os resultados antigos com timestamp, hash e comando preservados.
