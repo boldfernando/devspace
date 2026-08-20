@@ -24,8 +24,8 @@
   ],
   "latency": [
     {
-      "wallMs": 68,
-      "authenticatedWallMs": 24,
+      "wallMs": 50,
+      "authenticatedWallMs": 14,
       "slowProbes": 0
     },
     {

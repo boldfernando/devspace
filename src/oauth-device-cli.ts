@@ -202,11 +202,12 @@ async function loginDevice(args: string[]): Promise<void> {
     process.removeListener("SIGINT", cancel);
     process.removeListener("SIGTERM", cancel);
     process.stdin.removeListener("data", cancelFromInput);
+    process.stdin.pause();
     if (!process.stdin.isTTY) {
-      process.stdin.pause();
+      process.stdin.removeAllListeners("data");
+      process.stdin.removeAllListeners("readable");
       process.stdin.destroy();
-    } else {
-      process.stdin.pause();
+      (process.stdin as NodeJS.ReadStream & { unref?: () => void }).unref?.();
     }
   }
 }

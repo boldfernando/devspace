@@ -701,7 +701,18 @@ function checkBashShell(): string {
   }
 }
 
-main(process.argv.slice(2)).catch((error) => {
-  console.error(error instanceof Error ? error.message : String(error));
-  process.exitCode = 1;
-});
+async function finishCliProcess(): Promise<void> {
+  if (process.stdin.isTTY) return;
+  process.stdin.pause();
+  process.stdin.destroy();
+  (process.stdin as NodeJS.ReadStream & { unref?: () => void }).unref?.();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  process.exit(0);
+}
+
+main(process.argv.slice(2))
+  .then(() => finishCliProcess())
+  .catch((error) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  });

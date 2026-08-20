@@ -19,6 +19,26 @@ for (const flag of ["-v", "--version"]) {
   assert.equal(output, packageJson.version);
 }
 
+const doctorRoot = mkdtempSync(join(tmpdir(), "devspace-cli-doctor-test-"));
+try {
+  const output = execFileSync("node", ["--import", "tsx", "src/cli.ts", "doctor"], {
+    cwd: process.cwd(),
+    encoding: "utf8",
+    env: {
+      ...process.env,
+      DEVSPACE_CONFIG_DIR: join(doctorRoot, ".devspace"),
+      DEVSPACE_ALLOWED_ROOTS: doctorRoot,
+    },
+  });
+
+  assert.match(output, /Config dir:/);
+  assert.match(output, /Node: v\d+\.\d+/);
+  assert.match(output, /Node ABI:/);
+  assert.match(output, /SQLite native dependency:/);
+} finally {
+  rmSync(doctorRoot, { recursive: true, force: true });
+}
+
 const root = mkdtempSync(join(tmpdir(), "devspace-cli-agents-test-"));
 try {
   const configDir = join(root, ".devspace");

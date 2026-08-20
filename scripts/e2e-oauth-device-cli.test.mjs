@@ -158,7 +158,7 @@ test("CLI completes device login and stores private credential metadata", { conc
     cli.stderr?.on("data", (chunk) => { stderr += String(chunk); });
     const { userCode } = await collectDeviceCode(cli);
     await approve(userCode);
-    const exit = await waitForExit(cli);
+    const exit = await waitForExit(cli, 15_000);
     if (exit.code !== 0) {
       await writeFile(
         join(repoRoot, "artifacts", "oauth-device-cli-debug.json"),

@@ -1,8 +1,8 @@
 {
   "schema": "devspace.test-strategy.v1",
-  "generated_at": "2026-08-20T05:03:03.395Z",
+  "generated_at": "2026-08-20T06:03:11.598Z",
   "repository": "",
-  "commit": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+  "commit": "258dee10a1d7bc0bdfc8c6aa22f6e8b288ecd5b5",
   "inventory": {
     "source_unit_contract_files": 41,
     "script_e2e_integration_files": 15,
@@ -32,6 +32,7 @@
       "build",
       "build:app",
       "dev",
+      "doctor",
       "postinstall",
       "start",
       "test",

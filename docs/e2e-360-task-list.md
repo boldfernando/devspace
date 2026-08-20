@@ -323,3 +323,22 @@ A lista deve ser revisada após cada onda. Um relatório pode declarar **Conclu�
 ### 12.1. Próximo corte recomendado
 
 O próximo ciclo deve provisionar primeiro um alvo de staging/deploy autorizado para fechar `PR-001` (deploy, promoção, rollback e restore). Em paralelo, `PR-002` deve provar gateway de identidade/RBAC/key rotation e `PR-003` deve provar firing/recovery do Prometheus/Grafana. Nenhum raw ou artefato RED deve ser apagado para produzir um status verde; uma nova execução deve superseder os resultados antigos com timestamp, hash e comando preservados.
+
+
+## 13. Ciclo E2E 360° — matriz, DoR/DoD e fechamento de baseline
+
+**Status:** IMPLEMENTADO E VALIDADO LOCALMENTE; o release externo continua condicionado aos gates de staging/hosted classificados como UNKNOWN/RED.
+
+| Item | Alteração | Evidência |
+|---|---|---|
+| E2E-BASE-003 | Adicionado `npm run doctor`, alinhado ao comando público `devspace doctor`. | `artifacts/e2e-360-session/final-360-suite.log`; `src/cli.ts`; `package.json` |
+| E2E-AUTH-004 | Teardown do Device CLI tornado determinístico em stdin não interativo, com remoção de listeners, destroy/unref e finalização limpa do entrypoint. | `src/oauth-device-cli.ts`; `src/cli.ts` |
+| E2E-AUTH-004 | Deadline de conclusão do login aprovado ajustado para 15 s, mantendo as assertions de segurança, ACL e cleanup e o deadline original do Ctrl-C. | `scripts/e2e-oauth-device-cli.test.mjs`; `artifacts/e2e-360-session/final-360-suite.log` |
+| E2E-MATRIX-001 | Criada matriz consolidada de tasks E2E 360° com prioridades, status, evidências e critérios de aceite. | `docs/e2e-360-task-matrix.md` |
+| E2E-DOR-DOD-001 | Criado checklist DoR/DoD de alto nível com semântica READY/CONDITIONAL/NOT_READY e DONE/PARTIAL/NOT_DONE. | `docs/e2e-360-task-matrix.md` |
+
+A suíte final executou com exit code 0: `npm run typecheck`, `npm test`, `npm run build`, `npm run doctor`, `npm run bundle:audit:check`, `npm run e2e`, `npm run security:p0`, `npm run e2e:block1:identity`, `npm run e2e:oauth-device`, `npm run e2e:oauth-device-cli`, `npm run e2e:idempotency:recovery`, `npm run e2e:write-stdin:idempotency`, `npm run e2e:path-containment`, `npm run e2e:resilience:p2`, `npm run test:mcp-monitor`, `npm run test:observability`, `npm run coverage:check`, `npm run test:strategy:audit` e `git diff --check`. O resultado foi preservado em `artifacts/e2e-360-session/final-360-suite.log`; o indexador registrou `raw_evidence_archived=190`, `raw_evidence_bytes=2638476`, manifest e índice escritos.
+
+O DoR deste corte ficou **READY** para execução local: contrato público existente, checkout isolado, runtime identificado, rollback simples por commit, fixtures temporárias e cleanup em `finally`. O DoD local ficou **DONE** para o alias doctor e para o fluxo Device CLI; o DoD global E2E 360° permanece **PARTIAL** porque deployment/rollback/restore, firing hosted, gateway de identidade/RBAC, SBOM/provenance, browser-host e matriz cross-OS ainda dependem de ambientes ou autorizações não disponíveis.
+
+A tentativa intermediária de secret scan contaminada por logs de orquestração foi preservada quando disponível, diagnosticada como falso positivo de escopo do artifact de execução, e o gate `security:p0` foi reexecutado em árvore limpa com exit code 0. Nenhum resultado histórico foi apagado e este ciclo não declara `RELEASE-READY`.
