@@ -46,7 +46,8 @@ function hasFlag(args: string[], name: string): boolean {
 }
 
 function serverUrl(args: string[]): URL {
-  const value = optionValue(args, "--server") ?? process.env.DEVSPACE_PUBLIC_BASE_URL ?? DEFAULT_SERVER;
+  const files = loadDevspaceFiles();
+  const value = optionValue(args, "--server") ?? process.env.DEVSPACE_PUBLIC_BASE_URL ?? files.config.publicBaseUrl ?? DEFAULT_SERVER;
   const url = new URL(value);
   if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("--server must be an HTTP(S) URL");
   return url;
@@ -163,12 +164,13 @@ async function loginDevice(args: string[]): Promise<void> {
   console.log(`Abra: ${device.verification_uri}`);
   console.log(`Digite o código: ${device.user_code}`);
 
-  // Auto-approve when running against a local server with a known ownerToken
-  const isLocal = ["127.0.0.1", "localhost", "::1", "[::1]"].includes(server.hostname);
+  // Auto-approve when running against a local server or configured publicBaseUrl with a known ownerToken
   const files = loadDevspaceFiles();
+  const configuredHost = files.config.publicBaseUrl ? new URL(files.config.publicBaseUrl).hostname : undefined;
+  const isLocalOrConfigured = ["127.0.0.1", "localhost", "::1", "[::1]"].includes(server.hostname) || server.hostname === configuredHost;
   const ownerToken = files.auth.ownerToken;
   let autoApproved = false;
-  if (isLocal && ownerToken && !hasFlag(args, "--no-auto-approve")) {
+  if (isLocalOrConfigured && ownerToken && !hasFlag(args, "--no-auto-approve")) {
     try {
       const approveUrl = new URL("/oauth/device/approve", server);
       const approveBody = new URLSearchParams({
