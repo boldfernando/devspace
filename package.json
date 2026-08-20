@@ -51,6 +51,7 @@
     "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
     "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",
     "e2e:write-stdin:idempotency": "npm run build && node --test scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
+    "e2e:write-stdin:recovery": "npm run build && node --test scripts/e2e-http-mcp-write-stdin-recovery.test.mjs",
     "e2e:idempotency:recovery": "npm run build && node --test scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
     "e2e:path-containment": "npm run build && node --test scripts/e2e-http-mcp-path-containment.test.mjs",
     "e2e:resilience:p2": "npm run build && node --test scripts/e2e-http-mcp-resilience.test.mjs && npm exec -- tsx --test src/db/resilience.test.ts",

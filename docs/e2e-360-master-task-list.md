@@ -297,3 +297,34 @@ Em paralelo, o segundo corte é **P1-AUTHZ-001/P1-DEVICE-009** para RBAC/grants 
 8. `artifacts/canonical-prd-blueprint-360/` — PRD, Blueprint, matriz, resumo, manifest e validação.
 9. `scripts/e2e-http-mcp*.test.mjs`, `scripts/run-wave*.mjs`, `scripts/run-p0-negative-matrix.py` — runners reais.
 10. `src/server.ts`, `src/idempotency-store.ts`, `src/process-sessions.ts`, `src/oauth-provider.ts`, `src/metrics.ts`, `src/logger.ts` — contratos de runtime.
+
+
+---
+
+# 13. Ciclo executado — crash recovery durable de `write_stdin`
+
+**Task:** `P1-IDEMP-009/P1-IDEMP-010`
+**Status:** **GREEN local / PARTIAL hosted / NOT RELEASE-READY**
+**Objetivo:** provar o intervalo real entre o efeito de `process.write(chars)` e a confirmação durable do idempotency store, sem retry automático nem duplicação do efeito.
+
+| Item | Resultado comprovado |
+|---|---|
+| Transporte | HTTP/MCP real |
+| Autorização | OAuth authorization-code PKCE S256 |
+| Efeito | `crash-once\\n` observado no arquivo alvo antes do crash |
+| Estado durable | registro `pending` preservado no SQLite |
+| Retry antes de reconciliação | fail-closed com `IDEMPOTENCY_REQUEST_IN_PROGRESS` |
+| Reconciliação | estado convertido explicitamente para `failed` com `IDEMPOTENCY_AMBIGUOUS_RECONCILED` |
+| Retry após reconciliação | bloqueado com `IDEMPOTENCY_REQUEST_FAILED` |
+| Duplicação | `effect_replayed=false`; conteúdo escrito exatamente uma vez |
+| Observabilidade | métricas presentes e sem key/chars nos payloads |
+| Secrets | `secrets_included=false` |
+| CI | comando incluído em `.github/workflows/ci.yml`; execução hosted do SHA permanece UNKNOWN |
+
+**Implementação:** `scripts/e2e-http-mcp-write-stdin-recovery.test.mjs`, script `e2e:write-stdin:recovery` em `package.json` e gate/upload por OS em `.github/workflows/ci.yml`.
+
+**Evidências:** `artifacts/write-stdin-crash-recovery-report.json`, `artifacts/e2e-360-next-cut-20260820/next-cut-gate-summary.json`, logs por gate no mesmo diretório, `REMOTE-CI-EVIDENCE.md` e manifest SHA-256 a ser gerado após a revisão.
+
+**Limite:** o slice prova reconciliação explícita e fail-closed após restart em ambiente local. Não prova tenant isolation multi-tenant (`tenantId`, workspace/region RBAC), fencing entre duas instâncias concorrentes, execução hosted em Ubuntu/macOS/Windows, alert firing/recovery ou deploy/rollback.
+
+**Próximo aceite P1:** executar o workflow hosted em matriz OS, capturar artifacts por OS, adicionar cenário de fencing/split-brain e definir a identidade durável do process session para evitar colisões de `sessionId` após restart.

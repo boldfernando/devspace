@@ -135,6 +135,17 @@ jobs:
           path: artifacts/write-stdin-idempotency-report.json
           if-no-files-found: ignore
 
+      - name: write_stdin crash recovery E2E
+        run: npm run e2e:write-stdin:recovery
+
+      - name: Upload write_stdin crash recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: write-stdin-crash-recovery-${{ matrix.os }}
+          path: artifacts/write-stdin-crash-recovery-report.json
+          if-no-files-found: ignore
+
       - name: OAuth/MCP P0 negative matrix
         run: npm run security:p0
       - name: Upload OAuth/MCP security artifacts
