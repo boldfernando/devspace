@@ -109,7 +109,9 @@ function parseLogFormat(value: string | undefined): LogFormat {
   throw new Error(`Invalid DEVSPACE_LOG_FORMAT: ${value}`);
 }
 
-function parsePathList(value: string | undefined): string[] {
+function parsePathList(value: string | string[] | undefined): string[] {
+  if (Array.isArray(value)) return value.map((entry) => entry.trim()).filter(Boolean);
+
   return (
     value
       ?.split(",")
@@ -256,7 +258,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): ServerConfig {
       "DEVSPACE_ARTIFACT_MAX_FILE_BYTES",
     ),
     skillsEnabled: env.DEVSPACE_SKILLS === undefined ? true : parseBoolean(env.DEVSPACE_SKILLS),
-    skillPaths: parsePathList(env.DEVSPACE_SKILL_PATHS),
+    skillPaths: parsePathList(env.DEVSPACE_SKILL_PATHS ?? files.config.skillPaths),
     devspaceSkillsDir: devspaceSkillsDir(env),
     devspaceAgentsDir: devspaceAgentsDir(env),
     subagents:

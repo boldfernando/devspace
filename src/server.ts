@@ -37,6 +37,7 @@ import {
   sessionIdPrefix,
 } from "./logger.js";
 import { classifyError } from "./error-policy.js";
+import { uiComponentNames, validateUiSpec } from "./json-render.js";
 
 import { createRuntimeMetrics, type RuntimeMetrics } from "./metrics.js";
 import {
@@ -79,6 +80,8 @@ const MCP_SESSION_IDLE_TIMEOUT_MS = 24 * 60 * 60 * 1_000;
 const MCP_SESSION_CLEANUP_INTERVAL_MS = 5 * 60 * 1_000;
 const WORKSPACE_APP_URI = "ui://devspace/workspace-app.html";
 const WORKSPACE_APP_MANIFEST_ENTRY = "workspace-app.html";
+const JSON_RENDER_APP_URI = "ui://devspace/json-render-app.html";
+const JSON_RENDER_APP_MANIFEST_ENTRY = "json-render-app.html";
 const WRITE_TOOL_ANNOTATIONS = {
   readOnlyHint: false,
   destructiveHint: true,
@@ -444,12 +447,14 @@ function readWorkspaceAppManifest(): WorkspaceAppManifest {
   return JSON.parse(readFileSync(uiManifestUrl(), "utf8")) as WorkspaceAppManifest;
 }
 
-function getWorkspaceAppManifestEntry(): WorkspaceAppManifestEntry {
+function getWorkspaceAppManifestEntry(
+  manifestEntry: string = WORKSPACE_APP_MANIFEST_ENTRY,
+): WorkspaceAppManifestEntry {
   const manifest = readWorkspaceAppManifest();
-  const entry = manifest[WORKSPACE_APP_MANIFEST_ENTRY];
+  const entry = manifest[manifestEntry];
 
   if (!entry?.file) {
-    throw new Error(`Missing ${WORKSPACE_APP_MANIFEST_ENTRY} in UI manifest.`);
+    throw new Error(`Missing ${manifestEntry} in UI manifest.`);
   }
 
   return entry;
@@ -459,9 +464,12 @@ function assetUrl(baseUrl: string, assetPath: string): string {
   return `${baseUrl}/${assetPath.replace(/^\/+/, "")}`;
 }
 
-function workspaceAppHtml(config: ServerConfig): string {
+function workspaceAppHtml(
+  config: ServerConfig,
+  manifestEntry: string = WORKSPACE_APP_MANIFEST_ENTRY,
+): string {
   const baseUrl = assetBaseUrl(config);
-  const entry = getWorkspaceAppManifestEntry();
+  const entry = getWorkspaceAppManifestEntry(manifestEntry);
   const stylesheets = (entry.css ?? [])
     .map(
       (stylesheet) =>
@@ -508,8 +516,10 @@ function setAssetHeaders(res: Response): void {
   res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
 }
 
-async function assertWorkspaceAppAssets(): Promise<void> {
-  const entry = getWorkspaceAppManifestEntry();
+async function assertWorkspaceAppAssets(
+  manifestEntry: string = WORKSPACE_APP_MANIFEST_ENTRY,
+): Promise<void> {
+  const entry = getWorkspaceAppManifestEntry(manifestEntry);
   const candidates = [entry.file, ...(entry.css ?? [])].map(
     (assetPath) => new URL(`../dist/ui/${assetPath}`, import.meta.url),
   );
@@ -870,6 +880,130 @@ export function createMcpServer(
       };
     },
   );
+
+  if (config.widgets !== "off") {
+    registerAppResource(
+      server,
+      "DevSpace Generative UI",
+      JSON_RENDER_APP_URI,
+      {
+        description: "Renders agent-authored UI specs from the DevSpace component catalog.",
+        _meta: {
+          ui: {
+            csp: appCsp(config),
+          },
+        },
+      },
+      async () => {
+        await assertWorkspaceAppAssets(JSON_RENDER_APP_MANIFEST_ENTRY);
+        return {
+          contents: [
+            {
+              uri: JSON_RENDER_APP_URI,
+              mimeType: RESOURCE_MIME_TYPE,
+              text: workspaceAppHtml(config, JSON_RENDER_APP_MANIFEST_ENTRY),
+              _meta: {
+                ui: {
+                  csp: appCsp(config),
+                },
+              },
+            },
+          ],
+        };
+      },
+    );
+
+    registerAppTool(
+      server,
+      "render_ui",
+      {
+        title: "Render UI",
+        description:
+          `Render a structured result as UI instead of prose. Supply a json-render spec whose elements use only these components: ${uiComponentNames().join(", ")}. Every prop declared by a component must be present; pass null for the ones that do not apply. Use it for comparisons, test or audit results, and file or metric tables, where a table or card reads better than a paragraph. The spec is validated against the catalog and rejected if it does not match. Rendered output is presentational only: it never authorizes an action, so keep using the regular tools for anything that reads or changes files.`,
+        inputSchema: {
+          spec: z
+            .object({
+              root: z.string().describe("Key of the root element in elements."),
+              elements: z
+                .record(z.string(), z.unknown())
+                .describe(
+                  "Flat map of element key to { type, props, children }. type must be a catalog component; children lists child element keys.",
+                ),
+            })
+            .describe("json-render spec built from the DevSpace component catalog."),
+          title: z.string().optional().describe("Short title shown above the rendered UI."),
+        },
+        outputSchema: {
+          rendered: z.boolean(),
+          elementCount: z.number(),
+          title: z.string().optional(),
+        },
+        _meta: {
+          ui: {
+            resourceUri: JSON_RENDER_APP_URI,
+            visibility: ["model"],
+          },
+        },
+        annotations: {
+          readOnlyHint: true,
+          destructiveHint: false,
+          idempotentHint: true,
+          openWorldHint: false,
+        },
+      },
+      async ({ spec, title }) => {
+        const startedAt = performance.now();
+        const validation = validateUiSpec(spec);
+
+        if (!validation.ok) {
+          logToolCall(config, {
+            tool: "render_ui",
+            success: false,
+            durationMs: Math.round(performance.now() - startedAt),
+          });
+
+          // Fail closed: an invalid spec is never forwarded to the renderer.
+          return {
+            isError: true,
+            content: [
+              textBlock(
+                [
+                  "INVALID_UI_SPEC: the spec does not match the component catalog.",
+                  ...validation.issues,
+                ].join("\n"),
+              ),
+            ],
+          };
+        }
+
+        logToolCall(config, {
+          tool: "render_ui",
+          success: true,
+          durationMs: Math.round(performance.now() - startedAt),
+        });
+
+        return {
+          content: [
+            textBlock(
+              `Rendered ${validation.elementCount} UI element${validation.elementCount === 1 ? "" : "s"}${title ? `: ${title}` : "."}`,
+            ),
+          ],
+          _meta: {
+            tool: "render_ui",
+            jsonRender: {
+              ...(title ? { title } : {}),
+              spec: validation.spec,
+            },
+          },
+          structuredContent: {
+            rendered: true,
+            elementCount: validation.elementCount,
+            ...(title ? { title } : {}),
+          },
+        };
+      },
+    );
+  }
 
   registerAppTool(
     server,

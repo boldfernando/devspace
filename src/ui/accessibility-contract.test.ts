@@ -85,3 +85,29 @@ test("stylesheet protects keyboard focus, reduced motion, forced colors, and tou
   assert.match(css, /\.tool-label[\s\S]*?color: var\(--color-text-secondary, #c7c7ce\)/);
   assert.match(css, /\.header-meta[\s\S]*?color: var\(--color-text-secondary, #c7c7ce\)/);
 });
+
+test("generative UI shell keeps status messaging and lazy loading contracts", () => {
+  const app = read("json-render-app.tsx");
+
+  assert.match(app, /setAttribute\("role", "status"\)/);
+  assert.match(app, /setAttribute\("aria-live", "polite"\)/);
+  assert.match(app, /await import\("@modelcontextprotocol\/ext-apps"\)/);
+  assert.match(app, /await import\("\.\/json-render-renderer\.js"\)/);
+  assert.match(app, /Could not connect to the host/);
+  assert.match(app, /does not match the component catalog/);
+  // The heavy renderer must stay out of the shell's static imports.
+  assert.doesNotMatch(app, /^import .*react-dom/m);
+  assert.doesNotMatch(app, /^import .*@json-render\/react/m);
+});
+
+test("generative UI uses the published shadcn set and adds only figure semantics", () => {
+  const registry = read("json-render-registry.tsx");
+
+  // The shadcn implementations ship with the catalog and are used as published,
+  // so DevSpace does not reimplement their markup or their accessibility.
+  assert.match(registry, /shadcnComponents/);
+  assert.match(registry, /\.\.\.shadcnComponents/);
+  assert.match(registry, /<figure/);
+  assert.match(registry, /<figcaption/);
+  assert.match(registry, /<code/);
+});

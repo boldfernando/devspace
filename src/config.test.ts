@@ -189,6 +189,7 @@ writeFileSync(
     subagents: true,
     artifactsEnabled: true,
     artifactMaxFileBytes: 321,
+    skillPaths: ["/opt/skill-packs/medusa", " /opt/skill-packs/extra "],
   }),
 );
 writeFileSync(
@@ -205,6 +206,11 @@ assert.equal(fileConfig.publicBaseUrl, "https://devspace.example.com");
 assert.equal(fileConfig.subagents, true);
 assert.equal(fileConfig.artifactsEnabled, true);
 assert.equal(fileConfig.artifactMaxFileBytes, 321);
+assert.deepEqual(fileConfig.skillPaths, ["/opt/skill-packs/medusa", "/opt/skill-packs/extra"]);
+assert.deepEqual(
+  loadConfig({ DEVSPACE_CONFIG_DIR: configDir, DEVSPACE_SKILL_PATHS: "/env/skills" }).skillPaths,
+  ["/env/skills"],
+);
 assert.deepEqual(fileConfig.allowedHosts, [
   "localhost",
   "127.0.0.1",

@@ -121,7 +121,13 @@ Ele também mantém compatibilidade com:
 
 - a skill embutida `subagent-delegation` quando `DEVSPACE_SUBAGENTS=1`, a menos que `~/.devspace/skills/subagent-delegation/SKILL.md` exista
 - `DEVSPACE_AGENT_DIR/skills`, padrão `~/.codex/skills`
-- caminhos adicionais de `DEVSPACE_SKILL_PATHS`
+- caminhos adicionais de `DEVSPACE_SKILL_PATHS`, ou de `skillPaths` em `~/.devspace/config.json`
+
+Diretórios de skills são varridos recursivamente, então um diretório de packs
+como `plugins/<pack>/skills/<skill>/SKILL.md` pode ser registrado apenas pelo
+caminho raiz. Caminhos configurados explicitamente têm precedência sobre os
+diretórios descobertos automaticamente: em caso de colisão de nome, vence o
+caminho que o operador declarou, não uma cópia parada em `~/.agents/skills`.
 
 Quando os Subagents estão habilitados, o DevSpace descobre perfis de agente em:
 
@@ -141,6 +147,44 @@ Exemplo:
 DEVSPACE_SKILL_PATHS="$HOME/.claude/skills,$HOME/company/skills" \
  npx @waishnav/devspace serve
 ```
+
+Para persistir a mesma lista em todo boot, coloque em `~/.devspace/config.json`:
+
+```json
+{
+  "skillPaths": ["~/repos/medusa-agent-skills/plugins"]
+}
+```
+
+A variável de ambiente vence quando ambos estiverem definidos.
+
+## Generative UI
+
+Com widgets habilitados, o DevSpace expõe a tool `render_ui`, apoiada em
+[json-render](https://json-render.dev). O modelo emite um spec e o host o
+renderiza no recurso `ui://devspace/json-render-app.html`.
+
+O catálogo de componentes é o conjunto publicado `@json-render/shadcn` (`Card`,
+`Stack`, `Table`, `Tabs`, `Alert`, `Badge`, `Progress`, controles de formulário e
+o restante da biblioteca shadcn) mais uma adição do DevSpace, `CodeBlock`, para
+código-fonte e saída de comando. Toda prop declarada por um componente precisa
+estar presente no spec; as que não se aplicam vão como `null`.
+
+O spec é validado fail-closed: nomes de componente, tipos de prop e referências
+entre elementos são verificados, e um spec inválido é rejeitado com
+`INVALID_UI_SPEC` em vez de renderizado. Note que o `catalog.validate()` upstream
+não checa props, então o DevSpace aplica o schema de props de cada componente por
+conta própria.
+
+O catálogo não declara actions e o app não registra handlers de action, então a
+saída renderizada é apenas apresentacional e nunca carrega autorização para uma
+chamada de tool — componentes interativos renderizam, mas não conseguem despachar
+nada. `render_ui` é classificada como tool de escopo de leitura. Use
+`DEVSPACE_WIDGETS=off` para remover a tool e seu recurso.
+
+O renderer, o React DOM e a biblioteca de componentes são carregados
+dinamicamente, então o recurso do app fica em poucos kilobytes e nada mais pesado
+é buscado antes de um spec efetivamente chegar.
 
 ## Logs
 
