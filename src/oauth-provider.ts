@@ -33,6 +33,22 @@ interface AuthorizationCodeRecord {
   expiresAtMs: number;
 }
 
+const CODE_TTL_MS = 5 * 60 * 1000;
+
+function randomToken(): string {
+  return randomBytes(32).toString("base64url");
+}
+
+function safeEquals(a: string, b: string): boolean {
+  const left = Buffer.from(a.trim());
+  const right = Buffer.from(b.trim());
+  if (left.byteLength !== right.byteLength) return false;
+  return timingSafeEqual(left, right);
+}
+
+function htmlEscape(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
