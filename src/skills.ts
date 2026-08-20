@@ -47,8 +47,11 @@ export function effectiveSkillPaths(config: ServerConfig, cwd: string): string[]
     (path): path is string => path !== undefined && existsSync(path),
   );
 
+  // Explicitly configured packs outrank auto-discovered directories: a name
+  // collision resolves to the path the operator named, not to a stale copy that
+  // happens to sit in a default location.
   const seen = new Set<string>();
-  return [...defaultPaths, ...config.skillPaths]
+  return [...config.skillPaths, ...defaultPaths]
     .map((path) => resolveSkillPath(path, cwd))
     .filter((path) => {
       if (seen.has(path)) return false;

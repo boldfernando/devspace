@@ -22,6 +22,7 @@ export interface DevspaceUserConfig {
   artifactMaxFileBytes?: number;
   agentDir?: string;
   subagents?: boolean;
+  skillPaths?: string[];
 }
 
 export interface DevspaceAuthConfig {

@@ -209,6 +209,35 @@ try {
     true,
   );
 
+  // An explicitly configured pack outranks a stale copy sitting in a default
+  // discovery directory, so the operator's path is the one that gets served.
+  await mkdir(join(globalAgentsSkills, "shadowed-skill"), { recursive: true });
+  await mkdir(join(explicitSkills, "shadowed-skill"), { recursive: true });
+  await writeFile(
+    join(globalAgentsSkills, "shadowed-skill", "SKILL.md"),
+    ["---", "name: shadowed-skill", "description: Stale copy in a default directory.", "---", "", "Stale."].join("\n"),
+  );
+  await writeFile(
+    join(explicitSkills, "shadowed-skill", "SKILL.md"),
+    ["---", "name: shadowed-skill", "description: Explicitly configured pack.", "---", "", "Current."].join("\n"),
+  );
+
+  const precedenceConfig = loadConfig({
+    DEVSPACE_ALLOWED_ROOTS: projectRoot,
+    DEVSPACE_AGENT_DIR: agentDir,
+    DEVSPACE_SKILL_PATHS: explicitSkills,
+    DEVSPACE_OAUTH_OWNER_TOKEN: "test-owner-token-that-is-long-enough",
+    PORT: "1",
+  });
+  const precedencePaths = effectiveSkillPaths(precedenceConfig, projectRoot);
+  assert.equal(precedencePaths[0], explicitSkills, "explicit skill paths come first");
+  const shadowed = loadWorkspaceSkills(precedenceConfig, projectRoot).skills.find(
+    (skill) => skill.name === "shadowed-skill",
+  );
+  assert.ok(shadowed);
+  assert.equal(shadowed.filePath, join(explicitSkills, "shadowed-skill", "SKILL.md"));
+  assert.equal(shadowed.description, "Explicitly configured pack.");
+
   const duplicateConfig = loadConfig({
     DEVSPACE_ALLOWED_ROOTS: projectRoot,
     DEVSPACE_AGENT_DIR: agentDir,
