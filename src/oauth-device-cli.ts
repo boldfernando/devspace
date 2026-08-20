@@ -161,40 +161,10 @@ async function loginDevice(args: string[]): Promise<void> {
     headers: { "content-type": "application/x-www-form-urlencoded" },
     body,
   });
-  console.log(`Abra: ${device.verification_uri}`);
+  console.log(`Abra: ${device.verification_uri_complete ?? device.verification_uri}`);
   console.log(`Digite o código: ${device.user_code}`);
 
-  // Auto-approve when running against a local server or configured publicBaseUrl with a known ownerToken
-  const files = loadDevspaceFiles();
-  const configuredHost = files.config.publicBaseUrl ? new URL(files.config.publicBaseUrl).hostname : undefined;
-  const isLocalOrConfigured = ["127.0.0.1", "localhost", "::1", "[::1]"].includes(server.hostname) || server.hostname === configuredHost;
-  const ownerToken = files.auth.ownerToken;
-  let autoApproved = false;
-  if (isLocalOrConfigured && ownerToken && !hasFlag(args, "--no-auto-approve")) {
-    try {
-      const approveUrl = new URL("/oauth/device/approve", server);
-      const approveBody = new URLSearchParams({
-        user_code: device.user_code,
-        decision: "approve",
-        owner_token: ownerToken,
-      });
-      const approveRes = await fetch(approveUrl.href, {
-        method: "POST",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-        body: approveBody,
-        redirect: "manual",
-        signal: AbortSignal.timeout(10_000),
-      });
-      autoApproved = approveRes.status === 303 || approveRes.ok;
-      if (autoApproved) {
-        console.log("Aprovação automática concluída (servidor local).");
-      }
-    } catch {
-      // Auto-approval failed silently; fall back to manual browser flow
-    }
-  }
-
-  if (!autoApproved && device.verification_uri_complete && !hasFlag(args, "--no-browser")) {
+  if (device.verification_uri_complete && !hasFlag(args, "--no-browser")) {
     openBrowser(device.verification_uri_complete);
   }
 
