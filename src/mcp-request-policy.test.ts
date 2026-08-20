@@ -24,6 +24,11 @@ test("MCP policy classifies protocol discovery and read calls", () => {
     method: "POST",
     body: { method: "tools/call", params: { name: "show_changes" } },
   }), "read");
+  // render_ui only renders a validated spec; it reads and mutates nothing.
+  assert.equal(requiredScopeForMcpRequest({
+    method: "POST",
+    body: { method: "tools/call", params: { name: "render_ui" } },
+  }), "read");
 });
 
 test("MCP policy classifies every mutating tool as write", () => {

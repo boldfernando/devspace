@@ -27,6 +27,7 @@ const READ_TOOL_NAMES = new Set([
   "glob",
   "ls",
   "show_changes",
+  "render_ui",
 ]);
 
 export function classifyMcpRequest(
