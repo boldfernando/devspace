@@ -1,0 +1,123 @@
+=== npm run lint ===
+
+> @waishnav/devspace@1.0.7 lint
+> eslint src storybook-360-mcp .storybook --max-warnings=0
+
+
+Oops! Something went wrong! :(
+
+ESLint: 10.8.1
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@eslint/js' imported from C:\Users\fjuni\.copilot\repos\devspace\eslint.config.mjs
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:859:18)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+exit_code=2
+=== npm run typecheck ===
+
+> @waishnav/devspace@1.0.7 typecheck
+> tsc -p tsconfig.json --noEmit
+
+exit_code=0
+=== npm run storybook:test:contracts ===
+
+> @waishnav/devspace@1.0.7 storybook:test:contracts
+> tsx --test storybook-360-mcp/tests/mock-layer.test.ts
+
+Ô£ö fixture catalog covers every required deterministic state (0.4627ms)
+Ô£ö model mock is deterministic and emits tool calls plus streaming chunks (0.6868ms)
+Ô£ö AI model adapter uses the injected mock and never requires a provider (0.3275ms)
+Ô£ö missing scenarios fail closed without network fallback (0.1197ms)
+Ôä╣ tests 4
+Ôä╣ suites 0
+Ôä╣ pass 4
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 2746.0072
+exit_code=0
+=== npm run storybook:build ===
+
+> @waishnav/devspace@1.0.7 storybook:build
+> storybook build
+
+
+[90mT[39m  Building storybook v10.5.9
+[90m|[39m
+[32mo[39m  Cleaning outputDir: [36mstorybook-static[39m
+[90m|[39m
+[32mo[39m  Loading presets
+[90m|[39m
+[32mo[39m  Building manager..
+[90m|[39m
+[34mÔÇó[39m  Building open services..
+[90m|[39m
+[34mÔÇó[39m  Building preview..
+[90m|[39m  [43mVite[49m [36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+[2K
+transforming...Ô£ô 2071 modules transformed.
+rendering chunks...
+[90m|[39m
+[31mx[39m  [43mVite[49m [31mÔ£ù[39m Build failed in 3.19s
+[90m|[39m
+[31mx[39m  Failed to build the preview
+[90m|[39m
+[31mx[39m  [31mBuild failed with 2 errors:
+
+[90m|[39m  [31m[MISSING_EXPORT] [0m"initialize" is not exported by
+[90m|[39m  "node_modules/msw-storybook-addon/build/index.mjs".
+[90m|[39m  [38;5;246mÔò¡[0m[38;5;246mÔöÇ[0m[38;5;246m[[0m .storybook/preview.ts:1:10 [38;5;246m][0m
+[90m|[39m  [38;5;246mÔöé[0m
+[90m|[39m  [38;5;246m1 Ôöé[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0minitialize[38;5;249m,[0m[38;5;249m [0m[38;5;249mm[0m[38;5;249ms[0m[38;5;249mw[0m[38;5;249mL[0m[38;5;249mo[0m[38;5;249ma[0m[38;5;249md[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249mm[0m[38;5;249ms[0m[38;5;249mw[0m[38;5;249m-[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249my[0m[38;5;249mb[0m[38;5;249mo[0m[38;5;249mo[0m[38;5;249mk[0m[38;5;249m-[0m[38;5;249ma[0m[38;5;249md[0m[38;5;249md[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249m"[0m[38;5;249m;[0m
+[90m|[39m  [38;5;240mÔöé[0m          ÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇ
+[90m|[39m  [38;5;240mÔöé[0m               Ôò░ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ Missing export
+[90m|[39m  [38;5;246mÔöÇÔöÇÔöÇÔò»[0m
+
+[90m|[39m  [31m[MISSING_EXPORT] [0m"mswLoader" is not exported by
+[90m|[39m  "node_modules/msw-storybook-addon/build/index.mjs".
+[90m|[39m  [38;5;246mÔò¡[0m[38;5;246mÔöÇ[0m[38;5;246m[[0m .storybook/preview.ts:1:22 [38;5;246m][0m
+[90m|[39m  [38;5;246mÔöé[0m
+[90m|[39m  [38;5;246m1 Ôöé[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249ma[0m[38;5;249ml[0m[38;5;249mi[0m[38;5;249mz[0m[38;5;249me[0m[38;5;249m,[0m[38;5;249m [0mmswLoader[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249mm[0m[38;5;249ms[0m[38;5;249mw[0m[38;5;249m-[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249my[0m[38;5;249mb[0m[38;5;249mo[0m[38;5;249mo[0m[38;5;249mk[0m[38;5;249m-[0m[38;5;249ma[0m[38;5;249md[0m[38;5;249md[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249m"[0m[38;5;249m;[0m
+[90m|[39m  [38;5;240mÔöé[0m                      ÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇ
+[90m|[39m  [38;5;240mÔöé[0m                          Ôò░ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ Missing export
+[90m|[39m  [38;5;246mÔöÇÔöÇÔöÇÔò»[0m
+[90m|[39m  [39m
+[90m|[39m  at aggregateBindingErrorsIntoJsError
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/rolldown/dist/shared/error-BuvQYXuZ.mjs:48:18)
+[90m|[39m  at unwrapBindingResult
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/rolldown/dist/shared/error-BuvQYXuZ.mjs:18:128)
+[90m|[39m  at #build
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/rolldown/dist/shared/rolldown-build-CrPk_lZe.mjs:3246:34)
+[90m|[39m  at async buildEnvironment
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/vite/dist/node/chunks/node.js:33253:64)
+[90m|[39m  at async Object.build
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/vite/dist/node/chunks/node.js:33675:19)
+[90m|[39m  at async build
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/@storybook/builder-vite/dist/index.js:1531:290)
+[90m|[39m  at async Promise.all (index 0)
+[90m|[39m  at async buildStaticStandalone
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/storybook/dist/core-server/index.js:10085:7)
+[90m|[39m  at async withTelemetry
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/storybook/dist/_node-chunks/chunk-BJAFYWQI.js:1889:12)
+[90m|[39m  at async build
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/storybook/dist/bin/core.js:3794:3)
+[90m|[39m  at async _Command.<anonymous>
+[90m|[39m  (file:///C:/Users/fjuni/.copilot/repos/devspace/node_modules/storybook/dist/bin/core.js:3976:7)
+[90m|[39m
+[34mÔÇó[39m  Storybook collects completely anonymous usage telemetry. We use it to
+[90m|[39m  shape Storybook's roadmap and prioritize features. You can learn more,
+[90m|[39m  including how to opt out, at ]8;;https://storybook.js.org/telemetryhttps://storybook.js.org/telemetry]8;;
+[90m|[39m
+[90mÔÇö[39m  Storybook exited with an error
+
+exit_code=1
+=== summary ===
+[{"command":"npm run lint","exit_code":2},{"command":"npm run typecheck","exit_code":0},{"command":"npm run storybook:test:contracts","exit_code":0},{"command":"npm run storybook:build","exit_code":1}]

@@ -1,0 +1,344 @@
+{
+  "schema": "devspace/storybook-360-mcp.evidence-ledger.v1",
+  "generated_at": "2026-08-20T07:14:08.487Z",
+  "baseline_sha": "7478d538815d5cec2596ad2101a753ebb96e0165",
+  "working_tree": "dirty before commit; all pre-existing work preserved",
+  "decision": {
+    "local_gate_status": "GREEN",
+    "coverage_reconciliation_status": "YELLOW",
+    "global_status": "YELLOW",
+    "release_status": "NOT_RELEASE_READY",
+    "reason": "All executed local gates passed, but browser-host interaction execution, automated accessibility scan execution, visual regression evidence, cross-OS browser coverage, and hosted deployment/rollback remain unproven."
+  },
+  "as_is": {
+    "storybook": false,
+    "storybook_dependencies": false,
+    "storybook_scripts": false,
+    "storybook_stories": 0,
+    "atomic_design_directories": {
+      "atoms": 0,
+      "molecules": 0,
+      "organisms": 0,
+      "templates": 0,
+      "pages": 0
+    },
+    "mock_layer": false,
+    "msw": false,
+    "aimock": false,
+    "ui_architecture": "single-shell React/TypeScript UI under src/ui with shared CSS token and accessibility contracts",
+    "unit_and_contract_tests": "existing source-level tests cover UI semantics, rendering strategy, state, card normalization, language, diff and journey behavior",
+    "browser_host_e2e": "UNKNOWN / not present in the baseline inventory"
+  },
+  "to_be": {
+    "storybook": "10.5.9",
+    "storybook_addons": ["@storybook/addon-a11y", "@storybook/addon-mcp@0.7.0"],
+    "msw": "2.15.0",
+    "msw_storybook_addon": "3.0.0",
+    "eslint": "10.8.1 with typescript-eslint, react-hooks and react-refresh",
+    "stories": 7,
+    "fixtures": 7,
+    "mock_states": ["success", "error", "empty", "loading", "timeout", "retry"],
+    "mock_behaviors": ["tool-calling", "streaming", "deterministic replay", "fail-closed missing scenario", "no external provider/network fallback"],
+    "contract_tests": 4,
+    "service_worker": "public/mockServiceWorker.js",
+    "storybook_check": "storybook:build plus storybook:test:contracts",
+    "lint_gate": "eslint src storybook-360-mcp .storybook --max-warnings=0"
+  },
+  "component_inventory": {
+    "count": 26,
+    "source": "artifacts/storybook-360-mcp-e2e/04-discovery-versioned.json",
+    "files": [
+      "src/ui/accessibility-contract.test.ts",
+      "src/ui/card-result-normalizer.test.ts",
+      "src/ui/card-result-normalizer.ts",
+      "src/ui/card-types.test.ts",
+      "src/ui/card-types.ts",
+      "src/ui/diff-payload.tsx",
+      "src/ui/file-payload.tsx",
+      "src/ui/heavy-payload.tsx",
+      "src/ui/icons.ts",
+      "src/ui/journey-progress.test.ts",
+      "src/ui/journey-progress.ts",
+      "src/ui/language-catalog.test.ts",
+      "src/ui/language-catalog.ts",
+      "src/ui/patch-display.test.ts",
+      "src/ui/patch-display.ts",
+      "src/ui/render-strategy.test.ts",
+      "src/ui/render-strategy.ts",
+      "src/ui/review-payload.tsx",
+      "src/ui/scrollbar.ts",
+      "src/ui/sync-state.test.ts",
+      "src/ui/sync-state.ts",
+      "src/ui/tool-display.test.ts",
+      "src/ui/tool-display.ts",
+      "src/ui/vite-env.d.ts",
+      "src/ui/workspace-app.css",
+      "src/ui/workspace-app.tsx"
+    ],
+    "atomic_design_reconciliation": {
+      "status": "YELLOW",
+      "finding": "No existing atoms/molecules/organisms/templates/pages taxonomy was found. The integration adapted the real shared-shell architecture instead of creating artificial folders or duplicating production components."
+    }
+  },
+  "stories": {
+    "file": "storybook-360-mcp/stories/ToolResultCard.stories.tsx",
+    "count": 7,
+    "ids": ["Success", "Error", "Empty", "Loading", "Timeout", "RetryAndToolCalling", "Streaming"],
+    "interaction_play_functions": ["RetryAndToolCalling", "Streaming"],
+    "storybook_render_status": "BUILD_AND_SMOKE_PASS",
+    "browser_play_execution": "UNKNOWN: no browser-host test runner was installed or executed"
+  },
+  "fixtures": {
+    "file": "storybook-360-mcp/fixtures/tool-results.ts",
+    "count": 7,
+    "ids": ["read-success", "write-error", "glob-empty", "workspace-loading", "bash-timeout", "exec-retry-tool-call", "streaming-read"],
+    "state_coverage": {
+      "success": ["read-success", "streaming-read"],
+      "error": ["write-error"],
+      "empty": ["glob-empty"],
+      "loading": ["workspace-loading"],
+      "timeout": ["bash-timeout"],
+      "retry": ["exec-retry-tool-call"]
+    },
+    "tool_calling": ["exec-retry-tool-call", "streaming-read"],
+    "streaming": ["read-success", "exec-retry-tool-call", "streaming-read"]
+  },
+  "coverage_matrix": [
+    {
+      "component": "src/ui/workspace-app.tsx + workspace-app.css",
+      "story": "Indirect shared shell used by Storybook fixture harness; no direct production App story",
+      "unit": "src/ui/accessibility-contract.test.ts; src/ui/render-strategy.test.ts; src/ui/sync-state.test.ts",
+      "integration": "storybook:build and storybook:smoke pass",
+      "e2e": "UNKNOWN: browser-host mount and MCP host bridge not executed",
+      "mock": "storybook-360-mcp/mocks/model.ts; adapters.ts; 7 fixture catalog"
+    },
+    {
+      "component": "src/ui/card-types.ts + card-result-normalizer.ts",
+      "story": "All seven ToolResultCard stories consume the real ToolResultCard type and normalization-compatible payload shapes",
+      "unit": "card-types.test.ts; card-result-normalizer.test.ts",
+      "integration": "storybook-test contract catalog and deterministic model adapter pass",
+      "e2e": "UNKNOWN: no browser-host E2E",
+      "mock": "all seven fixtures"
+    },
+    {
+      "component": "src/ui/tool-display.ts",
+      "story": "All seven stories call getToolDisplay against real tool identifiers",
+      "unit": "tool-display.test.ts",
+      "integration": "Storybook build pass",
+      "e2e": "UNKNOWN: no browser-host E2E",
+      "mock": "all seven fixtures"
+    },
+    {
+      "component": "src/ui/heavy-payload.tsx",
+      "story": "Covered indirectly by real payload/status semantics; no direct mounted HeavyPayload story",
+      "unit": "accessibility-contract.test.ts; render-strategy.test.ts",
+      "integration": "Typecheck/build pass; lazy renderer imports remain intact",
+      "e2e": "UNKNOWN: no browser-host lazy-load assertion",
+      "mock": "read-success, write-error, bash-timeout, streaming-read"
+    },
+    {
+      "component": "src/ui/file-payload.tsx + diff-payload.tsx + review-payload.tsx",
+      "story": "Indirectly represented by read/write/retry fixtures; no direct renderer stories",
+      "unit": "accessibility-contract.test.ts; patch-display.test.ts",
+      "integration": "Build pass; existing source contracts pass",
+      "e2e": "UNKNOWN: no browser-host code/diff rendering E2E",
+      "mock": "read-success, write-error, exec-retry-tool-call, streaming-read"
+    },
+    {
+      "component": "src/ui/patch-display.ts",
+      "story": "Indirect through write and retry payload fixtures",
+      "unit": "patch-display.test.ts",
+      "integration": "npm test pass",
+      "e2e": "UNKNOWN: no browser-host diff interaction",
+      "mock": "write-error, exec-retry-tool-call"
+    },
+    {
+      "component": "src/ui/journey-progress.ts",
+      "story": "No direct story; shared shell journey is outside the minimal fixture harness",
+      "unit": "journey-progress.test.ts",
+      "integration": "npm test pass",
+      "e2e": "UNKNOWN: no browser-host journey trace",
+      "mock": "No dedicated journey fixture; existing deterministic card test data only"
+    },
+    {
+      "component": "src/ui/sync-state.ts",
+      "story": "No direct story",
+      "unit": "sync-state.test.ts",
+      "integration": "npm test pass",
+      "e2e": "UNKNOWN: no reconnect/epoch browser-host test",
+      "mock": "No dedicated Storybook scenario"
+    },
+    {
+      "component": "src/ui/language-catalog.ts",
+      "story": "No direct story; language selection is consumed by the real file renderer",
+      "unit": "language-catalog.test.ts",
+      "integration": "npm test and build pass",
+      "e2e": "UNKNOWN: no browser-host language render assertion",
+      "mock": "read-success and streaming-read provide file paths"
+    },
+    {
+      "component": "src/ui/icons.ts + scrollbar.ts + vite-env.d.ts",
+      "story": "No direct stories; token/style infrastructure is reused via workspace-app.css",
+      "unit": "No dedicated unit test for icons/scrollbar; accessibility-contract.test.ts checks CSS contracts",
+      "integration": "Storybook build pass",
+      "e2e": "UNKNOWN: no visual browser evidence",
+      "mock": "Not applicable; no external data boundary"
+    },
+    {
+      "component": "Existing src/ui/*.test.ts contract surfaces",
+      "story": "Not stories; retained as source-level unit contracts to avoid duplication",
+      "unit": "Covered by npm test and coverage:check",
+      "integration": "PASS",
+      "e2e": "Not applicable as a source test layer",
+      "mock": "No external network required"
+    }
+  ],
+  "gate_matrix": [
+    {
+      "gate": "lint",
+      "status": "GREEN",
+      "command": "npm run lint",
+      "exit_code": 0,
+      "duration_ms": 2237,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-lint.stdout.log", "artifacts/storybook-360-mcp-e2e/07-gate-chain-summary.json"]
+    },
+    {
+      "gate": "typecheck",
+      "status": "GREEN",
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "duration_ms": 4180,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-typecheck.stdout.log", "artifacts/storybook-360-mcp-e2e/07-gate-chain-summary.json"]
+    },
+    {
+      "gate": "build",
+      "status": "GREEN_WITH_WARNING",
+      "command": "npm run build",
+      "exit_code": 0,
+      "duration_ms": 4632,
+      "warning": "Existing post-minification chunk warning above 500 kB remains; it did not fail the gate.",
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-build.stdout.log", "artifacts/storybook-360-mcp-e2e/07-build.stderr.log"]
+    },
+    {
+      "gate": "storybook-build-and-contracts",
+      "status": "GREEN_WITH_WARNING",
+      "command": "npm run storybook:check",
+      "exit_code": 0,
+      "duration_ms": 4103,
+      "proof": "Storybook v10.5.9 built, seven stories were bundled, and four contract tests passed.",
+      "warning": "The Storybook iframe chunk is above 500 kB after minification; this is a performance follow-up, not a failed build.",
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-storybook-check.stdout.log"]
+    },
+    {
+      "gate": "storybook-smoke-render",
+      "status": "GREEN",
+      "command": "npm run storybook:smoke",
+      "exit_code": 0,
+      "duration_ms": 2800,
+      "proof": "Storybook smoke command completed successfully.",
+      "limitation": "Smoke mode did not execute the play functions in a browser-host test runner.",
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-storybook-smoke-render.stdout.log"]
+    },
+    {
+      "gate": "unit-and-integration",
+      "status": "GREEN",
+      "command": "npm test",
+      "exit_code": 0,
+      "duration_ms": 39457,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-unit-integration.stdout.log", "artifacts/storybook-360-mcp-e2e/07-unit-integration.stderr.log"]
+    },
+    {
+      "gate": "coverage",
+      "status": "GREEN",
+      "command": "npm run coverage:check",
+      "exit_code": 0,
+      "duration_ms": 49441,
+      "thresholds": {"lines": 60, "functions": 55, "branches": 45, "statements": 60},
+      "observed_total": {"statements": 67.97, "branches": 80.31, "functions": 71.31, "lines": 67.97},
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-coverage-check.stdout.log"]
+    },
+    {
+      "gate": "observability-contract",
+      "status": "GREEN",
+      "command": "npm run test:observability",
+      "exit_code": 0,
+      "duration_ms": 298,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-observability-contract.stdout.log"]
+    },
+    {
+      "gate": "strategy-audit",
+      "status": "GREEN",
+      "command": "npm run test:strategy:audit",
+      "exit_code": 0,
+      "duration_ms": 357,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-strategy-audit.stdout.log"]
+    },
+    {
+      "gate": "security-p0",
+      "status": "GREEN",
+      "command": "npm run security:p0",
+      "exit_code": 0,
+      "duration_ms": 3641,
+      "proof": "23/23 negative OAuth/Bearer/session/MCP/release scenarios passed; missing_scenarios=0; secret_leak_detected=false.",
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-security-p0.stdout.log"]
+    },
+    {
+      "gate": "real-http-mcp-e2e",
+      "status": "GREEN",
+      "command": "npm run e2e",
+      "exit_code": 0,
+      "duration_ms": 6675,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-http-mcp-e2e.stdout.log", "artifacts/storybook-360-mcp-e2e/07-http-mcp-e2e.stderr.log"]
+    },
+    {
+      "gate": "doctor",
+      "status": "GREEN",
+      "command": "npm run doctor",
+      "exit_code": 0,
+      "duration_ms": 2084,
+      "evidence": ["artifacts/storybook-360-mcp-e2e/07-doctor.stdout.log"]
+    },
+    {
+      "gate": "browser-host-interaction",
+      "status": "UNKNOWN",
+      "command": null,
+      "proof": "No browser-host runner was installed or executed; play functions are present but their runtime execution is not claimed.",
+      "evidence": ["artifacts/storybook-360-mcp-e2e/04-discovery-versioned.json", "storybook-360-mcp/stories/ToolResultCard.stories.tsx"]
+    },
+    {
+      "gate": "automated-a11y-scan",
+      "status": "UNKNOWN",
+      "command": null,
+      "proof": "@storybook/addon-a11y is configured and the build contains axe assets, but no browser-host axe scan result was executed.",
+      "evidence": [".storybook/main.ts", ".storybook/preview.ts", "artifacts/storybook-360-mcp-e2e/07-storybook-check.stdout.log"]
+    },
+    {
+      "gate": "visual-regression",
+      "status": "UNKNOWN",
+      "command": null,
+      "proof": "No Chromatic, Playwright screenshot baseline, or equivalent visual diff runner is configured.",
+      "evidence": ["artifacts/storybook-360-mcp-e2e/04-discovery-versioned.json"]
+    }
+  ],
+  "unknowns_and_blockers": [
+    {"priority": "P1", "id": "STORYBOOK-360-001", "status": "UNKNOWN", "finding": "Play functions are authored but not executed in a browser-host test runner."},
+    {"priority": "P1", "id": "STORYBOOK-360-002", "status": "UNKNOWN", "finding": "Automated axe/a11y scan result is not proven; addon configuration alone is insufficient."},
+    {"priority": "P1", "id": "STORYBOOK-360-003", "status": "UNKNOWN", "finding": "Visual regression baseline and diff evidence are absent."},
+    {"priority": "P2", "id": "STORYBOOK-360-004", "status": "PARTIAL", "finding": "The real UI has no Atomic Design folder taxonomy; the integration intentionally preserved the existing single-shell architecture rather than fabricating atom/molecule layers."},
+    {"priority": "P2", "id": "STORYBOOK-360-005", "status": "PARTIAL", "finding": "Several payload and infrastructure modules are covered by source contracts or indirect stories, not direct stories."},
+    {"priority": "P2", "id": "STORYBOOK-360-006", "status": "OPEN", "finding": "Build and Storybook retain existing post-minification chunk warnings above 500 kB."},
+    {"priority": "P2", "id": "STORYBOOK-360-007", "status": "OPEN", "finding": "Cross-OS browser-host execution and hosted deployment/rollback remain outside the local proof boundary."}
+  ],
+  "evidence_manifest": {
+    "source": "artifacts/storybook-360-mcp-e2e/07-gate-chain-summary.json",
+    "sha256_policy": "Each captured stdout/stderr file is written byte-exact and hashed in the gate-chain summary; no failed or intermediate output was deleted.",
+    "captured_files": 24,
+    "raw_manifest_entries": 24
+  },
+  "security": {
+    "external_calls_default": "blocked in the Storybook Mock Layer",
+    "provider_live_tests": "not enabled",
+    "secret_scan": "23-scenario security:p0 passed with secret_leak_detected=false",
+    "observability_dimensions": "existing sanitization contract gate passed; no token, payload, command, stdout, or key dimensions are introduced by the Mock Layer"
+  }
+}

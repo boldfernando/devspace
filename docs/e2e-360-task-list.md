@@ -369,3 +369,26 @@ A tentativa intermediária de secret scan contaminada por logs de orquestração
 - **P4:** `PR-009` automação enterprise de RBAC, key rotation e provenance.
 
 Relatório completo: `artifacts/canonical-platform-review-360-v4-first-mover/FIRST-MOVER-PLATFORM-REVIEW-REPORT.md`. Matriz final: `FIRST-MOVER-GATE-MATRIX.json`. Nenhuma alteração de código de produto, push remoto ou promoção de branch foi executada; o merge seguro deste ciclo é limitado aos artifacts e documentação após o gate independente.
+
+
+## 15. Storybook 360 MCP integration — deterministic Mock Layer and coverage reconciliation
+
+**Status:** IMPLEMENTED LOCALLY; **local gates GREEN**, **coverage reconciliation YELLOW**, **global E2E 360 YELLOW**, **release NOT RELEASE-READY**.
+
+| Item | Alteration / result | Evidence |
+|---|---|---|
+| STORYBOOK-360-001 | Added Storybook 10.5.9, React/Vite integration, addon MCP, addon a11y, MSW Storybook addon, scripts and strict ESLint gate. | `package.json`; `package-lock.json`; `.storybook/main.ts`; `.storybook/preview.ts`; `eslint.config.mjs`; `artifacts/storybook-360-mcp-e2e/07-gate-chain-summary.json` |
+| STORYBOOK-360-002 | Added typed deterministic Mock Layer with success/error/empty/loading/timeout/retry, streaming, tool-calling, adapter boundary, MSW handlers and fail-closed missing scenarios. | `storybook-360-mcp/mocks/`; `storybook-360-mcp/tests/mock-layer.test.ts`; `artifacts/storybook-360-mcp-e2e/07-storybook-check.stdout.log` |
+| STORYBOOK-360-003 | Added seven versioned tool-result fixtures and seven stories, including retry/tool-calling and streaming play functions. | `storybook-360-mcp/fixtures/tool-results.ts`; `storybook-360-mcp/stories/ToolResultCard.stories.tsx` |
+| STORYBOOK-360-004 | Preserved the real single-shell UI architecture and existing CSS/a11y conventions; no artificial Atomic Design directories were introduced. | `artifacts/storybook-360-mcp-e2e/04-discovery-versioned.json`; `src/ui/workspace-app.css`; `src/ui/accessibility-contract.test.ts` |
+| STORYBOOK-360-005 | Repaired lint errors/warnings exposed by the new zero-warning gate without changing public error messages or security behavior. | `src/git-worktrees.ts`; `src/incoming-artifacts.ts`; `src/local-agent-adapters.ts`; `src/local-agent-profiles.ts`; `src/oauth-device-cli.ts`; `src/pi-tools.ts`; `src/process-sessions.ts`; `src/server.ts`; `src/ui/file-payload.tsx`; `src/ui/heavy-payload.tsx`; `src/ui/workspace-app.tsx`; `src/user-config.ts`; `src/workspace-conversation.test.ts` |
+| STORYBOOK-360-006 | Executed lint → typecheck → build → Storybook build/check → Storybook smoke → unit/integration → coverage → observability → strategy audit → security P0 → real HTTP/MCP E2E → doctor; all 12 commands exited 0. | `artifacts/storybook-360-mcp-e2e/07-gate-chain-summary.json`; `artifacts/storybook-360-mcp-e2e/07-*.stdout.log`; `artifacts/storybook-360-mcp-e2e/07-*.stderr.log` |
+| STORYBOOK-360-007 | Coverage thresholds passed at 67.97% statements/lines, 80.31% branches and 71.31% functions against configured thresholds 60/45/55/60. | `artifacts/storybook-360-mcp-e2e/07-coverage-check.stdout.log` |
+| STORYBOOK-360-008 | Security P0 passed all 23 required negative OAuth/Bearer/session/MCP/release scenarios with no missing scenarios and `secret_leak_detected=false`. | `artifacts/storybook-360-mcp-e2e/07-security-p0.stdout.log` |
+| STORYBOOK-360-009 | Generated Evidence Ledger and AS IS→TO BE report; raw gate streams remain byte-exact and SHA-256 referenced. | `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-EVIDENCE-LEDGER.json`; `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-REPORT.md`; `artifacts/storybook-360-mcp-e2e/07-gate-chain-summary.json` |
+
+The DoR for this local slice was **READY**: baseline, architecture, repository conventions, rollback point, fixture boundary, and commands were identified before implementation. The local DoD is **DONE** for Storybook configuration, deterministic mocks, fixture/story catalog, lint, build, source/unit/integration gates, security P0, and real HTTP/MCP E2E. The global DoD remains **PARTIAL** because browser-host play-function execution, automated axe execution, visual regression, cross-OS browser evidence, and hosted deployment/rollback are still **UNKNOWN**. The existing >500 kB build warnings remain a documented P2 performance follow-up. This cycle does not declare `RELEASE-READY`.
+
+Prioritized closure work: **P1** browser-host runner plus a11y execution; **P1** visual regression baselines and diffs; **P2** cross-OS browser-host matrix and hosted deployment/rollback proof; **P2** direct stories only for payload surfaces where they add non-duplicative user-facing value; **P2** measured bundle split after dependency-graph analysis.
+
+Full report: `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-REPORT.md`. Structured ledger: `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-EVIDENCE-LEDGER.json`.

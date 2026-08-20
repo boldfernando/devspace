@@ -1,0 +1,142 @@
+=== npm run lint ===
+
+> @waishnav/devspace@1.0.7 lint
+> eslint src storybook-360-mcp .storybook --max-warnings=0
+
+
+C:\Users\fjuni\.copilot\repos\devspace\src\git-worktrees.ts
+  107:115  error    Unnecessary escape character: \"                                no-useless-escape
+  107:125  error    Unnecessary escape character: \"                                no-useless-escape
+  134:12   warning  'error' is defined but never used                               @typescript-eslint/no-unused-vars
+  179:5    error    There is no `cause` attached to the symptom error being thrown  preserve-caught-error
+
+C:\Users\fjuni\.copilot\repos\devspace\src\incoming-artifacts.ts
+  15:40  error  Unexpected control character(s) in regular expression: \x00, \x1f     no-control-regex
+  70:11  error  The value assigned to 'handles' is not used in subsequent statements  no-useless-assignment
+
+C:\Users\fjuni\.copilot\repos\devspace\src\local-agent-adapters.ts
+    2:10  warning  'resolve' is defined but never used                             @typescript-eslint/no-unused-vars
+  241:7   error    There is no `cause` attached to the symptom error being thrown  preserve-caught-error
+
+C:\Users\fjuni\.copilot\repos\devspace\src\local-agent-profiles.ts
+  133:5  error  There is no `cause` attached to the symptom error being thrown  preserve-caught-error
+
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-cli.ts
+  181:40  error  There is no `cause` attached to the symptom error being thrown  preserve-caught-error
+
+C:\Users\fjuni\.copilot\repos\devspace\src\pi-tools.ts
+  56:3  warning  'context' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\fjuni\.copilot\repos\devspace\src\process-sessions.ts
+  415:5  error  Unnecessary try/catch wrapper  no-useless-catch
+
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts
+  296:7   warning  'reviewFileOutputSchema' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  304:7   warning  'reviewSummaryOutputSchema' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  762:13  warning  'replayed' is assigned a value but never used                   @typescript-eslint/no-unused-vars
+
+C:\Users\fjuni\.copilot\repos\devspace\src\ui\file-payload.tsx
+  3:15  warning  'HostContext' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\fjuni\.copilot\repos\devspace\src\ui\heavy-payload.tsx
+   2:27  warning  'Root' is defined but never used                      @typescript-eslint/no-unused-vars
+  12:10  warning  'pierrePrettyScrollbarCss' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\fjuni\.copilot\repos\devspace\src\ui\workspace-app.tsx
+   56:5   warning  'app' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  505:10  warning  'renderEmpty' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\fjuni\.copilot\repos\devspace\src\user-config.ts
+  134:5  error  There is no `cause` attached to the symptom error being thrown  preserve-caught-error
+
+C:\Users\fjuni\.copilot\repos\devspace\src\workspace-conversation.test.ts
+  169:9  warning  'successfulOpen' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Ô£û 22 problems (10 errors, 12 warnings)
+
+exit_code=1
+=== npm run typecheck ===
+
+> @waishnav/devspace@1.0.7 typecheck
+> tsc -p tsconfig.json --noEmit
+
+exit_code=0
+=== npm run storybook:test:contracts ===
+
+> @waishnav/devspace@1.0.7 storybook:test:contracts
+> tsx --test storybook-360-mcp/tests/mock-layer.test.ts
+
+Ô£ö fixture catalog covers every required deterministic state (0.4836ms)
+Ô£ö model mock is deterministic and emits tool calls plus streaming chunks (0.7164ms)
+Ô£ö AI model adapter uses the injected mock and never requires a provider (0.3052ms)
+Ô£ö missing scenarios fail closed without network fallback (0.125ms)
+Ôä╣ tests 4
+Ôä╣ suites 0
+Ôä╣ pass 4
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 341.9512
+exit_code=0
+=== npm run storybook:build ===
+
+> @waishnav/devspace@1.0.7 storybook:build
+> storybook build
+
+
+[90mT[39m  Building storybook v10.5.9
+[90m|[39m
+[32mo[39m  Cleaning outputDir: [36mstorybook-static[39m
+[90m|[39m
+[32mo[39m  Loading presets
+[90m|[39m
+[32mo[39m  Building manager..
+[90m|[39m
+[34mÔÇó[39m  Building open services..
+[90m|[39m
+[34mÔÇó[39m  Building preview..
+[90m|[39m  [43mVite[49m [36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+[2K
+transforming...Ô£ô 2045 modules transformed.
+rendering chunks...
+computing gzip size...
+[90m|[39m  [43mVite[49m storybook-static/iframe.html
+[90m|[39m  18.89 kB Ôöé gzip:   5.28 kB
+[90m|[39m  storybook-static/assets/iframe-D2nHj6Z0.css                    23.11
+[90m|[39m  kB Ôöé gzip:   4.20 kB
+[90m|[39m  storybook-static/assets/preload-helper-xPQekRTU.js              2.34
+[90m|[39m  kB Ôöé gzip:   1.24 kB
+[90m|[39m  storybook-static/assets/ToolResultCard.stories--SECs-U3.js     27.00
+[90m|[39m  kB Ôöé gzip:   9.67 kB
+[90m|[39m  storybook-static/vite-inject-mocker-entry.js                   27.81
+[90m|[39m  kB Ôöé gzip:   9.63 kB
+[90m|[39m  storybook-static/assets/matchers-JIUQ3HVY-DfTG6O73.js          28.76
+[90m|[39m  kB Ôöé gzip:   9.66 kB
+[90m|[39m  storybook-static/assets/browser-D9e2lN4z.js                    87.37
+[90m|[39m  kB Ôöé gzip:  25.38 kB
+[90m|[39m  storybook-static/assets/react-18-C4o3JZcw.js                  182.50
+[90m|[39m  kB Ôöé gzip:  57.52 kB
+[90m|[39m  storybook-static/assets/axe-B3hdJyLf.js                       587.45
+[90m|[39m  kB Ôöé gzip: 160.35 kB
+[90m|[39m  storybook-static/assets/iframe-QsNcYiGv.js                  1,465.84
+[90m|[39m  kB Ôöé gzip: 458.56 kB
+
+[90m|[39m  [43mVite[49m [32mÔ£ô built in 1.13s[39m
+[90m|[39m
+[33m![39m  [43mVite[49m [33m[plugin builtin:vite-reporter]
+[90m|[39m  (!) Some chunks are larger than 500 kB after minification. Consider:
+[90m|[39m  - Using dynamic import() to code-split the application
+[90m|[39m  - Use build.rolldownOptions.output.codeSplitting to improve chunking:
+[90m|[39m  ]8;;https://rolldown.rs/reference/OutputOptions.codeSplittinghttps://rolldown.rs/reference/OutputOptions.codeSplitting]8;;
+[90m|[39m  - Adjust chunk size limit for this warning via
+[90m|[39m  build.chunkSizeWarningLimit.[39m
+[90m|[39m
+[32mo[39m  Output directory:
+[90m|[39m  C:/Users/fjuni/.copilot/repos/devspace/storybook-static
+[90m|[39m
+[90mÔÇö[39m  Storybook build completed successfully
+
+exit_code=0
+=== summary ===
+[{"command":"npm run lint","exit_code":1},{"command":"npm run typecheck","exit_code":0},{"command":"npm run storybook:test:contracts","exit_code":0},{"command":"npm run storybook:build","exit_code":0}]

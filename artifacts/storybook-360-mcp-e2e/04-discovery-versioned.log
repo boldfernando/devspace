@@ -1,0 +1,151 @@
+tracked_files=437
+ui_files=26
+stories=0
+tests=74
+mock_fixture_related=1
+tokens=1
+storybook_deps=<none>
+storybook_module_present=False
+aimock_present=False
+=== atomic paths ===
+molecules: <none>
+templates: <none>
+atoms: <none>
+organisms: <none>
+pages: <none>
+=== UI ===
+src/ui/accessibility-contract.test.ts
+src/ui/card-result-normalizer.test.ts
+src/ui/card-result-normalizer.ts
+src/ui/card-types.test.ts
+src/ui/card-types.ts
+src/ui/diff-payload.tsx
+src/ui/file-payload.tsx
+src/ui/heavy-payload.tsx
+src/ui/icons.ts
+src/ui/journey-progress.test.ts
+src/ui/journey-progress.ts
+src/ui/language-catalog.test.ts
+src/ui/language-catalog.ts
+src/ui/patch-display.test.ts
+src/ui/patch-display.ts
+src/ui/render-strategy.test.ts
+src/ui/render-strategy.ts
+src/ui/review-payload.tsx
+src/ui/scrollbar.ts
+src/ui/sync-state.test.ts
+src/ui/sync-state.ts
+src/ui/tool-display.test.ts
+src/ui/tool-display.ts
+src/ui/vite-env.d.ts
+src/ui/workspace-app.css
+src/ui/workspace-app.tsx
+=== stories ===
+=== mocks/tests related ===
+scripts/idempotency-p1-fixture-server.ts
+=== source markers ===
+docs/artifact-exchange.md:35:file-object shape, trusted OpenAI download hosts, and redirects before streaming.
+docs/configuration.pt-br.md:54:| `DEVSPACE_ARTIFACT_MAX_FILE_BYTES` | `104857600` | Tamanho m├íximo de um arquivo transmitido em streaming (100 MiB). |
+docs/e2e-360-task-list.md:216:| P3-SKILL-003 | Skills | Manter `e2e-idempotency-mcp-p1` com hash, lease, recovery e observabilidade. | Conclu├¡da | IDEMP-P1 | Fixture n├úo ├® apresentada como E2E real. |
+docs/e2e-360-task-list.md:342:O DoR deste corte ficou **READY** para execu├º├úo local: contrato p├║blico existente, checkout isolado, runtime identificado, rollback simples por commit, fixtures tempor├írias e cleanup em `finally`. O DoD local ficou **DONE** para o alias doctor e para o fluxo Device CLI; o DoD global E2E 360┬░ permanece **PARTIAL** porque deployment/rollback/restore, firing hosted, gateway de identidade/RBAC, SBOM/provenance, browser-host e matriz cross-OS ainda dependem de ambientes ou autoriza├º├Áes n├úo dispon├¡veis.
+docs/e2e-360-task-matrix.md:80:| Dados | SQLite, migrations, fixtures e snapshots est├úo isolados? | Banco tempor├írio e plano de cleanup |
+docs/rest-endpoint-review.md:22:| `/mcp` | GET/POST/DELETE/OPTIONS via `app.all` | Streamable HTTP MCP transport | Bearer/resource/scope/session checks | MCP JSON-RPC, streaming, lifecycle, or fail-closed HTTP errors | Keep single transport endpoint; tool authorization stays in MCP policy. |
+evidence/raw/canonical-dod-360-audit/FINAL-REPORT.md:81:| Storybook / Atomic Design | **N/A** | No Storybook, CSF stories, Atomic Design taxonomy, or Storybook-specific dependencies/scripts were observed; adding that framework would expand scope without evidence. |
+evidence/raw/canonical-dod-360-audit/final-gate-matrix.json:29:    {"id":"frontend","status":"PARTIAL","proof":"React/Vite UI source, accessibility contracts, responsive/state/render tests, and production build are present; no browser-host visual/interaction E2E or Storybook surface is present.","evidence":["artifacts/canonical-dod-360-audit/01-discovery.log","artifacts/canonical-dod-360-audit/05-build.log","src/ui/accessibility-contract.test.ts"]},
+evidence/raw/canonical-dod-360-audit/final-gate-matrix.json:45:    {"id":"storybook-atomic-design","status":"N/A","proof":"No Storybook, CSF stories, Atomic Design taxonomy, or Storybook-specific dependencies/scripts were observed in the repository; imposing that framework would be an unproven scope expansion.","evidence":["artifacts/canonical-dod-360-audit/01-discovery.log","package.json"]}
+evidence/raw/canonical-platform-review-360-audit/PRIORITIZED-ROADMAP.md:28:| PR-008 | Calibrate hosted load by region/tool and external provider/runtime behavior. | Performance/SRE | Hosted staging target and safe synthetic fixtures | Three runs per region/tool establish p50/p95/p99, throughput, 429/5xx, timeout, retry, and saturation thresholds; thresholds are not promoted without variance evidence. | Evidence: `artifacts/wave3-performance/summary.json`, `artifacts/mcp-load-log.json`. Stop load and preserve prior thresholds if calibration is unstable. |
+evidence/raw/idempotency-p1-evidence.html:4:<body><p>IDEMP-P1 CONTRACT HARNESS ┬À HTTP + SQLITE</p><h1>Concurrent deduplication and conflict evidence</h1><div class="summary">8/8 passed</div><p>Each scenario was executed against a real local HTTP server backed by SQLite transactions. This fixture validates the proposed contract before wiring it to the production MCP write tool.</p><table><thead><tr><th>ID</th><th>Status</th><th>Observed oracle</th></tr></thead><tbody><tr><td>IDEMP-P1-001</td><td class="passed">PASSED</td><td>first claim succeeded and created one file effect</td></tr>
+evidence/raw/idempotency-p1-evidence.html:11:<tr><td>IDEMP-P1-008</td><td class="passed">PASSED</td><td>fixture effect log and test evidence passed the secret scan</td></tr></tbody></table><p class="note">Artifacts: idempotency-p1-report.json ┬À evidence generated by scripts/e2e-idempotency-p1.test.ts</p></body></html>
+evidence/raw/idempotency-p1-report.json:3:  "mode": "real HTTP fixture with SQLite transaction store",
+evidence/raw/idempotency-p1-report.json:47:      "detail": "fixture effect log and test evidence passed the secret scan"
+evidence/raw/idempotency-p1-report.json:89:      "detail": "fixture effect log and test evidence passed the secret scan"
+scripts/canonical-360.test.ts:51:test("fixture scan supports fail-safe minimal repositories", () => {
+scripts/canonical-360.test.ts:52:  const fixture = mkdtempSync(join(tmpdir(), "canonical-360-fixture-"));
+scripts/canonical-360.test.ts:54:    mkdirSync(join(fixture, "src", "ui"), { recursive: true });
+scripts/canonical-360.test.ts:55:    writeFileSync(join(fixture, "package.json"), JSON.stringify({ name: "fixture-app", version: "0.0.0", bin: { fixture: "dist/cli.js" }, dependencies: {} }, null, 2));
+scripts/canonical-360.test.ts:56:    writeFileSync(join(fixture, "package-lock.json"), "{}\n");
+scripts/canonical-360.test.ts:57:    writeFileSync(join(fixture, "src", "server.ts"), "import express from 'express'; const app = express(); app.post('/mcp', () => undefined);\n");
+scripts/canonical-360.test.ts:58:    writeFileSync(join(fixture, "src", "ui", "App.tsx"), "export function App(){ return null; }\n");
+scripts/canonical-360.test.ts:59:    const manifest = analyzeRepository(fixture);
+scripts/canonical-360.test.ts:60:    assert.equal(manifest.repository.name, "fixture-app");
+scripts/canonical-360.test.ts:65:    rmSync(fixture, { recursive: true, force: true });
+scripts/e2e-http-mcp-negative.test.mjs:287:  const result = await mcpRequest("invalid-token-fixture", { jsonrpc: "2.0", id: 3, method: "initialize", params: {} });
+scripts/e2e-http-mcp-negative.test.mjs:321:  const response = await exchangeCode(flow, { code: `code-expired-fixture-${randomBytes(8).toString("hex")}` });
+scripts/e2e-http-mcp-negative.test.mjs:341:      code: "code-unknown-client-fixture",
+scripts/e2e-http-mcp-negative.test.mjs:342:      client_id: "unknown-client-fixture",
+scripts/e2e-http-mcp-negative.test.mjs:372:  const result = await mcpRequest(flow.tokens.access_token, { jsonrpc: "2.0", id: 10, method: "tools/list", params: {} }, "unknown-session-fixture");
+scripts/e2e-idempotency-p1.test.ts:8:import { startIdempotencyFixture, type FixtureHandle } from "./idempotency-p1-fixture-server.js";
+scripts/e2e-idempotency-p1.test.ts:24:let fixture: FixtureHandle;
+scripts/e2e-idempotency-p1.test.ts:25:let fixtureRoot: string;
+scripts/e2e-idempotency-p1.test.ts:37:  const response = await fetch(`${fixture.url}/write`, {
+scripts/e2e-idempotency-p1.test.ts:56:    mode: "real HTTP fixture with SQLite transaction store",
+scripts/e2e-idempotency-p1.test.ts:60:    effect_count: fixture?.effectCount() ?? null,
+scripts/e2e-idempotency-p1.test.ts:66:  const effectLog = await readFile(fixture.effectLogPath, "utf8");
+scripts/e2e-idempotency-p1.test.ts:73:<body><p>IDEMP-P1 CONTRACT HARNESS ┬À HTTP + SQLITE</p><h1>Concurrent deduplication and conflict evidence</h1><div class="summary">${passed}/8 passed</div><p>Each scenario was executed against a real local HTTP server backed by SQLite transactions. This fixture validates the proposed contract before wiring it to the production MCP write tool.</p><table><thead><tr><th>ID</th><th>Status</th><th>Observed oracle</th></tr></thead><tbody>${rows}</tbody></table><p class="note">Artifacts: idempotency-p1-report.json ┬À evidence generated by scripts/e2e-idempotency-p1.test.ts</p></body></html>`, "utf8");
+scripts/e2e-idempotency-p1.test.ts:77:  fixtureRoot = await mkdtemp(join(tmpdir(), "devspace-idempotency-p1-"));
+scripts/e2e-idempotency-p1.test.ts:78:  fixture = await startIdempotencyFixture(fixtureRoot);
+scripts/e2e-idempotency-p1.test.ts:82:  const beforeEffects = fixture.effectCount();
+scripts/e2e-idempotency-p1.test.ts:86:  assert.equal(fixture.effectCount() - beforeEffects, 1);
+scripts/e2e-idempotency-p1.test.ts:87:  await access(join(fixtureRoot, "one.txt"), fsConstants.F_OK);
+scripts/e2e-idempotency-p1.test.ts:92:  const beforeEffects = fixture.effectCount();
+scripts/e2e-idempotency-p1.test.ts:96:  assert.equal(fixture.effectCount(), beforeEffects);
+scripts/e2e-idempotency-p1.test.ts:101:  const beforeEffects = fixture.effectCount();
+scripts/e2e-idempotency-p1.test.ts:105:  assert.equal(fixture.effectCount(), beforeEffects);
+scripts/e2e-idempotency-p1.test.ts:110:  const beforeEffects = fixture.effectCount();
+scripts/e2e-idempotency-p1.test.ts:117:  assert.equal(fixture.effectCount() - beforeEffects, 1);
+scripts/e2e-idempotency-p1.test.ts:125:  const beforeEffects = fixture.effectCount();
+scripts/e2e-idempotency-p1.test.ts:130:  assert.equal(fixture.effectCount() - beforeEffects, 1);
+scripts/e2e-idempotency-p1.test.ts:156:  const beforeEffects = fixture.effectCount();
+scripts/e2e-idempotency-p1.test.ts:161:  assert.equal(fixture.effectCount() - beforeEffects, 2);
+scripts/e2e-idempotency-p1.test.ts:184:  const effectLog = await readFile(fixture.effectLogPath, "utf8");
+scripts/e2e-idempotency-p1.test.ts:190:  record("IDEMP-P1-008", "passed", "fixture effect log and test evidence passed the secret scan");
+scripts/e2e-idempotency-p1.test.ts:204:    await fixture?.close();
+scripts/e2e-idempotency-p1.test.ts:205:    await rm(fixtureRoot, { recursive: true, force: true });
+scripts/idempotency-p1-fixture-server.ts:7:export interface FixtureHandle {
+scripts/idempotency-p1-fixture-server.ts:25:export async function startIdempotencyFixture(root: string): Promise<FixtureHandle> {
+scripts/idempotency-p1-fixture-server.ts:27:  const sqlite = new Database(join(root, "fixture.sqlite"));
+scripts/idempotency-p1-fixture-server.ts:79:      writeJson(response, 500, { error: "fixture_error" });
+scripts/idempotency-p1-fixture-server.ts:85:  if (!address || typeof address === "string") throw new Error("fixture failed to bind");
+src/local-agent-adapters.test.ts:9:  extractPiStreamingText,
+src/local-agent-adapters.test.ts:347:  extractPiStreamingText([
+src/local-agent-adapters.ts:361:        extractPiStreamingText(events);
+src/local-agent-adapters.ts:590:export function extractPiStreamingText(events: unknown[]): string {
+src/server.test.ts:20:  const context = await fixture(t);
+src/server.test.ts:62:  const context = await fixture(t);
+src/server.test.ts:80:  const context = await fixture(t, { git: true });
+src/server.test.ts:103:  const context = await fixture(t, { git: true });
+src/server.test.ts:117:  const context = await fixture(t);
+src/server.test.ts:129:  const context = await fixture(t);
+src/server.test.ts:170:interface ServerFixture {
+src/server.test.ts:178:async function fixture(t: TestContext, options: { git?: boolean } = {}): Promise<ServerFixture> {
+src/workspace-conversation.test.ts:16:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:30:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:39:  const { root, project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:63:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:76:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:85:  const { project, registry } = await fixture(t, { git: true });
+src/workspace-conversation.test.ts:103:  const { project, registry } = await fixture(t, { git: true });
+src/workspace-conversation.test.ts:118:  const { project, registry } = await fixture(t, { git: true });
+src/workspace-conversation.test.ts:139:  const context = await fixture(t);
+src/workspace-conversation.test.ts:155:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:173:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:193:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:204:  const { project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:215:  const { root, project, registry } = await fixture(t);
+src/workspace-conversation.test.ts:234:  const context = await fixture(t);
+src/workspace-conversation.test.ts:267:  const context = await fixture(t);
+src/workspace-conversation.test.ts:292:  const context = await fixture(t);
+src/workspace-conversation.test.ts:316:  const context = await fixture(t);
+src/workspace-conversation.test.ts:329:  const context = await fixture(t);
+src/workspace-conversation.test.ts:348:  const context = await fixture(t);
+src/workspace-conversation.test.ts:383:interface WorkspaceFixture {
+src/workspace-conversation.test.ts:394:async function fixture(
+src/workspace-conversation.test.ts:397:): Promise<WorkspaceFixture> {
+src/workspaces.test.ts:16:  const context = await fixture(t);
+src/workspaces.test.ts:68:  const context = await fixture(t);
+src/workspaces.test.ts:100:  const context = await fixture(t);
+src/workspaces.test.ts:128:  const context = await fixture(t);
+src/workspaces.test.ts:156:  const context = await fixture(t);
+src/workspaces.test.ts:165:  const context = await fixture(t);
+src/workspaces.test.ts:192:interface WorkspaceFixture {
+src/workspaces.test.ts:200:async function fixture(t: TestContext): Promise<WorkspaceFixture> {

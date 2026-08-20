@@ -1,0 +1,295 @@
+
+> @waishnav/devspace@1.0.7 test
+> node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/error-policy.test.ts && tsx src/logger.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/ui/accessibility-contract.test.ts && tsx src/ui/journey-progress.test.ts && tsx src/ui/card-result-normalizer.test.ts && tsx src/ui/render-strategy.test.ts && tsx src/ui/sync-state.test.ts && tsx src/response-shaping-contract.test.ts && tsx src/mcp-request-policy.test.ts && tsx src/db/query-performance.test.ts && tsx src/db/resilience.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts && tsx src/credential-security.test.ts
+
+✔ the dev server launches tsx through Node without a shell (0.7679ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.0698
+✔ classifies filesystem failures without exposing the original path (1.4235ms)
+✔ classifies retryable SQLite contention and timeout failures (0.4454ms)
+✔ preserves safe process and domain codes while replacing raw detail (0.0884ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7.0027
+✔ logger sanitization retains safe dimensions and hashes identifying values (2.3347ms)
+✔ logger event remains structural when fields contain event-like input (0.852ms)
+✔ logger hashing is deterministic and bounded (0.2165ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13.3444
+✔ undefined request metadata has no conversation scope (0.9742ms)
+✔ missing session metadata has no conversation scope (0.0768ms)
+✔ an empty session string has no conversation scope (0.0512ms)
+✔ a non-string session value has no conversation scope (0.0493ms)
+✔ valid OpenAI session metadata returns the raw opaque session value (0.0574ms)
+✔ unrelated metadata fields do not alter the selected conversation scope (0.046ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6.2788
+✔ the supported coding tools are recognized as card tools (0.4679ms)
+✔ tool classification distinguishes patch, edit, and shell operations (0.0793ms)
+✔ a patch card expands only when it contains patch content (0.0953ms)
+✔ a single-file patch opens immediately (0.0639ms)
+✔ a multi-file patch stays collapsed (0.0648ms)
+✔ show changes still opens immediately (0.0469ms)
+✔ a workspace card expands when it contains provider metadata (0.0509ms)
+✔ a workspace card with details opens immediately (0.047ms)
+✔ a workspace card expands when it contains agent metadata (0.0776ms)
+✔ a workspace card expands when it contains available instruction files (0.1011ms)
+✔ an empty workspace card stays collapsed (0.0602ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7.025
+✔ workspace shell exposes accessible disclosure and live-status contracts (1.2952ms)
+✔ React payload renderers use stable memoized boundaries (0.5097ms)
+✔ review payload exposes file list and per-file diff relationships (0.184ms)
+✔ lazy payload renderers provide accessible output and status semantics (0.297ms)
+✔ stylesheet protects keyboard focus, reduced motion, forced colors, and touch targets (0.3944ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7.5107
+✔ journey progress advances through workspace, explore, change, and verify (0.4876ms)
+✔ repeated tools do not retrigger a completed milestone (0.098ms)
+✔ interactive process input only completes the verification stage (0.0701ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5.8649
+✔ card result normalizer reuses top-level MCP content without losing payload fields (0.7793ms)
+✔ card result normalizer preserves an explicit card payload (0.0872ms)
+✔ card result normalizer keeps image content available to the lazy renderer (0.0794ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6.0145
+✔ render strategy preserves a mounted payload for same-tool expanded updates (0.4073ms)
+✔ render strategy remounts when tool identity or expansion changes (0.516ms)
+✔ render strategy remounts when no mounted payload exists (0.0913ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5.7228
+✔ connection epochs invalidate an older boot attempt (2.0033ms)
+✔ render revisions invalidate a lazy result from a previous shell (0.1331ms)
+✔ starting a connection also invalidates pending renders (0.1575ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10.7799
+✔ MCP response shaping avoids duplicating top-level content in card payloads (0.6279ms)
+✔ frontend reconstructs omitted card content from the top-level MCP result (0.0841ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5.8063
+✔ MCP policy classifies protocol discovery and read calls (0.7544ms)
+✔ MCP policy classifies every mutating tool as write (0.6292ms)
+✔ MCP policy denies unknown and malformed tool calls (0.1225ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6.184
+✔ query-performance migration supports hot recency and cleanup plans (19.7032ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21.9645
+✔ SQLite lock contention fails with a bounded SQLITE_BUSY error (87.5689ms)
+✔ SQLite full storage is surfaced as a bounded resource failure (14.7891ms)
+✔ SQLite read-only mode rejects writes without mutating the state (14.6929ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.1245
+✔ a checkout exposes initial and nested instruction context while filtering outside symlinks (51.2635ms)
+✔ opening a missing checkout creates its workspace root (27.7789ms)
+✔ missing checkout root creation propagates filesystem failure without a partial root (0.4108ms)
+✔ worktree opens require Git and create an isolated managed workspace (392.5338ms)
+✔ persisted checkout and worktree sessions restore after recreating the registry (430.1254ms)
+✔ workspace paths outside the allowed roots are rejected (5.7039ms)
+﹣ a symlinked allowed root preserves checkout and worktree path behavior (0.069ms) # SKIP
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 911.0185
+✔ a conversation reuses its checkout context (81.7204ms)
+✔ different conversations receive separate checkout workspaces (59.2374ms)
+✔ conversation bindings distinguish canonical projects (68.5056ms)
+✔ concurrent checkout opens reuse one workspace and return matching context (34.7607ms)
+✔ a checkout without a conversation scope does not use conversation reuse (53.7102ms)
+✔ worktree requests remain fresh without replacing the reusable checkout (583.4811ms)
+✔ a worktree-first conversation creates and then reuses its checkout (351.5649ms)
+✔ concurrent worktree opens remain fresh and return complete context (384.6938ms)
+✔ checkout reuse survives a registry restart (60.1016ms)
+✔ a failed first context load does not consume bootstrap (54.4586ms)
+✔ a context-loading failure preserves a valid checkout binding (45.1018ms)
+✔ a deleted checkout is replaced with a new workspace (74.9548ms)
+✔ canonical checkout identity remains stable when the requested target starts missing (47.3103ms)
+✔ canonical checkout identity survives equivalent path and symlink aliases (43.3819ms)
+﹣ canonical checkout identity survives macOS var path aliases (0.057ms) # SKIP
+✔ an invalid persisted checkout binding is not reused (63.0161ms)
+✔ an inactive persisted checkout binding is not reused (60.4282ms)
+✔ a checkout replaced by a file reports the filesystem error (32.2377ms)
+✔ unexpected storage errors are not mistaken for stale bindings (34.5731ms)
+﹣ unexpected filesystem errors are propagated without replacing the binding (0.0451ms) # SKIP
+ℹ tests 20
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 2138.1385
+✔ a clean workspace reports no changes from the last-shown checkpoint (741.7562ms)
+✔ show_changes reports and advances the last-shown checkpoint (1128.2938ms)
+✔ review checkpoints survive a manager restart (974.0478ms)
+✔ concurrent initialization produces one usable checkpoint state (904.2964ms)
+✔ a missing last-shown checkpoint falls back after restart and can be re-established (1170.6802ms)
+✔ a checkpoint workspace rejects a different root without changing its state (907.2537ms)
+✔ a concurrent review rejects a different root after initialization (594.5192ms)
+✔ an unborn repository becomes reviewable after its first commit (826.3339ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7250.4815
+{"ts":"2026-08-20T07:12:54.095Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"4bcea7d9b10d4544","pathHash":"7855e1a5ff897482","success":true,"durationMs":37}
+{"ts":"2026-08-20T07:12:54.102Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"4bcea7d9b10d4544","pathHash":"7855e1a5ff897482","success":true,"durationMs":6}
+✔ open_workspace keeps lifecycle flags out of model output and preserves complete card metadata (90.0208ms)
+{"ts":"2026-08-20T07:12:54.157Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"9db848fb7bca3c19","pathHash":"25644ec9d64245d2","success":true,"durationMs":25}
+{"ts":"2026-08-20T07:12:54.157Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"9db848fb7bca3c19","pathHash":"25644ec9d64245d2","success":true,"durationMs":25}
+✔ concurrent checkout opens return one full context and one reuse instruction (41.0074ms)
+{"ts":"2026-08-20T07:12:54.369Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"ebf1868dff25a35b","pathHash":"a6448077e3d3cb6d","success":true,"durationMs":26}
+{"ts":"2026-08-20T07:12:54.529Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6a0cde340d47825c","pathHash":"c2ef4cb879a5236e","success":true,"durationMs":160}
+{"ts":"2026-08-20T07:12:54.713Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"ca912c58769c08b4","pathHash":"c14151792b8d8d71","success":true,"durationMs":183}
+{"ts":"2026-08-20T07:12:54.723Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"ebf1868dff25a35b","pathHash":"a6448077e3d3cb6d","success":true,"durationMs":10}
+✔ new worktrees always receive a fresh workspace and complete worktree context (574.9017ms)
+{"ts":"2026-08-20T07:12:55.077Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"fad86fd01e59cea8","pathHash":"e2c85a28ef3f79ee","success":true,"durationMs":144}
+{"ts":"2026-08-20T07:12:55.096Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"ae7579adc07b9b52","pathHash":"da4c1c8d449e3373","success":true,"durationMs":19}
+{"ts":"2026-08-20T07:12:55.101Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"ae7579adc07b9b52","pathHash":"da4c1c8d449e3373","success":true,"durationMs":5}
+✔ checkout opened after a worktree receives its own complete context (370.3784ms)
+{"ts":"2026-08-20T07:12:55.137Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"77bce83a28d70d22","pathHash":"c96e3398bd9e6517","success":true,"durationMs":20}
+{"ts":"2026-08-20T07:12:55.160Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"fab42b4ff873ffd6","pathHash":"c96e3398bd9e6517","success":true,"durationMs":23}
+✔ a host without conversation metadata receives normal explicit-workspace behavior (65.3101ms)
+{"ts":"2026-08-20T07:12:55.206Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"273731820568e1b2","pathHash":"33078f732e5b9474","success":true,"durationMs":21}
+{"ts":"2026-08-20T07:12:55.235Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"273731820568e1b2","pathHash":"33078f732e5b9474","success":true,"durationMs":22}
+✔ checkout reuse and context suppression survive a registry restart (66.33ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1210.9117
+✔ device store creates a sanitized public record and enforces polling interval (27.4937ms)
+✔ device store approval emits one token opportunity and rejects replay (15.9453ms)
+✔ device store denies pending requests and does not disclose invalid user codes (18.4223ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 444.3448
+✔ selective language catalog falls back heavy grammars to text (0.5642ms)
+✔ selective language catalog allows explicit heavy-language opt in (0.1032ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8.8553
+✔ runtime metrics render safe dimensions and stable Prometheus names (6.9441ms)
+✔ runtime metrics sanitize unsafe label values (0.248ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12.4739
+✔ private file hardening produces an ACL equivalent to 0600 (75.9278ms)
+✔ DevSpace auth persistence applies private-file hardening (75.0884ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 154.0682

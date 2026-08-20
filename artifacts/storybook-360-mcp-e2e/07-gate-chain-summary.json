@@ -1,0 +1,349 @@
+{
+  "schema": "devspace.storybook-360.gate-chain.v1",
+  "generatedAt": "2026-08-20T07:14:08.487Z",
+  "repoRoot": ".",
+  "node": "v24.18.0",
+  "platform": "win32",
+  "gates": [
+    [
+      "lint",
+      [
+        "run",
+        "lint"
+      ]
+    ],
+    [
+      "typecheck",
+      [
+        "run",
+        "typecheck"
+      ]
+    ],
+    [
+      "build",
+      [
+        "run",
+        "build"
+      ]
+    ],
+    [
+      "storybook-check",
+      [
+        "run",
+        "storybook:check"
+      ]
+    ],
+    [
+      "storybook-smoke-render",
+      [
+        "run",
+        "storybook:smoke"
+      ]
+    ],
+    [
+      "unit-integration",
+      [
+        "test"
+      ]
+    ],
+    [
+      "coverage-check",
+      [
+        "run",
+        "coverage:check"
+      ]
+    ],
+    [
+      "observability-contract",
+      [
+        "run",
+        "test:observability"
+      ]
+    ],
+    [
+      "strategy-audit",
+      [
+        "run",
+        "test:strategy:audit"
+      ]
+    ],
+    [
+      "security-p0",
+      [
+        "run",
+        "security:p0"
+      ]
+    ],
+    [
+      "http-mcp-e2e",
+      [
+        "run",
+        "e2e"
+      ]
+    ],
+    [
+      "doctor",
+      [
+        "run",
+        "doctor"
+      ]
+    ]
+  ],
+  "results": [
+    {
+      "id": "lint",
+      "command": "npm run lint",
+      "startedAt": "2026-08-20T07:12:08.557Z",
+      "endedAt": "2026-08-20T07:12:10.794Z",
+      "durationMs": 2237,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-lint.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-lint.stderr.log"
+    },
+    {
+      "id": "typecheck",
+      "command": "npm run typecheck",
+      "startedAt": "2026-08-20T07:12:10.794Z",
+      "endedAt": "2026-08-20T07:12:14.974Z",
+      "durationMs": 4180,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-typecheck.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-typecheck.stderr.log"
+    },
+    {
+      "id": "build",
+      "command": "npm run build",
+      "startedAt": "2026-08-20T07:12:14.975Z",
+      "endedAt": "2026-08-20T07:12:19.607Z",
+      "durationMs": 4632,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-build.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-build.stderr.log"
+    },
+    {
+      "id": "storybook-check",
+      "command": "npm run storybook:check",
+      "startedAt": "2026-08-20T07:12:19.607Z",
+      "endedAt": "2026-08-20T07:12:23.710Z",
+      "durationMs": 4103,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-storybook-check.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-storybook-check.stderr.log"
+    },
+    {
+      "id": "storybook-smoke-render",
+      "command": "npm run storybook:smoke",
+      "startedAt": "2026-08-20T07:12:23.710Z",
+      "endedAt": "2026-08-20T07:12:26.510Z",
+      "durationMs": 2800,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-storybook-smoke-render.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-storybook-smoke-render.stderr.log"
+    },
+    {
+      "id": "unit-integration",
+      "command": "npm test",
+      "startedAt": "2026-08-20T07:12:26.511Z",
+      "endedAt": "2026-08-20T07:13:05.968Z",
+      "durationMs": 39457,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-unit-integration.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-unit-integration.stderr.log"
+    },
+    {
+      "id": "coverage-check",
+      "command": "npm run coverage:check",
+      "startedAt": "2026-08-20T07:13:05.968Z",
+      "endedAt": "2026-08-20T07:13:55.409Z",
+      "durationMs": 49441,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-coverage-check.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-coverage-check.stderr.log"
+    },
+    {
+      "id": "observability-contract",
+      "command": "npm run test:observability",
+      "startedAt": "2026-08-20T07:13:55.409Z",
+      "endedAt": "2026-08-20T07:13:55.707Z",
+      "durationMs": 298,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-observability-contract.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-observability-contract.stderr.log"
+    },
+    {
+      "id": "strategy-audit",
+      "command": "npm run test:strategy:audit",
+      "startedAt": "2026-08-20T07:13:55.707Z",
+      "endedAt": "2026-08-20T07:13:56.064Z",
+      "durationMs": 357,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-strategy-audit.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-strategy-audit.stderr.log"
+    },
+    {
+      "id": "security-p0",
+      "command": "npm run security:p0",
+      "startedAt": "2026-08-20T07:13:56.064Z",
+      "endedAt": "2026-08-20T07:13:59.705Z",
+      "durationMs": 3641,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-security-p0.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-security-p0.stderr.log"
+    },
+    {
+      "id": "http-mcp-e2e",
+      "command": "npm run e2e",
+      "startedAt": "2026-08-20T07:13:59.705Z",
+      "endedAt": "2026-08-20T07:14:06.380Z",
+      "durationMs": 6675,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-http-mcp-e2e.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-http-mcp-e2e.stderr.log"
+    },
+    {
+      "id": "doctor",
+      "command": "npm run doctor",
+      "startedAt": "2026-08-20T07:14:06.381Z",
+      "endedAt": "2026-08-20T07:14:08.465Z",
+      "durationMs": 2084,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/07-doctor.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/07-doctor.stderr.log"
+    }
+  ],
+  "overall": "PASS",
+  "evidence": [
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-lint.stdout.log",
+      "bytes": 93,
+      "sha256": "f7f96906aa9e3e1cfa8816c59019c2b419e70063518de82e47619900ea2b7f10"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-lint.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-typecheck.stdout.log",
+      "bytes": 71,
+      "sha256": "6c11c2163c626595bd9872d97b9315a2d2392c5a2eda2c8d002ba60cf0daa649"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-typecheck.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-build.stdout.log",
+      "bytes": 27586,
+      "sha256": "b7da71e53f7fd1274fb122c75f3fb0004fb4e4ec7ded380ca292d4bae9429f00"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-build.stderr.log",
+      "bytes": 370,
+      "sha256": "d79e4144b596aba3efe480a763561840cbfef5eb0cb7529f9b108e6fedc4fb34"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-storybook-check.stdout.log",
+      "bytes": 3243,
+      "sha256": "ab72a271bcb597936b74cd109b6b087ee35a7ddb133933039bf3b7d5eb76b8be"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-storybook-check.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-storybook-smoke-render.stdout.log",
+      "bytes": 265,
+      "sha256": "457fb639709fda293423649c1d6602ac0242b0c1116ab56863d98dd8596224c3"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-storybook-smoke-render.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-unit-integration.stdout.log",
+      "bytes": 14769,
+      "sha256": "70bea8f639c4929e496dff70d385ae86784045ebcf38ef6d7871e525090b222e"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-unit-integration.stderr.log",
+      "bytes": 328,
+      "sha256": "488ad4b1a034dace7a54e6aa842d889c9368e6caaa4d39ae55f18dcca01a6fc2"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-coverage-check.stdout.log",
+      "bytes": 21332,
+      "sha256": "f9e03181cff03ae698de21f9a7f578a892f29e6d0e213bcc8ff8d2356676ef9f"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-coverage-check.stderr.log",
+      "bytes": 328,
+      "sha256": "50ddb21ceb1787a29aef68e50c1168a483df7366a6ae61678c14d00c9c7fdf1f"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-observability-contract.stdout.log",
+      "bytes": 307,
+      "sha256": "263b34a9dd521ec8f0da683ec3dd9c68731a466830d686d053058a75cd08be5e"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-observability-contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-strategy-audit.stdout.log",
+      "bytes": 1215,
+      "sha256": "b41dfea3d8f098a465ddff9bfdb1c6e3d96418b38e09a51d798635886838c8fc"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-strategy-audit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-security-p0.stdout.log",
+      "bytes": 2955,
+      "sha256": "15cbda1734896c248e4c8b0cc0e60bc5992ba3fdece8a4a0b096473ade51fc90"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-security-p0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-http-mcp-e2e.stdout.log",
+      "bytes": 28091,
+      "sha256": "0487aebaa733515a01a8327bf4ead23863a3cd0933319f76e0a24c17fb473d70"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-http-mcp-e2e.stderr.log",
+      "bytes": 370,
+      "sha256": "d79e4144b596aba3efe480a763561840cbfef5eb0cb7529f9b108e6fedc4fb34"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-doctor.stdout.log",
+      "bytes": 565,
+      "sha256": "1704a0d8cc09426ae45cb900b2751c3951c2c8f2ad6ee4c165024847a1ceb588"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/07-doctor.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

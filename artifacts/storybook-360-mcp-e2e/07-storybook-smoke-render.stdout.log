@@ -1,0 +1,13 @@
+
+> @waishnav/devspace@1.0.7 storybook:smoke
+> storybook dev --ci --smoke-test --port 6006
+
+
+[90m┌[39m  storybook v10.5.9
+[90m│[39m
+[34m●[39m  Starting...
+[90m│[39m
+[32m◇[39m  [32mSmoke tests passed, exiting.[39m
+[90m│[39m
+[90m└[39m  
+
