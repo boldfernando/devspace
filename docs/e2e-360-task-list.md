@@ -342,3 +342,30 @@ A suíte final executou com exit code 0: `npm run typecheck`, `npm test`, `npm r
 O DoR deste corte ficou **READY** para execução local: contrato público existente, checkout isolado, runtime identificado, rollback simples por commit, fixtures temporárias e cleanup em `finally`. O DoD local ficou **DONE** para o alias doctor e para o fluxo Device CLI; o DoD global E2E 360° permanece **PARTIAL** porque deployment/rollback/restore, firing hosted, gateway de identidade/RBAC, SBOM/provenance, browser-host e matriz cross-OS ainda dependem de ambientes ou autorizações não disponíveis.
 
 A tentativa intermediária de secret scan contaminada por logs de orquestração foi preservada quando disponível, diagnosticada como falso positivo de escopo do artifact de execução, e o gate `security:p0` foi reexecutado em árvore limpa com exit code 0. Nenhum resultado histórico foi apagado e este ciclo não declara `RELEASE-READY`.
+
+
+## 14. Canonical Platform Review 360 v4 — First-Mover
+
+**Status:** EXECUTADO EM EVIDENCE-FIRST; **global YELLOW**, **release RED / NOT RELEASE-READY**.
+
+| Domínio | Resultado | Evidência |
+|---|---|---|
+| Pacotes v4 | 63 skills validadas, 0 erros e 0 warnings; os dois ZIPs de revisão possuem SHA-256 equivalente. | `artifacts/canonical-platform-review-360-v4-first-mover/V4-PACKAGE-PROVENANCE.json` |
+| Control Plane | Runtime `READ_ONLY` inicializado no commit `9d420bc`; rollback preservado. | `runtime/state.json`, `ROLLBACK_POINT.json` |
+| Execution Fabric | Workgraph com 10 tasks, 5 waves, 7 leases adquiridos, 0 conflitos e todos os leases liberados. | `v4-workgraph.json`, `CONFLICT-GRAPH.json`, `05-fabric-plan-leases.log`, `11-lease-release.log` |
+| H2A | Envelope experimental válido em `DRAFT`; transição direta para execução rejeitada; nenhuma aprovação inferida. | `06-h2a-interaction.json`, `06-h2a-validation.log` |
+| A2A | Envelope lógico A2A 1.0.0 gerado, porém `NOT_READY` por ausência de Agent Card/endpoint remoto. | `05-a2a-local-evidence.json` |
+| A2UI/AG-UI | Contrato UI/accessibility local passou; render/event trace browser-host permanece `UNKNOWN`. | `08-A2UI-AGUI-CONTRACT.json`, `07-a2ui-agui-inspection.log` |
+| Observability | 9 eventos locais sanitizados com trace groups; collector/scrape/alert recovery hosted permanecem `UNKNOWN`. | `runtime/events.jsonl`, `09-traces-events.log` |
+| Adaptive Intelligence | Router selecionou candidate local por skill-fit e risk ceiling; nenhum learning/eval foi promovido. | `07-adaptive-routing.json` |
+| Regression gates | Verificador de artifacts, typecheck, testes, build, doctor, security P0, observability, coverage, bundle audit e diff check retornaram exit code 0. | `10-final-gates.log` |
+
+### Findings v4 e decisão
+
+- **P0:** `PR-001` deployment, promoção, SBOM/provenance e rollback/restore não provados; release bloqueado.
+- **P1:** `PR-002` gateway de identidade/RBAC/key rotation; `PR-003` alert firing/recovery hosted.
+- **P2:** `PR-004` DAST real-server; `PR-005` SBOM/provenance; `PR-006` cross-OS/browser-host.
+- **P3:** `PR-007` write→ACK ambíguo; `PR-008` calibração hosted/provider.
+- **P4:** `PR-009` automação enterprise de RBAC, key rotation e provenance.
+
+Relatório completo: `artifacts/canonical-platform-review-360-v4-first-mover/FIRST-MOVER-PLATFORM-REVIEW-REPORT.md`. Matriz final: `FIRST-MOVER-GATE-MATRIX.json`. Nenhuma alteração de código de produto, push remoto ou promoção de branch foi executada; o merge seguro deste ciclo é limitado aos artifacts e documentação após o gate independente.

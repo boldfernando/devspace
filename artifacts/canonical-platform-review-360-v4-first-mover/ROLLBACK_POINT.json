@@ -1,0 +1,30 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/rollback-point/v1",
+  "captured_at": "2026-08-20T00:00:00-03:00",
+  "repository": "devspace",
+  "branch": "main",
+  "head": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+  "working_tree": "clean",
+  "ahead_of_origin": 58,
+  "runtime": {
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "git": "2.55.0.windows.4"
+  },
+  "mutation_policy": {
+    "product_source_mutation": "deny_until_explicit_apply_scope",
+    "skill_runtime_target": "isolated audit runtime",
+    "new_write_policy": "lease_required",
+    "worker_direct_promoted_branch_write": false,
+    "destructive_git_operations": false,
+    "remote_push": false
+  },
+  "rollback": {
+    "source_restore": "git revert or reset only after explicit authorization; no destructive reset executed",
+    "audit_runtime_restore": "remove isolated runtime and restore backup manifest",
+    "evidence_restore": "preserve raw artifacts byte-exact with SHA-256; never rewrite historical evidence",
+    "database_restore": "not applicable to read-only initialization; any APPLY requires isolated state directory and backup",
+    "release_status": "not_release_ready_until_external_gates_proven"
+  },
+  "baseline_evidence": "artifacts/canonical-platform-review-360-v4-first-mover/02-baseline.log"
+}

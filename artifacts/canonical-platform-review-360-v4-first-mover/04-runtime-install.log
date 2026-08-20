@@ -1,0 +1,752 @@
+=== profile lifecycle ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "bootstrap-skill-system",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\bootstrap-skill-system",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\bootstrap-skill-system",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "execute-skill-workflow",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\execute-skill-workflow",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\execute-skill-workflow",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "initialize-skill-runtime",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\initialize-skill-runtime",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\initialize-skill-runtime",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "install-skill-pack",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\install-skill-pack",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\install-skill-pack",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "integrate-skill-pack",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\integrate-skill-pack",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\integrate-skill-pack",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "verify-skill-system",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\verify-skill-system",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\verify-skill-system",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills --scope custom --repo . --collision fail --skills bootstrap-skill-system install-skill-pack integrate-skill-pack initialize-skill-runtime execute-skill-workflow verify-skill-system --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "lifecycle",
+  "skills": [
+    "bootstrap-skill-system",
+    "install-skill-pack",
+    "integrate-skill-pack",
+    "initialize-skill-runtime",
+    "execute-skill-workflow",
+    "verify-skill-system"
+  ],
+  "count": 6,
+  "applied": true
+}
+exit_code=0
+=== profile review ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "discover-codebase",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\discover-codebase",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\discover-codebase",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "orchestrate-platform-review-360",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\orchestrate-platform-review-360",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\orchestrate-platform-review-360",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "reconcile-git-state",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\reconcile-git-state",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\reconcile-git-state",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-accessibility-i18n",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-accessibility-i18n",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-accessibility-i18n",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-api-contracts",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-api-contracts",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-api-contracts",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-auth-iam",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-auth-iam",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-auth-iam",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-cicd-release",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-cicd-release",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-cicd-release",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-data-database",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-data-database",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-data-database",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-docs-code-quality",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-docs-code-quality",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-docs-code-quality",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-domain-rules-compliance",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-domain-rules-compliance",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-domain-rules-compliance",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-frontend-architecture",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-frontend-architecture",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-frontend-architecture",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-fullstack-integration",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-fullstack-integration",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-fullstack-integration",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-observability-sre",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-observability-sre",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-observability-sre",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-product-jtbd",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-product-jtbd",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-product-jtbd",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-resilience-errors",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-resilience-errors",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-resilience-errors",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-scalability-cost",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-scalability-cost",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-scalability-cost",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-security-devsecops",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-security-devsecops",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-security-devsecops",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-testing-quality",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-testing-quality",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-testing-quality",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-third-parties",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-third-parties",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-third-parties",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-ui-design-system",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-ui-design-system",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-ui-design-system",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-ux-journeys",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-ux-journeys",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-ux-journeys",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "review-web-performance",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\review-web-performance",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\review-web-performance",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "synthesize-roadmap-gates",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\skills\\synthesize-roadmap-gates",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\synthesize-roadmap-gates",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills --scope custom --repo . --collision fail --skills orchestrate-platform-review-360 discover-codebase reconcile-git-state review-product-jtbd review-ui-design-system review-ux-journeys review-frontend-architecture review-web-performance review-api-contracts review-data-database review-auth-iam review-fullstack-integration review-resilience-errors review-testing-quality review-security-devsecops review-cicd-release review-observability-sre review-scalability-cost review-accessibility-i18n review-third-parties review-domain-rules-compliance review-docs-code-quality synthesize-roadmap-gates --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "review",
+  "skills": [
+    "orchestrate-platform-review-360",
+    "discover-codebase",
+    "reconcile-git-state",
+    "review-product-jtbd",
+    "review-ui-design-system",
+    "review-ux-journeys",
+    "review-frontend-architecture",
+    "review-web-performance",
+    "review-api-contracts",
+    "review-data-database",
+    "review-auth-iam",
+    "review-fullstack-integration",
+    "review-resilience-errors",
+    "review-testing-quality",
+    "review-security-devsecops",
+    "review-cicd-release",
+    "review-observability-sre",
+    "review-scalability-cost",
+    "review-accessibility-i18n",
+    "review-third-parties",
+    "review-domain-rules-compliance",
+    "review-docs-code-quality",
+    "synthesize-roadmap-gates"
+  ],
+  "count": 23,
+  "applied": true
+}
+exit_code=0
+=== profile github-intelligence ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "github-collect-repository-evidence",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-collect-repository-evidence",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-collect-repository-evidence",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "github-discover-repository-universe",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-discover-repository-universe",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-discover-repository-universe",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "github-distill-canonical-patterns",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-distill-canonical-patterns",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-distill-canonical-patterns",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "github-intelligence-sweep",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-intelligence-sweep",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-intelligence-sweep",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "github-mine-engineering-intelligence",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-mine-engineering-intelligence",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-mine-engineering-intelligence",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "github-promote-pattern-to-skill",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-promote-pattern-to-skill",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-promote-pattern-to-skill",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "github-verify-provenance-supply-chain",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\github-intelligence\\skills\\github-verify-provenance-supply-chain",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\github-verify-provenance-supply-chain",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\github-intelligence\skills --scope custom --repo . --collision fail --skills github-intelligence-sweep github-discover-repository-universe github-collect-repository-evidence github-mine-engineering-intelligence github-verify-provenance-supply-chain github-distill-canonical-patterns github-promote-pattern-to-skill --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "github-intelligence",
+  "skills": [
+    "github-intelligence-sweep",
+    "github-discover-repository-universe",
+    "github-collect-repository-evidence",
+    "github-mine-engineering-intelligence",
+    "github-verify-provenance-supply-chain",
+    "github-distill-canonical-patterns",
+    "github-promote-pattern-to-skill"
+  ],
+  "count": 7,
+  "applied": true
+}
+exit_code=0
+=== profile execution-fabric ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-execution-fabric\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "coordinate-agent-execution",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-execution-fabric\\skills\\coordinate-agent-execution",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\coordinate-agent-execution",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "decompose-issue-work",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-execution-fabric\\skills\\decompose-issue-work",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\decompose-issue-work",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "plan-buildback",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-execution-fabric\\skills\\plan-buildback",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\plan-buildback",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "reconcile-buildback",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-execution-fabric\\skills\\reconcile-buildback",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\reconcile-buildback",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "verify-promote-buildback",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-execution-fabric\\skills\\verify-promote-buildback",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\verify-promote-buildback",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\agent-execution-fabric\skills --scope custom --repo . --collision fail --skills plan-buildback decompose-issue-work coordinate-agent-execution reconcile-buildback verify-promote-buildback --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "execution-fabric",
+  "skills": [
+    "plan-buildback",
+    "decompose-issue-work",
+    "coordinate-agent-execution",
+    "reconcile-buildback",
+    "verify-promote-buildback"
+  ],
+  "count": 5,
+  "applied": true
+}
+exit_code=0
+=== profile google-a2a-interop ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\google-a2a-interop\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "delegate-a2a-task",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\google-a2a-interop\\skills\\delegate-a2a-task",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\delegate-a2a-task",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "discover-a2a-agents",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\google-a2a-interop\\skills\\discover-a2a-agents",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\discover-a2a-agents",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "negotiate-a2a-capabilities",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\google-a2a-interop\\skills\\negotiate-a2a-capabilities",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\negotiate-a2a-capabilities",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "verify-a2a-interoperation",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\google-a2a-interop\\skills\\verify-a2a-interoperation",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\verify-a2a-interoperation",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\google-a2a-interop\skills --scope custom --repo . --collision fail --skills discover-a2a-agents negotiate-a2a-capabilities delegate-a2a-task verify-a2a-interoperation --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "google-a2a-interop",
+  "skills": [
+    "discover-a2a-agents",
+    "negotiate-a2a-capabilities",
+    "delegate-a2a-task",
+    "verify-a2a-interoperation"
+  ],
+  "count": 4,
+  "applied": true
+}
+exit_code=0
+=== profile h2a-human-agent ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\h2a-human-agent-profile\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "accept-revoke-agent-work",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\h2a-human-agent-profile\\skills\\accept-revoke-agent-work",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\accept-revoke-agent-work",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "capture-human-authority",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\h2a-human-agent-profile\\skills\\capture-human-authority",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\capture-human-authority",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "delegate-human-to-agent",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\h2a-human-agent-profile\\skills\\delegate-human-to-agent",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\delegate-human-to-agent",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "elicit-human-input",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\h2a-human-agent-profile\\skills\\elicit-human-input",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\elicit-human-input",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "request-human-approval",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\h2a-human-agent-profile\\skills\\request-human-approval",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\request-human-approval",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\h2a-human-agent-profile\skills --scope custom --repo . --collision fail --skills capture-human-authority delegate-human-to-agent request-human-approval elicit-human-input accept-revoke-agent-work --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "h2a-human-agent",
+  "skills": [
+    "capture-human-authority",
+    "delegate-human-to-agent",
+    "request-human-approval",
+    "elicit-human-input",
+    "accept-revoke-agent-work"
+  ],
+  "count": 5,
+  "applied": true
+}
+exit_code=0
+=== profile agent-ui-interop ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-ui-interop\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "bridge-agui-events",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-ui-interop\\skills\\bridge-agui-events",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\bridge-agui-events",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "present-human-gate",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-ui-interop\\skills\\present-human-gate",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\present-human-gate",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "render-a2ui-interface",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-ui-interop\\skills\\render-a2ui-interface",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\render-a2ui-interface",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "verify-agent-ui-contract",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-ui-interop\\skills\\verify-agent-ui-contract",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\verify-agent-ui-contract",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\agent-ui-interop\skills --scope custom --repo . --collision fail --skills render-a2ui-interface bridge-agui-events present-human-gate verify-agent-ui-contract --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "agent-ui-interop",
+  "skills": [
+    "render-a2ui-interface",
+    "bridge-agui-events",
+    "present-human-gate",
+    "verify-agent-ui-contract"
+  ],
+  "count": 4,
+  "applied": true
+}
+exit_code=0
+=== profile agent-observability ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-observability\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "analyze-agent-runtime",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-observability\\skills\\analyze-agent-runtime",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\analyze-agent-runtime",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "instrument-agent-traces",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-observability\\skills\\instrument-agent-traces",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\instrument-agent-traces",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "investigate-agent-failure",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-observability\\skills\\investigate-agent-failure",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\investigate-agent-failure",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "monitor-agent-liveness",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\agent-observability\\skills\\monitor-agent-liveness",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\monitor-agent-liveness",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\agent-observability\skills --scope custom --repo . --collision fail --skills instrument-agent-traces monitor-agent-liveness analyze-agent-runtime investigate-agent-failure --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "agent-observability",
+  "skills": [
+    "instrument-agent-traces",
+    "monitor-agent-liveness",
+    "analyze-agent-runtime",
+    "investigate-agent-failure"
+  ],
+  "count": 4,
+  "applied": true
+}
+exit_code=0
+=== profile adaptive-intelligence ===
+{
+  "status": "APPLIED",
+  "scope": "custom",
+  "mode": "copy",
+  "collision": "fail",
+  "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\adaptive-intelligence\\skills",
+  "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills",
+  "missing_requested_skills": [],
+  "invalid_skills": [],
+  "operations": [
+    {
+      "skill": "calibrate-agent-confidence",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\adaptive-intelligence\\skills\\calibrate-agent-confidence",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\calibrate-agent-confidence",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "evolve-agent-evals",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\adaptive-intelligence\\skills\\evolve-agent-evals",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\evolve-agent-evals",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "govern-agent-learning",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\adaptive-intelligence\\skills\\govern-agent-learning",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\govern-agent-learning",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "optimize-context-budget",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\adaptive-intelligence\\skills\\optimize-context-budget",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\optimize-context-budget",
+      "exists": false,
+      "action": "install"
+    },
+    {
+      "skill": "route-task-by-capability",
+      "source": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\input\\extracted\\canonical-platform-review-360-v4.0.0\\extensions\\adaptive-intelligence\\skills\\route-task-by-capability",
+      "destination": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\runtime\\skills\\route-task-by-capability",
+      "exists": false,
+      "action": "install"
+    }
+  ],
+  "backups": [],
+  "rollback_performed": false
+}
++ C:\Users\fjuni\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\skills\install-skill-pack\scripts\install_pack.py --source C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\input\extracted\canonical-platform-review-360-v4.0.0\extensions\adaptive-intelligence\skills --scope custom --repo . --collision fail --skills route-task-by-capability calibrate-agent-confidence optimize-context-budget evolve-agent-evals govern-agent-learning --dest C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\runtime\skills --apply
+{
+  "profile": "adaptive-intelligence",
+  "skills": [
+    "route-task-by-capability",
+    "calibrate-agent-confidence",
+    "optimize-context-budget",
+    "evolve-agent-evals",
+    "govern-agent-learning"
+  ],
+  "count": 5,
+  "applied": true
+}
+exit_code=0
+=== initialize runtime READ_ONLY ===
+{
+  "run_id": "a57da34c-3505-4ded-973b-8ecebc531018",
+  "initialized_at": "2026-08-20T06:27:01.089526+00:00",
+  "pack": "canonical-platform-review-360",
+  "pack_version": "4.0.0",
+  "skill_count": 29,
+  "workspace": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "mode": "READ_ONLY",
+  "git": {
+    "root": "C:/Users/fjuni/.copilot/repos/devspace",
+    "head": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+    "branch": "main"
+  },
+  "tools": {
+    "git": true,
+    "python": true,
+    "python3": true,
+    "codex": false,
+    "node": true,
+    "npm": true,
+    "pnpm": true,
+    "yarn": false,
+    "docker": true,
+    "jq": false,
+    "rg": true
+  }
+}
+initialize_exit_code=0
+=== summary ===
+[{"profile":"lifecycle","exit_code":0},{"profile":"review","exit_code":0},{"profile":"github-intelligence","exit_code":0},{"profile":"execution-fabric","exit_code":0},{"profile":"google-a2a-interop","exit_code":0},{"profile":"h2a-human-agent","exit_code":0},{"profile":"agent-ui-interop","exit_code":0},{"profile":"agent-observability","exit_code":0},{"profile":"adaptive-intelligence","exit_code":0}]
+runtime_skill_files=456

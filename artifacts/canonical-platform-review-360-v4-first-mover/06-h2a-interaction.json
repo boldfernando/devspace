@@ -1,0 +1,19 @@
+{
+  "interaction_id": "h2a://devspace/MISSION-DEVSPACE-FMV4-001/BBK-DEVSPACE-FMV4-001/PR-001/FM V4-CONTROL-001/human/review",
+  "type": "AUTHORITY_REQUEST",
+  "actor_id": "human://mission-owner/devspace-review",
+  "authority_grant_id": null,
+  "delegation_id": null,
+  "action": "review_and_plan_only",
+  "resources": ["audit:control-plane-v4", "audit:first-mover-review-record"],
+  "risk_class": "HIGH",
+  "approval_policy": "explicit_required_before_apply_or_external_side_effect",
+  "issued_at": "2026-08-20T06:30:00Z",
+  "expires_at": null,
+  "revocable": true,
+  "trace_id": "TRACE-GRP-PLATFORM-001",
+  "task_id": "FMV4-CONTROL-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "state": "DRAFT",
+  "note": "H2A is experimental and package-defined; no human approval is inferred from the user request for review execution."
+}

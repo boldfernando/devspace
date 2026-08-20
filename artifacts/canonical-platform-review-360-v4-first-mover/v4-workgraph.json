@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema": "devspace/canonical-platform-review-360-v4/workgraph/v1",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "repository": "devspace",
+  "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+  "mode": "READ_ONLY",
+  "h2a_authority": "NOT_ISSUED",
+  "tasks": [
+    {
+      "task_id": "FMV4-BASELINE-001",
+      "title": "Freeze repository, runtime, package provenance and rollback baseline",
+      "dependencies": [],
+      "claims": [{"resource": "repository:devspace-baseline", "mode": "read"}],
+      "mode": "READ_ONLY",
+      "risk_class": "LOW",
+      "skills": ["discover-codebase", "reconcile-git-state", "bootstrap-skill-system"]
+    },
+    {
+      "task_id": "FMV4-CONTROL-001",
+      "title": "Initialize v4 Control Plane and mission ledger",
+      "dependencies": ["FMV4-BASELINE-001"],
+      "claims": [{"resource": "audit:control-plane-v4", "mode": "contract"}],
+      "mode": "PLAN",
+      "risk_class": "MEDIUM",
+      "skills": ["orchestrate-platform-review-360", "plan-buildback"]
+    },
+    {
+      "task_id": "FMV4-FABRIC-001",
+      "title": "Initialize Execution Fabric, scheduler, addressing and lease state",
+      "dependencies": ["FMV4-BASELINE-001"],
+      "claims": [{"resource": "audit:execution-fabric-v4", "mode": "contract"}],
+      "mode": "PLAN",
+      "risk_class": "HIGH",
+      "skills": ["plan-buildback", "decompose-issue-work", "coordinate-agent-execution"]
+    },
+    {
+      "task_id": "FMV4-H2A-001",
+      "title": "Model Human-to-Agent authority envelope without inferring approval",
+      "dependencies": ["FMV4-CONTROL-001"],
+      "claims": [{"resource": "audit:h2a-authority-v4", "mode": "contract"}],
+      "mode": "PLAN",
+      "risk_class": "HIGH",
+      "skills": ["capture-human-authority", "delegate-human-to-agent", "request-human-approval", "accept-revoke-agent-work"]
+    },
+    {
+      "task_id": "FMV4-A2A-001",
+      "title": "Discover and classify A2A interoperability surface",
+      "dependencies": ["FMV4-CONTROL-001"],
+      "claims": [{"resource": "integration:a2a-local-surface", "mode": "read"}],
+      "mode": "READ_ONLY",
+      "risk_class": "MEDIUM",
+      "skills": ["discover-a2a-agents", "negotiate-a2a-capabilities", "verify-a2a-interoperation"]
+    },
+    {
+      "task_id": "FMV4-A2UI-001",
+      "title": "Inspect A2UI/AG-UI bridge and human-gate contract",
+      "dependencies": ["FMV4-CONTROL-001"],
+      "claims": [{"resource": "ui:a2ui-agui-contract", "mode": "read"}],
+      "mode": "READ_ONLY",
+      "risk_class": "MEDIUM",
+      "skills": ["render-a2ui-interface", "bridge-agui-events", "present-human-gate", "verify-agent-ui-contract"]
+    },
+    {
+      "task_id": "FMV4-OBS-001",
+      "title": "Define agent trace, liveness, runtime failure and cost evidence contract",
+      "dependencies": ["FMV4-FABRIC-001"],
+      "claims": [{"resource": "audit:agent-observability-v4", "mode": "contract"}],
+      "mode": "PLAN",
+      "risk_class": "HIGH",
+      "skills": ["instrument-agent-traces", "monitor-agent-liveness", "analyze-agent-runtime", "investigate-agent-failure"]
+    },
+    {
+      "task_id": "FMV4-ADAPT-001",
+      "title": "Route capabilities and define confidence/context/eval promotion gates",
+      "dependencies": ["FMV4-FABRIC-001"],
+      "claims": [{"resource": "audit:adaptive-intelligence-v4", "mode": "contract"}],
+      "mode": "PLAN",
+      "risk_class": "HIGH",
+      "skills": ["route-task-by-capability", "calibrate-agent-confidence", "optimize-context-budget", "evolve-agent-evals", "govern-agent-learning"]
+    },
+    {
+      "task_id": "FMV4-RECONCILE-001",
+      "title": "Reconcile findings, conflicts, traces, cost records and evidence pointers",
+      "dependencies": ["FMV4-H2A-001", "FMV4-A2A-001", "FMV4-A2UI-001", "FMV4-OBS-001", "FMV4-ADAPT-001"],
+      "claims": [{"resource": "audit:first-mover-review-record", "mode": "semantic-write"}],
+      "mode": "VERIFY",
+      "risk_class": "HIGH",
+      "skills": ["reconcile-buildback", "investigate-agent-failure"]
+    },
+    {
+      "task_id": "FMV4-VERIFY-001",
+      "title": "Independently verify DoR, DoD, lease cleanup and release posture",
+      "dependencies": ["FMV4-RECONCILE-001"],
+      "claims": [{"resource": "audit:first-mover-review-record", "mode": "read"}, {"resource": "repository:devspace-baseline", "mode": "read"}],
+      "mode": "RELEASE_GATE",
+      "risk_class": "CRITICAL",
+      "skills": ["verify-promote-buildback", "verify-skill-system", "synthesize-roadmap-gates"]
+    }
+  ]
+}

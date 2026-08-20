@@ -1,0 +1,51 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/buildbacks/v1",
+  "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+  "buildbacks": [
+    {
+      "buildback_id": "BBK-PLATFORM-001",
+      "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+      "integration_sha": null,
+      "state": "DECOMPOSED",
+      "issue_ids": ["PR-001", "PR-005"],
+      "tasks": ["FMV4-BASELINE-001", "FMV4-CONTROL-001", "FMV4-VERIFY-001"],
+      "trace_group_id": "TRACE-GRP-PLATFORM-001"
+    },
+    {
+      "buildback_id": "BBK-IDENTITY-002",
+      "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+      "integration_sha": null,
+      "state": "DECOMPOSED",
+      "issue_ids": ["PR-002", "PR-009"],
+      "tasks": ["FMV4-H2A-001", "FMV4-VERIFY-001"],
+      "trace_group_id": "TRACE-GRP-IDENTITY-002"
+    },
+    {
+      "buildback_id": "BBK-INTEROP-003",
+      "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+      "integration_sha": null,
+      "state": "DECOMPOSED",
+      "issue_ids": ["PR-006", "PR-008"],
+      "tasks": ["FMV4-A2A-001", "FMV4-A2UI-001", "FMV4-ADAPT-001"],
+      "trace_group_id": "TRACE-GRP-INTEROP-003"
+    },
+    {
+      "buildback_id": "BBK-OPS-004",
+      "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+      "integration_sha": null,
+      "state": "DECOMPOSED",
+      "issue_ids": ["PR-003", "PR-008"],
+      "tasks": ["FMV4-OBS-001", "FMV4-RECONCILE-001", "FMV4-VERIFY-001"],
+      "trace_group_id": "TRACE-GRP-OPS-004"
+    },
+    {
+      "buildback_id": "BBK-RESILIENCE-005",
+      "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+      "integration_sha": null,
+      "state": "DECOMPOSED",
+      "issue_ids": ["PR-004", "PR-007"],
+      "tasks": ["FMV4-FABRIC-001", "FMV4-OBS-001", "FMV4-RECONCILE-001", "FMV4-VERIFY-001"],
+      "trace_group_id": "TRACE-GRP-RESILIENCE-005"
+    }
+  ]
+}

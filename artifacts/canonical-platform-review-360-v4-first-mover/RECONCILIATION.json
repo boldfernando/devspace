@@ -1,0 +1,58 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/reconciliation/v1",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "buildback_state": "MERGE_READY",
+  "tasks": {
+    "dor_passed": ["FMV4-BASELINE-001", "FMV4-CONTROL-001", "FMV4-FABRIC-001", "FMV4-A2A-001", "FMV4-A2UI-001", "FMV4-OBS-001", "FMV4-ADAPT-001"],
+    "dor_conditional": ["FMV4-H2A-001"],
+    "dod_done_local": ["FMV4-BASELINE-001", "FMV4-CONTROL-001", "FMV4-FABRIC-001"],
+    "dod_partial": ["FMV4-H2A-001", "FMV4-A2UI-001", "FMV4-OBS-001", "FMV4-ADAPT-001", "FMV4-RECONCILE-001", "FMV4-VERIFY-001"],
+    "dod_not_done": ["FMV4-A2A-001"]
+  },
+  "leases": {
+    "requested": 7,
+    "acquired": 7,
+    "acquisition_failures": 0,
+    "conflicting_claims": 0,
+    "lease_state": "runtime/leases.json",
+    "cleanup_required_before_final_gate": false,
+    "cleanup_completed": true,
+    "final_lease_list": "empty"
+  },
+  "conflicts": {
+    "detected": 0,
+    "resolved_by_dependency": 4,
+    "parallel_waves": 5,
+    "evidence": "CONFLICT-GRAPH.json"
+  },
+  "traces": {
+    "sanitized_event_count": 9,
+    "trace_groups": ["TRACE-GRP-PLATFORM-001", "TRACE-GRP-IDENTITY-002", "TRACE-GRP-INTEROP-003", "TRACE-GRP-OPS-004", "TRACE-GRP-RESILIENCE-005"],
+    "journal": "runtime/events.jsonl",
+    "raw_stdout_published": false,
+    "secrets_included": false
+  },
+  "costs": {
+    "external_model_calls": 0,
+    "remote_a2a_calls": 0,
+    "billing_meter": "not_metered_local_deterministic_tools",
+    "observed_cost_usd": null,
+    "cost_claim": "No external billing or provider cost was measured; do not interpret null as zero spend."
+  },
+  "findings": [
+    {"id":"PR-001","priority":"P1","status":"OPEN","title":"Deployment, promotion and rollback not proven"},
+    {"id":"PR-002","priority":"P1","status":"OPEN","title":"Production identity gateway, explicit RBAC and key rotation not proven"},
+    {"id":"PR-003","priority":"P1","status":"OPEN","title":"Hosted observability firing and recovery not proven"},
+    {"id":"PR-004","priority":"P2","status":"OPEN","title":"Real-server DAST probe incomplete"},
+    {"id":"PR-005","priority":"P2","status":"OPEN","title":"SBOM and signed provenance unavailable"},
+    {"id":"PR-006","priority":"P2","status":"OPEN","title":"Cross-OS chaos/Swarm and browser-host evidence incomplete"},
+    {"id":"PR-007","priority":"P3","status":"OPEN","title":"Write-to-ACK ambiguous interval remains"},
+    {"id":"PR-008","priority":"P3","status":"OPEN","title":"Hosted load calibration and provider runtime unknown"},
+    {"id":"PR-009","priority":"P4","status":"OPEN","title":"Enterprise RBAC, key rotation and provenance automation backlog"}
+  ],
+  "decision": "DO_NOT_PROMOTE; MERGE_EVIDENCE_ONLY",
+  "rollback": "retain baseline 9d420bc7c2b46282a9fad96bda4c2319c6454261; release leases and remove isolated runtime only after evidence indexing",
+  "evidence": ["PLANE-STATE.json", "v4-buildbacks.json", "v4-workgraph.json", "CONFLICT-GRAPH.json", "09-traces-events.log"]
+}

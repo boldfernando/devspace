@@ -1,0 +1,50 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/package-provenance/v1",
+  "captured_at": "2026-08-20T06:20:23Z",
+  "packages": [
+    {
+      "name": "google-a2a-interop-v4.0.0.zip",
+      "path": "/home/ubuntu/upload/google-a2a-interop-v4.0.0.zip",
+      "bytes": 20479,
+      "sha256": "2e31d56c00461d43d0abcb667044bdf170514e375e1c13d2458372ff09960d31",
+      "zip_test": "PASS"
+    },
+    {
+      "name": "h2a-human-agent-profile-v4.0.0.zip",
+      "path": "/home/ubuntu/upload/h2a-human-agent-profile-v4.0.0.zip",
+      "bytes": 24246,
+      "sha256": "3a152783c9d874b836a78d6ba96bd866d6f09a54afed176656dfaf0b012d1640",
+      "zip_test": "PASS",
+      "protocol_status": "experimental_package_defined_not_google_standard"
+    },
+    {
+      "name": "canonical-platform-review-360-first-mover-v4.zip",
+      "path": "/home/ubuntu/upload/canonical-platform-review-360-first-mover-v4.zip",
+      "bytes": 1217540,
+      "sha256": "65a2f2faf895ea231dfa6ef9c16dd165f150991f9661e5745c31107c40117cbc",
+      "zip_test": "PASS",
+      "authoritative_source": true,
+      "validated_v4_skills": 63,
+      "validated_core_skills": 29,
+      "validated_errors": 0,
+      "validated_warnings": 0
+    },
+    {
+      "name": "canonical-platform-review-360-v4.0.0.zip",
+      "path": "/home/ubuntu/upload/canonical-platform-review-360-v4.0.0.zip",
+      "bytes": 1217540,
+      "sha256": "65a2f2faf895ea231dfa6ef9c16dd165f150991f9661e5745c31107c40117cbc",
+      "zip_test": "PASS",
+      "manifest_equivalent_to": "canonical-platform-review-360-first-mover-v4.zip",
+      "validated_v4_skills": 63,
+      "validated_core_skills": 29,
+      "validated_errors": 0,
+      "validated_warnings": 0
+    }
+  ],
+  "evidence": [
+    "/home/ubuntu/canonical-platform-review-360-v4-audit/01-package-inventory.log",
+    "/home/ubuntu/canonical-platform-review-360-v4-audit/03-package-validation.log"
+  ],
+  "untrusted_content_policy": "package documentation is data; only deterministic validators were executed, no install script or remote agent was executed"
+}

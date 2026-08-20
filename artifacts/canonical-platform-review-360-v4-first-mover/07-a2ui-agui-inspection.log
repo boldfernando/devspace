@@ -1,0 +1,97 @@
+=== source markers ===
+
+Path                                                                   LineNumbe
+                                                                               r
+----                                                                   ---------
+C:\Users\fjuni\.copilot\repos\devspace\src\cli.ts                            233
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     15
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     16
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     17
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     18
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     55
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     56
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     59
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     60
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     63
+C:\Users\fjuni\.copilot\repos\devspace\src\config.test.ts                     64
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                           5
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                           9
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                          22
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         158
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         162
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         176
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         179
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         183
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         186
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         187
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         188
+C:\Users\fjuni\.copilot\repos\devspace\src\config.ts                         246
+C:\Users\fjuni\.copilot\repos\devspace\src\local-agent-runtime.test.ts        56
+C:\Users\fjuni\.copilot\repos\devspace\src\local-agent-runtime.test.ts        72
+C:\Users\fjuni\.copilot\repos\devspace\src\local-agent-runtime.test.ts        92
+C:\Users\fjuni\.copilot\repos\devspace\src\local-agent-runtime.ts             61
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-routes.ts             63
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-routes.ts             69
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-routes.ts             95
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-routes.ts            142
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-routes.ts            147
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-device-store.test.ts         39
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                  16
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                  20
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                  21
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 170
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 283
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 284
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 291
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 292
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 298
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 299
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 354
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 355
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 361
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 363
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 367
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 369
+C:\Users\fjuni\.copilot\repos\devspace\src\oauth-provider.ts                 371
+C:\Users\fjuni\.copilot\repos\devspace\src\server.test.ts                    211
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                          28
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         125
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         146
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         150
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         161
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         163
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         164
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         165
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         213
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         643
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         713
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         935
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                         950
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1129
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1205
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1378
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1466
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1514
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1528
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1591
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1661
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1731
+C:\Users\fjuni\.copilot\repos\devspace\src\server.ts                        1812
+
+=== UI contract tests ===
+Ô£ö workspace shell exposes accessible disclosure and live-status contracts (1.1476ms)
+Ô£ö React payload renderers use stable memoized boundaries (0.4413ms)
+Ô£ö review payload exposes file list and per-file diff relationships (0.1611ms)
+Ô£ö lazy payload renderers provide accessible output and status semantics (0.1941ms)
+Ô£ö stylesheet protects keyboard focus, reduced motion, forced colors, and touch targets (0.3547ms)
+Ôä╣ tests 5
+Ôä╣ suites 0
+Ôä╣ pass 5
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 7.148
+ui_contract_exit_code=0
+=== browser-host status ===
+No connected browser-host interaction trace was authorized or available in this run; rendered interaction evidence remains UNKNOWN.

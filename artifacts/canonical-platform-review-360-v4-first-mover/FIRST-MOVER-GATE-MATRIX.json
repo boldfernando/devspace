@@ -1,0 +1,24 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/gate-matrix/v1",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+  "gates": [
+    {"id":"G0","name":"Package provenance and validation","status":"GREEN","severity":"P0","confidence":"HIGH","evidence":["V4-PACKAGE-PROVENANCE.json","/home/ubuntu/canonical-platform-review-360-v4-audit/03-package-validation.log"],"decision":"validated 63 v4 skills; 0 errors; 0 warnings"},
+    {"id":"G1","name":"Repository baseline and rollback","status":"GREEN","severity":"P0","confidence":"HIGH","evidence":["02-baseline.log","ROLLBACK_POINT.json"],"decision":"baseline frozen at 9d420bc; working tree clean before v4"},
+    {"id":"G2","name":"Control Plane initialization","status":"GREEN","severity":"P1","confidence":"HIGH","evidence":["runtime/state.json","v4-workgraph.json"],"decision":"READ_ONLY runtime initialized; mission and buildback recorded"},
+    {"id":"G3","name":"Execution Fabric, DAG and leases","status":"GREEN","severity":"P1","confidence":"HIGH","evidence":["05-fabric-plan-leases.log","CONFLICT-GRAPH.json","11-lease-release.log","runtime/leases.json"],"decision":"5 scheduler waves; 7 leases acquired; 0 conflicts; all leases released"},
+    {"id":"G4","name":"H2A authority safety","status":"YELLOW","severity":"P1","confidence":"HIGH","evidence":["06-h2a-interaction.json","06-h2a-validation.log"],"decision":"DRAFT validates; invalid direct execution rejected; no authority grant or approval inferred"},
+    {"id":"G5","name":"A2A interoperability","status":"RED","severity":"P1","confidence":"HIGH","evidence":["05-a2a-local-evidence.json"],"decision":"NOT_READY; no remote card, endpoint, negotiation or delegated execution available"},
+    {"id":"G6","name":"A2UI/AG-UI interaction","status":"YELLOW","severity":"P2","confidence":"HIGH","evidence":["08-A2UI-AGUI-CONTRACT.json","07-a2ui-agui-inspection.log"],"decision":"static UI/accessibility contract pass; browser-host render/event trace UNKNOWN"},
+    {"id":"G7","name":"Agent observability","status":"YELLOW","severity":"P1","confidence":"HIGH","evidence":["runtime/events.jsonl","09-traces-events.log","artifacts/observability-contract-report.json"],"decision":"9 sanitized local events; hosted collector/scrape/alert recovery UNKNOWN"},
+    {"id":"G8","name":"Adaptive intelligence and eval promotion","status":"YELLOW","severity":"P2","confidence":"MEDIUM","evidence":["07-adaptive-routing.json","07-adaptive-candidates.json"],"decision":"local candidate selected deterministically; no learning or promotion performed"},
+    {"id":"G9","name":"DevSpace regression and security gates","status":"GREEN","severity":"P0","confidence":"HIGH","evidence":["10-final-gates.log"],"decision":"artifact gate, typecheck, tests, build, doctor, security P0, observability, coverage, bundle audit and diff check all exit 0"},
+    {"id":"G10","name":"Deployment, promotion, SBOM and rollback drill","status":"RED","severity":"P0","confidence":"HIGH","evidence":["artifacts/canonical-platform-review-360-audit/RECONCILED_FINDINGS.json","ROLLBACK_POINT.json"],"decision":"no authorized hosted target, signed provenance, promotion or executed rollback/restore drill"}
+  ],
+  "finding_summary": {"P0": ["PR-001 deployment/rollback/provenance release blocker"],"P1":["PR-002 identity gateway/RBAC/key rotation","PR-003 hosted observability"],"P2":["PR-004 real-server DAST","PR-005 SBOM/signed provenance","PR-006 cross-OS/browser host"],"P3":["PR-007 write-to-ACK ambiguity","PR-008 hosted load/provider calibration"],"P4":["PR-009 enterprise RBAC/key rotation/provenance automation"]},
+  "global_status":"YELLOW",
+  "release_status":"RED",
+  "release_decision":"NOT_RELEASE_READY",
+  "unknowns_must_remain_unknown":true,
+  "secrets_included":false
+}

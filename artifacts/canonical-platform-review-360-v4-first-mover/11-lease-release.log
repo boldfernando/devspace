@@ -1,0 +1,237 @@
+=== release lease_58712b1dd9aa40f4 ===
+{
+  "leases": [
+    {
+      "lease_id": "lease_7161daa3016344a5",
+      "resource": "audit:execution-fabric-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/execution-fabric/FMV4-FABRIC-001/buildback-planner/1",
+      "acquired_at": "2026-08-20T06:30:40.708523+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.708523+00:00",
+      "expires_at": "2026-08-20T06:45:40.708523+00:00"
+    },
+    {
+      "lease_id": "lease_d702d230d7b84c5b",
+      "resource": "audit:h2a-authority-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/h2a-authority/FMV4-H2A-001/human-gate/1",
+      "acquired_at": "2026-08-20T06:30:40.798568+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.798568+00:00",
+      "expires_at": "2026-08-20T06:45:40.798568+00:00"
+    },
+    {
+      "lease_id": "lease_f2f1c0c35e45427e",
+      "resource": "integration:a2a-local-surface",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2a-interop/FMV4-A2A-001/a2a-broker/1",
+      "acquired_at": "2026-08-20T06:30:40.886042+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.886042+00:00",
+      "expires_at": "2026-08-20T06:45:40.886042+00:00"
+    },
+    {
+      "lease_id": "lease_f521655229fc4486",
+      "resource": "ui:a2ui-agui-contract",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2ui-agui/FMV4-A2UI-001/ui-bridge/1",
+      "acquired_at": "2026-08-20T06:30:40.969218+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.969218+00:00",
+      "expires_at": "2026-08-20T06:45:40.969218+00:00"
+    },
+    {
+      "lease_id": "lease_9286166d15684cd1",
+      "resource": "audit:agent-observability-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FMV4-OBS-001/observability/1",
+      "acquired_at": "2026-08-20T06:30:41.051850+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.051850+00:00",
+      "expires_at": "2026-08-20T06:45:41.051850+00:00"
+    },
+    {
+      "lease_id": "lease_36aed86545694998",
+      "resource": "audit:adaptive-intelligence-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+      "acquired_at": "2026-08-20T06:30:41.137482+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.137482+00:00",
+      "expires_at": "2026-08-20T06:45:41.137482+00:00"
+    }
+  ]
+}
+exit_code=0
+=== release lease_7161daa3016344a5 ===
+{
+  "leases": [
+    {
+      "lease_id": "lease_d702d230d7b84c5b",
+      "resource": "audit:h2a-authority-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/h2a-authority/FMV4-H2A-001/human-gate/1",
+      "acquired_at": "2026-08-20T06:30:40.798568+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.798568+00:00",
+      "expires_at": "2026-08-20T06:45:40.798568+00:00"
+    },
+    {
+      "lease_id": "lease_f2f1c0c35e45427e",
+      "resource": "integration:a2a-local-surface",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2a-interop/FMV4-A2A-001/a2a-broker/1",
+      "acquired_at": "2026-08-20T06:30:40.886042+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.886042+00:00",
+      "expires_at": "2026-08-20T06:45:40.886042+00:00"
+    },
+    {
+      "lease_id": "lease_f521655229fc4486",
+      "resource": "ui:a2ui-agui-contract",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2ui-agui/FMV4-A2UI-001/ui-bridge/1",
+      "acquired_at": "2026-08-20T06:30:40.969218+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.969218+00:00",
+      "expires_at": "2026-08-20T06:45:40.969218+00:00"
+    },
+    {
+      "lease_id": "lease_9286166d15684cd1",
+      "resource": "audit:agent-observability-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FMV4-OBS-001/observability/1",
+      "acquired_at": "2026-08-20T06:30:41.051850+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.051850+00:00",
+      "expires_at": "2026-08-20T06:45:41.051850+00:00"
+    },
+    {
+      "lease_id": "lease_36aed86545694998",
+      "resource": "audit:adaptive-intelligence-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+      "acquired_at": "2026-08-20T06:30:41.137482+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.137482+00:00",
+      "expires_at": "2026-08-20T06:45:41.137482+00:00"
+    }
+  ]
+}
+exit_code=0
+=== release lease_d702d230d7b84c5b ===
+{
+  "leases": [
+    {
+      "lease_id": "lease_f2f1c0c35e45427e",
+      "resource": "integration:a2a-local-surface",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2a-interop/FMV4-A2A-001/a2a-broker/1",
+      "acquired_at": "2026-08-20T06:30:40.886042+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.886042+00:00",
+      "expires_at": "2026-08-20T06:45:40.886042+00:00"
+    },
+    {
+      "lease_id": "lease_f521655229fc4486",
+      "resource": "ui:a2ui-agui-contract",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2ui-agui/FMV4-A2UI-001/ui-bridge/1",
+      "acquired_at": "2026-08-20T06:30:40.969218+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.969218+00:00",
+      "expires_at": "2026-08-20T06:45:40.969218+00:00"
+    },
+    {
+      "lease_id": "lease_9286166d15684cd1",
+      "resource": "audit:agent-observability-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FMV4-OBS-001/observability/1",
+      "acquired_at": "2026-08-20T06:30:41.051850+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.051850+00:00",
+      "expires_at": "2026-08-20T06:45:41.051850+00:00"
+    },
+    {
+      "lease_id": "lease_36aed86545694998",
+      "resource": "audit:adaptive-intelligence-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+      "acquired_at": "2026-08-20T06:30:41.137482+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.137482+00:00",
+      "expires_at": "2026-08-20T06:45:41.137482+00:00"
+    }
+  ]
+}
+exit_code=0
+=== release lease_f2f1c0c35e45427e ===
+{
+  "leases": [
+    {
+      "lease_id": "lease_f521655229fc4486",
+      "resource": "ui:a2ui-agui-contract",
+      "mode": "SHARED_READ",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2ui-agui/FMV4-A2UI-001/ui-bridge/1",
+      "acquired_at": "2026-08-20T06:30:40.969218+00:00",
+      "heartbeat_at": "2026-08-20T06:30:40.969218+00:00",
+      "expires_at": "2026-08-20T06:45:40.969218+00:00"
+    },
+    {
+      "lease_id": "lease_9286166d15684cd1",
+      "resource": "audit:agent-observability-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FMV4-OBS-001/observability/1",
+      "acquired_at": "2026-08-20T06:30:41.051850+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.051850+00:00",
+      "expires_at": "2026-08-20T06:45:41.051850+00:00"
+    },
+    {
+      "lease_id": "lease_36aed86545694998",
+      "resource": "audit:adaptive-intelligence-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+      "acquired_at": "2026-08-20T06:30:41.137482+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.137482+00:00",
+      "expires_at": "2026-08-20T06:45:41.137482+00:00"
+    }
+  ]
+}
+exit_code=0
+=== release lease_f521655229fc4486 ===
+{
+  "leases": [
+    {
+      "lease_id": "lease_9286166d15684cd1",
+      "resource": "audit:agent-observability-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FMV4-OBS-001/observability/1",
+      "acquired_at": "2026-08-20T06:30:41.051850+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.051850+00:00",
+      "expires_at": "2026-08-20T06:45:41.051850+00:00"
+    },
+    {
+      "lease_id": "lease_36aed86545694998",
+      "resource": "audit:adaptive-intelligence-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+      "acquired_at": "2026-08-20T06:30:41.137482+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.137482+00:00",
+      "expires_at": "2026-08-20T06:45:41.137482+00:00"
+    }
+  ]
+}
+exit_code=0
+=== release lease_9286166d15684cd1 ===
+{
+  "leases": [
+    {
+      "lease_id": "lease_36aed86545694998",
+      "resource": "audit:adaptive-intelligence-v4",
+      "mode": "CONTRACT_LOCK",
+      "owner": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+      "acquired_at": "2026-08-20T06:30:41.137482+00:00",
+      "heartbeat_at": "2026-08-20T06:30:41.137482+00:00",
+      "expires_at": "2026-08-20T06:45:41.137482+00:00"
+    }
+  ]
+}
+exit_code=0
+=== release lease_36aed86545694998 ===
+{
+  "leases": []
+}
+exit_code=0
+=== final lease state ===
+{
+  "leases": []
+}
+lease_list_exit_code=0
+=== summary ===
+[{"lease_id":"lease_58712b1dd9aa40f4","resource":"audit:control-plane-v4","exit_code":0},{"lease_id":"lease_7161daa3016344a5","resource":"audit:execution-fabric-v4","exit_code":0},{"lease_id":"lease_d702d230d7b84c5b","resource":"audit:h2a-authority-v4","exit_code":0},{"lease_id":"lease_f2f1c0c35e45427e","resource":"integration:a2a-local-surface","exit_code":0},{"lease_id":"lease_f521655229fc4486","resource":"ui:a2ui-agui-contract","exit_code":0},{"lease_id":"lease_9286166d15684cd1","resource":"audit:agent-observability-v4","exit_code":0},{"lease_id":"lease_36aed86545694998","resource":"audit:adaptive-intelligence-v4","exit_code":0}]

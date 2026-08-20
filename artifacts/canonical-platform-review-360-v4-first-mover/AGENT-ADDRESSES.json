@@ -1,0 +1,65 @@
+[
+  {
+    "task_id": "FMV4-CONTROL-001",
+    "role": "manager",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/control-plane/FMV4-CONTROL-001/manager/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-FABRIC-001",
+    "role": "buildback-planner",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/execution-fabric/FMV4-FABRIC-001/buildback-planner/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-H2A-001",
+    "role": "human-gate",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/h2a-authority/FMV4-H2A-001/human-gate/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-A2A-001",
+    "role": "a2a-broker",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2a-interop/FMV4-A2A-001/a2a-broker/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-A2UI-001",
+    "role": "ui-bridge",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2ui-agui/FMV4-A2UI-001/ui-bridge/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-OBS-001",
+    "role": "observability",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FMV4-OBS-001/observability/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-ADAPT-001",
+    "role": "adaptive-quality",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FMV4-ADAPT-001/adaptive-quality/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-RECONCILE-001",
+    "role": "reconciler",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FMV4-RECONCILE-001/reconciler/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  },
+  {
+    "task_id": "FMV4-VERIFY-001",
+    "role": "independent-verifier",
+    "address": "agent://devspace/BBK-DEVSPACE-FMV4-001/release-gate/FMV4-VERIFY-001/independent-verifier/1",
+    "catalog_resolution": "deterministic_address_only",
+    "spawned": false
+  }
+]
