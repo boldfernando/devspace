@@ -30,6 +30,8 @@
     "start": "node dist/cli.js serve",
     "test": "node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/error-policy.test.ts && tsx src/logger.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/ui/accessibility-contract.test.ts && tsx src/ui/journey-progress.test.ts && tsx src/ui/card-result-normalizer.test.ts && tsx src/ui/render-strategy.test.ts && tsx src/ui/sync-state.test.ts && tsx src/response-shaping-contract.test.ts && tsx src/mcp-request-policy.test.ts && tsx src/db/query-performance.test.ts && tsx src/db/resilience.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts && tsx src/credential-security.test.ts",
     "test:observability": "node scripts/validate-observability.mjs",
+    "test:strategy:audit": "node scripts/test-strategy-audit.mjs",
+
     "wave1:p0": "node scripts/run-wave1-p0.mjs --repo . --base-url http://127.0.0.1:7676",
     "wave2:chaos": "node scripts/run-wave2-chaos.mjs --repo . --base-url http://127.0.0.1:7676 --chaos-port 17678",
     "wave3:performance": "node scripts/run-wave3-performance.mjs --repo . --isolated-port 17679",
@@ -43,8 +45,9 @@
     "e2e:idempotency:recovery": "npm run build && node --test scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
     "e2e:path-containment": "npm run build && node --test scripts/e2e-http-mcp-path-containment.test.mjs",
     "e2e:resilience:p2": "npm run build && node --test scripts/e2e-http-mcp-resilience.test.mjs && npm exec -- tsx --test src/db/resilience.test.ts",
-    "e2e:swarm:resilience": "node --test scripts/e2e-swarm-resilience.test.mjs",
-    "e2e:swarm:chaos": "node --test scripts/e2e-swarm-chaos.test.mjs",
+    "e2e:swarm:resilience": "npm run build && node --test scripts/e2e-swarm-resilience.test.mjs",
+    "e2e:swarm:chaos": "npm run build && node --test scripts/e2e-swarm-chaos.test.mjs",
+
     "test:idempotency:p1": "tsx --test scripts/e2e-idempotency-p1.test.ts",
     "prd:reverse": "tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both",
     "prd:reverse:strict": "tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both --strict --fail-on P1",

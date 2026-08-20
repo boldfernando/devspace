@@ -145,6 +145,32 @@ jobs:
           path: |
             artifacts/oauth-mcp-negative-report.json
             artifacts/e2e-security-summary.md
+      - name: Agents Swarm resilience E2E
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: npm run e2e:swarm:resilience
+      - name: Agents Swarm chaos E2E
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: npm run e2e:swarm:chaos
+      - name: Upload Agents Swarm evidence
+        if: ${{ always() && matrix.os == 'ubuntu-latest' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: agents-swarm-${{ matrix.os }}
+          path: |
+            artifacts/swarm-resilience-report.json
+            artifacts/swarm-chaos-report.json
+          if-no-files-found: ignore
+
+      - name: Test strategy audit
+        run: npm run test:strategy:audit
+      - name: Upload test strategy report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-strategy-${{ matrix.os }}
+          path: artifacts/test-strategy-report.json
+          if-no-files-found: ignore
+
       - name: Coverage gate
         run: npm run coverage:check
 
