@@ -1,5 +1,7 @@
 node_modules/
 dist/
+storybook-static/
+
 releases/
 .env
 *.log
