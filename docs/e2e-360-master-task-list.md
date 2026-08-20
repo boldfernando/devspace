@@ -305,6 +305,7 @@ Em paralelo, o segundo corte é **P1-AUTHZ-001/P1-DEVICE-009** para RBAC/grants 
 
 **Task:** `P1-IDEMP-009/P1-IDEMP-010`
 **Status:** **GREEN local / PARTIAL hosted / NOT RELEASE-READY**
+**Implementation commit:** `10fd880f587b3da06dc6745cb50c214616c57a1f`
 **Objetivo:** provar o intervalo real entre o efeito de `process.write(chars)` e a confirmação durable do idempotency store, sem retry automático nem duplicação do efeito.
 
 | Item | Resultado comprovado |
