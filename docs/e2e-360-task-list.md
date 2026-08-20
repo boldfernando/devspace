@@ -392,3 +392,38 @@ The DoR for this local slice was **READY**: baseline, architecture, repository c
 Prioritized closure work: **P1** browser-host runner plus a11y execution; **P1** visual regression baselines and diffs; **P2** cross-OS browser-host matrix and hosted deployment/rollback proof; **P2** direct stories only for payload surfaces where they add non-duplicative user-facing value; **P2** measured bundle split after dependency-graph analysis.
 
 Full report: `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-REPORT.md`. Structured ledger: `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-EVIDENCE-LEDGER.json`.
+
+
+## 10. Ciclo Storybook 360 MCP — browser-host, a11y e visual
+
+**Data do ciclo:** 20 de agosto de 2026
+**Base:** `c7fe916` + implementação browser-host no working tree
+**Escopo:** fechar a lacuna entre story/play function declarada e execução real em Chromium, incluindo interação, axe/a11y, regressão visual, screenshots, vídeos e manifest SHA-256.
+
+| ID | Task | Status | Evidência executável | Critério de aceite |
+|---|---|---|---|---|
+| STORYBOOK-360-BROWSER-001 | Instalar Playwright Chromium e criar configuração cross-platform local com `webServer`, timeout, traces e reporters sanitizados. | Concluída localmente | `playwright.config.ts`, `package.json`, `10-run-browser360-gates.mjs` | Runner reproduzível sem provider/live network; exit code não zero falha o ciclo. |
+| STORYBOOK-360-BROWSER-002 | Executar as sete stories `ToolResultCard` no browser real e cobrir RetryAndToolCalling/Streaming. | Concluída | `ToolResultCard.browser.spec.ts`, `09-browser-host-report.json`, `10-storybook-browser-check.stdout.log` | 7/7 testes Chromium PASS; 2 interações PASS; Storybook build/contracts PASS. |
+| STORYBOOK-360-BROWSER-003 | Executar axe com tags `wcag2a` e `wcag2aa` para as sete stories. | Concluída após reparo | `09-browser-host-report.json`, `src/ui/accessibility-contract.test.ts` | 7/7 scans sem violações; nenhuma falha é suprimida. |
+| STORYBOOK-360-BROWSER-004 | Corrigir o defeito real de contraste encontrado no primeiro run. | Concluída | `src/ui/workspace-app.css`, `09-browser-host-visual-findings.md` | `.tool-label`/`.header-meta` usam secondary text token; fonte de regressão adicionada; segundo run sem `color-contrast`. |
+| STORYBOOK-360-BROWSER-005 | Gerar e comparar baselines visuais estáveis em viewport 1280×720/light. | Concluída localmente | `storybook-360-mcp/visual-baselines/`, `09-browser-media/`, `10-browser360-media-manifest.sha256` | 7/7 snapshots gerados e 7/7 comparações PASS. |
+| STORYBOOK-360-BROWSER-006 | Preservar screenshots e vídeos dos sete casos aprovados sem substituir assertions. | Concluída localmente | `artifacts/storybook-360-mcp-e2e/09-browser-media/` | 7 PNG + 7 WEBM presentes e hashados; mídia é suporte, não oráculo único. |
+| STORYBOOK-360-BROWSER-007 | Executar cadeia completa lint→typecheck→build→storybook→browser→unit→coverage→security→HTTP/MCP E2E→doctor. | Concluída localmente | `10-browser360-gate-summary.json`, `10-*.stdout.log`, `10-*.stderr.log` | 11/11 comandos exit 0; cobertura 67,97/80,31/71,31; security P0 23/23. |
+
+### Resultado DoR/DoD
+
+| Item | Classificação | Prova / limitação |
+|---|---|---|
+| Escopo, baseline e AGENTS.md | DONE | baseline SHA e instruções do repositório preservados |
+| Mock Layer determinística e fail-closed | DONE | 4/4 contract tests e 7 fixtures |
+| Browser interaction | DONE local | Chromium Windows; produção MCP host bridge não exercitada |
+| A11y automatizada | DONE local | 7/7 axe scans sem violações após correção de contraste |
+| Visual regression | DONE local | 7/7 baselines e comparações; manifest SHA-256 |
+| Unit/integration/security/HTTP-MCP | DONE local | cadeia `10-browser360-gate-summary.json` |
+| Atomic Design | PARTIAL intencional | UI real continua single-shell; nenhuma taxonomia artificial foi criada |
+| Cross-OS browser/hosted deploy/rollback | UNKNOWN/PARTIAL | ainda fora do limite de prova local |
+
+**Status do ciclo:** **GREEN para implementação e browser harness local; YELLOW global; NOT RELEASE-READY.**
+**Próximo corte:** matriz cross-OS browser, story/renderer direto somente onde agregar valor, integração com produção MCP host-context, e fechamento do warning de chunk >500 kB com dependência medida.
+
+**Relatórios:** `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-EVIDENCE-LEDGER.json` e `artifacts/storybook-360-mcp-e2e/STORYBOOK-360-REPORT.md`.

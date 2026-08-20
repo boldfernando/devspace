@@ -1,0 +1,327 @@
+{
+  "schema": "devspace.storybook-360.browser-gate-chain.v1",
+  "generatedAt": "2026-08-20T07:49:39.536Z",
+  "node": "v24.18.0",
+  "platform": "win32",
+  "gates": [
+    [
+      "lint",
+      [
+        "run",
+        "lint"
+      ]
+    ],
+    [
+      "typecheck",
+      [
+        "run",
+        "typecheck"
+      ]
+    ],
+    [
+      "build",
+      [
+        "run",
+        "build"
+      ]
+    ],
+    [
+      "storybook-browser-check",
+      [
+        "run",
+        "storybook:check:browser"
+      ]
+    ],
+    [
+      "unit-integration",
+      [
+        "test"
+      ]
+    ],
+    [
+      "coverage-check",
+      [
+        "run",
+        "coverage:check"
+      ]
+    ],
+    [
+      "observability-contract",
+      [
+        "run",
+        "test:observability"
+      ]
+    ],
+    [
+      "strategy-audit",
+      [
+        "run",
+        "test:strategy:audit"
+      ]
+    ],
+    [
+      "security-p0",
+      [
+        "run",
+        "security:p0"
+      ]
+    ],
+    [
+      "http-mcp-e2e",
+      [
+        "run",
+        "e2e"
+      ]
+    ],
+    [
+      "doctor",
+      [
+        "run",
+        "doctor"
+      ]
+    ]
+  ],
+  "results": [
+    {
+      "id": "lint",
+      "command": "npm run lint",
+      "startedAt": "2026-08-20T07:47:17.482Z",
+      "endedAt": "2026-08-20T07:47:19.583Z",
+      "durationMs": 2101,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-lint.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-lint.stderr.log"
+    },
+    {
+      "id": "typecheck",
+      "command": "npm run typecheck",
+      "startedAt": "2026-08-20T07:47:19.583Z",
+      "endedAt": "2026-08-20T07:47:23.156Z",
+      "durationMs": 3573,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-typecheck.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-typecheck.stderr.log"
+    },
+    {
+      "id": "build",
+      "command": "npm run build",
+      "startedAt": "2026-08-20T07:47:23.156Z",
+      "endedAt": "2026-08-20T07:47:27.637Z",
+      "durationMs": 4481,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-build.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-build.stderr.log"
+    },
+    {
+      "id": "storybook-browser-check",
+      "command": "npm run storybook:check:browser",
+      "startedAt": "2026-08-20T07:47:27.637Z",
+      "endedAt": "2026-08-20T07:47:47.672Z",
+      "durationMs": 20035,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-storybook-browser-check.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-storybook-browser-check.stderr.log"
+    },
+    {
+      "id": "unit-integration",
+      "command": "npm test",
+      "startedAt": "2026-08-20T07:47:47.673Z",
+      "endedAt": "2026-08-20T07:48:29.745Z",
+      "durationMs": 42072,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-unit-integration.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-unit-integration.stderr.log"
+    },
+    {
+      "id": "coverage-check",
+      "command": "npm run coverage:check",
+      "startedAt": "2026-08-20T07:48:29.746Z",
+      "endedAt": "2026-08-20T07:49:25.124Z",
+      "durationMs": 55379,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-coverage-check.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-coverage-check.stderr.log"
+    },
+    {
+      "id": "observability-contract",
+      "command": "npm run test:observability",
+      "startedAt": "2026-08-20T07:49:25.125Z",
+      "endedAt": "2026-08-20T07:49:25.502Z",
+      "durationMs": 377,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-observability-contract.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-observability-contract.stderr.log"
+    },
+    {
+      "id": "strategy-audit",
+      "command": "npm run test:strategy:audit",
+      "startedAt": "2026-08-20T07:49:25.502Z",
+      "endedAt": "2026-08-20T07:49:25.928Z",
+      "durationMs": 426,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-strategy-audit.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-strategy-audit.stderr.log"
+    },
+    {
+      "id": "security-p0",
+      "command": "npm run security:p0",
+      "startedAt": "2026-08-20T07:49:25.928Z",
+      "endedAt": "2026-08-20T07:49:29.875Z",
+      "durationMs": 3947,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-security-p0.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-security-p0.stderr.log"
+    },
+    {
+      "id": "http-mcp-e2e",
+      "command": "npm run e2e",
+      "startedAt": "2026-08-20T07:49:29.875Z",
+      "endedAt": "2026-08-20T07:49:37.424Z",
+      "durationMs": 7549,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-http-mcp-e2e.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-http-mcp-e2e.stderr.log"
+    },
+    {
+      "id": "doctor",
+      "command": "npm run doctor",
+      "startedAt": "2026-08-20T07:49:37.424Z",
+      "endedAt": "2026-08-20T07:49:39.523Z",
+      "durationMs": 2099,
+      "exitCode": 0,
+      "signal": null,
+      "stdoutPath": "artifacts/storybook-360-mcp-e2e/10-doctor.stdout.log",
+      "stderrPath": "artifacts/storybook-360-mcp-e2e/10-doctor.stderr.log"
+    }
+  ],
+  "overall": "PASS",
+  "browserProof": {
+    "stories": 7,
+    "interactionPlayFunctions": 2,
+    "axe": "executed against wcag2a and wcag2aa tags",
+    "visualSnapshots": 7,
+    "media": "STORYBOOK_BROWSER_MEDIA=1"
+  },
+  "evidence": [
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-lint.stdout.log",
+      "bytes": 114,
+      "sha256": "e7acb4dc7fafbb38bea123cf913544a1f8a65f3152ec071bc441d572738c82dd"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-lint.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-typecheck.stdout.log",
+      "bytes": 71,
+      "sha256": "6c11c2163c626595bd9872d97b9315a2d2392c5a2eda2c8d002ba60cf0daa649"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-typecheck.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-build.stdout.log",
+      "bytes": 27586,
+      "sha256": "f8415a10c32aa3a4d3f61af4109ab3f57b8628f0f4886206e3176c9c77b7c600"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-build.stderr.log",
+      "bytes": 370,
+      "sha256": "d79e4144b596aba3efe480a763561840cbfef5eb0cb7529f9b108e6fedc4fb34"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-storybook-browser-check.stdout.log",
+      "bytes": 5460,
+      "sha256": "4e509881419b3b35ea6d3a314122d698a91d6c17afb0bdf9d225255f5b3fa6b9"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-storybook-browser-check.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-unit-integration.stdout.log",
+      "bytes": 14780,
+      "sha256": "6e94a32d27718f34ae0f4a740d156be6134d0f77d45aa59a2d43d4563a8762dd"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-unit-integration.stderr.log",
+      "bytes": 328,
+      "sha256": "015440b67ecb242551067545538a8fceb86289e6b63fd279c986fef6c789a14a"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-coverage-check.stdout.log",
+      "bytes": 21349,
+      "sha256": "84dc51bf0c536f0da869d948d1325e9928356356f8f599f3d5941df6f64e333f"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-coverage-check.stderr.log",
+      "bytes": 328,
+      "sha256": "e7a9d2e71cf88db89b38d8e92ad675867dc108d6e8c7c5e844e3c9cab58c09e6"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-observability-contract.stdout.log",
+      "bytes": 307,
+      "sha256": "263b34a9dd521ec8f0da683ec3dd9c68731a466830d686d053058a75cd08be5e"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-observability-contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-strategy-audit.stdout.log",
+      "bytes": 1215,
+      "sha256": "b41dfea3d8f098a465ddff9bfdb1c6e3d96418b38e09a51d798635886838c8fc"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-strategy-audit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-security-p0.stdout.log",
+      "bytes": 2956,
+      "sha256": "9d5edecca1c37983e00ba43e44cc8f570a0f7172a9191eb79c473ce1e3a6e327"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-security-p0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-http-mcp-e2e.stdout.log",
+      "bytes": 28091,
+      "sha256": "db73f8ae1d02905904b61e39a843275ff154f3f8a123141c1c9e5eba5586a3c9"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-http-mcp-e2e.stderr.log",
+      "bytes": 370,
+      "sha256": "d79e4144b596aba3efe480a763561840cbfef5eb0cb7529f9b108e6fedc4fb34"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-doctor.stdout.log",
+      "bytes": 565,
+      "sha256": "1704a0d8cc09426ae45cb900b2751c3951c2c8f2ad6ee4c165024847a1ceb588"
+    },
+    {
+      "path": "artifacts/storybook-360-mcp-e2e/10-doctor.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+
+> @waishnav/devspace@1.0.7 storybook:check:browser
+> npm run storybook:check && npm run storybook:test:browser
+
+
+> @waishnav/devspace@1.0.7 storybook:check
+> npm run storybook:build && npm run storybook:test:contracts
+
+
+> @waishnav/devspace@1.0.7 storybook:build
+> storybook build
+
+
+[90m┌[39m  Building storybook v10.5.9
+[90m│[39m
+[32m◇[39m  Cleaning outputDir: [36mstorybook-static[39m
+[90m│[39m
+[32m◇[39m  Loading presets
+[90m│[39m
+[32m◇[39m  Building manager..
+[90m│[39m
+[34m●[39m  Building open services..
+[90m│[39m
+[34m●[39m  Building preview..
+[90m│[39m  [43mVite[49m [36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 2045 modules transformed.
+rendering chunks...
+computing gzip size...
+[90m│[39m  [43mVite[49m storybook-static/iframe.html
+[90m│[39m  18.89 kB │ gzip:   5.28 kB
+[90m│[39m  storybook-static/assets/iframe-BK4ezhSd.css                    23.11
+[90m│[39m  kB │ gzip:   4.20 kB
+[90m│[39m  storybook-static/assets/preload-helper-xPQekRTU.js              2.34
+[90m│[39m  kB │ gzip:   1.24 kB
+[90m│[39m  storybook-static/assets/ToolResultCard.stories-BCV5QSnw.js     27.00
+[90m│[39m  kB │ gzip:   9.67 kB
+[90m│[39m  storybook-static/vite-inject-mocker-entry.js                   27.81
+[90m│[39m  kB │ gzip:   9.63 kB
+[90m│[39m  storybook-static/assets/matchers-JIUQ3HVY-DfTG6O73.js          28.76
+[90m│[39m  kB │ gzip:   9.66 kB
+[90m│[39m  storybook-static/assets/browser-C8ySYDdw.js                    87.37
+[90m│[39m  kB │ gzip:  25.38 kB
+[90m│[39m  storybook-static/assets/react-18-D2BDA4l0.js                  182.50
+[90m│[39m  kB │ gzip:  57.52 kB
+[90m│[39m  storybook-static/assets/axe-B3hdJyLf.js                       587.45
+[90m│[39m  kB │ gzip: 160.35 kB
+[90m│[39m  storybook-static/assets/iframe-UKRzMo51.js                  1,465.84
+[90m│[39m  kB │ gzip: 458.56 kB
+
+[90m│[39m  [43mVite[49m [32m✓ built in 1.20s[39m
+[90m│[39m
+[33m▲[39m  [43mVite[49m [33m[plugin builtin:vite-reporter]
+[90m│[39m  (!) Some chunks are larger than 500 kB after minification. Consider:
+[90m│[39m  - Using dynamic import() to code-split the application
+[90m│[39m  - Use build.rolldownOptions.output.codeSplitting to improve chunking:
+[90m│[39m  ]8;;https://rolldown.rs/reference/OutputOptions.codeSplittinghttps://rolldown.rs/reference/OutputOptions.codeSplitting]8;;
+[90m│[39m  - Adjust chunk size limit for this warning via
+[90m│[39m  build.chunkSizeWarningLimit.[39m
+[90m│[39m
+[32m◇[39m  Output directory:
+[90m│[39m  C:/Users/fjuni/.copilot/repos/devspace/storybook-static
+[90m│[39m
+[90m└[39m  Storybook build completed successfully
+
+
+> @waishnav/devspace@1.0.7 storybook:test:contracts
+> tsx --test storybook-360-mcp/tests/mock-layer.test.ts
+
+✔ fixture catalog covers every required deterministic state (0.5635ms)
+✔ model mock is deterministic and emits tool calls plus streaming chunks (1.1369ms)
+✔ AI model adapter uses the injected mock and never requires a provider (0.5494ms)
+✔ missing scenarios fail closed without network fallback (0.1725ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 415.9157
+
+> @waishnav/devspace@1.0.7 storybook:test:browser
+> playwright test -c playwright.config.ts
+
+[WebServer] 
+
+[WebServer] ┌  storybook v10.5.9
+
+[WebServer] │
+[WebServer] ●  Starting...
+
+[WebServer] │ ╭────────────────────────────────────────────────────────╮
+[WebServer] │ │   Storybook ready!                                     │
+
+[WebServer] │ │                                                        │
+[WebServer] │ │   - Local:                http://localhost:6006/       │
+[WebServer] │ │   - On your network:      http://172.23.240.1:6006/    │
+[WebServer] │ │                                                        │
+[WebServer] │ ╰────────────────────────────────────────────────────────╯
+
+[WebServer] │
+[WebServer] ●  117 ms for manager and 123 ms for preview
+
+
+Running 7 tests using 1 worker
+
+[1/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › success renders in a real browser with no axe violations
+[2/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › error renders in a real browser with no axe violations
+[3/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › empty renders in a real browser with no axe violations
+[4/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › loading renders in a real browser with no axe violations
+[5/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › timeout renders in a real browser with no axe violations
+[6/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › retry-and-tool-calling renders in a real browser with no axe violations
+[7/7] [chromium] › storybook-360-mcp\tests\ToolResultCard.browser.spec.ts:36:3 › streaming renders in a real browser with no axe violations
+  7 passed (15.1s)

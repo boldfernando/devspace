@@ -82,4 +82,6 @@ test("stylesheet protects keyboard focus, reduced motion, forced colors, and tou
   assert.match(css, /\.journey-progress[\s\S]*?border-radius: 10px/);
   assert.match(css, /\.journey-progress-track[\s\S]*?height: 6px/);
   assert.match(css, /\.journey-progress-toggle[\s\S]*?min-height: 32px/);
+  assert.match(css, /\.tool-label[\s\S]*?color: var\(--color-text-secondary, #c7c7ce\)/);
+  assert.match(css, /\.header-meta[\s\S]*?color: var\(--color-text-secondary, #c7c7ce\)/);
 });

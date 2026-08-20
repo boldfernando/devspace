@@ -1,0 +1,479 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.config.ts"
+    ],
+    "configFile": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\playwright.config.ts",
+    "rootDir": "C:/Users/fjuni/.copilot/repos/devspace/storybook-360-mcp/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/fjuni/.copilot/repos/devspace/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/fjuni/.copilot/repos/devspace/storybook-360-mcp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.browser.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "artifacts/storybook-360-mcp-e2e/09-browser-host-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npx storybook dev --ci --port 6006",
+      "url": "http://127.0.0.1:6006",
+      "reuseExistingServer": false,
+      "timeout": 120000,
+      "stdout": "pipe",
+      "stderr": "pipe"
+    }
+  },
+  "suites": [
+    {
+      "title": "ToolResultCard.browser.spec.ts",
+      "file": "ToolResultCard.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "success renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2657,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:36.332Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-success",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJzdWNjZXNzIiwKICAicGFzc2VzIjogWwogICAgewogICAgICAiaWQiOiAiYXJpYS1hbGxvd2VkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtY29uZGl0aW9uYWwtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1kZXByZWNhdGVkLXJvbGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtaGlkZGVuLWJvZHkiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtaGlkZGVuLWZvY3VzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDMKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXByb2hpYml0ZWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1yZXF1aXJlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXJvbGVzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXZhbGlkLWF0dHItdmFsdWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtdmFsaWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYnV0dG9uLW5hbWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImJ5cGFzcyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiY29sb3ItY29udHJhc3QiLAogICAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiZG9jdW1lbnQtdGl0bGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImR1cGxpY2F0ZS1pZC1hcmlhIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJodG1sLWhhcy1sYW5nIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJodG1sLWxhbmctdmFsaWQiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogIm1ldGEtdmlld3BvcnQiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogIm5lc3RlZC1pbnRlcmFjdGl2ZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9CiAgXSwKICAiaW5jb21wbGV0ZSI6IFsKICAgIHsKICAgICAgImlkIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgIm5vZGVzIjogMgogICAgfQogIF0sCiAgInZpb2xhdGlvbnMiOiBbXQp9"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-suc-d9728-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-suc-d9728-wser-with-no-axe-violations-chromium\\video.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-suc-d9728-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-aa70cfc9cf4a472da20f",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "error renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1392,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:39.069Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-error",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJlcnJvciIsCiAgInBhc3NlcyI6IFsKICAgIHsKICAgICAgImlkIjogImFyaWEtYWxsb3dlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDYKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWNvbmRpdGlvbmFsLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtZGVwcmVjYXRlZC1yb2xlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWhpZGRlbi1ib2R5IiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWhpZGRlbi1mb2N1cyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAzCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1wcm9oaWJpdGVkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtcmVxdWlyZWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAyCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1yb2xlcyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAyCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS12YWxpZC1hdHRyLXZhbHVlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDYKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXZhbGlkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImJ1dHRvbi1uYW1lIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJieXBhc3MiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImRvY3VtZW50LXRpdGxlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJkdXBsaWNhdGUtaWQtYXJpYSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiaHRtbC1oYXMtbGFuZyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiaHRtbC1sYW5nLXZhbGlkIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJtZXRhLXZpZXdwb3J0IiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJuZXN0ZWQtaW50ZXJhY3RpdmUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfQogIF0sCiAgImluY29tcGxldGUiOiBbCiAgICB7CiAgICAgICJpZCI6ICJjb2xvci1jb250cmFzdCIsCiAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICJub2RlcyI6IDIKICAgIH0KICBdLAogICJ2aW9sYXRpb25zIjogW10KfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-err-829be-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-err-829be-wser-with-no-axe-violations-chromium\\video.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-err-829be-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-ffd7efccc0082613e026",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "empty renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1322,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:40.470Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-empty",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJlbXB0eSIsCiAgInBhc3NlcyI6IFsKICAgIHsKICAgICAgImlkIjogImFyaWEtYWxsb3dlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDYKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWNvbmRpdGlvbmFsLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtZGVwcmVjYXRlZC1yb2xlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWhpZGRlbi1ib2R5IiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWhpZGRlbi1mb2N1cyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAzCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1wcm9oaWJpdGVkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtcmVxdWlyZWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAyCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1yb2xlcyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAyCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS12YWxpZC1hdHRyLXZhbHVlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDYKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXZhbGlkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImJ1dHRvbi1uYW1lIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJieXBhc3MiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImRvY3VtZW50LXRpdGxlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJkdXBsaWNhdGUtaWQtYXJpYSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiaHRtbC1oYXMtbGFuZyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiaHRtbC1sYW5nLXZhbGlkIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJtZXRhLXZpZXdwb3J0IiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJuZXN0ZWQtaW50ZXJhY3RpdmUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfQogIF0sCiAgImluY29tcGxldGUiOiBbCiAgICB7CiAgICAgICJpZCI6ICJjb2xvci1jb250cmFzdCIsCiAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICJub2RlcyI6IDIKICAgIH0KICBdLAogICJ2aW9sYXRpb25zIjogW10KfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-emp-59f8e-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-emp-59f8e-wser-with-no-axe-violations-chromium\\video.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-emp-59f8e-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-8e375406309c58a877f9",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "loading renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:41.803Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-loading",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJsb2FkaW5nIiwKICAicGFzc2VzIjogWwogICAgewogICAgICAiaWQiOiAiYXJpYS1hbGxvd2VkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNAogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtY29uZGl0aW9uYWwtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA0CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1oaWRkZW4tYm9keSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1oaWRkZW4tZm9jdXMiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMwogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtcHJvaGliaXRlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDQKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXZhbGlkLWF0dHItdmFsdWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNAogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtdmFsaWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA0CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYnV0dG9uLW5hbWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImJ5cGFzcyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiY29sb3ItY29udHJhc3QiLAogICAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgICAibm9kZXMiOiAzCiAgICB9LAogICAgewogICAgICAiaWQiOiAiZG9jdW1lbnQtdGl0bGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImh0bWwtaGFzLWxhbmciLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImh0bWwtbGFuZy12YWxpZCIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAibWV0YS12aWV3cG9ydCIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAibmVzdGVkLWludGVyYWN0aXZlIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0KICBdLAogICJpbmNvbXBsZXRlIjogWwogICAgewogICAgICAiaWQiOiAiY29sb3ItY29udHJhc3QiLAogICAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgICAibm9kZXMiOiAyCiAgICB9CiAgXSwKICAidmlvbGF0aW9ucyI6IFtdCn0="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-loa-f8c43-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-loa-f8c43-wser-with-no-axe-violations-chromium\\video.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-loa-f8c43-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-64831422d7760fde8e61",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "timeout renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1184,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:43.043Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-timeout",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJ0aW1lb3V0IiwKICAicGFzc2VzIjogWwogICAgewogICAgICAiaWQiOiAiYXJpYS1hbGxvd2VkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtY29uZGl0aW9uYWwtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1kZXByZWNhdGVkLXJvbGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtaGlkZGVuLWJvZHkiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtaGlkZGVuLWZvY3VzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDMKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXByb2hpYml0ZWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1yZXF1aXJlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXJvbGVzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXZhbGlkLWF0dHItdmFsdWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtdmFsaWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYnV0dG9uLW5hbWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImJ5cGFzcyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiY29sb3ItY29udHJhc3QiLAogICAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgICAibm9kZXMiOiA1CiAgICB9LAogICAgewogICAgICAiaWQiOiAiZG9jdW1lbnQtdGl0bGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImR1cGxpY2F0ZS1pZC1hcmlhIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJodG1sLWhhcy1sYW5nIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJodG1sLWxhbmctdmFsaWQiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogIm1ldGEtdmlld3BvcnQiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogIm5lc3RlZC1pbnRlcmFjdGl2ZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9CiAgXSwKICAiaW5jb21wbGV0ZSI6IFsKICAgIHsKICAgICAgImlkIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgIm5vZGVzIjogMgogICAgfQogIF0sCiAgInZpb2xhdGlvbnMiOiBbXQp9"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-tim-4dc06-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-tim-4dc06-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-tim-4dc06-wser-with-no-axe-violations-chromium\\video.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-9e78016a097e7879daaf",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "retry-and-tool-calling renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1440,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:44.236Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-retry-and-tool-calling",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJyZXRyeS1hbmQtdG9vbC1jYWxsaW5nIiwKICAicGFzc2VzIjogWwogICAgewogICAgICAiaWQiOiAiYXJpYS1hbGxvd2VkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNwogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtY29uZGl0aW9uYWwtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA3CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1kZXByZWNhdGVkLXJvbGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtaGlkZGVuLWJvZHkiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtaGlkZGVuLWZvY3VzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDMKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXByb2hpYml0ZWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA3CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1yZXF1aXJlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXJvbGVzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXZhbGlkLWF0dHItdmFsdWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogNwogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtdmFsaWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA3CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYnV0dG9uLW5hbWUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImJ5cGFzcyIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiY29sb3ItY29udHJhc3QiLAogICAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgICAibm9kZXMiOiA2CiAgICB9LAogICAgewogICAgICAiaWQiOiAiZG9jdW1lbnQtdGl0bGUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImR1cGxpY2F0ZS1pZC1hcmlhIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJodG1sLWhhcy1sYW5nIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJodG1sLWxhbmctdmFsaWQiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImxpc3QiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImxpc3RpdGVtIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJtZXRhLXZpZXdwb3J0IiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJuZXN0ZWQtaW50ZXJhY3RpdmUiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfQogIF0sCiAgImluY29tcGxldGUiOiBbCiAgICB7CiAgICAgICJpZCI6ICJjb2xvci1jb250cmFzdCIsCiAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICJub2RlcyI6IDIKICAgIH0KICBdLAogICJ2aW9sYXRpb25zIjogW10KfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-ret-79e35-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-ret-79e35-wser-with-no-axe-violations-chromium\\video.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-ret-79e35-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-ee04dc5f7f48088cb01b",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "streaming renders in a real browser with no axe violations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1302,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-20T07:47:45.686Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe-streaming",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdG9yeSI6ICJzdHJlYW1pbmciLAogICJwYXNzZXMiOiBbCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWFsbG93ZWQtYXR0ciIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA4CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1jb25kaXRpb25hbC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDgKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLWRlcHJlY2F0ZWQtcm9sZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAyCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1oaWRkZW4tYm9keSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS1oaWRkZW4tZm9jdXMiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMwogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtcHJvaGliaXRlZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDgKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJhcmlhLXJlcXVpcmVkLWF0dHIiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtcm9sZXMiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMgogICAgfSwKICAgIHsKICAgICAgImlkIjogImFyaWEtdmFsaWQtYXR0ci12YWx1ZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiA4CiAgICB9LAogICAgewogICAgICAiaWQiOiAiYXJpYS12YWxpZC1hdHRyIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDgKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJidXR0b24tbmFtZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYnlwYXNzIiwKICAgICAgImltcGFjdCI6IG51bGwsCiAgICAgICJub2RlcyI6IDEKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJjb2xvci1jb250cmFzdCIsCiAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICJub2RlcyI6IDcKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJkb2N1bWVudC10aXRsZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAiZHVwbGljYXRlLWlkLWFyaWEiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImh0bWwtaGFzLWxhbmciLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogImh0bWwtbGFuZy12YWxpZCIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAibGlzdCIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9LAogICAgewogICAgICAiaWQiOiAibGlzdGl0ZW0iLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogIm1ldGEtdmlld3BvcnQiLAogICAgICAiaW1wYWN0IjogbnVsbCwKICAgICAgIm5vZGVzIjogMQogICAgfSwKICAgIHsKICAgICAgImlkIjogIm5lc3RlZC1pbnRlcmFjdGl2ZSIsCiAgICAgICJpbXBhY3QiOiBudWxsLAogICAgICAibm9kZXMiOiAxCiAgICB9CiAgXSwKICAiaW5jb21wbGV0ZSI6IFsKICAgIHsKICAgICAgImlkIjogImNvbG9yLWNvbnRyYXN0IiwKICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgIm5vZGVzIjogMgogICAgfQogIF0sCiAgInZpb2xhdGlvbnMiOiBbXQp9"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-str-32df9-wser-with-no-axe-violations-chromium\\test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-str-32df9-wser-with-no-axe-violations-chromium\\video.webm"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\test-results\\ToolResultCard.browser-str-32df9-wser-with-no-axe-violations-chromium\\video-1.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b00c16e4a1ec348ff9e3-f52132c6b364219cad26",
+          "file": "ToolResultCard.browser.spec.ts",
+          "line": 36,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-20T07:47:32.568Z",
+    "duration": 15051.728000000001,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

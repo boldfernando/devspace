@@ -1,0 +1,1 @@
+Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-bbPMQA\project\.devspace\agents\custom.md: Subagent profile provider must be codex, claude, opencode, pi, cursor, or copilot: C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-bbPMQA\project\.devspace\agents\custom.md
