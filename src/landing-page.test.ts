@@ -7,21 +7,21 @@ import { loadConfig } from "./config.js";
 import { createServer } from "./server.js";
 
 interface LandingFixture {
+  /** Where the server actually listens, on an OS-assigned port. */
   baseUrl: string;
+  /** What the page advertises, independent of the bound port. */
+  publicBaseUrl: string;
   html: string;
 }
 
 async function landingPage(
   t: TestContext,
-  port: number,
-  publicBaseUrl?: string,
+  publicBaseUrl = "https://devspace.example.test",
 ): Promise<LandingFixture> {
   const root = await mkdtemp(join(tmpdir(), "devspace-landing-test-"));
-  const localUrl = `http://127.0.0.1:${port}`;
   const config = loadConfig({
     HOST: "127.0.0.1",
-    PORT: String(port),
-    DEVSPACE_PUBLIC_BASE_URL: publicBaseUrl ?? localUrl,
+    DEVSPACE_PUBLIC_BASE_URL: publicBaseUrl,
     DEVSPACE_CONFIG_DIR: join(root, ".config"),
     DEVSPACE_ALLOWED_ROOTS: root,
     DEVSPACE_STATE_DIR: join(root, ".state"),
@@ -31,24 +31,31 @@ async function landingPage(
   });
 
   const { app, close } = createServer(config);
-  const httpServer = app.listen(port, "127.0.0.1");
-  await new Promise<void>((resolve) => httpServer.once("listening", () => resolve()));
+  const httpServer = app.listen(0, "127.0.0.1");
+  await new Promise<void>((resolve, reject) => {
+    httpServer.once("error", reject);
+    httpServer.once("listening", () => resolve());
+  });
+
   t.after(async () => {
     await new Promise<void>((resolve) => httpServer.close(() => resolve()));
     await close();
     await rm(root, { recursive: true, force: true });
   });
 
-  const response = await fetch(`${localUrl}/`);
+  const address = httpServer.address();
+  const port = typeof address === "object" && address ? address.port : 0;
+  const baseUrl = `http://127.0.0.1:${port}`;
+
+  const response = await fetch(`${baseUrl}/`);
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /text\/html/);
 
-  return { baseUrl: localUrl, html: await response.text() };
+  return { baseUrl, publicBaseUrl: config.publicBaseUrl, html: await response.text() };
 }
 
 test("the landing page describes the server and links only to endpoints it serves", async (t) => {
-  const port = 17751;
-  const { baseUrl, html } = await landingPage(t, port);
+  const { baseUrl, publicBaseUrl, html } = await landingPage(t);
 
   assert.match(html, /DevSpace MCP Server/);
   assert.match(html, /<html lang="pt-BR">/);
@@ -66,26 +73,34 @@ test("the landing page describes the server and links only to endpoints it serve
   const device = await fetch(`${baseUrl}/oauth/device`, { redirect: "manual" });
   assert.ok(device.status < 500, "the device authorization page must not fail");
 
-  // The connection hint carries the real public base URL, fully interpolated.
-  assert.ok(html.includes(`${baseUrl}/mcp`), "the hint must interpolate publicBaseUrl");
-  assert.ok(html.includes(`${baseUrl}/authorize`), "the hint must interpolate the authorize URL");
+  // /mcp needs a bearer token, so it answers 401 rather than 200. Requesting it
+  // still proves the route is mounted, which html.includes() alone cannot.
+  const mcp = await fetch(`${baseUrl}/mcp`, {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "application/json, text/event-stream" },
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "initialize", params: {} }),
+  });
+  assert.notEqual(mcp.status, 404, "/mcp must be mounted");
+  assert.ok(mcp.status < 500, `/mcp must not fail: got ${mcp.status}`);
+
+  // The connection hint carries the advertised public base URL, fully interpolated.
+  assert.ok(html.includes(`${publicBaseUrl}/mcp`), "the hint must interpolate publicBaseUrl");
+  assert.ok(html.includes(`${publicBaseUrl}/authorize`), "the hint must interpolate the authorize URL");
   assert.doesNotMatch(html, /\$\{/, "no unresolved template expression may reach the response");
 });
 
 test("the landing page escapes the public base URL instead of interpolating it raw", async (t) => {
-  const port = 17752;
   // Config normalization drops the query string and percent-encodes angle
   // brackets, so a path-embedded `&` is the character that actually reaches the
   // template; unescaped it would open an entity in the rendered hint.
-  const { html } = await landingPage(t, port, "http://127.0.0.1:17752/tenant&team");
+  const { html } = await landingPage(t, "https://devspace.example.test/tenant&team");
 
   assert.ok(html.includes("tenant&amp;team"), "an ampersand in the base URL must be escaped");
   assert.doesNotMatch(html, /tenant&team/, "the raw ampersand must not survive into the markup");
 });
 
 test("the landing page does not leak owner credentials", async (t) => {
-  const port = 17753;
-  const { html } = await landingPage(t, port);
+  const { html } = await landingPage(t);
 
   assert.doesNotMatch(html, /landing-page-owner-token/, "the owner token must never render");
   assert.doesNotMatch(html, /ownerToken|owner_token/i, "no credential field may appear in the page");
