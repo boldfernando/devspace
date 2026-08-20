@@ -1,0 +1,155 @@
+{
+  "event_id": "evt_ec826df782d24743",
+  "event_type": "DOR_READY",
+  "timestamp": "2026-08-20T06:34:46.979071+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "baseline",
+  "task_id": "FMV4-BASELINE-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/baseline/FM V4-BASELINE-001/cartographer/1",
+  "trace_id": "TRACE-GRP-PLATFORM-001",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_b69d0acec66a443b",
+  "event_type": "FABRIC_READY",
+  "timestamp": "2026-08-20T06:34:47.093560+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "execution-fabric",
+  "task_id": "FMV4-FABRIC-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/execution-fabric/FM V4-FABRIC-001/buildback-planner/1",
+  "trace_id": "TRACE-GRP-RESILIENCE-005",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_6351745e0e1143f8",
+  "event_type": "H2A_DRAFT",
+  "timestamp": "2026-08-20T06:34:47.182082+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "h2a-authority",
+  "task_id": "FMV4-H2A-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/h2a-authority/FM V4-H2A-001/human-gate/1",
+  "trace_id": "TRACE-GRP-IDENTITY-002",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_f8338cebf6d041ad",
+  "event_type": "A2A_NOT_READY",
+  "timestamp": "2026-08-20T06:34:47.256436+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "a2a-interop",
+  "task_id": "FMV4-A2A-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2a-interop/FM V4-A2A-001/a2a-broker/1",
+  "trace_id": "TRACE-GRP-INTEROP-003",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_4dcdeb1bf54440f8",
+  "event_type": "A2UI_PARTIAL",
+  "timestamp": "2026-08-20T06:34:47.344780+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "a2ui-agui",
+  "task_id": "FMV4-A2UI-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/a2ui-agui/FM V4-A2UI-001/ui-bridge/1",
+  "trace_id": "TRACE-GRP-INTEROP-003",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_54512654ce8648e9",
+  "event_type": "OBSERVABILITY_CONTRACT",
+  "timestamp": "2026-08-20T06:34:47.431751+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "agent-observability",
+  "task_id": "FMV4-OBS-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/agent-observability/FM V4-OBS-001/observability/1",
+  "trace_id": "TRACE-GRP-OPS-004",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_c3ba5855ed2642bf",
+  "event_type": "ADAPTIVE_ROUTE",
+  "timestamp": "2026-08-20T06:34:47.526941+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "adaptive-intelligence",
+  "task_id": "FMV4-ADAPT-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/adaptive-intelligence/FM V4-ADAPT-001/adaptive-quality/1",
+  "trace_id": "TRACE-GRP-INTEROP-003",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_65f4d3a732ae4a49",
+  "event_type": "RECONCILIATION",
+  "timestamp": "2026-08-20T06:34:47.616032+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "review-reconcile",
+  "task_id": "FMV4-RECONCILE-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FM V4-RECONCILE-001/reconciler/1",
+  "trace_id": "TRACE-GRP-PLATFORM-001",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+{
+  "event_id": "evt_bdd318a819d9408d",
+  "event_type": "INDEPENDENT_VERIFY",
+  "timestamp": "2026-08-20T06:34:47.702756+00:00",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "buildback_id": "BBK-DEVSPACE-FMV4-001",
+  "issue_id": "release-gate",
+  "task_id": "FMV4-VERIFY-001",
+  "agent_address": "agent://devspace/BBK-DEVSPACE-FMV4-001/release-gate/FM V4-VERIFY-001/independent-verifier/1",
+  "trace_id": "TRACE-GRP-PLATFORM-001",
+  "payload": {
+    "mode": "READ_ONLY",
+    "secrets_included": false,
+    "cost_metering": "not_metered_local"
+  }
+}
+event_exit_code=0
+=== event_count ===
+events=9

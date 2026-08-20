@@ -1,0 +1,1079 @@
+=== node "C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover\validate-v4-artifacts.mjs" "C:\Users\fjuni\.copilot\repos\devspace\artifacts\canonical-platform-review-360-v4-first-mover" ===
+{
+  "schema": "devspace.canonical-platform-review-360-v4/artifact-gate.v1",
+  "status": "PASS",
+  "errors": [],
+  "checked": [
+    "v4-workgraph.json",
+    "v4-buildbacks.json",
+    "PLANE-STATE.json",
+    "RECONCILIATION.json",
+    "CONFLICT-GRAPH.json",
+    "AGENT-ADDRESSES.json",
+    "06-h2a-interaction.json",
+    "05-a2a-local-evidence.json"
+  ]
+}
+exit_code=0
+=== npm run typecheck ===
+
+> @waishnav/devspace@1.0.7 typecheck
+> tsc -p tsconfig.json --noEmit
+
+exit_code=0
+=== npm test ===
+
+> @waishnav/devspace@1.0.7 test
+> node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/error-policy.test.ts && tsx src/logger.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/ui/accessibility-contract.test.ts && tsx src/ui/journey-progress.test.ts && tsx src/ui/card-result-normalizer.test.ts && tsx src/ui/render-strategy.test.ts && tsx src/ui/sync-state.test.ts && tsx src/response-shaping-contract.test.ts && tsx src/mcp-request-policy.test.ts && tsx src/db/query-performance.test.ts && tsx src/db/resilience.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts && tsx src/credential-security.test.ts
+
+Ô£ö the dev server launches tsx through Node without a shell (0.7969ms)
+Ôä╣ tests 1
+Ôä╣ suites 0
+Ôä╣ pass 1
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 56.4389
+Ô£ö classifies filesystem failures without exposing the original path (1.0785ms)
+Ô£ö classifies retryable SQLite contention and timeout failures (1.487ms)
+Ô£ö preserves safe process and domain codes while replacing raw detail (0.1257ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.0582
+Ô£ö logger sanitization retains safe dimensions and hashes identifying values (1.3601ms)
+Ô£ö logger event remains structural when fields contain event-like input (1.2277ms)
+Ô£ö logger hashing is deterministic and bounded (0.3219ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.9967
+Ô£ö undefined request metadata has no conversation scope (0.4484ms)
+Ô£ö missing session metadata has no conversation scope (0.6926ms)
+Ô£ö an empty session string has no conversation scope (0.0665ms)
+Ô£ö a non-string session value has no conversation scope (0.059ms)
+Ô£ö valid OpenAI session metadata returns the raw opaque session value (0.0688ms)
+Ô£ö unrelated metadata fields do not alter the selected conversation scope (0.0509ms)
+Ôä╣ tests 6
+Ôä╣ suites 0
+Ôä╣ pass 6
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 6.8776
+Ô£ö the supported coding tools are recognized as card tools (0.5549ms)
+Ô£ö tool classification distinguishes patch, edit, and shell operations (0.0889ms)
+Ô£ö a patch card expands only when it contains patch content (0.0936ms)
+Ô£ö a single-file patch opens immediately (0.0692ms)
+Ô£ö a multi-file patch stays collapsed (0.0673ms)
+Ô£ö show changes still opens immediately (0.0505ms)
+Ô£ö a workspace card expands when it contains provider metadata (0.0546ms)
+Ô£ö a workspace card with details opens immediately (0.055ms)
+Ô£ö a workspace card expands when it contains agent metadata (0.0892ms)
+Ô£ö a workspace card expands when it contains available instruction files (0.1321ms)
+Ô£ö an empty workspace card stays collapsed (0.0716ms)
+Ôä╣ tests 11
+Ôä╣ suites 0
+Ôä╣ pass 11
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 7.1514
+Ô£ö workspace shell exposes accessible disclosure and live-status contracts (1.3449ms)
+Ô£ö React payload renderers use stable memoized boundaries (0.4889ms)
+Ô£ö review payload exposes file list and per-file diff relationships (0.1994ms)
+Ô£ö lazy payload renderers provide accessible output and status semantics (0.2407ms)
+Ô£ö stylesheet protects keyboard focus, reduced motion, forced colors, and touch targets (0.4238ms)
+Ôä╣ tests 5
+Ôä╣ suites 0
+Ôä╣ pass 5
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.8407
+Ô£ö journey progress advances through workspace, explore, change, and verify (0.7366ms)
+Ô£ö repeated tools do not retrigger a completed milestone (0.1101ms)
+Ô£ö interactive process input only completes the verification stage (0.0765ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 7.269
+Ô£ö card result normalizer reuses top-level MCP content without losing payload fields (0.8166ms)
+Ô£ö card result normalizer preserves an explicit card payload (0.1002ms)
+Ô£ö card result normalizer keeps image content available to the lazy renderer (0.0851ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 6.5442
+Ô£ö render strategy preserves a mounted payload for same-tool expanded updates (0.4383ms)
+Ô£ö render strategy remounts when tool identity or expansion changes (0.0961ms)
+Ô£ö render strategy remounts when no mounted payload exists (0.4708ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 6.4304
+Ô£ö connection epochs invalidate an older boot attempt (0.4533ms)
+Ô£ö render revisions invalidate a lazy result from a previous shell (0.1067ms)
+Ô£ö starting a connection also invalidates pending renders (0.0789ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 6.9826
+Ô£ö MCP response shaping avoids duplicating top-level content in card payloads (0.5921ms)
+Ô£ö frontend reconstructs omitted card content from the top-level MCP result (0.0861ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 6.26
+Ô£ö MCP policy classifies protocol discovery and read calls (0.8621ms)
+Ô£ö MCP policy classifies every mutating tool as write (0.1311ms)
+Ô£ö MCP policy denies unknown and malformed tool calls (0.1023ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 7.1611
+Ô£ö query-performance migration supports hot recency and cleanup plans (39.8332ms)
+Ôä╣ tests 1
+Ôä╣ suites 0
+Ôä╣ pass 1
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 42.6938
+Ô£ö SQLite lock contention fails with a bounded SQLITE_BUSY error (126.2344ms)
+Ô£ö SQLite full storage is surfaced as a bounded resource failure (20.9086ms)
+Ô£ö SQLite read-only mode rejects writes without mutating the state (24.1923ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 176.8333
+Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-smPRvd\project\.devspace\agents\custom.md: Subagent profile provider must be codex, claude, opencode, pi, cursor, or copilot: C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-smPRvd\project\.devspace\agents\custom.md
+Ô£ö a checkout exposes initial and nested instruction context while filtering outside symlinks (47.8422ms)
+Ô£ö opening a missing checkout creates its workspace root (25.6811ms)
+Ô£ö missing checkout root creation propagates filesystem failure without a partial root (0.4948ms)
+Ô£ö worktree opens require Git and create an isolated managed workspace (336.1453ms)
+Ô£ö persisted checkout and worktree sessions restore after recreating the registry (444.2644ms)
+Ô£ö workspace paths outside the allowed roots are rejected (6.0909ms)
+´╣ú a symlinked allowed root preserves checkout and worktree path behavior (0.0809ms) # SKIP
+Ôä╣ tests 7
+Ôä╣ suites 0
+Ôä╣ pass 6
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 1
+Ôä╣ todo 0
+Ôä╣ duration_ms 863.7453
+Ô£ö a conversation reuses its checkout context (81.5649ms)
+Ô£ö different conversations receive separate checkout workspaces (60.4654ms)
+Ô£ö conversation bindings distinguish canonical projects (68.7777ms)
+Ô£ö concurrent checkout opens reuse one workspace and return matching context (48.107ms)
+Ô£ö a checkout without a conversation scope does not use conversation reuse (79.6512ms)
+Ô£ö worktree requests remain fresh without replacing the reusable checkout (526.3127ms)
+Ô£ö a worktree-first conversation creates and then reuses its checkout (393.7886ms)
+Ô£ö concurrent worktree opens remain fresh and return complete context (432.8584ms)
+Ô£ö checkout reuse survives a registry restart (104.6138ms)
+Ô£ö a failed first context load does not consume bootstrap (99.6814ms)
+Ô£ö a context-loading failure preserves a valid checkout binding (75.2553ms)
+Ô£ö a deleted checkout is replaced with a new workspace (96.6673ms)
+Ô£ö canonical checkout identity remains stable when the requested target starts missing (66.4039ms)
+Ô£ö canonical checkout identity survives equivalent path and symlink aliases (70.7576ms)
+´╣ú canonical checkout identity survives macOS var path aliases (0.088ms) # SKIP
+Ô£ö an invalid persisted checkout binding is not reused (111.7034ms)
+Ô£ö an inactive persisted checkout binding is not reused (112.2637ms)
+Ô£ö a checkout replaced by a file reports the filesystem error (71.0118ms)
+Ô£ö unexpected storage errors are not mistaken for stale bindings (70.8655ms)
+´╣ú unexpected filesystem errors are propagated without replacing the binding (0.109ms) # SKIP
+Ôä╣ tests 20
+Ôä╣ suites 0
+Ôä╣ pass 18
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 2
+Ôä╣ todo 0
+Ôä╣ duration_ms 2577.2747
+Ô£ö a clean workspace reports no changes from the last-shown checkpoint (853.0376ms)
+Ô£ö show_changes reports and advances the last-shown checkpoint (1199.6969ms)
+Ô£ö review checkpoints survive a manager restart (1328.394ms)
+Ô£ö concurrent initialization produces one usable checkpoint state (1026.1768ms)
+Ô£ö a missing last-shown checkpoint falls back after restart and can be re-established (1437.9096ms)
+Ô£ö a checkpoint workspace rejects a different root without changing its state (920.8202ms)
+Ô£ö a concurrent review rejects a different root after initialization (762.1592ms)
+Ô£ö an unborn repository becomes reviewable after its first commit (1138.4675ms)
+Ôä╣ tests 8
+Ôä╣ suites 0
+Ôä╣ pass 8
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8671.4128
+{"ts":"2026-08-20T06:37:11.526Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"e6566405238d34d1","pathHash":"6a47e83de28e0881","success":true,"durationMs":86}
+{"ts":"2026-08-20T06:37:11.545Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"e6566405238d34d1","pathHash":"6a47e83de28e0881","success":true,"durationMs":15}
+Ô£ö open_workspace keeps lifecycle flags out of model output and preserves complete card metadata (210.9102ms)
+{"ts":"2026-08-20T06:37:11.720Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"a5b4e214f51e9670","pathHash":"fe374afc6cf8256e","success":true,"durationMs":92}
+{"ts":"2026-08-20T06:37:11.721Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"a5b4e214f51e9670","pathHash":"fe374afc6cf8256e","success":true,"durationMs":93}
+Ô£ö concurrent checkout opens return one full context and one reuse instruction (134.2657ms)
+{"ts":"2026-08-20T06:37:12.048Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"e387db75afde3fc1","pathHash":"914409e88080f1af","success":true,"durationMs":49}
+{"ts":"2026-08-20T06:37:12.300Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"c71e7b0d10bb2afa","pathHash":"3bcdee7cdd9abbc7","success":true,"durationMs":250}
+{"ts":"2026-08-20T06:37:12.524Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"5c185f73761cf09d","pathHash":"94efcd79e0976764","success":true,"durationMs":222}
+{"ts":"2026-08-20T06:37:12.535Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"e387db75afde3fc1","pathHash":"914409e88080f1af","success":true,"durationMs":10}
+Ô£ö new worktrees always receive a fresh workspace and complete worktree context (819.7551ms)
+{"ts":"2026-08-20T06:37:13.110Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"4b3f457b6f6d9ad1","pathHash":"58be836ffad533d8","success":true,"durationMs":238}
+{"ts":"2026-08-20T06:37:13.162Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"cd0ff7ba02b9c83f","pathHash":"81bd554946fc8b84","success":true,"durationMs":50}
+{"ts":"2026-08-20T06:37:13.172Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"cd0ff7ba02b9c83f","pathHash":"81bd554946fc8b84","success":true,"durationMs":9}
+Ô£ö checkout opened after a worktree receives its own complete context (633.5976ms)
+{"ts":"2026-08-20T06:37:13.251Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"62f98507ff1c558d","pathHash":"79a4f33492bf3596","success":true,"durationMs":42}
+{"ts":"2026-08-20T06:37:13.298Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"0e6f3e334aedc06f","pathHash":"79a4f33492bf3596","success":true,"durationMs":47}
+Ô£ö a host without conversation metadata receives normal explicit-workspace behavior (119.9578ms)
+{"ts":"2026-08-20T06:37:13.386Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"d350a22be455d70d","pathHash":"90902c4ca3becc9b","success":true,"durationMs":48}
+{"ts":"2026-08-20T06:37:13.444Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"d350a22be455d70d","pathHash":"90902c4ca3becc9b","success":true,"durationMs":46}
+Ô£ö checkout reuse and context suppression survive a registry restart (144.8575ms)
+Ôä╣ tests 6
+Ôä╣ suites 0
+Ôä╣ pass 6
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 2069.3976
+Ô£ö device store creates a sanitized public record and enforces polling interval (54.8482ms)
+Ô£ö device store approval emits one token opportunity and rejects replay (25.6893ms)
+Ô£ö device store denies pending requests and does not disclose invalid user codes (18.9159ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 751.6175
+Ô£ö selective language catalog falls back heavy grammars to text (0.5921ms)
+Ô£ö selective language catalog allows explicit heavy-language opt in (0.0988ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 9.1521
+Ô£ö runtime metrics render safe dimensions and stable Prometheus names (8.1114ms)
+Ô£ö runtime metrics sanitize unsafe label values (0.2866ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 14.5092
+Ô£ö private file hardening produces an ACL equivalent to 0600 (99.5533ms)
+Ô£ö DevSpace auth persistence applies private-file hardening (87.8928ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 190.6252
+exit_code=0
+=== npm run build ===
+
+> @waishnav/devspace@1.0.7 build
+> npm run clean && npm run build:app && tsc -p tsconfig.build.json
+
+
+> @waishnav/devspace@1.0.7 clean
+> node -e "require('node:fs').rmSync('dist', { recursive: true, force: true })"
+
+
+> @waishnav/devspace@1.0.7 build:app
+> vite build
+
+[36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+[2K
+transforming...Ô£ô 2496 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/ui/workspace-app.html                               0.51 kB Ôöé gzip:   0.33 kB
+dist/ui/.vite/manifest.json                             95.17 kB Ôöé gzip:  10.30 kB
+dist/ui/assets/workspace-app-D2nHj6Z0.css               23.11 kB Ôöé gzip:   4.20 kB
+dist/ui/assets/v4-u0rOK50D.js                            0.05 kB Ôöé gzip:   0.06 kB
+dist/ui/assets/codeowners-C8r90Shi.js                    0.54 kB Ôöé gzip:   0.31 kB
+dist/ui/assets/chunk-EyZ2wyi3.js                         0.61 kB Ôöé gzip:   0.39 kB
+dist/ui/assets/shellsession-BpE5o7_3.js                  0.71 kB Ôöé gzip:   0.42 kB
+dist/ui/assets/tsv-sltzmVWM.js                           0.73 kB Ôöé gzip:   0.33 kB
+dist/ui/assets/html-derivative-DJAQcZyc.js               0.84 kB Ôöé gzip:   0.46 kB
+dist/ui/assets/git-rebase-utbU6CzV.js                    0.98 kB Ôöé gzip:   0.43 kB
+dist/ui/assets/qmldir-DCQb3MpD.js                        0.99 kB Ôöé gzip:   0.44 kB
+dist/ui/assets/csv-Dx-8-gkx.js                           1.13 kB Ôöé gzip:   0.36 kB
+dist/ui/assets/git-commit-BSykSTBG.js                    1.22 kB Ôöé gzip:   0.52 kB
+dist/ui/assets/xsl-3_vJ27aE.js                           1.36 kB Ôöé gzip:   0.49 kB
+dist/ui/assets/dotenv-_5a1GRtc.js                        1.41 kB Ôöé gzip:   0.52 kB
+dist/ui/assets/sparql-D_iOobhT.js                        1.47 kB Ôöé gzip:   0.81 kB
+dist/ui/assets/ini-B5eOa1yu.js                           1.51 kB Ôöé gzip:   0.49 kB
+dist/ui/assets/diff-payload-W8dJwvHp.js                  1.62 kB Ôöé gzip:   0.78 kB
+dist/ui/assets/fortran-fixed-form-DEKoE2YW.js            1.66 kB Ôöé gzip:   0.68 kB
+dist/ui/assets/docker-IyjqRm3v.js                        1.73 kB Ôöé gzip:   0.59 kB
+dist/ui/assets/hxml-B0Qn7Nwc.js                          1.74 kB Ôöé gzip:   0.87 kB
+dist/ui/assets/desktop-Dlh5hvp9.js                       1.82 kB Ôöé gzip:   0.75 kB
+dist/ui/assets/heavy-payload-BzftqgBo.js                 2.11 kB Ôöé gzip:   0.98 kB
+dist/ui/assets/erb-DHFmDvM0.js                           2.13 kB Ôöé gzip:   0.62 kB
+dist/ui/assets/wenyan-C8pVoKbM.js                        2.15 kB Ôöé gzip:   1.08 kB
+dist/ui/assets/jssm-DXw9l8Rf.js                          2.23 kB Ôöé gzip:   0.61 kB
+dist/ui/assets/edge-CESgo4ia.js                          2.30 kB Ôöé gzip:   0.67 kB
+dist/ui/assets/reg-CRGYupPL.js                           2.33 kB Ôöé gzip:   0.69 kB
+dist/ui/assets/diff-woXpYk--.js                          2.56 kB Ôöé gzip:   0.68 kB
+dist/ui/assets/gleam-CSRkHgEL.js                         2.57 kB Ôöé gzip:   0.81 kB
+dist/ui/assets/hy-CZbG8q4J.js                            2.64 kB Ôöé gzip:   1.17 kB
+dist/ui/assets/openscad-BUDT5pXO.js                      2.81 kB Ôöé gzip:   1.00 kB
+dist/ui/assets/log-BNLmms1o.js                           2.84 kB Ôöé gzip:   0.89 kB
+dist/ui/assets/json-Cw91r8h1.js                          2.87 kB Ôöé gzip:   0.81 kB
+dist/ui/assets/cairo-DLTphjLi.js                         2.93 kB Ôöé gzip:   0.80 kB
+dist/ui/assets/berry-DKpUyyne.js                         2.99 kB Ôöé gzip:   0.80 kB
+dist/ui/assets/jsonl-CmCQp5Yx.js                         3.00 kB Ôöé gzip:   0.78 kB
+dist/ui/assets/jsonc-CYpm1nAK.js                         3.10 kB Ôöé gzip:   0.78 kB
+dist/ui/assets/logo-Cluzi2Zq.js                          3.12 kB Ôöé gzip:   1.46 kB
+dist/ui/assets/po-BiJDBrnU.js                            3.23 kB Ôöé gzip:   0.90 kB
+dist/ui/assets/json5-BR5RXkoi.js                         3.24 kB Ôöé gzip:   0.82 kB
+dist/ui/assets/mipsasm-BMqwQI7S.js                       3.25 kB Ôöé gzip:   1.17 kB
+dist/ui/assets/tasl-DMoTqEGO.js                          3.28 kB Ôöé gzip:   0.84 kB
+dist/ui/assets/genie-CV2tkWYe.js                         3.34 kB Ôöé gzip:   1.20 kB
+dist/ui/assets/rel-BtDbiS_P.js                           3.36 kB Ôöé gzip:   1.10 kB
+dist/ui/assets/vala-zf12oZj6.js                          3.36 kB Ôöé gzip:   1.18 kB
+dist/ui/assets/splunk-BC2Px7Mm.js                        3.42 kB Ôöé gzip:   1.51 kB
+dist/ui/assets/hurl-Y5uYzMZR.js                          3.51 kB Ôöé gzip:   1.09 kB
+dist/ui/assets/fluent-C03EYrpw.js                        3.60 kB Ôöé gzip:   0.89 kB
+dist/ui/assets/ssh-config-BgfXC-Er.js                    3.61 kB Ôöé gzip:   1.59 kB
+dist/ui/assets/jsonnet-CJTPZ8u_.js                       3.61 kB Ôöé gzip:   1.03 kB
+dist/ui/assets/kdl-CsD5j6eV.js                           3.62 kB Ôöé gzip:   1.03 kB
+dist/ui/assets/narrat-_X_XdTYD.js                        3.66 kB Ôöé gzip:   1.09 kB
+dist/ui/assets/glsl-_ooCjaeB.js                          3.68 kB Ôöé gzip:   1.45 kB
+dist/ui/assets/turtle-ByJddavk.js                        3.69 kB Ôöé gzip:   0.96 kB
+dist/ui/assets/zenscript-BnlCZFoB.js                     3.90 kB Ôöé gzip:   1.28 kB
+dist/ui/assets/ron-VUp2lXgN.js                           3.90 kB Ôöé gzip:   0.97 kB
+dist/ui/assets/gn-ilITqXS6.js                            3.99 kB Ôöé gzip:   1.47 kB
+dist/ui/assets/pascal-4ZHwLPI5.js                        4.14 kB Ôöé gzip:   1.67 kB
+dist/ui/assets/http-Dg5LSYRK.js                          4.41 kB Ôöé gzip:   1.06 kB
+dist/ui/assets/tcl-CZd0xW_V.js                           4.42 kB Ôöé gzip:   1.50 kB
+dist/ui/assets/nextflow-Bbiyy34d.js                      4.50 kB Ôöé gzip:   1.16 kB
+dist/ui/assets/rosmsg-CAekHB0j.js                        4.51 kB Ôöé gzip:   1.05 kB
+dist/ui/assets/polar-C7UOKdEL.js                         4.66 kB Ôöé gzip:   1.12 kB
+dist/ui/assets/sdbl-bTVj8UrX.js                          4.69 kB Ôöé gzip:   2.00 kB
+dist/ui/assets/review-payload-BVmH2ljz.js                4.72 kB Ôöé gzip:   1.82 kB
+dist/ui/assets/fennel-DQxkIbk2.js                        4.76 kB Ôöé gzip:   1.53 kB
+dist/ui/assets/bibtex-Ci_nEsc7.js                        4.78 kB Ôöé gzip:   0.83 kB
+dist/ui/assets/llvm-Cm23YOpf.js                          5.04 kB Ôöé gzip:   2.01 kB
+dist/ui/assets/wgsl-BsKzXJz4.js                          5.13 kB Ôöé gzip:   1.38 kB
+dist/ui/assets/gdresource-C0sCabJj.js                    5.28 kB Ôöé gzip:   1.33 kB
+dist/ui/assets/zig-CMLA9XwU.js                           5.33 kB Ôöé gzip:   1.55 kB
+dist/ui/assets/qml-CjxTkcFH.js                           5.33 kB Ôöé gzip:   1.38 kB
+dist/ui/assets/dax-BkyTk9wS.js                           5.35 kB Ôöé gzip:   2.21 kB
+dist/ui/assets/bicep-CUHmPFLl.js                         5.37 kB Ôöé gzip:   1.14 kB
+dist/ui/assets/xml-JnmX6vyS.js                           5.43 kB Ôöé gzip:   1.24 kB
+dist/ui/assets/awk-BWXHIvNe.js                           5.45 kB Ôöé gzip:   1.37 kB
+dist/ui/assets/coq-BrsZFFmf.js                           5.54 kB Ôöé gzip:   1.91 kB
+dist/ui/assets/jinja-Bt30h8Ik.js                         5.62 kB Ôöé gzip:   1.36 kB
+dist/ui/assets/lean-CewbzKMR.js                          5.77 kB Ôöé gzip:   1.91 kB
+dist/ui/assets/moonbit-CaWjb8XO.js                       5.89 kB Ôöé gzip:   1.67 kB
+dist/ui/assets/powerquery-DNMTfnFr.js                    5.89 kB Ôöé gzip:   1.51 kB
+dist/ui/assets/shaderlab-TOUzSsQk.js                     5.91 kB Ôöé gzip:   2.08 kB
+dist/ui/assets/verilog-CiiDBU1e.js                       5.92 kB Ôöé gzip:   1.89 kB
+dist/ui/assets/cypher-ClKdZ_lG.js                        5.94 kB Ôöé gzip:   1.71 kB
+dist/ui/assets/vb-Djn5o6TS.js                            6.08 kB Ôöé gzip:   2.33 kB
+dist/ui/assets/red-CJ3rzSJv.js                           6.25 kB Ôöé gzip:   1.59 kB
+dist/ui/assets/min-dark-BSWPekZh.js                      6.28 kB Ôöé gzip:   1.70 kB
+dist/ui/assets/gdshader-CBce3t8t.js                      6.31 kB Ôöé gzip:   1.72 kB
+dist/ui/assets/prisma-BsRQq5mF.js                        6.32 kB Ôöé gzip:   1.38 kB
+dist/ui/assets/ara-4CJ0cIlV.js                           6.35 kB Ôöé gzip:   1.80 kB
+dist/ui/assets/clojure-DqKBuwfJ.js                       6.40 kB Ôöé gzip:   1.41 kB
+dist/ui/assets/postcss-BXeXVLqQ.js                       6.41 kB Ôöé gzip:   1.90 kB
+dist/ui/assets/toml-CcmNWLt0.js                          6.41 kB Ôöé gzip:   1.28 kB
+dist/ui/assets/solarized-light-DSh2HLQt.js               6.47 kB Ôöé gzip:   1.71 kB
+dist/ui/assets/proto-DB4EqR-F.js                         6.54 kB Ôöé gzip:   1.41 kB
+dist/ui/assets/smalltalk-B16xEiuN.js                     6.58 kB Ôöé gzip:   1.61 kB
+dist/ui/assets/r-DfFga4si.js                             6.59 kB Ôöé gzip:   1.82 kB
+dist/ui/assets/talonscript-CohzipZa.js                   6.75 kB Ôöé gzip:   1.48 kB
+dist/ui/assets/solarized-dark-DV17i1UV.js                6.84 kB Ôöé gzip:   1.78 kB
+dist/ui/assets/riscv-Ckw8ddFX.js                         6.90 kB Ôöé gzip:   1.97 kB
+dist/ui/assets/soy-COesmhTY.js                           6.92 kB Ôöé gzip:   1.62 kB
+dist/ui/assets/min-light-DDpmG2fV.js                     6.96 kB Ôöé gzip:   1.88 kB
+dist/ui/assets/scheme-DQCgrYNe.js                        7.16 kB Ôöé gzip:   2.04 kB
+dist/ui/assets/hlsl-Cvrh5tZx.js                          7.25 kB Ôöé gzip:   2.18 kB
+dist/ui/assets/qss-Fe1Jh2GI.js                           7.46 kB Ôöé gzip:   2.57 kB
+dist/ui/assets/dart-DkHntEIa.js                          7.80 kB Ôöé gzip:   1.91 kB
+dist/ui/assets/systemd-BxMlprV5.js                       7.86 kB Ôöé gzip:   2.54 kB
+dist/ui/assets/monokai-CdkpiU2Y.js                       7.88 kB Ôöé gzip:   1.90 kB
+dist/ui/assets/regexp-iC9_nbSI.js                        8.04 kB Ôöé gzip:   1.46 kB
+dist/ui/assets/haml-BU5EoZBn.js                          8.32 kB Ôöé gzip:   1.85 kB
+dist/ui/assets/typst-DI99ib-x.js                         8.38 kB Ôöé gzip:   1.66 kB
+dist/ui/assets/vue-html-BHtJ8geX.js                      8.47 kB Ôöé gzip:   1.68 kB
+dist/ui/assets/plsql-DGHpHOYJ.js                         8.50 kB Ôöé gzip:   2.99 kB
+dist/ui/assets/file-payload-nJpvFIgm.js                  8.61 kB Ôöé gzip:   2.99 kB
+dist/ui/assets/horizon-CE9ld1lL.js                       8.77 kB Ôöé gzip:   1.94 kB
+dist/ui/assets/kotlin-DhhofPvG.js                        8.77 kB Ôöé gzip:   2.12 kB
+dist/ui/assets/horizon-bright-Br1oVSNq.js                8.78 kB Ôöé gzip:   1.96 kB
+dist/ui/assets/ts-tags-Bewoa6pS.js                       8.92 kB Ôöé gzip:   1.20 kB
+dist/ui/assets/make-Dixweg8N.js                          8.95 kB Ôöé gzip:   1.76 kB
+dist/ui/assets/andromeeda-vGVdxbeo.js                    9.01 kB Ôöé gzip:   2.35 kB
+dist/ui/assets/sas-BnMEh2S3.js                           9.06 kB Ôöé gzip:   3.82 kB
+dist/ui/assets/dark-plus-Cs2F2srj.js                     9.09 kB Ôöé gzip:   2.10 kB
+dist/ui/assets/slack-dark-DnToyrRv.js                    9.11 kB Ôöé gzip:   1.96 kB
+dist/ui/assets/sass-DXrisJhu.js                          9.28 kB Ôöé gzip:   2.48 kB
+dist/ui/assets/plastic-DQwYfKfQ.js                       9.29 kB Ôöé gzip:   1.96 kB
+dist/ui/assets/slack-ochin-B2OO5cIa.js                   9.42 kB Ôöé gzip:   2.08 kB
+dist/ui/assets/tex-t1rUiQCm.js                           9.67 kB Ôöé gzip:   3.06 kB
+dist/ui/assets/jison-D5uZ1Nyo.js                         9.69 kB Ôöé gzip:   1.86 kB
+dist/ui/assets/cmake-Bj61d0ZC.js                         9.84 kB Ôöé gzip:   3.37 kB
+dist/ui/assets/light-plus-DVQuIRkW.js                    9.93 kB Ôöé gzip:   2.27 kB
+dist/ui/assets/hcl-Dh228itO.js                          10.04 kB Ôöé gzip:   1.93 kB
+dist/ui/assets/rst-oy_97Kl4.js                          10.31 kB Ôöé gzip:   2.24 kB
+dist/ui/assets/pkl-ot-7Btpt.js                          10.36 kB Ôöé gzip:   1.37 kB
+dist/ui/assets/beancount-D-usSTwE.js                    10.36 kB Ôöé gzip:   1.43 kB
+dist/ui/assets/nextflow-groovy-Dc_ddanL.js              10.39 kB Ôöé gzip:   2.12 kB
+dist/ui/assets/dream-maker-DW3nJb8Q.js                  10.46 kB Ôöé gzip:   2.25 kB
+dist/ui/assets/raku-B3gFvitq.js                         10.46 kB Ôöé gzip:   2.94 kB
+dist/ui/assets/yaml-OAcZkP-w.js                         10.56 kB Ôöé gzip:   2.31 kB
+dist/ui/assets/just-CDE7W0vW.js                         10.76 kB Ôöé gzip:   2.60 kB
+dist/ui/assets/elm-Dv7A0aLa.js                          10.94 kB Ôöé gzip:   2.09 kB
+dist/ui/assets/github-light-EUqPIrTm.js                 11.18 kB Ôöé gzip:   2.49 kB
+dist/ui/assets/prolog-iXnhIJG7.js                       11.34 kB Ôöé gzip:   3.84 kB
+dist/ui/assets/terraform-DswuEJGm.js                    11.38 kB Ôöé gzip:   2.51 kB
+dist/ui/assets/github-dark-C-LZuMrd.js                  11.40 kB Ôöé gzip:   2.53 kB
+dist/ui/assets/puppet-CDv2pdJW.js                       11.43 kB Ôöé gzip:   2.10 kB
+dist/ui/assets/laserwave-C_8bwKvT.js                    11.49 kB Ôöé gzip:   2.57 kB
+dist/ui/assets/gherkin-DExj1W_8.js                      11.93 kB Ôöé gzip:   5.04 kB
+dist/ui/assets/wasm-ByWQv1Qj.js                         12.00 kB Ôöé gzip:   2.17 kB
+dist/ui/assets/hjson-CxZEssPk.js                        12.04 kB Ôöé gzip:   1.64 kB
+dist/ui/assets/handlebars-BBFEg4Lo.js                   12.16 kB Ôöé gzip:   2.38 kB
+dist/ui/assets/apache-U0d_L8uA.js                       12.44 kB Ôöé gzip:   3.71 kB
+dist/ui/assets/vesper-D5bVUKB1.js                       12.68 kB Ôöé gzip:   1.98 kB
+dist/ui/assets/bat-Bo4NYOV-.js                          12.88 kB Ôöé gzip:   3.22 kB
+dist/ui/assets/fish-BJitypiv.js                         13.03 kB Ôöé gzip:   1.73 kB
+dist/ui/assets/v-DETTlOr0.js                            13.20 kB Ôöé gzip:   2.73 kB
+dist/ui/assets/vitesse-light-VbXTXTou.js                13.61 kB Ôöé gzip:   3.03 kB
+dist/ui/assets/aurora-x-CDeNXAV0.js                     13.65 kB Ôöé gzip:   2.28 kB
+dist/ui/assets/vitesse-black-fwtXNY1n.js                13.67 kB Ôöé gzip:   3.05 kB
+dist/ui/assets/vitesse-dark-BZCL-v6S.js                 13.75 kB Ôöé gzip:   3.06 kB
+dist/ui/assets/pug-CMgI5afi.js                          13.84 kB Ôöé gzip:   2.58 kB
+dist/ui/assets/luau-CNKltnaQ.js                         13.95 kB Ôöé gzip:   3.16 kB
+dist/ui/assets/synthwave-84-nFMaYfgc.js                 14.03 kB Ôöé gzip:   2.85 kB
+dist/ui/assets/github-light-default-BXViO-2h.js         14.15 kB Ôöé gzip:   3.02 kB
+dist/ui/assets/clarity-SemFz856.js                      14.26 kB Ôöé gzip:   2.46 kB
+dist/ui/assets/github-light-high-contrast-B68TUdTA.js   14.27 kB Ôöé gzip:   3.00 kB
+dist/ui/assets/github-dark-dimmed-Bx1FflLF.js           14.43 kB Ôöé gzip:   3.11 kB
+dist/ui/assets/github-dark-default-DXG-b-1a.js          14.43 kB Ôöé gzip:   3.12 kB
+dist/ui/assets/github-dark-high-contrast-B_tTalzw.js    14.59 kB Ôöé gzip:   3.07 kB
+dist/ui/assets/gnuplot-7GGW24-e.js                      14.77 kB Ôöé gzip:   3.27 kB
+dist/ui/assets/rust-Cfkwpbl8.js                         15.06 kB Ôöé gzip:   2.71 kB
+dist/ui/assets/kusto-BUv0MjJC.js                        15.16 kB Ôöé gzip:   3.93 kB
+dist/ui/assets/actionscript-3--17pq3dv.js               15.19 kB Ôöé gzip:   2.67 kB
+dist/ui/assets/nix-IvuFDN5E.js                          15.50 kB Ôöé gzip:   2.47 kB
+dist/ui/assets/lua-CiyBp52Y.js                          15.58 kB Ôöé gzip:   3.18 kB
+dist/ui/assets/abap-CLvhMVsD.js                         15.84 kB Ôöé gzip:   5.93 kB
+dist/ui/assets/solidity-CKzVLygQ.js                     16.06 kB Ôöé gzip:   3.09 kB
+dist/ui/assets/matlab-D7qyCx1q.js                       16.07 kB Ôöé gzip:   3.06 kB
+dist/ui/assets/cue-CE9AQfxI.js                          16.19 kB Ôöé gzip:   2.04 kB
+dist/ui/assets/elixir-9FKfw4cJ.js                       16.26 kB Ôöé gzip:   2.76 kB
+dist/ui/assets/odin-B1RWQWA5.js                         16.50 kB Ôöé gzip:   2.92 kB
+dist/ui/assets/bird2-C2hNVINV.js                        16.96 kB Ôöé gzip:   3.84 kB
+dist/ui/assets/kanagawa-wave-CTweb8Dz.js                17.12 kB Ôöé gzip:   2.90 kB
+dist/ui/assets/kanagawa-lotus-BN08jTvb.js               17.12 kB Ôöé gzip:   2.90 kB
+dist/ui/assets/kanagawa-dragon-CXtmUGW6.js              17.12 kB Ôöé gzip:   2.92 kB
+dist/ui/assets/move-B1IS1UjX.js                         17.49 kB Ôöé gzip:   3.06 kB
+dist/ui/assets/graphql-B9LqP-cY.js                      18.07 kB Ôöé gzip:   2.53 kB
+dist/ui/assets/liquid-CA-AS3EX.js                       18.10 kB Ôöé gzip:   3.14 kB
+dist/ui/assets/svelte-1jM2ejXj.js                       18.24 kB Ôöé gzip:   3.14 kB
+dist/ui/assets/material-theme-Bm3Qr25_.js               18.61 kB Ôöé gzip:   3.10 kB
+dist/ui/assets/material-theme-darker-2IIEA8gg.js        18.62 kB Ôöé gzip:   3.10 kB
+dist/ui/assets/material-theme-ocean-CHQ94UKr.js         18.62 kB Ôöé gzip:   3.12 kB
+dist/ui/assets/material-theme-lighter-uhdI0v04.js       18.63 kB Ôöé gzip:   3.10 kB
+dist/ui/assets/material-theme-palenight-B5W6OYN7.js     18.63 kB Ôöé gzip:   3.11 kB
+dist/ui/assets/gdscript-Cp2uCuqX.js                     18.98 kB Ôöé gzip:   3.75 kB
+dist/ui/assets/groovy-CacY0gHj.js                       19.17 kB Ôöé gzip:   3.59 kB
+dist/ui/assets/mdc-PyJv85eS.js                          19.54 kB Ôöé gzip:   6.66 kB
+dist/ui/assets/ayu-dark-DluEY0Gj.js                     20.07 kB Ôöé gzip:   3.93 kB
+dist/ui/assets/ayu-mirage-Bqwy1Gya.js                   20.08 kB Ôöé gzip:   3.91 kB
+dist/ui/assets/glimmer-js-t2kiCkyB.js                   20.08 kB Ôöé gzip:   2.94 kB
+dist/ui/assets/glimmer-ts-F0Jv5okV.js                   20.08 kB Ôöé gzip:   2.93 kB
+dist/ui/assets/powershell-DshXNtvi.js                   20.14 kB Ôöé gzip:   4.05 kB
+dist/ui/assets/ayu-light-C3h-C4tm.js                    20.14 kB Ôöé gzip:   3.89 kB
+dist/ui/assets/viml-DvXPmvsu.js                         20.35 kB Ôöé gzip:   6.73 kB
+dist/ui/assets/nushell-DcLAeLz5.js                      20.40 kB Ôöé gzip:   5.21 kB
+dist/ui/assets/snazzy-light-4G7pJPwS.js                 20.77 kB Ôöé gzip:   3.80 kB
+dist/ui/assets/twig-DVg-vELl.js                         20.90 kB Ôöé gzip:   3.66 kB
+dist/ui/assets/dracula-BHWKrbxM.js                      21.06 kB Ôöé gzip:   3.99 kB
+dist/ui/assets/dracula-soft-5eyTD99u.js                 21.07 kB Ôöé gzip:   4.02 kB
+dist/ui/assets/wit-DdvCle-K.js                          21.46 kB Ôöé gzip:   2.87 kB
+dist/ui/assets/rose-pine-BthvhNj6.js                    21.74 kB Ôöé gzip:   3.86 kB
+dist/ui/assets/rose-pine-moon-hon4tzzS.js               21.75 kB Ôöé gzip:   3.87 kB
+dist/ui/assets/rose-pine-dawn-Dg85fqjY.js               21.75 kB Ôöé gzip:   3.88 kB
+dist/ui/assets/nim-CKE1dzpU.js                          22.45 kB Ôöé gzip:   3.15 kB
+dist/ui/assets/common-lisp-Cv5bFMCO.js                  22.57 kB Ôöé gzip:   6.07 kB
+dist/ui/assets/surrealql-Bz4JbU-9.js                    22.58 kB Ôöé gzip:   4.31 kB
+dist/ui/assets/gruvbox-dark-hard-C820rvS2.js            22.63 kB Ôöé gzip:   4.15 kB
+dist/ui/assets/gruvbox-dark-soft-MrdJrrXF.js            22.63 kB Ôöé gzip:   4.15 kB
+dist/ui/assets/gruvbox-light-hard-BC_s9l72.js           22.63 kB Ôöé gzip:   4.16 kB
+dist/ui/assets/gruvbox-light-soft-BSMLrYjP.js           22.63 kB Ôöé gzip:   4.16 kB
+dist/ui/assets/gruvbox-dark-medium-BPjhmG05.js          22.63 kB Ôöé gzip:   4.15 kB
+dist/ui/assets/gruvbox-light-medium-BAWPOn9u.js         22.63 kB Ôöé gzip:   4.16 kB
+dist/ui/assets/sql-Ccv_yeUm.js                          23.46 kB Ôöé gzip:   7.48 kB
+dist/ui/assets/cadence-CQ2zXKGN.js                      23.66 kB Ôöé gzip:   3.65 kB
+dist/ui/assets/typespec-B88KGewJ.js                     24.01 kB Ôöé gzip:   2.58 kB
+dist/ui/assets/astro-C51vqDKq.js                        24.02 kB Ôöé gzip:   7.59 kB
+dist/ui/assets/apl-BmYHKQ6m.js                          24.02 kB Ôöé gzip:   4.16 kB
+dist/ui/assets/templ-C-VwELcp.js                        24.06 kB Ôöé gzip:   5.41 kB
+dist/ui/assets/angular-html-BkgDQl-G.js                 24.23 kB Ôöé gzip:   3.98 kB
+dist/ui/assets/vhdl-BroJfC0k.js                         24.25 kB Ôöé gzip:   3.86 kB
+dist/ui/assets/vue-wPQ7UlMy.js                          24.48 kB Ôöé gzip:   2.96 kB
+dist/ui/assets/purescript-9MfHhQsQ.js                   24.67 kB Ôöé gzip:   3.24 kB
+dist/ui/assets/one-light-D7Lr4KcI.js                    25.29 kB Ôöé gzip:   3.63 kB
+dist/ui/assets/fsharp-D13ZGOAj.js                       25.30 kB Ôöé gzip:   4.12 kB
+dist/ui/assets/marko-_BWrPfny.js                        25.48 kB Ôöé gzip:   3.59 kB
+dist/ui/assets/c3-CnJL0r0V.js                           25.62 kB Ôöé gzip:   3.85 kB
+dist/ui/assets/night-owl-light-eJ-hLW7d.js              25.89 kB Ôöé gzip:   4.23 kB
+dist/ui/assets/system-verilog-DJ5XKQeo.js               26.19 kB Ôöé gzip:   4.82 kB
+dist/ui/assets/nord-Cb4Vim4T.js                         26.72 kB Ôöé gzip:   4.35 kB
+dist/ui/assets/codeql-oeQT6MSM.js                       26.87 kB Ôöé gzip:   3.79 kB
+dist/ui/assets/scss-BfZXsAWQ.js                         27.25 kB Ôöé gzip:   4.22 kB
+dist/ui/assets/java-ppHvycj5.js                         27.27 kB Ôöé gzip:   4.30 kB
+dist/ui/assets/coffee-vVdGzlmt.js                       27.42 kB Ôöé gzip:   6.35 kB
+dist/ui/assets/razor-i4DbHr8p.js                        27.45 kB Ôöé gzip:   3.54 kB
+dist/ui/assets/scala-DKOlJaKm.js                        28.87 kB Ôöé gzip:   3.92 kB
+dist/ui/assets/night-owl-DhmEMT88.js                    28.91 kB Ôöé gzip:   5.14 kB
+dist/ui/assets/crystal-5UZy6KIX.js                      29.41 kB Ôöé gzip:   4.44 kB
+dist/ui/assets/mermaid-Bk4SNUv9.js                      29.50 kB Ôöé gzip:   3.64 kB
+dist/ui/assets/applescript-CCn79oCD.js                  29.56 kB Ôöé gzip:   5.94 kB
+dist/ui/assets/pierre-dark-sU4Zdns8.js                  30.51 kB Ôöé gzip:   4.73 kB
+dist/ui/assets/pierre-light-DWBk51d8.js                 30.52 kB Ôöé gzip:   4.72 kB
+dist/ui/assets/pierre-dark-soft-HXgun5vs.js             30.52 kB Ôöé gzip:   4.76 kB
+dist/ui/assets/pierre-light-soft-CodEzPxf.js            30.52 kB Ôöé gzip:   4.71 kB
+dist/ui/assets/julia-76hRaaGz.js                        30.99 kB Ôöé gzip:   4.30 kB
+dist/ui/assets/stylus-B6D30XZt.js                       31.06 kB Ôöé gzip:   8.01 kB
+dist/ui/assets/poimandres-DRFjx7u4.js                   33.49 kB Ôöé gzip:   5.49 kB
+dist/ui/assets/one-dark-pro-CLwyXe_n.js                 33.78 kB Ôöé gzip:   5.50 kB
+dist/ui/assets/bsl-BkkzgIyY.js                          33.86 kB Ôöé gzip:   8.34 kB
+dist/ui/assets/haxe-OTjmBuCE.js                         35.15 kB Ôöé gzip:   5.90 kB
+dist/ui/assets/nginx-DAWVw8yu.js                        35.35 kB Ôöé gzip:   4.45 kB
+dist/ui/assets/houston-CsvMBhTu.js                      35.41 kB Ôöé gzip:   5.76 kB
+dist/ui/assets/tokyo-night-oM2G3aXe.js                  35.66 kB Ôöé gzip:   6.22 kB
+dist/ui/assets/erlang-Cphh6RMH.js                       37.47 kB Ôöé gzip:   4.36 kB
+dist/ui/assets/cobol-Cf6azoN_.js                        39.09 kB Ôöé gzip:  10.89 kB
+dist/ui/assets/asm-Cmm7eHzH.js                          40.71 kB Ôöé gzip:   8.16 kB
+dist/ui/assets/haskell-D8IpX4py.js                      41.48 kB Ôöé gzip:   6.41 kB
+dist/ui/assets/shellscript-BC2srNaB.js                  41.53 kB Ôöé gzip:   6.12 kB
+dist/ui/assets/workspace-app-JzIQ4NzF.js                41.68 kB Ôöé gzip:  14.73 kB
+dist/ui/assets/perl-BBhWva19.js                         43.14 kB Ôöé gzip:   4.64 kB
+dist/ui/assets/d-qD-0Kul2.js                            43.78 kB Ôöé gzip:   8.43 kB
+dist/ui/assets/ruby-C5zYZIyl.js                         45.83 kB Ôöé gzip:   5.56 kB
+dist/ui/assets/go-BJwz_mda.js                           46.80 kB Ôöé gzip:   5.15 kB
+dist/ui/assets/apex-CGTLDQj6.js                         46.97 kB Ôöé gzip:   6.72 kB
+dist/ui/assets/catppuccin-mocha-DYhrFGRu.js             47.25 kB Ôöé gzip:   7.98 kB
+dist/ui/assets/catppuccin-latte-DwIHMF0Q.js             47.25 kB Ôöé gzip:   7.98 kB
+dist/ui/assets/catppuccin-frappe-3VR1Za6u.js            47.25 kB Ôöé gzip:   7.99 kB
+dist/ui/assets/catppuccin-macchiato-DYnBP6_5.js         47.26 kB Ôöé gzip:   7.99 kB
+dist/ui/assets/ada-C5qYipkI.js                          48.07 kB Ôöé gzip:   5.96 kB
+dist/ui/assets/css-DEfus9J5.js                          49.07 kB Ôöé gzip:  11.94 kB
+dist/ui/assets/imba-DsUTQ-LC.js                         49.92 kB Ôöé gzip:   9.47 kB
+dist/ui/assets/everforest-dark-sB-x3p7T.js              53.74 kB Ôöé gzip:   8.37 kB
+dist/ui/assets/everforest-light-Df2xbC6M.js             53.74 kB Ôöé gzip:   8.36 kB
+dist/ui/assets/wikitext-ClFFjSW2.js                     55.87 kB Ôöé gzip:   4.81 kB
+dist/ui/assets/stata-CGQEuSZq.js                        56.99 kB Ôöé gzip:  12.39 kB
+dist/ui/assets/html-D-C6YZk4.js                         57.31 kB Ôöé gzip:  11.78 kB
+dist/ui/assets/ballerina-B7ZEbQpA.js                    58.68 kB Ôöé gzip:   8.10 kB
+dist/ui/assets/markdown-BYOwaDjH.js                     59.32 kB Ôöé gzip:   5.66 kB
+dist/ui/assets/ocaml-O90oeIOV.js                        62.44 kB Ôöé gzip:   5.04 kB
+dist/ui/assets/mojo-BgCJLMeH.js                         69.79 kB Ôöé gzip:   9.21 kB
+dist/ui/assets/python-gzcpVVnB.js                       69.94 kB Ôöé gzip:   9.09 kB
+dist/ui/assets/c-IBzBpxAO.js                            72.16 kB Ôöé gzip:  10.55 kB
+dist/ui/assets/latex-CVO2Byab.js                        72.61 kB Ôöé gzip:   6.68 kB
+dist/ui/assets/vyper-CgoNMtux.js                        74.64 kB Ôöé gzip:  10.69 kB
+dist/ui/assets/hack-8yjdbaSA.js                         80.18 kB Ôöé gzip:  26.27 kB
+dist/ui/assets/swift-DonLKvLd.js                        86.68 kB Ôöé gzip:  14.69 kB
+dist/ui/assets/fortran-free-form-CYNrtFtB.js            88.96 kB Ôöé gzip:  11.18 kB
+dist/ui/assets/csharp-Ct8U2NOr.js                       89.68 kB Ôöé gzip:  10.64 kB
+dist/ui/assets/racket-DcIDlBhZ.js                       92.38 kB Ôöé gzip:  15.07 kB
+dist/ui/assets/less-DVTAwKKz.js                         97.62 kB Ôöé gzip:  14.84 kB
+dist/ui/assets/blade-CdhVsmwq.js                       104.97 kB Ôöé gzip:  28.30 kB
+dist/ui/assets/objective-c-D1A_Heim.js                 105.40 kB Ôöé gzip:  23.63 kB
+dist/ui/assets/php-ChIeaAoF.js                         111.05 kB Ôöé gzip:  28.65 kB
+dist/ui/assets/asciidoc-DE70LPWp.js                    131.52 kB Ôöé gzip:   9.31 kB
+dist/ui/assets/mdx-DQZ5AkYe.js                         136.10 kB Ôöé gzip:  23.54 kB
+dist/ui/assets/useFileDiffInstance-CJ1jJMKh.js         167.35 kB Ôöé gzip:  44.01 kB
+dist/ui/assets/objective-cpp-BsSzOQcm.js               171.96 kB Ôöé gzip:  30.98 kB
+dist/ui/assets/javascript-DDTjKLlQ.js                  174.88 kB Ôöé gzip:  16.67 kB
+dist/ui/assets/tsx-CTXzrBkN.js                         175.59 kB Ôöé gzip:  16.67 kB
+dist/ui/assets/jsx-04X2FT_1.js                         177.84 kB Ôöé gzip:  16.76 kB
+dist/ui/assets/typescript--ElHoFkw.js                  181.13 kB Ôöé gzip:  16.28 kB
+dist/ui/assets/angular-ts-Bxh4-O1-.js                  183.73 kB Ôöé gzip:  16.78 kB
+dist/ui/assets/client-CmqlmOiR.js                      189.62 kB Ôöé gzip:  59.63 kB
+dist/ui/assets/vue-vine-CNSGAWwc.js                    190.05 kB Ôöé gzip:  18.07 kB
+dist/ui/assets/wolfram-DLL8P-h_.js                     262.38 kB Ôöé gzip:  77.63 kB
+dist/ui/assets/scrollbar-U1EWtVV5.js                   263.27 kB Ôöé gzip:  77.58 kB
+dist/ui/assets/app-CxDP9rTt.js                         335.26 kB Ôöé gzip:  79.90 kB
+dist/ui/assets/wasm-BnjxR4X6.js                        622.32 kB Ôöé gzip: 232.09 kB
+dist/ui/assets/cpp-CVHeO-Jk.js                         626.12 kB Ôöé gzip:  48.08 kB
+dist/ui/assets/emacs-lisp-C9PiwqqW.js                  779.84 kB Ôöé gzip: 197.53 kB
+
+[32mÔ£ô built in 768ms[39m
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+exit_code=0
+=== npm run doctor ===
+
+> @waishnav/devspace@1.0.7 doctor
+> node --import tsx src/cli.ts doctor
+
+Config dir: C:\Users\fjuni\.devspace
+Config file: C:\Users\fjuni\.devspace\config.json
+Auth file: C:\Users\fjuni\.devspace\auth.json
+Node: v24.18.0 (supported >=20.12 <27)
+Node ABI: 137
+Platform: win32 x64
+Git: git version 2.55.0.windows.4
+Bash shell: C:\Windows\System32\bash.exe -s
+SQLite native dependency: ok
+Local MCP URL: http://127.0.0.1:7676/mcp
+Public MCP URL: http://127.0.0.1:7676/mcp
+Allowed roots: C:\Users\fjuni\.copilot\repos\devspace
+Allowed hosts: localhost, 127.0.0.1, ::1
+exit_code=0
+=== npm run security:p0 ===
+
+> @waishnav/devspace@1.0.7 security:p0
+> python scripts/run-p0-negative-matrix.py --repo . --command "node --test scripts/e2e-http-mcp-negative.test.mjs"
+
+{"started_at": "2026-08-20T06:37:44Z", "duration_ms": 3768, "command": ["node", "--test", "scripts/e2e-http-mcp-negative.test.mjs"], "exit_code": 0, "required_scenarios": ["OAUTH-NEG-001", "OAUTH-NEG-002", "OAUTH-NEG-003", "OAUTH-NEG-004", "OAUTH-NEG-005", "OAUTH-NEG-006", "OAUTH-NEG-007", "OAUTH-NEG-008", "BEARER-NEG-001", "BEARER-NEG-002", "BEARER-NEG-003", "BEARER-NEG-004", "SESSION-NEG-001", "SESSION-NEG-002", "SESSION-NEG-003", "SESSION-NEG-004", "MCP-NEG-001", "MCP-NEG-002", "MCP-NEG-003", "MCP-NEG-004", "MCP-NEG-005", "RELEASE-NEG-001", "RELEASE-NEG-002"], "observed_scenarios": ["OAUTH-NEG-001", "OAUTH-NEG-002", "OAUTH-NEG-003", "OAUTH-NEG-004", "OAUTH-NEG-005", "OAUTH-NEG-006", "OAUTH-NEG-007", "OAUTH-NEG-008", "BEARER-NEG-001", "BEARER-NEG-002", "BEARER-NEG-003", "BEARER-NEG-004", "SESSION-NEG-001", "SESSION-NEG-002", "SESSION-NEG-003", "SESSION-NEG-004", "MCP-NEG-001", "MCP-NEG-002", "MCP-NEG-003", "MCP-NEG-004", "MCP-NEG-005", "RELEASE-NEG-001", "RELEASE-NEG-002"], "missing_scenarios": [], "secret_leak_detected": false, "status": "passed", "sanitized_output": "Ô£ö BEARER-NEG-001 rejects missing Authorization (2018.8909ms)\nÔ£ö BEARER-NEG-002 rejects malformed Authorization scheme (3.3629ms)\nÔ£ö BEARER-NEG-003 rejects an invalid token (3.5571ms)\nÔ£ö BEARER-NEG-004 rejects a revoked token (109.5882ms)\nÔ£ö OAUTH-NEG-001 rejects an incorrect code_verifier (64.1076ms)\nÔ£ö OAUTH-NEG-002 rejects authorization-code replay (90.5348ms)\nÔ£ö OAUTH-NEG-003 rejects an expired or stale authorization code (61.7451ms)\nÔ£ö OAUTH-NEG-004 rejects a mismatched redirect_uri (78.288ms)\nÔ£ö OAUTH-NEG-005 rejects an unknown client_id (15.3223ms)\nÔ£ö OAUTH-NEG-006 rejects a token minted for another resource server (62.0913ms)\nÔ£ö OAUTH-NEG-007 rejects a privileged request with insufficient scope (47.3908ms)\nÔ£ö OAUTH-NEG-008 rejects an unsupported scope (45.098ms)\nÔ£ö SESSION-NEG-001 rejects an unknown MCP session id (94.5391ms)\nÔ£ö SESSION-NEG-002 rejects transfer of a session between clients (139.5178ms)\nÔ£ö SESSION-NEG-003 rejects replay after session close (139.9355ms)\nÔ£ö SESSION-NEG-004 rejects reconnect without the original binding (170.8539ms)\nÔ£ö MCP-NEG-001 rejects an invalid content type (61.4277ms)\nÔ£ö MCP-NEG-002 rejects malformed JSON-RPC (81.3549ms)\nÔ£ö MCP-NEG-003 rejects an unknown JSON-RPC method (107.2576ms)\nÔ£ö MCP-NEG-004 rejects an invalid lifecycle order (45.2302ms)\nÔ£ö MCP-NEG-005 keeps a duplicate read request effect-free (127.4186ms)\nÔ£ö RELEASE-NEG-001 finds no secrets in collected logs or artifacts (32.1459ms)\nÔ£ö RELEASE-NEG-002 proves cleanup in finally after an aborted case (2.1795ms)\nÔä╣ tests 23\nÔä╣ suites 0\nÔä╣ pass 23\nÔä╣ fail 0\nÔä╣ cancelled 0\nÔä╣ skipped 0\nÔä╣ todo 0\nÔä╣ duration_ms 3719.9148\n\n"}
+exit_code=0
+=== npm run test:observability ===
+
+> @waishnav/devspace@1.0.7 test:observability
+> node scripts/validate-observability.mjs
+
+{"schema":"devspace.observability-contract.v1","status":"passed","required_alerts":13,"observed_alerts":13,"required_metrics":15,"observed_metrics":15,"dashboard_panels":12,"secret_leak_detected":false,"findings":[]}
+exit_code=0
+=== npm run coverage:check ===
+
+> @waishnav/devspace@1.0.7 coverage:check
+> c8 --all --src=src --extension=.ts --check-coverage --lines=60 --functions=55 --branches=45 --statements=60 --reporter=text --reporter=lcov npm test
+
+
+> @waishnav/devspace@1.0.7 test
+> node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/error-policy.test.ts && tsx src/logger.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/ui/accessibility-contract.test.ts && tsx src/ui/journey-progress.test.ts && tsx src/ui/card-result-normalizer.test.ts && tsx src/ui/render-strategy.test.ts && tsx src/ui/sync-state.test.ts && tsx src/response-shaping-contract.test.ts && tsx src/mcp-request-policy.test.ts && tsx src/db/query-performance.test.ts && tsx src/db/resilience.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts && tsx src/credential-security.test.ts
+
+Ô£ö the dev server launches tsx through Node without a shell (1.126ms)
+Ôä╣ tests 1
+Ôä╣ suites 0
+Ôä╣ pass 1
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 65.0335
+Ô£ö classifies filesystem failures without exposing the original path (1.9816ms)
+Ô£ö classifies retryable SQLite contention and timeout failures (1.2965ms)
+Ô£ö preserves safe process and domain codes while replacing raw detail (0.1251ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 13.6688
+Ô£ö logger sanitization retains safe dimensions and hashes identifying values (0.9246ms)
+Ô£ö logger event remains structural when fields contain event-like input (0.8101ms)
+Ô£ö logger hashing is deterministic and bounded (0.2163ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.4567
+Ô£ö undefined request metadata has no conversation scope (0.6135ms)
+Ô£ö missing session metadata has no conversation scope (0.0727ms)
+Ô£ö an empty session string has no conversation scope (0.0563ms)
+Ô£ö a non-string session value has no conversation scope (0.0476ms)
+Ô£ö valid OpenAI session metadata returns the raw opaque session value (0.0455ms)
+Ô£ö unrelated metadata fields do not alter the selected conversation scope (0.0472ms)
+Ôä╣ tests 6
+Ôä╣ suites 0
+Ôä╣ pass 6
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.3394
+Ô£ö the supported coding tools are recognized as card tools (0.6478ms)
+Ô£ö tool classification distinguishes patch, edit, and shell operations (0.0941ms)
+Ô£ö a patch card expands only when it contains patch content (0.1094ms)
+Ô£ö a single-file patch opens immediately (0.0708ms)
+Ô£ö a multi-file patch stays collapsed (0.0589ms)
+Ô£ö show changes still opens immediately (0.0914ms)
+Ô£ö a workspace card expands when it contains provider metadata (0.0692ms)
+Ô£ö a workspace card with details opens immediately (0.0534ms)
+Ô£ö a workspace card expands when it contains agent metadata (0.0636ms)
+Ô£ö a workspace card expands when it contains available instruction files (0.0495ms)
+Ô£ö an empty workspace card stays collapsed (0.0517ms)
+Ôä╣ tests 11
+Ôä╣ suites 0
+Ôä╣ pass 11
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.5847
+Ô£ö workspace shell exposes accessible disclosure and live-status contracts (1.0383ms)
+Ô£ö React payload renderers use stable memoized boundaries (0.7589ms)
+Ô£ö review payload exposes file list and per-file diff relationships (0.2458ms)
+Ô£ö lazy payload renderers provide accessible output and status semantics (0.2436ms)
+Ô£ö stylesheet protects keyboard focus, reduced motion, forced colors, and touch targets (0.4533ms)
+Ôä╣ tests 5
+Ôä╣ suites 0
+Ôä╣ pass 5
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 10.0564
+Ô£ö journey progress advances through workspace, explore, change, and verify (0.7593ms)
+Ô£ö repeated tools do not retrigger a completed milestone (0.1148ms)
+Ô£ö interactive process input only completes the verification stage (0.0773ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 7.508
+Ô£ö card result normalizer reuses top-level MCP content without losing payload fields (1.7094ms)
+Ô£ö card result normalizer preserves an explicit card payload (0.1666ms)
+Ô£ö card result normalizer keeps image content available to the lazy renderer (0.1034ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 10.6477
+Ô£ö render strategy preserves a mounted payload for same-tool expanded updates (0.664ms)
+Ô£ö render strategy remounts when tool identity or expansion changes (0.1029ms)
+Ô£ö render strategy remounts when no mounted payload exists (0.0615ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.5075
+Ô£ö connection epochs invalidate an older boot attempt (1.2221ms)
+Ô£ö render revisions invalidate a lazy result from a previous shell (0.2583ms)
+Ô£ö starting a connection also invalidates pending renders (0.1355ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 13.8616
+Ô£ö MCP response shaping avoids duplicating top-level content in card payloads (0.9604ms)
+Ô£ö frontend reconstructs omitted card content from the top-level MCP result (0.1099ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8.1964
+Ô£ö MCP policy classifies protocol discovery and read calls (1.4404ms)
+Ô£ö MCP policy classifies every mutating tool as write (0.1402ms)
+Ô£ö MCP policy denies unknown and malformed tool calls (0.1062ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 9.6503
+Ô£ö query-performance migration supports hot recency and cleanup plans (45.2209ms)
+Ôä╣ tests 1
+Ôä╣ suites 0
+Ôä╣ pass 1
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 48.8364
+Ô£ö SQLite lock contention fails with a bounded SQLITE_BUSY error (141.8302ms)
+Ô£ö SQLite full storage is surfaced as a bounded resource failure (12.4648ms)
+Ô£ö SQLite read-only mode rejects writes without mutating the state (16.4546ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 175.524
+Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-jSE8OT\project\.devspace\agents\custom.md: Subagent profile provider must be codex, claude, opencode, pi, cursor, or copilot: C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-jSE8OT\project\.devspace\agents\custom.md
+Ô£ö a checkout exposes initial and nested instruction context while filtering outside symlinks (80.1244ms)
+Ô£ö opening a missing checkout creates its workspace root (36.8554ms)
+Ô£ö missing checkout root creation propagates filesystem failure without a partial root (0.5523ms)
+Ô£ö worktree opens require Git and create an isolated managed workspace (496.9378ms)
+Ô£ö persisted checkout and worktree sessions restore after recreating the registry (588.8464ms)
+Ô£ö workspace paths outside the allowed roots are rejected (10.7645ms)
+´╣ú a symlinked allowed root preserves checkout and worktree path behavior (0.1043ms) # SKIP
+Ôä╣ tests 7
+Ôä╣ suites 0
+Ôä╣ pass 6
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 1
+Ôä╣ todo 0
+Ôä╣ duration_ms 1218.9174
+Ô£ö a conversation reuses its checkout context (107.5202ms)
+Ô£ö different conversations receive separate checkout workspaces (95.6549ms)
+Ô£ö conversation bindings distinguish canonical projects (150.9466ms)
+Ô£ö concurrent checkout opens reuse one workspace and return matching context (70.5312ms)
+Ô£ö a checkout without a conversation scope does not use conversation reuse (117.5459ms)
+Ô£ö worktree requests remain fresh without replacing the reusable checkout (867.9066ms)
+Ô£ö a worktree-first conversation creates and then reuses its checkout (703.1167ms)
+Ô£ö concurrent worktree opens remain fresh and return complete context (578.6824ms)
+Ô£ö checkout reuse survives a registry restart (135.745ms)
+Ô£ö a failed first context load does not consume bootstrap (134.7589ms)
+Ô£ö a context-loading failure preserves a valid checkout binding (91.5508ms)
+Ô£ö a deleted checkout is replaced with a new workspace (135.9207ms)
+Ô£ö canonical checkout identity remains stable when the requested target starts missing (122.2311ms)
+Ô£ö canonical checkout identity survives equivalent path and symlink aliases (114.9621ms)
+´╣ú canonical checkout identity survives macOS var path aliases (0.129ms) # SKIP
+Ô£ö an invalid persisted checkout binding is not reused (151.8814ms)
+Ô£ö an inactive persisted checkout binding is not reused (181.1074ms)
+Ô£ö a checkout replaced by a file reports the filesystem error (88.2995ms)
+Ô£ö unexpected storage errors are not mistaken for stale bindings (89.2719ms)
+´╣ú unexpected filesystem errors are propagated without replacing the binding (0.1429ms) # SKIP
+Ôä╣ tests 20
+Ôä╣ suites 0
+Ôä╣ pass 18
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 2
+Ôä╣ todo 0
+Ôä╣ duration_ms 3945.955
+Ô£ö a clean workspace reports no changes from the last-shown checkpoint (817.3594ms)
+Ô£ö show_changes reports and advances the last-shown checkpoint (1478.7337ms)
+Ô£ö review checkpoints survive a manager restart (1406.3396ms)
+Ô£ö concurrent initialization produces one usable checkpoint state (2309.9772ms)
+Ô£ö a missing last-shown checkpoint falls back after restart and can be re-established (2027.7718ms)
+Ô£ö a checkpoint workspace rejects a different root without changing its state (2500.5779ms)
+Ô£ö a concurrent review rejects a different root after initialization (1478.7334ms)
+Ô£ö an unborn repository becomes reviewable after its first commit (2999.4153ms)
+Ôä╣ tests 8
+Ôä╣ suites 0
+Ôä╣ pass 8
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 15026.3417
+{"ts":"2026-08-20T06:38:32.650Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6d1a0f5d99deb705","pathHash":"1f457096ba5556b3","success":true,"durationMs":92}
+{"ts":"2026-08-20T06:38:32.672Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6d1a0f5d99deb705","pathHash":"1f457096ba5556b3","success":true,"durationMs":17}
+Ô£ö open_workspace keeps lifecycle flags out of model output and preserves complete card metadata (293.5521ms)
+{"ts":"2026-08-20T06:38:32.883Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"1f610604b921738e","pathHash":"462076ae5c10d498","success":true,"durationMs":82}
+{"ts":"2026-08-20T06:38:32.883Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"1f610604b921738e","pathHash":"462076ae5c10d498","success":true,"durationMs":82}
+Ô£ö concurrent checkout opens return one full context and one reuse instruction (175.5672ms)
+{"ts":"2026-08-20T06:38:33.663Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"c6e7d828a2e3b276","pathHash":"e8be8424af97ec9b","success":true,"durationMs":42}
+{"ts":"2026-08-20T06:38:34.023Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"fb4f394493a1ca8f","pathHash":"a333d655861411d9","success":true,"durationMs":360}
+{"ts":"2026-08-20T06:38:34.210Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"ef08de3ed9b1c58b","pathHash":"8f51e3dfbbf5cb97","success":true,"durationMs":186}
+{"ts":"2026-08-20T06:38:34.220Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"c6e7d828a2e3b276","pathHash":"e8be8424af97ec9b","success":true,"durationMs":8}
+Ô£ö new worktrees always receive a fresh workspace and complete worktree context (1303.8652ms)
+{"ts":"2026-08-20T06:38:35.074Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"4faaaab431763048","pathHash":"b581129ac103e96c","success":true,"durationMs":258}
+{"ts":"2026-08-20T06:38:35.114Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"33d98edac2b4a2fc","pathHash":"aad51bf2419c6fc3","success":true,"durationMs":40}
+{"ts":"2026-08-20T06:38:35.122Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"33d98edac2b4a2fc","pathHash":"aad51bf2419c6fc3","success":true,"durationMs":7}
+Ô£ö checkout opened after a worktree receives its own complete context (930.4744ms)
+{"ts":"2026-08-20T06:38:35.268Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6c423d3962fa7142","pathHash":"9c562d9e745c0484","success":true,"durationMs":62}
+{"ts":"2026-08-20T06:38:35.309Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"519ca0b3822cb122","pathHash":"9c562d9e745c0484","success":true,"durationMs":40}
+Ô£ö a host without conversation metadata receives normal explicit-workspace behavior (252.2744ms)
+{"ts":"2026-08-20T06:38:35.498Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6581f85561fcb64d","pathHash":"842886ae49afcb84","success":true,"durationMs":40}
+{"ts":"2026-08-20T06:38:35.627Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6581f85561fcb64d","pathHash":"842886ae49afcb84","success":true,"durationMs":76}
+Ô£ö checkout reuse and context suppression survive a registry restart (194.5761ms)
+Ôä╣ tests 6
+Ôä╣ suites 0
+Ôä╣ pass 6
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 3158.3432
+Ô£ö device store creates a sanitized public record and enforces polling interval (93.0844ms)
+Ô£ö device store approval emits one token opportunity and rejects replay (102.0736ms)
+Ô£ö device store denies pending requests and does not disclose invalid user codes (173.8473ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 1458.0306
+Ô£ö selective language catalog falls back heavy grammars to text (1.189ms)
+Ô£ö selective language catalog allows explicit heavy-language opt in (0.1613ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 11.9699
+Ô£ö runtime metrics render safe dimensions and stable Prometheus names (7.242ms)
+Ô£ö runtime metrics sanitize unsafe label values (0.2388ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 12.894
+Ô£ö private file hardening produces an ACL equivalent to 0600 (78.773ms)
+Ô£ö DevSpace auth persistence applies private-file hardening (76.869ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 158.5728
+------------------------------|---------|----------|---------|---------|----------------------------
+File                          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
+------------------------------|---------|----------|---------|---------|----------------------------
+All files                     |   67.96 |    80.31 |   71.31 |   67.96 |                            
+ src                          |   65.46 |    79.51 |   71.65 |   65.46 |                            
+  apply-patch.ts              |    93.6 |    86.77 |     100 |    93.6 | ...316-318,337-340,438-440 
+  artifact-error.ts           |     100 |      100 |     100 |     100 |                            
+  artifact-tools.ts           |   31.98 |     37.5 |   28.57 |   31.98 | ...593-603,605-612,614-616 
+  cli.ts                      |   47.77 |    56.25 |   45.94 |   47.77 | ...689-691,699-701,716-717 
+  config.ts                   |   97.62 |     92.9 |     100 |   97.62 | 41-42,65-66,179,188,292    
+  credential-security.ts      |   85.41 |    71.42 |     100 |   85.41 | 41-46,76-77,90-95          
+  error-policy.ts             |   79.48 |    80.64 |     100 |   79.48 | ...64-65,67-68,76-77,82-97 
+  git-worktrees.ts            |   73.68 |     60.6 |     100 |   73.68 | ...116-128,135-146,174,177 
+  git.ts                      |   90.32 |    84.61 |     100 |   90.32 | 37-42                      
+  idempotency-store.ts        |   51.74 |     87.5 |      28 |   51.74 | ...234-263,266-275,278-285 
+  incoming-artifacts.ts       |    79.2 |    68.84 |     100 |    79.2 | ...444,453-457,519,527-528 
+  local-agent-adapters.ts     |   62.53 |    79.67 |   55.17 |   62.53 | ...708-714,716-718,720-726 
+  local-agent-availability.ts |   85.43 |    66.66 |    90.9 |   85.43 | ...2,77-82,119,139,146-150 
+  local-agent-path.ts         |    92.3 |       75 |     100 |    92.3 | 24-25                      
+  local-agent-profiles.ts     |   93.78 |       75 |     100 |   93.78 | ...137-138,152-153,170-171 
+  local-agent-runtime.ts      |   96.07 |       80 |   88.88 |   96.07 | 99-102                     
+  local-agent-store.ts        |   97.58 |    76.92 |     100 |   97.58 | 80-83,238-239              
+  local-agent-targets.ts      |   96.61 |    84.37 |     100 |   96.61 | 35-36,74-75                
+  logger.ts                   |   76.39 |    76.19 |      50 |   76.39 | ...142-144,146-156,158-161 
+  mcp-request-policy.ts       |     100 |    95.83 |     100 |     100 | 62                         
+  mcp-sessions.ts             |     100 |    95.23 |     100 |     100 | 24                         
+  metrics.ts                  |   97.91 |       84 |   96.15 |   97.91 | 212-216                    
+  oauth-device-cli.ts         |   18.99 |      100 |    5.88 |   18.99 | ...256-262,264-270,272-279 
+  oauth-device-routes.ts      |    9.13 |      100 |   11.11 |    9.13 | ...7-70,72-79,81-83,86-206 
+  oauth-device-store.ts       |   89.06 |    70.58 |   89.47 |   89.06 | ...179-184,214-216,237-251 
+  oauth-provider.ts           |   49.11 |     60.6 |   42.85 |   49.11 | ...381-382,421-422,434-448 
+  oauth-store.ts              |   98.39 |    85.71 |   91.66 |   98.39 | 63-64,209-210              
+  pi-tools.ts                 |   33.33 |      100 |    9.09 |   33.33 | ...107-112,114-119,121-129 
+  process-platform.ts         |    97.4 |    85.71 |     100 |    97.4 | 72-73                      
+  process-sessions.ts         |   86.88 |    81.81 |   94.44 |   86.88 | ...278-282,298-304,406-439 
+  request-meta.ts             |     100 |      100 |     100 |     100 |                            
+  review-checkpoints.ts       |   93.06 |    77.14 |     100 |   93.06 | ...103-106,190,261-271,291 
+  roots.ts                    |     100 |    93.33 |     100 |     100 | 76-78                      
+  server-shutdown.ts          |     100 |      100 |     100 |     100 |                            
+  server.ts                   |   35.01 |    57.35 |   25.71 |   35.01 | ...890,1900-2285,2296-2333 
+  skills.ts                   |   96.06 |    91.42 |   88.88 |   96.06 | 111-115                    
+  user-config.ts              |   89.36 |    94.73 |   78.57 |   89.36 | ...5,88-95,108-109,133-135 
+  workspace-store.ts          |   98.32 |    89.65 |   93.33 |   98.32 | 173-174,211-212            
+  workspaces.ts               |   92.13 |     83.2 |      90 |   92.13 | ...547-548,555-556,567-568 
+ src/db                       |     100 |      100 |   78.94 |     100 |                            
+  client.ts                   |     100 |      100 |     100 |     100 |                            
+  migrations.ts               |     100 |      100 |     100 |     100 |                            
+  schema.ts                   |     100 |      100 |       0 |     100 |                            
+ src/reverse-engineering      |   26.19 |       50 |    4.54 |   26.19 |                            
+  cli.ts                      |       0 |        0 |       0 |       0 | 1-10                       
+  index.ts                    |   27.84 |      100 |    4.76 |   27.84 | ...125,127,129-140,145-150 
+ src/ui                       |   89.93 |    83.72 |   88.88 |   89.93 |                            
+  card-result-normalizer.ts   |     100 |     90.9 |     100 |     100 | 16                         
+  card-types.ts               |    90.3 |    79.54 |   85.71 |    90.3 | 104-110,143-144,147-156    
+  icons.ts                    |   89.18 |      100 |   33.33 |   89.18 | 65-67,70-74                
+  journey-progress.ts         |   88.29 |    89.28 |    87.5 |   88.29 | 74-84                      
+  language-catalog.ts         |     100 |    85.71 |     100 |     100 | 8                          
+  patch-display.ts            |   94.63 |    84.05 |    92.3 |   94.63 | ...147-150,160-161,172-173 
+  render-strategy.ts          |     100 |      100 |     100 |     100 |                            
+  scrollbar.ts                |       0 |        0 |       0 |       0 | 1-44                       
+  sync-state.ts               |     100 |      100 |     100 |     100 |                            
+  tool-display.ts             |   99.09 |     81.6 |     100 |   99.09 | 207-208                    
+------------------------------|---------|----------|---------|---------|----------------------------
+exit_code=0
+=== npm run bundle:audit:check ===
+
+> @waishnav/devspace@1.0.7 bundle:audit:check
+> node scripts/audit-ui-bundle.mjs --check
+
+ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ
+Ôöé (index) Ôöé name                 Ôöé file                               Ôöé initialKB Ôöé
+Ôö£ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöñ
+Ôöé 0       Ôöé 'workspace-app.html' Ôöé 'assets/workspace-app-JzIQ4NzF.js' Ôöé 41        Ôöé
+ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ
+exit_code=0
+=== git diff check ===
+exit_code=0
+=== summary ===
+[{"command":"node \"C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\\validate-v4-artifacts.mjs\" \"C:\\Users\\fjuni\\.copilot\\repos\\devspace\\artifacts\\canonical-platform-review-360-v4-first-mover\"","exit_code":0},{"command":"npm run typecheck","exit_code":0},{"command":"npm test","exit_code":0},{"command":"npm run build","exit_code":0},{"command":"npm run doctor","exit_code":0},{"command":"npm run security:p0","exit_code":0},{"command":"npm run test:observability","exit_code":0},{"command":"npm run coverage:check","exit_code":0},{"command":"npm run bundle:audit:check","exit_code":0},{"command":"git diff --check","exit_code":0}]

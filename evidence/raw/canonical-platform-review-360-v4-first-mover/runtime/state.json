@@ -1,0 +1,27 @@
+{
+  "run_id": "a57da34c-3505-4ded-973b-8ecebc531018",
+  "initialized_at": "2026-08-20T06:27:01.089526+00:00",
+  "pack": "canonical-platform-review-360",
+  "pack_version": "4.0.0",
+  "skill_count": 29,
+  "workspace": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "mode": "READ_ONLY",
+  "git": {
+    "root": "C:/Users/fjuni/.copilot/repos/devspace",
+    "head": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+    "branch": "main"
+  },
+  "tools": {
+    "git": true,
+    "python": true,
+    "python3": true,
+    "codex": false,
+    "node": true,
+    "npm": true,
+    "pnpm": true,
+    "yarn": false,
+    "docker": true,
+    "jq": false,
+    "rg": true
+  }
+}

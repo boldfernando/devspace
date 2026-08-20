@@ -1,0 +1,26 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/a2ui-agui-contract/v1",
+  "task_id": "FMV4-A2UI-001",
+  "status": "PARTIAL",
+  "observed": {
+    "ui_source_present": true,
+    "accessibility_contract_exit_code": 0,
+    "landmarks_live_status_disclosure_keyboard_touch_contract": "PASS",
+    "a2ui_protocol_runtime": "NOT_OBSERVED",
+    "agui_event_bridge_runtime": "NOT_OBSERVED",
+    "human_gate_rendered_in_connected_host": "UNKNOWN",
+    "browser_host_interaction_trace": "UNKNOWN"
+  },
+  "evidence": [
+    "artifacts/canonical-platform-review-360-v4-first-mover/07-a2ui-agui-inspection.log",
+    "src/ui/accessibility-contract.test.ts",
+    "src/ui/workspace-app.tsx",
+    "src/ui/card-result-normalizer.ts"
+  ],
+  "policy": {
+    "unsafe_remote_ui_event": "reject",
+    "approval_inference_from_silence": "reject",
+    "browser_host_claim_without_trace": "UNKNOWN"
+  },
+  "next_gate": "authorized_browser_host_trace_and_contract_verification"
+}

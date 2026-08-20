@@ -1,0 +1,34 @@
+{
+  "protocol": "A2A",
+  "target_version": "1.0.0",
+  "task_id": "FMV4-A2A-001",
+  "context_id": "MISSION-DEVSPACE-FMV4-001",
+  "message": {
+    "role": "user",
+    "parts": [
+      {
+        "type": "text",
+        "text": "Local interoperability contract inspection only; no remote delegation authorized"
+      }
+    ]
+  },
+  "note": "logical envelope; serialize with an official A2A SDK/binding",
+  "interop_record": {
+    "remote_agent": "agent://devspace/local-review-v4",
+    "protocol_version": "1.0.0",
+    "agent_card_hash": null,
+    "capabilities": [
+      "logical_task_envelope_only"
+    ],
+    "bindings": [
+      "local_evidence_only"
+    ],
+    "security_schemes": [
+      "not_negotiated"
+    ],
+    "status": "NOT_READY",
+    "evidence": [
+      "No remote A2A endpoint or agent card was supplied; task envelope is logical and not delegated."
+    ]
+  }
+}

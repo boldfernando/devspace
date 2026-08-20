@@ -1,0 +1,7 @@
+{
+  "task_id": "FMV4-RECONCILE-001",
+  "skills": ["reconcile-buildback", "investigate-agent-failure"],
+  "risk_class": "HIGH",
+  "budget_policy": "local_evidence_only",
+  "risk_policy": "fail_closed_on_unverified_remote_output"
+}

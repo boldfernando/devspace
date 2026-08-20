@@ -1,0 +1,31 @@
+{
+  "task_id": "FMV4-RECONCILE-001",
+  "ranked": [
+    {
+      "candidate": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FM V4-RECONCILE-001/reconciler/1",
+      "score": 69.5,
+      "reasons": [
+        "skill_fit=1.00",
+        "verified_success_rate=0.50"
+      ]
+    },
+    {
+      "candidate": "agent://remote/unverified-a2a/review-reconcile/FM V4-RECONCILE-001/reconciler/1",
+      "score": 61.0,
+      "reasons": [
+        "skill_fit=1.00",
+        "verified_success_rate=0.50"
+      ]
+    },
+    {
+      "candidate": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FM V4-RECONCILE-001/manager/1",
+      "score": -55.3,
+      "reasons": [
+        "skill_fit=0.50",
+        "verified_success_rate=0.50",
+        "risk_ceiling_exceeded"
+      ]
+    }
+  ],
+  "selected": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FM V4-RECONCILE-001/reconciler/1"
+}

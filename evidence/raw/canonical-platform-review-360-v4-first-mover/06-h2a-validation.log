@@ -1,0 +1,16 @@
+=== validate ===
+{
+  "valid": true,
+  "missing": [],
+  "experimental_profile": "canonical-h2a-v0.1"
+}
+exit_code=0
+=== draft_to_authorized ===
+{"allowed": true, "current": "DRAFT", "target": "AUTHORIZED"}
+exit_code=0
+=== draft_to_executing_rejected ===
+{"allowed": false, "current": "DRAFT", "target": "EXECUTING"}
+exit_code=2
+=== authorized_to_revoked ===
+{"allowed": true, "current": "AUTHORIZED", "target": "REVOKED"}
+exit_code=0

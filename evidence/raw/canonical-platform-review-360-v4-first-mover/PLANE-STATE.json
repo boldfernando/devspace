@@ -1,0 +1,19 @@
+{
+  "schema": "devspace/canonical-platform-review-360-v4/plane-state/v1",
+  "mission_id": "MISSION-DEVSPACE-FMV4-001",
+  "baseline_sha": "9d420bc7c2b46282a9fad96bda4c2319c6454261",
+  "mode": "READ_ONLY_WITH_PLAN_AND_VERIFY",
+  "planes": [
+    {"id":"BB00","name":"Control Plane","status":"READY","dor":"READY","dod":"PARTIAL","evidence":["runtime/state.json","ROLLBACK_POINT.json","v4-workgraph.json"],"limitation":"No APPLY or release authority inferred."},
+    {"id":"BB15","name":"Agent Execution Fabric","status":"READY","dor":"READY","dod":"PARTIAL","evidence":["05-fabric-plan-leases.log","CONFLICT-GRAPH.json","runtime/leases.json","AGENT-ADDRESSES.json"],"limitation":"Deterministic addresses and logical workers were created; no external model subagents were spawned."},
+    {"id":"BB17","name":"H2A Human Authority","status":"CONDITIONAL","dor":"CONDITIONAL","dod":"PARTIAL","evidence":["06-h2a-interaction.json","06-h2a-validation.log"],"limitation":"Experimental package-defined profile; envelope remains DRAFT and no approval grant was issued."},
+    {"id":"BB16","name":"A2A Interoperability","status":"NOT_READY","dor":"CONDITIONAL","dod":"NOT_DONE","evidence":["05-a2a-local-evidence.json"],"limitation":"No remote agent card, endpoint, security negotiation or delegated task was available."},
+    {"id":"BB18","name":"A2UI/AG-UI Interaction","status":"PARTIAL","dor":"CONDITIONAL","dod":"PARTIAL","evidence":["08-A2UI-AGUI-CONTRACT.json","07-a2ui-agui-inspection.log"],"limitation":"Static UI contracts pass; connected browser-host render/event trace is UNKNOWN."},
+    {"id":"BB19","name":"Agent Observability","status":"PARTIAL","dor":"READY","dod":"PARTIAL","evidence":["runtime/events.jsonl","09-traces-events.log","artifacts/observability-contract-report.json"],"limitation":"Nine sanitized local events exist; external OTel collector, hosted scrape and alert recovery are UNKNOWN."},
+    {"id":"BB20","name":"Adaptive Intelligence","status":"CONDITIONAL","dor":"READY","dod":"PARTIAL","evidence":["07-adaptive-routing.json","07-adaptive-task.json","07-adaptive-candidates.json"],"limitation":"Deterministic routing selected a local candidate; no learning/eval promotion occurred and remote candidate was unavailable."}
+  ],
+  "global_status":"YELLOW",
+  "release_status":"RED_BLOCKED",
+  "external_unknowns":["remote A2A interoperability","browser-host A2UI/AG-UI trace","hosted agent observability","adaptive eval promotion","deployment/rollback/restore","SBOM/signed provenance"],
+  "secrets_included":false
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FM V4-RECONCILE-001/reconciler/1",
+    "skills": ["reconcile-buildback", "investigate-agent-failure"],
+    "available": true,
+    "verified_success_rate": 0.5,
+    "risk_ceiling": "HIGH",
+    "relative_cost": 1.0,
+    "relative_latency": 1.0
+  },
+  {
+    "id": "agent://remote/unverified-a2a/review-reconcile/FM V4-RECONCILE-001/reconciler/1",
+    "skills": ["reconcile-buildback", "investigate-agent-failure"],
+    "available": false,
+    "verified_success_rate": 0.5,
+    "risk_ceiling": "HIGH",
+    "relative_cost": 0.5,
+    "relative_latency": 0.5
+  },
+  {
+    "id": "agent://devspace/BBK-DEVSPACE-FMV4-001/review-reconcile/FM V4-RECONCILE-001/manager/1",
+    "skills": ["reconcile-buildback"],
+    "available": true,
+    "verified_success_rate": 0.5,
+    "risk_ceiling": "MEDIUM",
+    "relative_cost": 0.8,
+    "relative_latency": 1.2
+  }
+]
