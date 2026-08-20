@@ -1,0 +1,117 @@
+=== GIT STATUS ===
+## main...origin/main [ahead 50]
+ M .github/workflows/ci.yml
+ M artifacts/canonical-360/manifest.json
+ M artifacts/canonical-360/report.md
+ M artifacts/mcp-monitor-contract.json
+ M artifacts/wave3-performance/profiles/burst.json
+ M artifacts/wave3-performance/profiles/ramp-1.json
+ M artifacts/wave3-performance/profiles/ramp-2.json
+ M artifacts/wave3-performance/profiles/ramp-3.json
+ M artifacts/wave3-performance/profiles/ramp-4.json
+ M artifacts/wave3-performance/profiles/soak.json
+ M artifacts/wave3-performance/profiles/sustained.json
+ M artifacts/wave3-performance/summary.json
+ M docs/e2e-360-task-list.md
+ M docs/raw-evidence-index.md
+ M evidence/raw-evidence-manifest.json
+ M evidence/raw/canonical-360/manifest.json
+ M evidence/raw/canonical-360/report.md
+ M evidence/raw/mcp-load-log.json
+ M evidence/raw/mcp-monitor-contract.json
+ M evidence/raw/oauth-mcp-negative-report.json
+ M evidence/raw/observability-contract-report.json
+ M evidence/raw/swarm-resilience-report.json
+ M evidence/raw/ui-bundle-report.json
+ M evidence/raw/wave1-p0/build.log
+ M evidence/raw/wave1-p0/bundle-audit-tests.log
+ M evidence/raw/wave1-p0/bundle-budget.log
+ M evidence/raw/wave1-p0/coverage.log
+ M evidence/raw/wave1-p0/e2e-http-mcp-idempotency.log
+ M evidence/raw/wave1-p0/e2e-http-mcp-positive.log
+ M evidence/raw/wave1-p0/health.log
+ M evidence/raw/wave1-p0/idempotency-p1-matrix.log
+ M evidence/raw/wave1-p0/oauth-device-cli.log
+ M evidence/raw/wave1-p0/oauth-device-http.log
+ M evidence/raw/wave1-p0/oauth-mcp-negative-p0.log
+ M evidence/raw/wave1-p0/observability-contract.log
+ M evidence/raw/wave1-p0/summary.json
+ M evidence/raw/wave1-p0/unit-and-contract-tests.log
+ M evidence/raw/wave2-chaos/CHAOS-002-idempotency-real.log
+ M evidence/raw/wave2-chaos/CHAOS-003-idempotency-p1.log
+ M evidence/raw/wave2-chaos/CHAOS-004-http-mcp-positive.log
+ M evidence/raw/wave2-chaos/CHAOS-005-oauth-device-http.log
+ M evidence/raw/wave2-chaos/CHAOS-006-oauth-device-cli.log
+ M evidence/raw/wave2-chaos/CHAOS-007-negative-security.log
+ M evidence/raw/wave2-chaos/CHAOS-008-authenticated-load.log
+ M evidence/raw/wave2-chaos/CHAOS-009-observability-contract.log
+ M evidence/raw/wave2-chaos/CHAOS-010-bundle-and-coverage.log
+ M evidence/raw/wave2-chaos/summary.json
+ M evidence/raw/wave3-performance/profiles/burst.json
+ M evidence/raw/wave3-performance/profiles/ramp-1.json
+ M evidence/raw/wave3-performance/profiles/ramp-2.json
+ M evidence/raw/wave3-performance/profiles/ramp-3.json
+ M evidence/raw/wave3-performance/profiles/ramp-4.json
+ M evidence/raw/wave3-performance/profiles/soak.json
+ M evidence/raw/wave3-performance/profiles/sustained.json
+ M evidence/raw/wave3-performance/summary.json
+ M observability/grafana-idempotency-dashboard.json
+ M observability/prometheus-idempotency-alerts.yml
+ M package.json
+ M scripts/e2e-mcp-monitor.test.mjs
+ M scripts/e2e-swarm-chaos.test.mjs
+ M scripts/e2e-swarm-resilience.test.mjs
+ M scripts/mcp-monitor.mjs
+ M scripts/validate-observability.mjs
+ M src/config.test.ts
+ M src/config.ts
+ M src/metrics.test.ts
+ M src/metrics.ts
+ M src/oauth-device-cli.ts
+ M src/server.ts
+?? docs/observability-monitoring.md
+?? evidence/raw/canonical-dod-360-audit/
+?? evidence/raw/canonical-platform-review-360-audit/
+?? evidence/raw/security-audit/
+?? evidence/raw/test-strategy-report.json
+?? scripts/test-strategy-audit.mjs
+=== HEAD ===
+02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88
+=== AUDIT FILES ===
+00-discovery-and-git.log
+01-integration-inspection.json
+api-contract-scan.json
+BB-DAG.json
+coverage-gate.log
+device-cli.log
+device-http.log
+DOR-DOD.json
+e2e-positive.log
+evidence-index.log
+final-state.log
+GIT_BASELINE.json
+GITHUB-INTELLIGENCE.json
+platform-review-gate-matrix.json
+PLATFORM-REVIEW-REPORT.md
+PRIORITIZED-ROADMAP.md
+RECONCILED_FINDINGS.json
+review-auth-iam.log
+review-bundle.log
+review-data-database.log
+review-idempotency.log
+review-observability-sre.log
+review-resilience-errors.log
+review-security-devsecops.log
+review-testing-quality.log
+ROLLBACK_POINT.json
+scoped-diff-check.log
+SPECIALIST-REVIEW-LEDGER.json
+STACK.json
+SURFACE_INVENTORY.json
+=== EVIDENCE COUNTS ===
+manifest_type=PSCustomObject
+raw_files=490
+audit_files=34
+=== STATUS SUMMARY ===
+NOT_RELEASE_READY
+{"green":6,"yellow":5,"red":1,"overall":"YELLOW_WITH_RED_RELEASE_BLOCKER"}

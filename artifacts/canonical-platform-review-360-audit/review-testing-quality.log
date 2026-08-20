@@ -1,0 +1,6 @@
+
+> @waishnav/devspace@1.0.7 test:strategy:audit
+> node scripts/test-strategy-audit.mjs
+
+{"schema":"devspace.test-strategy.v1","status":"passed","output":"artifacts/test-strategy-report.json","inventory":{"source_unit_contract_files":41,"script_e2e_integration_files":15,"executable_runner_files":17,"by_layer":{"unit_contract":41,"integration_contract":2,"end_to_end":13}},"coverage":{"lines":{"total":12904,"covered":8761,"skipped":0,"pct":67.89},"statements":{"total":12904,"covered":8761,"skipped":0,"pct":67.89},"functions":{"total":718,"covered":505,"skipped":0,"pct":70.33},"branches":{"total":1962,"covered":1586,"skipped":0,"pct":80.83},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":100}},"hotspots":[{"file":"src/oauth-device-routes.ts","lines":9.13,"functions":11.11,"branches":100,"line_total":208},{"file":"src/oauth-device-cli.ts","lines":19.41,"functions":5.88,"branches":100,"line_total":273},{"file":"src/reverse-engineering/index.ts","lines":27.84,"functions":4.76,"branches":100,"line_total":158},{"file":"src/artifact-tools.ts","lines":31.98,"functions":28.57,"branches":37.5,"line_total":616},{"file":"src/pi-tools.ts","lines":33.33,"functions":9.09,"branches":100,"line_total":129}]}
+exit_code=0

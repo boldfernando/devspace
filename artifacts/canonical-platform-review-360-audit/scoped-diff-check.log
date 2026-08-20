@@ -1,0 +1,22 @@
+warning: in the working copy of '.github/workflows/ci.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'artifacts/canonical-360/manifest.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'artifacts/canonical-360/report.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'artifacts/mcp-monitor-contract.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/e2e-360-task-list.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/raw-evidence-index.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'evidence/raw-evidence-manifest.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'observability/grafana-idempotency-dashboard.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'observability/prometheus-idempotency-alerts.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/e2e-mcp-monitor.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/e2e-swarm-chaos.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/e2e-swarm-resilience.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/mcp-monitor.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/validate-observability.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/config.test.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/config.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/metrics.test.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/metrics.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/oauth-device-cli.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/server.ts', LF will be replaced by CRLF the next time Git touches it
+exit_code=0

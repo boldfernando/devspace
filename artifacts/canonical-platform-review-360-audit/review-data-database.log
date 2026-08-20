@@ -1,0 +1,22 @@
+Ô£ö query-performance migration supports hot recency and cleanup plans (44.7057ms)
+Ôä╣ tests 1
+Ôä╣ suites 0
+Ôä╣ pass 1
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 640.9409
+query_performance_exit=0
+Ô£ö SQLite lock contention fails with a bounded SQLITE_BUSY error (117.6904ms)
+Ô£ö SQLite full storage is surfaced as a bounded resource failure (14.2642ms)
+Ô£ö SQLite read-only mode rejects writes without mutating the state (19.3712ms)
+Ôä╣ tests 3
+Ôä╣ suites 0
+Ôä╣ pass 3
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 673.2435
+sqlite_resilience_exit=0

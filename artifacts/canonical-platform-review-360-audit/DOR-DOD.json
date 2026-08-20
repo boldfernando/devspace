@@ -1,0 +1,100 @@
+{
+  "schema": "canonical-platform-review-360/dor-dod",
+  "schema_version": "3.0.0",
+  "baseline": {
+    "head": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+    "branch": "main",
+    "working_tree": "DIRTY",
+    "mode": "READ_ONLY",
+    "captured_at": "2026-08-20T04:44:12.2836440Z",
+    "evidence": [
+      "GIT_BASELINE.json",
+      "ROLLBACK_POINT.json",
+      "00-discovery-and-git.log"
+    ]
+  },
+  "overall": {
+    "dor_status": "CONDITIONAL",
+    "dod_status": "PARTIAL",
+    "rationale": "The supplied package, bounded runtime, repository identity, discovery, Git baseline, rollback anchor, and applicable-skill selection are proven. Hosted deployment, real production identity gateway, external alert firing/recovery, SBOM/provenance, and a real-server security probe remain unavailable or incomplete.",
+    "critical_blockers": [
+      "No authorized deployment target or rollback drill is available.",
+      "No hosted Prometheus/Grafana environment is available to prove alert firing and recovery.",
+      "Real-server CSRF/XSS/SQLi probe was blocked by isolated Windows server startup/sidecar failure."
+    ]
+  },
+  "records": [
+    {
+      "skill": "validate-pack",
+      "dor_status": "READY",
+      "dor_blockers": [],
+      "dod_status": "DONE",
+      "dod_blockers": [],
+      "evidence": ["03-review-v3-validate.log"],
+      "verification": ["29 skills discovered; 0 errors; 0 warnings; exit code 0"],
+      "residual_risks": []
+    },
+    {
+      "skill": "install-skill-pack",
+      "dor_status": "READY",
+      "dor_blockers": [],
+      "dod_status": "DONE",
+      "dod_blockers": [],
+      "evidence": ["04-install-review.log", "05-active-applicable-receipt.json"],
+      "verification": ["Transactional copy install applied in isolated custom destination; missing=0; invalid=0; collisions=0"],
+      "residual_risks": ["This is an isolated audit runtime, not a host-wide installation." ]
+    },
+    {
+      "skill": "integrate-skill-pack",
+      "dor_status": "CONDITIONAL",
+      "dor_blockers": ["Host-native catalog/selector visibility is not available in this evidence environment."],
+      "dod_status": "PARTIAL",
+      "dod_blockers": ["No repository or user skill collision was observed, but host activation beyond filesystem discovery is UNKNOWN."],
+      "evidence": ["01-integration-inspection.json", "05-active-applicable-receipt.json"],
+      "verification": ["Repo and user roots enumerated; 0 collisions; no repo-local .agents skill root entries; applicable specialists mounted only in isolated custom root"],
+      "residual_risks": ["A custom MCP host may require explicit catalog integration not proven here." ]
+    },
+    {
+      "skill": "initialize-skill-runtime",
+      "dor_status": "READY",
+      "dor_blockers": [],
+      "dod_status": "DONE",
+      "dod_blockers": [],
+      "evidence": ["06-runtime-state.json"],
+      "verification": ["Pack canonical-platform-review-360 v3.0.0; skill_count=29; mode=READ_ONLY; run_id emitted; tools enumerated; state persisted without overwrite"],
+      "residual_risks": ["The isolated runtime workspace is not itself a Git checkout; repository identity is supplied by GIT_BASELINE.json." ]
+    },
+    {
+      "skill": "discover-codebase",
+      "dor_status": "READY",
+      "dor_blockers": [],
+      "dod_status": "DONE",
+      "dod_blockers": [],
+      "evidence": ["00-discovery-and-git.log", "STACK.json", "SURFACE_INVENTORY.json"],
+      "verification": ["npm-only markers, Node/npm/Git versions, package manifest, runtime/application stack, and surfaces recorded"],
+      "residual_risks": []
+    },
+    {
+      "skill": "reconcile-git-state",
+      "dor_status": "READY",
+      "dor_blockers": [],
+      "dod_status": "DONE",
+      "dod_blockers": [],
+      "evidence": ["00-discovery-and-git.log", "GIT_BASELINE.json", "ROLLBACK_POINT.json"],
+      "verification": ["HEAD, branch, remotes, worktree, ahead count, dirty status, and rollback anchor captured; no reset/clean performed"],
+      "residual_risks": ["Dirty changes include review-era source/evidence updates; later commits must preserve grouping and provenance." ]
+    },
+    {
+      "skill": "applicable-review-set",
+      "dor_status": "READY",
+      "dor_blockers": [],
+      "dod_status": "PARTIAL",
+      "dod_blockers": ["Domain review execution and independent release verification remain pending."],
+      "evidence": ["BB-DAG.json", "05-active-applicable-receipt.json"],
+      "verification": ["11 applicable skills activated: orchestration, discovery, Git, auth, security, API, testing, observability, CI/CD, data, resilience, synthesis"],
+      "residual_risks": ["Skipped UX/product/docs/third-party specialist reviews remain explicit N/A or evidence-only for this technical archetype." ]
+    }
+  ],
+  "rollback": "ROLLBACK_POINT.json",
+  "next_stage": "Execute applicable review skills in evidence-first READ_ONLY mode, then verify and synthesize gates."
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "canonical-platform-review-360/specialist-review-ledger",
+  "schema_version": "3.0.0",
+  "baseline": {
+    "head": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+    "branch": "main",
+    "working_tree": "DIRTY",
+    "mode": "READ_ONLY",
+    "review_runtime": "canonical-platform-review-360 v3.0.0",
+    "review_timestamp": "2026-08-20T05:02:35Z"
+  },
+  "reviews": [
+    {
+      "skill": "review-auth-iam",
+      "dor": "READY",
+      "dod": "DONE",
+      "gate": "GREEN",
+      "confidence": "HIGH",
+      "evidence": ["artifacts/canonical-platform-review-360-audit/review-auth-iam.log", "artifacts/block1-identity-report.json", "artifacts/oauth-mcp-negative-report.json", "src/server.ts", "src/oauth-device-routes.ts", "src/oauth-device-cli.ts"],
+      "verification": ["npm run e2e:block1:identity exit 0", "npm run security:p0 exit 0", "npm run e2e:oauth-device exit 0", "npm run e2e:oauth-device-cli exit 0", "SESSION-NEG-002/004 and identity binding evidence present"],
+      "findings": ["Trusted-header mode and local owner approval are proven; production identity gateway, explicit RBAC, and key rotation are not proven."],
+      "unknowns": ["Hosted identity gateway and production role/membership authority." ]
+    },
+    {
+      "skill": "review-security-devsecops",
+      "dor": "CONDITIONAL",
+      "dod": "PARTIAL",
+      "gate": "YELLOW",
+      "confidence": "HIGH",
+      "evidence": ["artifacts/canonical-platform-review-360-audit/review-security-devsecops.log", "artifacts/security-audit/01-static-scan.log", "artifacts/security-audit/09-csrf-xss-sqli-probe.log", "artifacts/security-audit/10-probe-diagnosis.log", "artifacts/security-audit/11-official-e2e.log", "artifacts/oauth-mcp-negative-report.json"],
+      "verification": ["23/23 OAuth/MCP negative IDs pass with exit 0; static XSS/SQL review and URL hardening evidence retained; current positive E2E pass is in e2e-positive.log"],
+      "findings": ["Real-server CSRF/XSS/SQLi probe is incomplete because isolated server startup did not bind port 17682; SBOM/provenance and hosted secret-scan proof are unavailable."],
+      "unknowns": ["Authorized hosted DAST, signed artifact provenance, SBOM generation, hosted secret scan." ]
+    },
+    {
+      "skill": "review-api-contracts",
+      "dor": "READY",
+      "dod": "PARTIAL",
+      "gate": "YELLOW",
+      "confidence": "HIGH",
+      "evidence": ["SURFACE_INVENTORY.json", "api-contract-scan.json", "src/server.ts", "src/oauth-device-routes.ts", "scripts/e2e-http-mcp.test.mjs", "scripts/e2e-http-mcp-negative.test.mjs"],
+      "verification": ["Read-only contract scanner exit 0; real MCP initialize/tools/list/tools/call and negative matrix pass locally"],
+      "findings": ["No first-class OpenAPI/AsyncAPI contract was found outside review/audit schemas; MCP/OAuth behavior is implemented and tested but formal compatibility/versioning freeze is not separately published."],
+      "unknowns": ["External host consumer compatibility and formal versioned contract publication." ]
+    },
+    {
+      "skill": "review-testing-quality",
+      "dor": "READY",
+      "dod": "PARTIAL",
+      "gate": "YELLOW",
+      "confidence": "HIGH",
+      "evidence": ["review-testing-quality.log", "coverage-gate.log", "evidence/raw/test-strategy-report.json", ".github/workflows/ci.yml", "e2e-positive.log", "review-idempotency.log", "review-resilience-errors.log"],
+      "verification": ["41 TypeScript source/unit/contract files and 15 script integration/E2E files inventoried; 67.89% lines, 70.33% functions, 80.83% branches; coverage exit 0; positive E2E exit 0; resilience and idempotency exit 0"],
+      "findings": ["Historical Wave 1/Wave 2 aggregate RED artifacts remain preserved and prevent a clean all-history GREEN declaration; browser-host E2E and full OS chaos/Swarm coverage are not proven."],
+      "unknowns": ["Browser-host visual/interaction traces, complete macOS/Windows chaos/Swarm equivalence, hosted/provider runtime." ]
+    },
+    {
+      "skill": "review-observability-sre",
+      "dor": "CONDITIONAL",
+      "dod": "PARTIAL",
+      "gate": "YELLOW",
+      "confidence": "HIGH",
+      "evidence": ["review-observability-sre.log", "artifacts/observability-contract-report.json", "artifacts/mcp-monitor-contract.json", "observability/prometheus-idempotency-alerts.yml", "observability/grafana-idempotency-dashboard.json", "docs/observability-monitoring.md"],
+      "verification": ["13/13 alerts, 15/15 metrics, 12 dashboard panels, no secret leak, and local monitor contract pass with exit 0"],
+      "findings": ["Local telemetry contract is green; hosted Prometheus/Grafana scrape, notification delivery, firing, recovery, and SLO/error-budget operation are not evidenced."],
+      "unknowns": ["Hosted monitoring backend and incident-response execution." ]
+    },
+    {
+      "skill": "review-cicd-release",
+      "dor": "CONDITIONAL",
+      "dod": "PARTIAL",
+      "gate": "RED",
+      "confidence": "HIGH",
+      "evidence": [".github/workflows/ci.yml", "review-bundle.log", "e2e-positive.log", "ROLLBACK_POINT.json", "artifacts/canonical-dod-360-audit/final-gate-matrix.json"],
+      "verification": ["Local build, bundle gate, test, security, E2E, coverage, doctor, and staging-load definitions are observable in workflow/source evidence"],
+      "findings": ["No deployment target, immutable promoted artifact digest, signed provenance/SBOM, production smoke, executed rollback, or restore/promotion reversal drill is proven."],
+      "unknowns": ["Deployment environment, registry, attestation, release approval, rollback executor, DR restore." ]
+    },
+    {
+      "skill": "review-data-database",
+      "dor": "CONDITIONAL",
+      "dod": "PARTIAL",
+      "gate": "YELLOW",
+      "confidence": "HIGH",
+      "evidence": ["src/db/migrations.ts", "review-data-database.log", "src/db/schema.ts", "src/db/query-performance.test.ts", "src/db/resilience.test.ts", "artifacts/idempotency-recovery-report.json"],
+      "verification": ["8 migrations and critical tables/indexes inventoried; query-performance exit 0; SQLite resilience exit 0; idempotency recovery E2E exit 0"],
+      "findings": ["Schema and local query/fault behavior are proven; backup/restore, retention validation, and disaster-recovery exercise are not proven. Drizzle schema is a subset and later migration tables are not declared there."],
+      "unknowns": ["Runtime production database metadata, backup media, restore time/objective, retention enforcement." ]
+    },
+    {
+      "skill": "review-resilience-errors",
+      "dor": "READY",
+      "dod": "PARTIAL",
+      "gate": "YELLOW",
+      "confidence": "HIGH",
+      "evidence": ["review-resilience-errors.log", "review-idempotency.log", "src/error-policy.ts", "src/logger.ts", "src/idempotency-store.ts", "artifacts/idempotency-recovery-report.json", "artifacts/write-stdin-idempotency-report.json"],
+      "verification": ["Real HTTP/MCP resilience exit 0; SQLite fault tests pass; idempotency recovery and write_stdin sequence E2E exit 0; sanitized error/log policies present"],
+      "findings": ["Crash/reconciliation and fencing are proven for implemented paths; the write→ACK ambiguous interval for non-reversible process/stdin effects remains a documented residual gap."],
+      "unknowns": ["Production fencing/split-brain drill across independent hosts and durable external ACK for arbitrary process input." ]
+    }
+  ],
+  "cross_domain_gate": "YELLOW",
+  "release_decision": "NOT_RELEASE_READY",
+  "critical_unknowns": [
+    "Deployment and rollback target",
+    "Hosted observability firing/recovery",
+    "Production identity gateway/RBAC/key rotation",
+    "SBOM and signed provenance",
+    "Browser-host E2E and full cross-OS chaos equivalence",
+    "Backup/restore and disaster-recovery proof"
+  ]
+}

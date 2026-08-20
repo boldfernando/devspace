@@ -1,0 +1,183 @@
+{
+  "schema": "canonical-platform-review-360/audit-artifact-manifest",
+  "schema_version": "3.0.0",
+  "generated_at": "2026-08-20T05:11:34.4610930Z",
+  "artifact_count": 35,
+  "artifacts": [
+    {
+      "path": "00-discovery-and-git.log",
+      "bytes": 19647,
+      "sha256": "91f98651d52bfce6bede02c000b62a2b1db3269b8dcf6068a884223ef91bd62b"
+    },
+    {
+      "path": "01-integration-inspection.json",
+      "bytes": 8320,
+      "sha256": "7c10536424f52731b256c8d550a05ac4e7d960e78444fe49515d346a4c9c2e05"
+    },
+    {
+      "path": "api-contract-scan.json",
+      "bytes": 1888,
+      "sha256": "76cfda4b1f794c610230bb6e86e206c74f369be3e71483126f4a10d7f21c65c6"
+    },
+    {
+      "path": "BB-DAG.json",
+      "bytes": 6614,
+      "sha256": "e116f8e9da83a1819001a34e7979c98033a2e189847aedd94a8969eda2bc8a20"
+    },
+    {
+      "path": "coverage-gate.log",
+      "bytes": 23045,
+      "sha256": "da6c8de263c60252ada04735fe4f2fad23c81947a9b05dc967a58d20cbd862f0"
+    },
+    {
+      "path": "device-cli.log",
+      "bytes": 454,
+      "sha256": "6541145cb06dac80eb56e3215b80df54a4e4b0f2c96155dc2177ced8b23a4959"
+    },
+    {
+      "path": "device-http.log",
+      "bytes": 351,
+      "sha256": "56b06a28e21d650108627215da503ac1e8de66f504a2f7bd73ed08bc7201248b"
+    },
+    {
+      "path": "DOR-DOD.json",
+      "bytes": 4924,
+      "sha256": "40fb41aba657e17eae069271965050c325fff41f10f22c94da635a550fcec353"
+    },
+    {
+      "path": "e2e-positive.log",
+      "bytes": 29819,
+      "sha256": "3da49cb065b7e23dfb169f0c6859f1ea76ad0e09aa969849d217e7ec5012fd33"
+    },
+    {
+      "path": "evidence-index-final.log",
+      "bytes": 222,
+      "sha256": "6989735ea8c36d71614d76c597b165fd0b2bd686bda41b2cacaec8a14cd6ae62"
+    },
+    {
+      "path": "evidence-index.log",
+      "bytes": 222,
+      "sha256": "1d5cd5607e74d790d8fcadca3363016f87cc0a418fcdd2c4a85df1199966e0e5"
+    },
+    {
+      "path": "final-state.log",
+      "bytes": 4414,
+      "sha256": "c2ccad782041537edb074bc36c155d330b6ee6ad7bde7662911d5782271f2cf9"
+    },
+    {
+      "path": "GIT_BASELINE.json",
+      "bytes": 1450,
+      "sha256": "39cff60a587dac22cbecbc4136b32ce1f4bf43f631246f9de172f6aa089d653f"
+    },
+    {
+      "path": "GITHUB-INTELLIGENCE.json",
+      "bytes": 4018,
+      "sha256": "800b8155cc647344d52da95554497134cc0151ce14fba98dec192ee23b6de55c"
+    },
+    {
+      "path": "platform-review-gate-matrix.json",
+      "bytes": 8825,
+      "sha256": "b5e1c870420a95d3a08a98c27fdc16d2223570609c2dab65e555878793a52fbe"
+    },
+    {
+      "path": "PLATFORM-REVIEW-REPORT.md",
+      "bytes": 17139,
+      "sha256": "a3e3369c1983ac8b91ba83aeb14001551e5e609accee7494b91dee32f96f4934"
+    },
+    {
+      "path": "PRIORITIZED-ROADMAP.md",
+      "bytes": 5635,
+      "sha256": "45e2457ed05931983f2a539e5dcaf23a55db0b9ea0b3b8a85cf82a12c41b8ba8"
+    },
+    {
+      "path": "RECONCILED_FINDINGS.json",
+      "bytes": 10420,
+      "sha256": "404ae484b0e3736da98b797137b0cae2af482995ac6e50ec972ea6499696dca7"
+    },
+    {
+      "path": "review-auth-iam.log",
+      "bytes": 350,
+      "sha256": "e341fc8c00d85f6dbeed6934903b40c9367cd0aceafb1fe1fab294e5f4b22008"
+    },
+    {
+      "path": "review-bundle.log",
+      "bytes": 1834,
+      "sha256": "3efb5f8c8c0caec6a9c33750e91ba65eafbbe8406d4bb2577c58a6c04afac1a5"
+    },
+    {
+      "path": "review-data-database.log",
+      "bytes": 694,
+      "sha256": "39bc31a2a936f099234f6f7a18e878dc3b149dc0af7965bc7dae97e0f4f48141"
+    },
+    {
+      "path": "review-idempotency.log",
+      "bytes": 59347,
+      "sha256": "6c17d48c17b747a9cc8003d49bd3116dece536e2718d5e90afb764a2339933f7"
+    },
+    {
+      "path": "review-observability-sre.log",
+      "bytes": 325,
+      "sha256": "852bdf04dcf047588b8de070fccdffc7e15bf795c72ee1f4c282c9f8dcd8f16f"
+    },
+    {
+      "path": "review-resilience-errors.log",
+      "bytes": 30080,
+      "sha256": "7461f2e35e1c88a4833172ae0519c542572571f5f4332e93c1bc8dd9c20d6e22"
+    },
+    {
+      "path": "review-security-devsecops.log",
+      "bytes": 3072,
+      "sha256": "69d51def56d58d32b610c712058dc646612d964a0dedff15aaf4772121162436"
+    },
+    {
+      "path": "review-testing-quality.log",
+      "bytes": 1233,
+      "sha256": "834bbffc22dab6cefd895231b34b92cf02d3c8ea0251ffd57c86d2464c3cc82a"
+    },
+    {
+      "path": "ROLLBACK_POINT.json",
+      "bytes": 1595,
+      "sha256": "14648afa0a37d4b08be742614f8a4318bdbe332c29977ccb71f119d59b4ca9f7"
+    },
+    {
+      "path": "scoped-diff-check.log",
+      "bytes": 2567,
+      "sha256": "42fc72048930c1c4b5286e615cb796dce5123804a090d4b2b7d554782b473ec2"
+    },
+    {
+      "path": "SPECIALIST-REVIEW-LEDGER.json",
+      "bytes": 7805,
+      "sha256": "3625198a145c298af661a9c874939b9f7de5934175486fd75fd7948f7c123805"
+    },
+    {
+      "path": "STACK.json",
+      "bytes": 2972,
+      "sha256": "bcf6cd94c0da6563ba8dd19e587ef3181b041ca6031d57639c32c1c903a010ce"
+    },
+    {
+      "path": "SURFACE_INVENTORY.json",
+      "bytes": 8844,
+      "sha256": "642672872fcf4fbdce501a8b4f5e0ebcac4fb6fd7efa702e4bc3e25164bb49cb"
+    },
+    {
+      "path": "tools/api_contract_scan.py",
+      "bytes": 590,
+      "sha256": "3960bd2c09d3d4bcbb52334a77c65c6d098fcf3440724e01b837f60012ca6323"
+    },
+    {
+      "path": "tools/discover_scan.py",
+      "bytes": 683,
+      "sha256": "3c03e73ad939a83768f36edf5a09afa43d9ac1beefcd1e291faf36b9f7f1568e"
+    },
+    {
+      "path": "tools/git_scan.py",
+      "bytes": 615,
+      "sha256": "d1f1baf32433401d39d986a141adabf0474a87fc29b66c8e8d4abaa92fd5f75e"
+    },
+    {
+      "path": "tools/inspect_integration.py",
+      "bytes": 1852,
+      "sha256": "4b4b35ddb3c5518adc50c778b57d0e026aa7b5a3e127f774de16c81eac155b85"
+    }
+  ]
+}

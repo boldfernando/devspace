@@ -1,0 +1,14 @@
+
+> @waishnav/devspace@1.0.7 e2e:block1:identity
+> node --test scripts/e2e-block1-identity.test.mjs
+
+Ô£ö Block 1 identity and authorization production mitigation (8303.4335ms)
+Ôä╣ tests 1
+Ôä╣ suites 0
+Ôä╣ pass 1
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 8363.6671
+exit_code=0

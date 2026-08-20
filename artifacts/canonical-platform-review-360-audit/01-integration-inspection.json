@@ -1,0 +1,299 @@
+{
+  "repository": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "git_root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "roots": [
+    {
+      "scope": "repo:C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+      "path": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\.agents\\skills"
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills"
+    }
+  ],
+  "skills": [
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\ai-sdk",
+      "name": "ai-sdk",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\automate",
+      "name": "automate",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\babysit",
+      "name": "babysit",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\building-admin-dashboard-customizations",
+      "name": "building-admin-dashboard-customizations",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\building-storefronts",
+      "name": "building-storefronts",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\building-with-medusa",
+      "name": "building-with-medusa",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\canvas",
+      "name": "canvas",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\create-hook",
+      "name": "create-hook",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\create-rule",
+      "name": "create-rule",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\create-skill",
+      "name": "create-skill",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\create-subagent",
+      "name": "create-subagent",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\creating-internal-agents",
+      "name": "creating-agents-in-medusa",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\db-generate",
+      "name": "db-generate",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\db-migrate",
+      "name": "db-migrate",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\design-log-create",
+      "name": "design-log-create",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\design-log-workflow",
+      "name": "design-log-workflow",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\developing-genkit-go",
+      "name": "developing-genkit-go",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\developing-genkit-js",
+      "name": "developing-genkit-js",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\developing-genkit-python",
+      "name": "developing-genkit-python",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\find-skills",
+      "name": "find-skills",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\learning-medusa",
+      "name": "learning-medusa",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\loop",
+      "name": "loop",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-auth",
+      "name": "mcloud-auth",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-deployments",
+      "name": "mcloud-deployments",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-environments",
+      "name": "mcloud-environments",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-logs",
+      "name": "mcloud-logs",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-organizations",
+      "name": "mcloud-organizations",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-projects",
+      "name": "mcloud-projects",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\mcloud-variables",
+      "name": "mcloud-variables",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\microsoft-foundry",
+      "name": "microsoft-foundry",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\migrate-to-builds",
+      "name": "migrate-to-builds",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\migrate-to-skills",
+      "name": "migrate-to-skills",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\new-user",
+      "name": "new-user",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\onboard",
+      "name": "onboard",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\rename-chat",
+      "name": "rename-chat",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\reporting",
+      "name": "reporting",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\review",
+      "name": "review",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\review-bugbot",
+      "name": "review-bugbot",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\review-security",
+      "name": "review-security",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\sdk",
+      "name": "sdk",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\shell",
+      "name": "shell",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\split-to-prs",
+      "name": "split-to-prs",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\statusline",
+      "name": "statusline",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\storefront-best-practices",
+      "name": "storefront-best-practices",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\update-cli-config",
+      "name": "update-cli-config",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\update-cursor-settings",
+      "name": "update-cursor-settings",
+      "openai_yaml": null
+    },
+    {
+      "scope": "user",
+      "path": "C:\\Users\\fjuni\\.agents\\skills\\using-medusa-cloud",
+      "name": "using-medusa-cloud",
+      "openai_yaml": null
+    }
+  ],
+  "collisions": {}
+}

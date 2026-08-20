@@ -1,0 +1,15 @@
+
+> @waishnav/devspace@1.0.7 e2e:oauth-device-cli
+> node --test scripts/e2e-oauth-device-cli.test.mjs
+
+Ô£ö CLI completes device login and stores private credential metadata (8377.654ms)
+Ô£ö Ctrl-C cancels device polling and leaves no credential or child process (3440.1298ms)
+Ôä╣ tests 2
+Ôä╣ suites 0
+Ôä╣ pass 2
+Ôä╣ fail 0
+Ôä╣ cancelled 0
+Ôä╣ skipped 0
+Ôä╣ todo 0
+Ôä╣ duration_ms 16858.245
+exit_code=0

@@ -1,0 +1,314 @@
+=== UTC ===
+2026-08-20T04:44:12.2836440Z
+=== DISCOVERY SCAN ===
+{
+  "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "markers": [
+    "package-lock.json",
+    "package.json"
+  ]
+}
+discover_exit=0
+=== GIT SCAN ===
+{
+  "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "head": {
+    "ok": true,
+    "stdout": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+    "stderr": ""
+  },
+  "branch": {
+    "ok": true,
+    "stdout": "main",
+    "stderr": ""
+  },
+  "status": {
+    "ok": true,
+    "stdout": "## main...origin/main [ahead 50]\n M .github/workflows/ci.yml\n M artifacts/canonical-360/manifest.json\n M artifacts/canonical-360/report.md\n M artifacts/mcp-monitor-contract.json\n M artifacts/wave3-performance/profiles/burst.json\n M artifacts/wave3-performance/profiles/ramp-1.json\n M artifacts/wave3-performance/profiles/ramp-2.json\n M artifacts/wave3-performance/profiles/ramp-3.json\n M artifacts/wave3-performance/profiles/ramp-4.json\n M artifacts/wave3-performance/profiles/soak.json\n M artifacts/wave3-performance/profiles/sustained.json\n M artifacts/wave3-performance/summary.json\n M docs/e2e-360-task-list.md\n M docs/raw-evidence-index.md\n M evidence/raw-evidence-manifest.json\n M evidence/raw/canonical-360/manifest.json\n M evidence/raw/canonical-360/report.md\n M evidence/raw/mcp-load-log.json\n M evidence/raw/mcp-monitor-contract.json\n M evidence/raw/oauth-device-cli-security-report.json\n M evidence/raw/oauth-mcp-negative-report.json\n M evidence/raw/observability-contract-report.json\n M evidence/raw/swarm-resilience-report.json\n M evidence/raw/ui-bundle-report.json\n M evidence/raw/wave1-p0/build.log\n M evidence/raw/wave1-p0/bundle-audit-tests.log\n M evidence/raw/wave1-p0/bundle-budget.log\n M evidence/raw/wave1-p0/coverage.log\n M evidence/raw/wave1-p0/e2e-http-mcp-idempotency.log\n M evidence/raw/wave1-p0/e2e-http-mcp-positive.log\n M evidence/raw/wave1-p0/health.log\n M evidence/raw/wave1-p0/idempotency-p1-matrix.log\n M evidence/raw/wave1-p0/oauth-device-cli.log\n M evidence/raw/wave1-p0/oauth-device-http.log\n M evidence/raw/wave1-p0/oauth-mcp-negative-p0.log\n M evidence/raw/wave1-p0/observability-contract.log\n M evidence/raw/wave1-p0/summary.json\n M evidence/raw/wave1-p0/unit-and-contract-tests.log\n M evidence/raw/wave2-chaos/CHAOS-002-idempotency-real.log\n M evidence/raw/wave2-chaos/CHAOS-003-idempotency-p1.log\n M evidence/raw/wave2-chaos/CHAOS-004-http-mcp-positive.log\n M evidence/raw/wave2-chaos/CHAOS-005-oauth-device-http.log\n M evidence/raw/wave2-chaos/CHAOS-006-oauth-device-cli.log\n M evidence/raw/wave2-chaos/CHAOS-007-negative-security.log\n M evidence/raw/wave2-chaos/CHAOS-008-authenticated-load.log\n M evidence/raw/wave2-chaos/CHAOS-009-observability-contract.log\n M evidence/raw/wave2-chaos/CHAOS-010-bundle-and-coverage.log\n M evidence/raw/wave2-chaos/summary.json\n M evidence/raw/wave3-performance/profiles/burst.json\n M evidence/raw/wave3-performance/profiles/ramp-1.json\n M evidence/raw/wave3-performance/profiles/ramp-2.json\n M evidence/raw/wave3-performance/profiles/ramp-3.json\n M evidence/raw/wave3-performance/profiles/ramp-4.json\n M evidence/raw/wave3-performance/profiles/soak.json\n M evidence/raw/wave3-performance/profiles/sustained.json\n M evidence/raw/wave3-performance/summary.json\n M observability/grafana-idempotency-dashboard.json\n M observability/prometheus-idempotency-alerts.yml\n M package.json\n M scripts/e2e-mcp-monitor.test.mjs\n M scripts/e2e-swarm-chaos.test.mjs\n M scripts/e2e-swarm-resilience.test.mjs\n M scripts/mcp-monitor.mjs\n M scripts/validate-observability.mjs\n M src/config.test.ts\n M src/config.ts\n M src/metrics.test.ts\n M src/metrics.ts\n M src/oauth-device-cli.ts\n M src/server.ts\n?? docs/observability-monitoring.md\n?? evidence/raw/canonical-dod-360-audit/\n?? evidence/raw/test-strategy-report.json\n?? scripts/test-strategy-audit.mjs",
+    "stderr": ""
+  },
+  "remotes": {
+    "ok": true,
+    "stdout": "origin\thttps://github.com/boldfernando/devspace.git (fetch)\norigin\thttps://github.com/boldfernando/devspace.git (push)\nupstream\thttps://github.com/Fernadoteixeira/devspace.git (fetch)\nupstream\thttps://github.com/Fernadoteixeira/devspace.git (push)",
+    "stderr": ""
+  },
+  "worktrees": {
+    "ok": true,
+    "stdout": "worktree C:/Users/fjuni/.copilot/repos/devspace\nHEAD 02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88\nbranch refs/heads/main",
+    "stderr": ""
+  }
+}
+git_scan_exit=0
+=== PACKAGE/RUNTIME ===
+v24.18.0
+11.16.0
+git version 2.55.0.windows.4
+{
+  "name": "@waishnav/devspace",
+  "version": "1.0.7",
+  "description": "Expose a secure local coding workspace through an MCP server.",
+  "type": "module",
+  "main": "dist/server.js",
+  "engines": {
+    "node": ">=22.19 <27"
+  },
+  "bin": {
+    "devspace": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    "scripts",
+    "skills",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run clean && npm run build:app && tsc -p tsconfig.build.json",
+    "build:app": "vite build",
+    "dev": "node scripts/dev-server.mjs",
+    "postinstall": "node scripts/fix-node-pty-permissions.mjs",
+    "start": "node dist/cli.js serve",
+    "test": "node --test scripts/dev-command.test.mjs && tsx src/config.test.ts && tsx src/error-policy.test.ts && tsx src/logger.test.ts && tsx src/request-meta.test.ts && tsx src/incoming-artifacts.test.ts && tsx src/artifact-download.test.ts && tsx src/ui/card-types.test.ts && tsx src/ui/patch-display.test.ts && tsx src/ui/tool-display.test.ts && tsx src/ui/accessibility-contract.test.ts && tsx src/ui/journey-progress.test.ts && tsx src/ui/card-result-normalizer.test.ts && tsx src/ui/render-strategy.test.ts && tsx src/ui/sync-state.test.ts && tsx src/response-shaping-contract.test.ts && tsx src/mcp-request-policy.test.ts && tsx src/db/query-performance.test.ts && tsx src/db/resilience.test.ts && tsx src/apply-patch.test.ts && tsx src/process-platform.test.ts && tsx src/process-sessions.test.ts && tsx src/mcp-sessions.test.ts && tsx src/server-shutdown.test.ts && tsx src/local-agent-runtime.test.ts && tsx src/local-agent-adapters.test.ts && tsx src/local-agent-availability.test.ts && tsx src/local-agent-profiles.test.ts && tsx src/local-agent-targets.test.ts && tsx src/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts && tsx src/credential-security.test.ts",
+    "test:observability": "node scripts/validate-observability.mjs",
+    "test:strategy:audit": "node scripts/test-strategy-audit.mjs",
+
+    "wave1:p0": "node scripts/run-wave1-p0.mjs --repo . --base-url http://127.0.0.1:7676",
+    "wave2:chaos": "node scripts/run-wave2-chaos.mjs --repo . --base-url http://127.0.0.1:7676 --chaos-port 17678",
+    "wave3:performance": "node scripts/run-wave3-performance.mjs --repo . --isolated-port 17679",
+    "evidence:index": "node scripts/index-raw-evidence.mjs --repo .",
+    "test:mcp-monitor": "node --test scripts/e2e-mcp-monitor.test.mjs",
+    "e2e:block1:identity": "node --test scripts/e2e-block1-identity.test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "e2e": "npm run build && node --test scripts/e2e-http-mcp.test.mjs",
+    "e2e:idempotency": "npm run build && node --test scripts/e2e-http-mcp-idempotency.test.mjs",
+    "e2e:write-stdin:idempotency": "npm run build && node --test scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
+    "e2e:idempotency:recovery": "npm run build && node --test scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+    "e2e:path-containment": "npm run build && node --test scripts/e2e-http-mcp-path-containment.test.mjs",
+    "e2e:resilience:p2": "npm run build && node --test scripts/e2e-http-mcp-resilience.test.mjs && npm exec -- tsx --test src/db/resilience.test.ts",
+    "e2e:swarm:resilience": "npm run build && node --test scripts/e2e-swarm-resilience.test.mjs",
+    "e2e:swarm:chaos": "npm run build && node --test scripts/e2e-swarm-chaos.test.mjs",
+
+    "test:idempotency:p1": "tsx --test scripts/e2e-idempotency-p1.test.ts",
+    "prd:reverse": "tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both",
+    "prd:reverse:strict": "tsx src/reverse-engineering/cli.ts full --root . --output artifacts/canonical-360 --format both --strict --fail-on P1",
+    "test:prd-reverse": "tsx --test scripts/canonical-360.test.ts",
+  "test:oauth-device": "npm exec -- tsx --test src/oauth-device-store.test.ts",
+  "e2e:oauth-device": "node --test scripts/e2e-oauth-device.test.mjs",
+  "e2e:oauth-device-cli": "node --test scripts/e2e-oauth-device-cli.test.mjs",
+    "coverage": "c8 --all --src=src --extension=.ts --reporter=text --reporter=lcov npm test",
+    "coverage:check": "c8 --all --src=src --extension=.ts --check-coverage --lines=60 --functions=55 --branches=45 --statements=60 --reporter=text --reporter=lcov npm test",
+    "bundle:audit": "node scripts/audit-ui-bundle.mjs",
+    "bundle:audit:check": "node scripts/audit-ui-bundle.mjs --check",
+    "test:bundle-audit": "node --test scripts/audit-ui-bundle.test.mjs",
+    "mcp:monitor": "powershell -ExecutionPolicy Bypass -File scripts/mcp-monitor.ps1",
+    "mcp:monitor:once": "node scripts/mcp-monitor.mjs --samples 1 --fail-on-alert",
+    "mcp:monitor:continuous": "node scripts/mcp-monitor.mjs",
+    "mcp:load:log": "node scripts/mcp-load-log.mjs",
+    "presentation:script": "node scripts/generate-e2e-presentation-script.mjs",
+    "security:p0": "python scripts/run-p0-negative-matrix.py --repo . --command \"node --test scripts/e2e-http-mcp-negative.test.mjs\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@agentclientprotocol/sdk": "^1.1.0",
+    "@anthropic-ai/claude-agent-sdk": "^0.3.200",
+    "@clack/prompts": "^1.5.1",
+    "@earendil-works/pi-coding-agent": "^0.84.2",
+    "@modelcontextprotocol/ext-apps": "^1.7.2",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@openai/codex-sdk": "^0.142.5",
+    "@opencode-ai/sdk": "^1.17.13",
+    "@pierre/diffs": "^1.2.5",
+    "better-sqlite3": "^12.10.0",
+    "diff": "^8.0.3",
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1",
+    "lucide": "^1.24.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "semver": "^7.8.4",
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@types/semver": "^7.7.1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "c8": "^12.0.0",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14"
+  },
+  "overrides": {
+    "protobufjs": "7.6.5",
+    "ws": "8.21.0",
+    "undici": "8.9.0"
+  },
+  "optionalDependencies": {
+    "node-pty": "^1.1.0"
+  }
+}
+
+=== ROLLBACK BASELINE ===
+02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88
+main
+ M .github/workflows/ci.yml
+ M artifacts/canonical-360/manifest.json
+ M artifacts/canonical-360/report.md
+ M artifacts/mcp-monitor-contract.json
+ M artifacts/wave3-performance/profiles/burst.json
+ M artifacts/wave3-performance/profiles/ramp-1.json
+ M artifacts/wave3-performance/profiles/ramp-2.json
+ M artifacts/wave3-performance/profiles/ramp-3.json
+ M artifacts/wave3-performance/profiles/ramp-4.json
+ M artifacts/wave3-performance/profiles/soak.json
+ M artifacts/wave3-performance/profiles/sustained.json
+ M artifacts/wave3-performance/summary.json
+ M docs/e2e-360-task-list.md
+ M docs/raw-evidence-index.md
+ M evidence/raw-evidence-manifest.json
+ M evidence/raw/canonical-360/manifest.json
+ M evidence/raw/canonical-360/report.md
+ M evidence/raw/mcp-load-log.json
+ M evidence/raw/mcp-monitor-contract.json
+ M evidence/raw/oauth-device-cli-security-report.json
+ M evidence/raw/oauth-mcp-negative-report.json
+ M evidence/raw/observability-contract-report.json
+ M evidence/raw/swarm-resilience-report.json
+ M evidence/raw/ui-bundle-report.json
+ M evidence/raw/wave1-p0/build.log
+ M evidence/raw/wave1-p0/bundle-audit-tests.log
+ M evidence/raw/wave1-p0/bundle-budget.log
+ M evidence/raw/wave1-p0/coverage.log
+ M evidence/raw/wave1-p0/e2e-http-mcp-idempotency.log
+ M evidence/raw/wave1-p0/e2e-http-mcp-positive.log
+ M evidence/raw/wave1-p0/health.log
+ M evidence/raw/wave1-p0/idempotency-p1-matrix.log
+ M evidence/raw/wave1-p0/oauth-device-cli.log
+ M evidence/raw/wave1-p0/oauth-device-http.log
+ M evidence/raw/wave1-p0/oauth-mcp-negative-p0.log
+ M evidence/raw/wave1-p0/observability-contract.log
+ M evidence/raw/wave1-p0/summary.json
+ M evidence/raw/wave1-p0/unit-and-contract-tests.log
+ M evidence/raw/wave2-chaos/CHAOS-002-idempotency-real.log
+ M evidence/raw/wave2-chaos/CHAOS-003-idempotency-p1.log
+ M evidence/raw/wave2-chaos/CHAOS-004-http-mcp-positive.log
+ M evidence/raw/wave2-chaos/CHAOS-005-oauth-device-http.log
+ M evidence/raw/wave2-chaos/CHAOS-006-oauth-device-cli.log
+ M evidence/raw/wave2-chaos/CHAOS-007-negative-security.log
+ M evidence/raw/wave2-chaos/CHAOS-008-authenticated-load.log
+ M evidence/raw/wave2-chaos/CHAOS-009-observability-contract.log
+ M evidence/raw/wave2-chaos/CHAOS-010-bundle-and-coverage.log
+ M evidence/raw/wave2-chaos/summary.json
+ M evidence/raw/wave3-performance/profiles/burst.json
+ M evidence/raw/wave3-performance/profiles/ramp-1.json
+ M evidence/raw/wave3-performance/profiles/ramp-2.json
+ M evidence/raw/wave3-performance/profiles/ramp-3.json
+ M evidence/raw/wave3-performance/profiles/ramp-4.json
+ M evidence/raw/wave3-performance/profiles/soak.json
+ M evidence/raw/wave3-performance/profiles/sustained.json
+ M evidence/raw/wave3-performance/summary.json
+ M observability/grafana-idempotency-dashboard.json
+ M observability/prometheus-idempotency-alerts.yml
+ M package.json
+ M scripts/e2e-mcp-monitor.test.mjs
+ M scripts/e2e-swarm-chaos.test.mjs
+ M scripts/e2e-swarm-resilience.test.mjs
+ M scripts/mcp-monitor.mjs
+ M scripts/validate-observability.mjs
+ M src/config.test.ts
+ M src/config.ts
+ M src/metrics.test.ts
+ M src/metrics.ts
+ M src/oauth-device-cli.ts
+ M src/server.ts
+?? docs/observability-monitoring.md
+?? evidence/raw/canonical-dod-360-audit/
+?? evidence/raw/test-strategy-report.json
+?? scripts/test-strategy-audit.mjs
+ .github/workflows/ci.yml                           |   26 +
+ artifacts/canonical-360/manifest.json              | 1057 +++++++++++++++++---
+ artifacts/canonical-360/report.md                  |    4 +-
+ artifacts/mcp-monitor-contract.json                |   20 +-
+ artifacts/wave3-performance/profiles/burst.json    |   88 +-
+ artifacts/wave3-performance/profiles/ramp-1.json   |   16 +-
+ artifacts/wave3-performance/profiles/ramp-2.json   |   28 +-
+ artifacts/wave3-performance/profiles/ramp-3.json   |   30 +-
+ artifacts/wave3-performance/profiles/ramp-4.json   |   30 +-
+ artifacts/wave3-performance/profiles/soak.json     |   44 +-
+ .../wave3-performance/profiles/sustained.json      |   32 +-
+ artifacts/wave3-performance/summary.json           |  108 +-
+ docs/e2e-360-task-list.md                          |    8 +-
+ docs/raw-evidence-index.md                         |  232 +++--
+ evidence/raw-evidence-manifest.json                |  926 +++++++++++++----
+ evidence/raw/canonical-360/manifest.json           | 1057 +++++++++++++++++---
+ evidence/raw/canonical-360/report.md               |    4 +-
+ evidence/raw/mcp-load-log.json                     |   28 +-
+ evidence/raw/mcp-monitor-contract.json             |   20 +-
+ evidence/raw/oauth-device-cli-security-report.json |    8 +-
+ evidence/raw/oauth-mcp-negative-report.json        |    6 +-
+ evidence/raw/observability-contract-report.json    |   10 +-
+ evidence/raw/swarm-resilience-report.json          |   14 +-
+ evidence/raw/ui-bundle-report.json                 |   12 +-
+ evidence/raw/wave1-p0/build.log                    |   98 +-
+ evidence/raw/wave1-p0/bundle-audit-tests.log       |    6 +-
+ evidence/raw/wave1-p0/bundle-budget.log            |    2 +-
+ evidence/raw/wave1-p0/coverage.log                 |  159 +--
+ evidence/raw/wave1-p0/e2e-http-mcp-idempotency.log |  102 +-
+ evidence/raw/wave1-p0/e2e-http-mcp-positive.log    |  104 +-
+ evidence/raw/wave1-p0/health.log                   |    1 -
+ evidence/raw/wave1-p0/idempotency-p1-matrix.log    |   18 +-
+ evidence/raw/wave1-p0/oauth-device-cli.log         |   20 +-
+ evidence/raw/wave1-p0/oauth-device-http.log        |    4 +-
+ evidence/raw/wave1-p0/oauth-mcp-negative-p0.log    |    2 +-
+ evidence/raw/wave1-p0/observability-contract.log   |    2 +-
+ evidence/raw/wave1-p0/summary.json                 |   44 +-
+ evidence/raw/wave1-p0/unit-and-contract-tests.log  |  299 ++++--
+ .../raw/wave2-chaos/CHAOS-002-idempotency-real.log |  116 +--
+ .../raw/wave2-chaos/CHAOS-003-idempotency-p1.log   |   18 +-
+ .../wave2-chaos/CHAOS-004-http-mcp-positive.log    |  119 ++-
+ .../wave2-chaos/CHAOS-005-oauth-device-http.log    |    4 +-
+ .../raw/wave2-chaos/CHAOS-006-oauth-device-cli.log |   20 +-
+ .../wave2-chaos/CHAOS-007-negative-security.log    |    2 +-
+ .../wave2-chaos/CHAOS-008-authenticated-load.log   |    6 +-
+ .../CHAOS-009-observability-contract.log           |    2 +-
+ .../wave2-chaos/CHAOS-010-bundle-and-coverage.log  |  287 +++---
+ evidence/raw/wave2-chaos/summary.json              |   30 +-
+ evidence/raw/wave3-performance/profiles/burst.json |   88 +-
+ .../raw/wave3-performance/profiles/ramp-1.json     |   16 +-
+ .../raw/wave3-performance/profiles/ramp-2.json     |   28 +-
+ .../raw/wave3-performance/profiles/ramp-3.json     |   30 +-
+ .../raw/wave3-performance/profiles/ramp-4.json     |   30 +-
+ evidence/raw/wave3-performance/profiles/soak.json  |   44 +-
+ .../raw/wave3-performance/profiles/sustained.json  |   32 +-
+ evidence/raw/wave3-performance/summary.json        |  108 +-
+ observability/grafana-idempotency-dashboard.json   |   52 +-
+ observability/prometheus-idempotency-alerts.yml    |   47 +
+ package.json                                       |    7 +-
+ scripts/e2e-mcp-monitor.test.mjs                   |   10 +-
+ scripts/e2e-swarm-chaos.test.mjs                   |   79 +-
+ scripts/e2e-swarm-resilience.test.mjs              |   34 +-
+ scripts/mcp-monitor.mjs                            |   80 +-
+ scripts/validate-observability.mjs                 |   10 +
+ src/config.test.ts                                 |   13 +
+ src/config.ts                                      |    6 +
+ src/metrics.test.ts                                |   34 +-
+ src/metrics.ts                                     |  205 ++--
+ src/oauth-device-cli.ts                            |    7 +-
+ src/server.ts                                      |   69 +-
+ 70 files changed, 4582 insertions(+), 1720 deletions(-)
+02d99a2 docs: record error handling evidence and backlog
+905a43a feat: centralize error policy and sanitize operational logs
+baddb69 docs: record frontend state synchronization evidence
+e1afdd2 fix: synchronize frontend state with MCP lifecycle
+5c79bb5 docs: record frontend backend performance evidence

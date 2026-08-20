@@ -1,0 +1,31 @@
+{
+  "schema": "canonical-platform-review-360/rollback-point",
+  "schema_version": "3.0.0",
+  "status": "READY",
+  "captured_at": "2026-08-20T04:44:12.2836440Z",
+  "repository": {
+    "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+    "branch": "main",
+    "head": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+    "working_tree_state": "DIRTY",
+    "reset_allowed": false,
+    "clean_allowed": false
+  },
+  "rollback_strategy": {
+    "product_source": "Preserve all preexisting modifications; no destructive Git operation is authorized or required.",
+    "audit_artifacts": "Remove only newly created canonical-platform-review-360-audit artifacts if an explicit cleanup is requested.",
+    "review_runtime": "The installed and active skill roots are isolated under the sandbox audit workspace and can be removed independently.",
+    "code_changes": "Any later APPLY change must be committed separately, recorded with exact paths and verification, and revertible by commit or targeted patch.",
+    "deployment": "UNKNOWN; no deployment target or production rollback drill was available."
+  },
+  "baseline_evidence": [
+    "artifacts/canonical-platform-review-360-audit/GIT_BASELINE.json",
+    "artifacts/canonical-platform-review-360-audit/00-discovery-and-git.log"
+  ],
+  "mutations_performed_before_review": [
+    "Created audit artifact directory and transferred read-only scanners into it.",
+    "Created isolated sandbox review runtime; no host skill configuration was changed.",
+    "Emitted machine-readable review artifacts under the audit directory."
+  ],
+  "confidence": "HIGH"
+}
