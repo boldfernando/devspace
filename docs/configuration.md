@@ -138,7 +138,12 @@ It also keeps compatibility with:
 
 - the bundled `subagent-delegation` skill when `DEVSPACE_SUBAGENTS=1`, unless `~/.devspace/skills/subagent-delegation/SKILL.md` exists
 - `DEVSPACE_AGENT_DIR/skills`, defaulting to `~/.codex/skills`
-- additional paths from `DEVSPACE_SKILL_PATHS`
+- additional paths from `DEVSPACE_SKILL_PATHS`, or from `skillPaths` in `~/.devspace/config.json`
+
+Skill directories are scanned recursively, so a directory of skill packs such as
+`plugins/<pack>/skills/<skill>/SKILL.md` can be registered by its root path
+alone. Names collide first-wins in the order above: a copy under
+`~/.agents/skills` shadows the same skill name coming from a later path.
 
 When Subagents are enabled, DevSpace discovers agent profiles
 from:
@@ -165,6 +170,44 @@ Example:
 DEVSPACE_SKILL_PATHS="$HOME/.claude/skills,$HOME/company/skills" \
 npx @waishnav/devspace serve
 ```
+
+To persist the same list for every run, put it in `~/.devspace/config.json`:
+
+```json
+{
+  "skillPaths": ["~/repos/medusa-agent-skills/plugins"]
+}
+```
+
+The environment variable wins when both are set.
+
+## Generative UI
+
+When widgets are enabled, DevSpace exposes a `render_ui` tool backed by
+[json-render](https://json-render.dev). The model emits a spec and the host
+renders it in the `ui://devspace/json-render-app.html` app resource.
+
+The component catalog is the published `@json-render/shadcn` set (`Card`,
+`Stack`, `Table`, `Tabs`, `Alert`, `Badge`, `Progress`, form controls, and the
+rest of the shadcn library) plus one DevSpace addition, `CodeBlock`, for source
+code and command output. Every prop a component declares must be present in the
+spec; props that do not apply are passed as `null`.
+
+The spec is validated fail-closed: component names, prop types, and element
+references are all checked, and an invalid spec is rejected with
+`INVALID_UI_SPEC` instead of being rendered. Note that the upstream
+`catalog.validate()` does not check props, so DevSpace enforces each component's
+props schema itself.
+
+The catalog declares no actions and the app registers no action handlers, so
+rendered output is presentational only and never carries authorization for a
+tool call — interactive components render, but they cannot dispatch anything.
+`render_ui` is classified as a read-scope tool. Set `DEVSPACE_WIDGETS=off` to
+remove the tool and its resource.
+
+The renderer, React DOM, and the component library are loaded dynamically, so the
+app resource itself stays a few kilobytes and nothing heavier is fetched until a
+spec actually arrives.
 
 ## Logging
 
