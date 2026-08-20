@@ -161,6 +161,19 @@ assert.deepEqual(
   loadConfig({ ...baseEnv, DEVSPACE_PUBLIC_BASE_URL: "https://abc.trycloudflare.com/" }).allowedHosts,
   ["localhost", "127.0.0.1", "::1", "abc.trycloudflare.com"],
 );
+assert.throws(
+  () => loadConfig({ ...baseEnv, DEVSPACE_PUBLIC_BASE_URL: "javascript:alert(1)" }),
+  /DEVSPACE_PUBLIC_BASE_URL must use http or https/,
+);
+assert.throws(
+  () => loadConfig({ ...baseEnv, DEVSPACE_PUBLIC_BASE_URL: "data:text/html,<svg/onload=alert(1)>" }),
+  /DEVSPACE_PUBLIC_BASE_URL must use http or https/,
+);
+assert.throws(
+  () => loadConfig({ ...baseEnv, DEVSPACE_PUBLIC_BASE_URL: "https://user:pass@example.com" }),
+  /DEVSPACE_PUBLIC_BASE_URL must not include URL credentials/,
+);
+
 assert.deepEqual(
   loadConfig({ ...baseEnv, DEVSPACE_ALLOWED_HOSTS: "*" }).allowedHosts,
   ["*"],

@@ -274,6 +274,12 @@ function numberConfigValue(value: number | undefined): string | undefined {
 
 function parsePublicBaseUrl(value: string): string {
   const parsed = new URL(value);
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    throw new Error("DEVSPACE_PUBLIC_BASE_URL must use http or https.");
+  }
+  if (parsed.username || parsed.password) {
+    throw new Error("DEVSPACE_PUBLIC_BASE_URL must not include URL credentials.");
+  }
   parsed.hash = "";
   parsed.search = "";
   parsed.pathname = parsed.pathname.replace(/\/+$/, "");
