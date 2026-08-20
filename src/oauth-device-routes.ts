@@ -265,6 +265,23 @@ export function registerOAuthDeviceRoutes(
       return;
     }
     metrics?.recordOAuthDeviceEvent(approved ? "approved" : "denied");
+    res.redirect(303, `/oauth/device?user_code=${encodeURIComponent(userCode)}&status=${encodeURIComponent(approved ? "Autorização registrada. Retorne ao terminal." : "Solicitação negada.")}`);
+  });
+
+  app.post("/token", async (req, res, next) => {
+    devicePollingRateLimiter(req, res, () => undefined);
+    if (res.headersSent) return;
+    if (formValue(req, "grant_type") !== DEVICE_GRANT) {
+      next();
+      return;
+    }
+    const clientId = formValue(req, "client_id");
+    const deviceCode = formValue(req, "device_code");
+    const resource = parseOptionalUrl(formValue(req, "resource"));
+    if (!clientId || !deviceCode) {
+      sendOAuthError(res, "invalid_request", "client_id and device_code are required");
+      return;
+    }
     try {
       const tokens = await provider.exchangeDeviceCode(clientId, deviceCode, resource);
       metrics?.recordOAuthDeviceEvent("consumed");
