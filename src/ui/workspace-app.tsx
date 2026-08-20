@@ -53,7 +53,7 @@ interface MountedPayload {
 }
 
 type ExtAppsModule = typeof import("@modelcontextprotocol/ext-apps");
-let app: App | null = null;
+
 let extAppsModule: ExtAppsModule | null = null;
 let connected = false;
 let connectionError: string | null = null;
@@ -94,7 +94,6 @@ async function boot(): Promise<void> {
   openWorkspaceInstructionKey = null;
   showAvailableWorkspaceInstructions = false;
   unmountPayload();
-  app = null;
   render();
 
   let nextApp: App;
@@ -106,7 +105,6 @@ async function boot(): Promise<void> {
       { name: "devspace-tool-cards", version: "0.4.0" },
       {},
     );
-    app = nextApp;
   } catch (loadError) {
     if (!isCurrentConnection(uiSyncState, connectionEpoch)) return;
     connectionError = classifyError(loadError).userMessage;
@@ -502,17 +500,7 @@ function renderConnectionError(message: string): void {
   appRoot.replaceChildren(main);
 }
 
-function renderEmpty(message: string, tone: "muted" | "error" = "muted"): void {
-  const main = element("main", { className: "shell" });
-  main.append(element("section", {
-    className: `empty ${tone}`,
-    text: message,
-    role: tone === "error" ? "alert" : "status",
-    ariaLive: tone === "error" ? "assertive" : "polite",
-    ariaAtomic: "true",
-  }));
-  appRoot.replaceChildren(main);
-}
+
 
 async function renderPayloadIfNeeded(
   expectedRenderRevision = activeRenderRevision,

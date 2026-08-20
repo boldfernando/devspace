@@ -166,7 +166,7 @@ test("a failed first context load does not consume bootstrap", async (t) => {
     await restoreAgentsDirectory(agentsDir, backupDir);
   }
 
-  const successfulOpen = await registry.openWorkspace(project, { conversationScopeId: "chat-1" });
+  await registry.openWorkspace(project, { conversationScopeId: "chat-1" });
 });
 
 test("a context-loading failure preserves a valid checkout binding", async (t) => {

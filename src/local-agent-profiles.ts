@@ -130,7 +130,7 @@ function parseProfileYaml(source: string, filePath: string): Record<string, unkn
   try {
     parsed = parseYaml(source) ?? {};
   } catch (error) {
-    throw new Error(`Unable to parse subagent profile frontmatter: ${filePath}: ${errorMessage(error)}`);
+    throw new Error(`Unable to parse subagent profile frontmatter: ${filePath}: ${errorMessage(error)}`, { cause: error });
   }
 
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {

@@ -1,5 +1,5 @@
 import { spawn, spawnSync, type ChildProcessWithoutNullStreams } from "node:child_process";
-import { resolve } from "node:path";
+
 import { Readable, Writable } from "node:stream";
 import type { EffortLevel } from "@anthropic-ai/claude-agent-sdk";
 import type { LocalAgentProvider } from "./local-agent-profiles.js";
@@ -238,7 +238,7 @@ class AcpLocalAgentAdapter implements LocalAgentAdapter {
         items: [],
       };
     } catch (error) {
-      throw new Error(`${this.provider} ACP run failed: ${errorMessage(error)}${stderr ? `\n${stderr.trim()}` : ""}`);
+      throw new Error(`${this.provider} ACP run failed: ${errorMessage(error)}${stderr ? `\n${stderr.trim()}` : ""}`, { cause: error });
     } finally {
       child.kill();
     }

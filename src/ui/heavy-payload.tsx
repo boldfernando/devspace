@@ -1,5 +1,5 @@
 import { lazy, memo, Suspense } from "react";
-import { createRoot, type Root } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import {
   isEditTool,
   isReadTool,
@@ -9,7 +9,6 @@ import {
   type HostContext,
   type ToolResultCard,
 } from "./card-types.js";
-import { pierrePrettyScrollbarCss } from "./scrollbar.js";
 
 type ThemeType = "light" | "dark";
 const LazyFilePayload = lazy(() => import("./file-payload.js").then((module) => ({ default: module.FilePayload })));

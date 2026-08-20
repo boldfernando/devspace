@@ -178,7 +178,7 @@ async function loginDevice(args: string[]): Promise<void> {
       try {
         await delay(intervalSeconds * 1000, undefined, { signal: controller.signal });
       } catch (error) {
-        if (controller.signal.aborted) throw new Error("Device authorization cancelled");
+        if (controller.signal.aborted) throw new Error("Device authorization cancelled", { cause: error });
         throw error;
       }
       const form = new URLSearchParams({ grant_type: DEVICE_GRANT, device_code: device.device_code, client_id: clientId, resource: resource.href });

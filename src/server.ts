@@ -293,19 +293,7 @@ const workspaceAvailableAgentsFileOutputSchema = z.object({
   path: z.string(),
 });
 
-const reviewFileOutputSchema = z.object({
-  path: z.string(),
-  previousPath: z.string().optional(),
-  type: z.enum(["change", "rename-pure", "rename-changed", "new", "deleted"]),
-  additions: z.number(),
-  removals: z.number(),
-});
 
-const reviewSummaryOutputSchema = z.object({
-  files: z.number(),
-  additions: z.number(),
-  removals: z.number(),
-});
 
 function sendJsonRpcError(
   res: Response,
@@ -718,7 +706,6 @@ function registerCodexProcessTools(
       const workspace = workspaces.getWorkspace(workspaceId);
       const inputMutation = (chars?.length ?? 0) > 0;
       let snapshot: ProcessSnapshot;
-      let replayed = false;
       let response: { content: ToolContent[]; isError?: boolean } | undefined;
 
       try {
@@ -759,7 +746,6 @@ function registerCodexProcessTools(
               rows,
             }, executeWrite);
             snapshot = run.value;
-            replayed = run.replayed;
             runtimeMetrics?.recordIdempotencyClaim("write_stdin", run.replayed ? "replay" : "owner");
             if (!run.replayed) runtimeMetrics?.recordIdempotencyEffect("write_stdin", "started");
             logEvent(config.logging, "info", "idempotency_claim", {

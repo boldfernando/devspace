@@ -411,21 +411,16 @@ export class ProcessSessionManager {
     }
 
     const shell = resolveShellCommand(input.command);
-    let pty: import("node-pty").IPty;
-    try {
-      pty = nodePty.spawn(shell.executable, shell.args, {
-        cwd: input.cwd,
-        env: processEnvironment({
-          workspaceId: input.workspaceId,
-          workspaceRoot: input.workspaceRoot,
-        }),
-        name: "xterm-256color",
-        cols: session.columns,
-        rows: session.rows,
-      });
-    } catch (error) {
-      throw error;
-    }
+    const pty: import("node-pty").IPty = nodePty.spawn(shell.executable, shell.args, {
+      cwd: input.cwd,
+      env: processEnvironment({
+        workspaceId: input.workspaceId,
+        workspaceRoot: input.workspaceRoot,
+      }),
+      name: "xterm-256color",
+      cols: session.columns,
+      rows: session.rows,
+    });
 
     session.process = {
       write: (data) => pty.write(data),

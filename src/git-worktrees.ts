@@ -104,7 +104,7 @@ async function resolveGitRoot(path: string, allowedRoots: string[]): Promise<str
 
     throw new GitWorktreeError(
       "GIT_REPOSITORY_NOT_FOUND",
-      `Cannot open workspace in worktree mode because this path is not inside a Git repository: ${path}. Use mode=\"checkout\" to work directly in this directory, or initialize Git and create an initial commit first.`,
+      `Cannot open workspace in worktree mode because this path is not inside a Git repository: ${path}. Use mode="checkout" to work directly in this directory, or initialize Git and create an initial commit first.`,
     );
   }
 }
@@ -131,7 +131,7 @@ async function assertGitRootAllowed(gitRoot: string, allowedRoots: string[]): Pr
 async function resolveBaseCommit(sourceRoot: string, baseRef: string): Promise<string> {
   try {
     return (await git(["rev-parse", "--verify", `${baseRef}^{commit}`], sourceRoot)).trim();
-  } catch (error) {
+  } catch {
     if (baseRef === "HEAD") {
       throw new GitWorktreeError(
         "GIT_REPOSITORY_HAS_NO_COMMITS",
@@ -176,7 +176,7 @@ async function git(args: string[], cwd: string): Promise<string> {
       ? String((error as { stdout?: unknown }).stdout ?? "").trim()
       : "";
     const details = stderr || stdout || (error instanceof Error ? error.message : String(error));
-    throw new Error(details);
+    throw new Error(details, { cause: error });
   }
 }
 

@@ -1,6 +1,6 @@
 import { memo, useEffect, useMemo, useRef } from "react";
 import { FileStream, getFiletypeFromFileName, type FileStreamOptions } from "@pierre/diffs";
-import type { HostContext } from "./card-types.js";
+
 import { pierrePrettyScrollbarCss } from "./scrollbar.js";
 import { selectFileLanguage } from "./language-catalog.js";
 
