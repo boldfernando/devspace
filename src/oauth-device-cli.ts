@@ -202,7 +202,12 @@ async function loginDevice(args: string[]): Promise<void> {
     process.removeListener("SIGINT", cancel);
     process.removeListener("SIGTERM", cancel);
     process.stdin.removeListener("data", cancelFromInput);
-    if (!process.stdin.isTTY) process.stdin.pause();
+    if (!process.stdin.isTTY) {
+      process.stdin.pause();
+      process.stdin.destroy();
+    } else {
+      process.stdin.pause();
+    }
   }
 }
 

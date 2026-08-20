@@ -8,8 +8,11 @@ import { setTimeout as delay } from "node:timers/promises";
 import test, { after } from "node:test";
 
 const repoRoot = process.env.DEVSPACE_REPO_ROOT ?? process.cwd();
-const baseUrl = process.env.SWARM_BASE_URL ?? "http://127.0.0.1:7676";
+const isolatedServer = !process.env.SWARM_BASE_URL;
+const serverPort = boundedInt(process.env.SWARM_ISOLATED_PORT, 17691, 1_024, 65_535);
+const baseUrl = process.env.SWARM_BASE_URL ?? `http://127.0.0.1:${serverPort}`;
 const ownerToken = process.env.SWARM_OWNER_TOKEN ?? "swarm-e2e-owner-token-that-is-long-enough";
+const serverEntrypoint = process.env.SWARM_SERVER_ENTRYPOINT ?? join(repoRoot, "dist", "server.js");
 const reportPath = process.env.SWARM_REPORT ?? "artifacts/swarm-resilience-report.json";
 const agentCount = boundedInt(process.env.SWARM_AGENT_COUNT, 8, 1, 32);
 const rounds = boundedInt(process.env.SWARM_ROUNDS, 6, 1, 50);
@@ -86,9 +89,29 @@ async function waitForHealth() {
   throw new Error("swarm server readiness timeout");
 }
 
-function maybeStartIsolatedServer() {
-  if (process.env.SWARM_BASE_URL) return;
-  stateDir = undefined;
+async function maybeStartIsolatedServer() {
+  if (!isolatedServer) return;
+  stateDir = await mkdtemp(join(tmpdir(), "devspace-swarm-state-"));
+  child = spawn(process.execPath, [serverEntrypoint], {
+    cwd: repoRoot,
+    env: {
+      ...process.env,
+      HOST: "127.0.0.1",
+      PORT: String(serverPort),
+      DEVSPACE_PUBLIC_BASE_URL: baseUrl,
+      DEVSPACE_ALLOWED_ROOTS: repoRoot,
+      DEVSPACE_STATE_DIR: stateDir,
+      DEVSPACE_OAUTH_OWNER_TOKEN: ownerToken,
+      DEVSPACE_OAUTH_SCOPES: "devspace",
+      DEVSPACE_OAUTH_ALLOWED_REDIRECT_HOSTS: "localhost,127.0.0.1",
+      DEVSPACE_TOOL_MODE: "codex",
+      DEVSPACE_TEST_MODE: "true",
+      DEVSPACE_ENV: "staging",
+    },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  child.stdout?.resume();
+  child.stderr?.resume();
 }
 
 async function stopServer() {
@@ -327,11 +350,10 @@ async function closeRemaining(activeAgents) {
   return allClosed;
 }
 
-maybeStartIsolatedServer();
-
 test("SWARM-RESILIENCE-001 validates concurrent authenticated agents and recovery", async () => {
   const authorized = [];
   try {
+    await maybeStartIsolatedServer();
     await waitForHealth();
     const primary = await discoverAndAuthorize(agents[0]);
     const challenger = await discoverAndAuthorize({ id: "isolation-client", profile: "security" });

@@ -1,13 +1,19 @@
 import assert from "node:assert/strict";
 import { createHash, randomBytes } from "node:crypto";
 import { createServer } from "node:http";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { spawn } from "node:child_process";
 import { join } from "node:path";
+import { tmpdir } from "node:os";
 import test, { after } from "node:test";
 
-const targetUrl = process.env.CHAOS_TARGET_URL ?? "http://127.0.0.1:7676";
+const repoRoot = process.env.DEVSPACE_REPO_ROOT ?? process.cwd();
+const isolatedTarget = !process.env.CHAOS_TARGET_URL;
+const targetPort = boundedInt(process.env.CHAOS_TARGET_PORT, 17692, 1_024, 65_535);
+let targetUrl = process.env.CHAOS_TARGET_URL ?? `http://127.0.0.1:${targetPort}`;
 const proxyPort = Number(process.env.CHAOS_PROXY_PORT ?? "17791");
 const ownerToken = process.env.CHAOS_OWNER_TOKEN ?? "e2e-owner-token-that-is-long-enough";
+const targetServerEntrypoint = process.env.CHAOS_SERVER_ENTRYPOINT ?? join(repoRoot, "dist", "server.js");
 const reportPath = process.env.CHAOS_REPORT ?? "artifacts/swarm-chaos-report.json";
 const agentCount = boundedInt(process.env.CHAOS_AGENT_COUNT, 4, 2, 16);
 const maxAttempts = boundedInt(process.env.CHAOS_MAX_ATTEMPTS, 3, 2, 5);
@@ -36,6 +42,8 @@ const state = {
   failureLabels: [],
 };
 let proxy;
+let targetChild;
+let targetStateDir;
 
 function boundedInt(value, fallback, minimum, maximum) {
   const parsed = Number(value ?? fallback);
@@ -141,6 +149,60 @@ async function exchangeOAuthToken() {
   const tokens = await tokenResponse.json();
   assert.ok(tokens.access_token);
   return tokens.access_token;
+}
+
+async function waitForTargetHealth() {
+  const deadline = Date.now() + 30_000;
+  while (Date.now() < deadline) {
+    if (targetChild?.exitCode !== null && targetChild?.exitCode !== undefined) {
+      throw new Error(`chaos target exited before readiness with code ${targetChild.exitCode}`);
+    }
+    try {
+      if ((await fetch(`${targetUrl}/healthz`)).ok) return;
+    } catch {
+      // Readiness retry only; functional assertions remain strict.
+    }
+    await wait(100);
+  }
+  throw new Error("chaos target readiness timeout");
+}
+
+async function startTargetServer() {
+  if (!isolatedTarget) return;
+  targetStateDir = await mkdtemp(join(tmpdir(), "devspace-swarm-chaos-state-"));
+  targetChild = spawn(process.execPath, [targetServerEntrypoint], {
+    cwd: repoRoot,
+    env: {
+      ...process.env,
+      HOST: "127.0.0.1",
+      PORT: String(targetPort),
+      DEVSPACE_PUBLIC_BASE_URL: targetUrl,
+      DEVSPACE_ALLOWED_ROOTS: repoRoot,
+      DEVSPACE_STATE_DIR: targetStateDir,
+      DEVSPACE_OAUTH_OWNER_TOKEN: ownerToken,
+      DEVSPACE_OAUTH_SCOPES: "devspace",
+      DEVSPACE_OAUTH_ALLOWED_REDIRECT_HOSTS: "localhost,127.0.0.1",
+      DEVSPACE_TOOL_MODE: "codex",
+      DEVSPACE_TEST_MODE: "true",
+      DEVSPACE_ENV: "staging",
+    },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  targetChild.stdout?.resume();
+  targetChild.stderr?.resume();
+  await waitForTargetHealth();
+}
+
+async function stopTargetServer() {
+  if (targetChild && targetChild.exitCode === null) {
+    targetChild.kill("SIGTERM");
+    const exited = await Promise.race([
+      new Promise((resolve) => targetChild.once("exit", () => resolve(true))),
+      wait(5_000).then(() => false),
+    ]);
+    if (!exited && targetChild.exitCode === null) targetChild.kill("SIGKILL");
+  }
+  if (targetStateDir) await rm(targetStateDir, { recursive: true, force: true });
 }
 
 function createChaosProxy() {
@@ -291,12 +353,14 @@ async function closeSession(baseUrl, token, sessionId) {
 }
 
 test("SWARM-CHAOS-001 validates network fault recovery and fail-closed behavior", async () => {
-  const token = await exchangeOAuthToken();
-  proxy = createChaosProxy();
-  await proxy.start();
-  state.realHttpMcp = true;
+  let token;
   const sessions = [];
   try {
+    await startTargetServer();
+    token = await exchangeOAuthToken();
+    proxy = createChaosProxy();
+    await proxy.start();
+    state.realHttpMcp = true;
     for (let index = 0; index < agentCount; index += 1) {
       const session = await initializeWithSession(proxy.url, token, `agent-${index + 1}`);
       sessions.push(session);
@@ -348,7 +412,8 @@ test("SWARM-CHAOS-001 validates network fault recovery and fail-closed behavior"
         state.cleanup = false;
       }
     }
-    await proxy.close();
+    if (proxy) await proxy.close();
+    await stopTargetServer();
   }
   assert.equal(state.cleanup, true);
 });
