@@ -8,6 +8,7 @@ import { promisify } from "node:util";
 import { loadConfig, type ServerConfig } from "./config.js";
 import { GitWorktreeError } from "./git-worktrees.js";
 import { SqliteWorkspaceStore } from "./workspace-store.js";
+import { formatPathForPrompt } from "./skills.js";
 import { ensureCheckoutWorkspaceRoot, WorkspaceRegistry } from "./workspaces.js";
 
 const execFileAsync = promisify(execFile);
@@ -270,3 +271,50 @@ async function createGitProject(parent: string): Promise<string> {
 async function git(cwd: string, args: string[]): Promise<void> {
   await execFileAsync("git", args, { cwd });
 }
+
+test("a skill advertised with a home-relative path stays readable", async (t) => {
+  const home = await mkdtemp(join(tmpdir(), "devspace-skill-home-"));
+  const root = join(home, "project");
+  const skillDir = join(home, "packs", "demo-skill");
+  await mkdir(root, { recursive: true });
+  await mkdir(skillDir, { recursive: true });
+  await writeFile(
+    join(skillDir, "SKILL.md"),
+    ["---", "name: demo-skill", "description: Demo skill outside the workspace.", "---", "", "Body.", ""].join("\n"),
+  );
+
+  const originalHome = process.env.HOME;
+  const originalUserProfile = process.env.USERPROFILE;
+  process.env.HOME = home;
+  process.env.USERPROFILE = home;
+  t.after(async () => {
+    if (originalHome === undefined) delete process.env.HOME;
+    else process.env.HOME = originalHome;
+    if (originalUserProfile === undefined) delete process.env.USERPROFILE;
+    else process.env.USERPROFILE = originalUserProfile;
+    await rm(home, { recursive: true, force: true });
+  });
+
+  const config = loadConfig({
+    DEVSPACE_CONFIG_DIR: join(home, ".devspace-home"),
+    DEVSPACE_ALLOWED_ROOTS: root,
+    DEVSPACE_WORKTREE_ROOT: join(home, ".worktrees"),
+    DEVSPACE_AGENT_DIR: join(home, ".agent"),
+    DEVSPACE_SKILL_PATHS: join(home, "packs"),
+    DEVSPACE_OAUTH_OWNER_TOKEN: "test-owner-token-that-is-long-enough",
+    PORT: "1",
+  });
+
+  const opened = await new WorkspaceRegistry(config).openWorkspace(root);
+  const skill = opened.workspace.skills.find((entry) => entry.name === "demo-skill");
+  assert.ok(skill, "skill pack should load from DEVSPACE_SKILL_PATHS");
+
+  const advertisedPath = formatPathForPrompt(skill.filePath);
+  assert.match(advertisedPath, /^~\//, "open_workspace advertises skills home-relative");
+
+  const registry = new WorkspaceRegistry(config);
+  const reopened = await registry.openWorkspace(root);
+  const readPath = registry.resolveReadPath(reopened.workspace, advertisedPath);
+  assert.equal(readPath.absolutePath, join(skillDir, "SKILL.md"));
+  assert.equal(readPath.skillRead?.isSkillFile, true);
+});

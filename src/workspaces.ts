@@ -13,6 +13,7 @@ import { createManagedWorktree } from "./git-worktrees.js";
 import {
   AccessDeniedError,
   assertAllowedPath,
+  expandHomePath,
   isPathInsideRoot,
   resolveAllowedPath,
   resolveAllowedPathReal,
@@ -294,16 +295,19 @@ export class WorkspaceRegistry {
   }
 
   resolveReadPath(workspace: Workspace, inputPath: string): WorkspaceReadPath {
+    // Skill paths are advertised home-relative (`~/...`); expand them so they resolve
+    // outside the workspace root instead of becoming a literal `~` directory inside it.
+    const candidatePath = expandHomePath(inputPath);
     try {
       return {
-        absolutePath: this.resolvePath(workspace, inputPath),
+        absolutePath: this.resolvePath(workspace, candidatePath),
         readRoots: [workspace.root],
       };
     } catch (workspaceError) {
       const skillRead = resolveSkillReadPath(
         workspace.skills,
         workspace.activatedSkillDirs,
-        inputPath,
+        candidatePath,
       );
       if (!skillRead) throw workspaceError;
 
