@@ -162,7 +162,40 @@ async function loginDevice(args: string[]): Promise<void> {
   });
   console.log(`Abra: ${device.verification_uri}`);
   console.log(`Digite o código: ${device.user_code}`);
-  if (device.verification_uri_complete && !hasFlag(args, "--no-browser")) openBrowser(device.verification_uri_complete);
+
+  // Auto-approve when running against a local server with a known ownerToken
+  const isLocal = ["127.0.0.1", "localhost", "::1", "[::1]"].includes(server.hostname);
+  const files = loadDevspaceFiles();
+  const ownerToken = files.auth.ownerToken;
+  let autoApproved = false;
+  if (isLocal && ownerToken && !hasFlag(args, "--no-auto-approve")) {
+    try {
+      const approveUrl = new URL("/oauth/device/approve", server);
+      const approveBody = new URLSearchParams({
+        user_code: device.user_code,
+        decision: "approve",
+        owner_token: ownerToken,
+      });
+      const approveRes = await fetch(approveUrl.href, {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: approveBody,
+        redirect: "manual",
+        signal: AbortSignal.timeout(10_000),
+      });
+      autoApproved = approveRes.status === 303 || approveRes.ok;
+      if (autoApproved) {
+        console.log("Aprovação automática concluída (servidor local).");
+      }
+    } catch {
+      // Auto-approval failed silently; fall back to manual browser flow
+    }
+  }
+
+  if (!autoApproved && device.verification_uri_complete && !hasFlag(args, "--no-browser")) {
+    openBrowser(device.verification_uri_complete);
+  }
+
   const controller = new AbortController();
   const cancel = () => controller.abort();
   const cancelFromInput = (chunk: Buffer | string) => {
@@ -211,6 +244,7 @@ async function loginDevice(args: string[]): Promise<void> {
     }
   }
 }
+
 
 async function loginPkce(args: string[]): Promise<void> {
   const server = serverUrl(args);

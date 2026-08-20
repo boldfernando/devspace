@@ -1950,6 +1950,11 @@ export function createServer(
   }, MCP_SESSION_CLEANUP_INTERVAL_MS);
   sessionCleanupTimer.unref();
 
+  const deviceCleanupTimer = setInterval(() => {
+    oauthProvider.cleanupDeviceAuthorizations();
+  }, 15 * 60 * 1000);
+  deviceCleanupTimer.unref();
+
   if (config.logging.trustProxy) {
     app.set("trust proxy", true);
   }
@@ -2257,6 +2262,7 @@ export function createServer(
     close: () => {
       closePromise ??= (async () => {
         clearInterval(sessionCleanupTimer);
+        clearInterval(deviceCleanupTimer);
         sessionBindings.clear();
         const results = await transports.closeAll();
         logSessionCloseResults("server_shutdown", results);

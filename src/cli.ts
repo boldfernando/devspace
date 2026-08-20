@@ -46,7 +46,7 @@ type Command = "serve" | "init" | "doctor" | "config" | "agents" | "prd-reverse"
 const require = createRequire(import.meta.url);
 const SUPPORTED_NODE_RANGE = ">=20.12 <27";
 
-async function main(argv: string[]): Promise<void> {
+async function main(argv: string[]): Promise<Command> {
   assertSupportedNode();
 
   const [rawCommand, ...args] = argv;
@@ -56,31 +56,31 @@ async function main(argv: string[]): Promise<void> {
     case "serve":
       await ensureConfigured();
       await serve();
-      return;
+      return command;
     case "init":
       await runInit({ force: args.includes("--force") });
-      return;
+      return command;
     case "doctor":
       await runDoctor();
-      return;
+      return command;
     case "auth":
       await runAuthCommand(args);
-      return;
+      return command;
     case "prd-reverse":
       process.exitCode = runCanonicalReverse(args);
-      return;
+      return command;
     case "config":
       runConfigCommand(args);
-      return;
+      return command;
     case "agents":
       await runAgentsCommand(args);
-      return;
+      return command;
     case "help":
       printHelp();
-      return;
+      return command;
     case "version":
       printVersion();
-      return;
+      return command;
   }
 }
 
@@ -237,10 +237,12 @@ async function serve(): Promise<void> {
     }
   });
 
+  const keepAlive = setInterval(() => {}, 60_000);
   let shuttingDown = false;
   const shutdown = async () => {
     if (shuttingDown) return;
     shuttingDown = true;
+    clearInterval(keepAlive);
     await shutdownHttpServer(httpServer, close);
     process.exit(0);
   };
@@ -252,6 +254,8 @@ async function serve(): Promise<void> {
   };
   process.once("SIGINT", handleShutdown);
   process.once("SIGTERM", handleShutdown);
+
+  return new Promise<void>(() => {});
 }
 
 async function runDoctor(): Promise<void> {
@@ -701,7 +705,8 @@ function checkBashShell(): string {
   }
 }
 
-async function finishCliProcess(): Promise<void> {
+async function finishCliProcess(command?: Command): Promise<void> {
+  if (command === "serve") return;
   if (process.stdin.isTTY) return;
   process.stdin.pause();
   process.stdin.destroy();
@@ -711,7 +716,7 @@ async function finishCliProcess(): Promise<void> {
 }
 
 main(process.argv.slice(2))
-  .then(() => finishCliProcess())
+  .then((command) => finishCliProcess(command))
   .catch((error) => {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;

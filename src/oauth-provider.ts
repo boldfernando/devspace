@@ -346,6 +346,10 @@ export class SingleUserOAuthProvider implements OAuthServerProvider {
     this.oauthStore.deleteRefreshToken(hashed);
   }
 
+  cleanupDeviceAuthorizations(now?: number): number {
+    return this.deviceStore?.cleanup(now) ?? 0;
+  }
+
   close(): void {
     this.deviceStore?.close();
     this.oauthStore.close();
