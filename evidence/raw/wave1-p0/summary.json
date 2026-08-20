@@ -1,7 +1,7 @@
 {
   "schema": "devspace.wave1-p0.v1",
-  "status": "passed",
-  "started_at": "2026-08-18T05:05:10.172Z",
+  "status": "failed",
+  "started_at": "2026-08-20T04:13:24.330Z",
   "repository": "devspace",
   "branch": "local",
   "gates": [
@@ -12,10 +12,10 @@
         "-e",
         "fetch(\"http://127.0.0.1:7676/healthz\").then(async r=>{if(r.status!==200)process.exit(1);console.log('health=200')}).catch(()=>process.exit(1))"
       ],
-      "exit_code": 0,
+      "exit_code": 1,
       "signal": null,
-      "status": "passed",
-      "duration_ms": 66,
+      "status": "failed",
+      "duration_ms": 53,
       "log": "<repo>\\artifacts\\wave1-p0\\health.log"
     },
     {
@@ -28,7 +28,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 3313,
+      "duration_ms": 4801,
       "log": "<repo>\\artifacts\\wave1-p0\\typecheck.log"
     },
     {
@@ -40,7 +40,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 64175,
+      "duration_ms": 42583,
       "log": "<repo>\\artifacts\\wave1-p0\\unit-and-contract-tests.log"
     },
     {
@@ -53,7 +53,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 4646,
+      "duration_ms": 5498,
       "log": "<repo>\\artifacts\\wave1-p0\\build.log"
     },
     {
@@ -66,7 +66,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 287,
+      "duration_ms": 399,
       "log": "<repo>\\artifacts\\wave1-p0\\observability-contract.log"
     },
     {
@@ -79,7 +79,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 447,
+      "duration_ms": 466,
       "log": "<repo>\\artifacts\\wave1-p0\\bundle-audit-tests.log"
     },
     {
@@ -92,7 +92,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 313,
+      "duration_ms": 318,
       "log": "<repo>\\artifacts\\wave1-p0\\bundle-budget.log"
     },
     {
@@ -105,7 +105,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 45347,
+      "duration_ms": 50770,
       "log": "<repo>\\artifacts\\wave1-p0\\coverage.log"
     },
     {
@@ -118,7 +118,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 5816,
+      "duration_ms": 7574,
       "log": "<repo>\\artifacts\\wave1-p0\\e2e-http-mcp-positive.log"
     },
     {
@@ -131,7 +131,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 5573,
+      "duration_ms": 6688,
       "log": "<repo>\\artifacts\\wave1-p0\\e2e-http-mcp-idempotency.log"
     },
     {
@@ -144,7 +144,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 765,
+      "duration_ms": 1719,
       "log": "<repo>\\artifacts\\wave1-p0\\idempotency-p1-matrix.log"
     },
     {
@@ -157,7 +157,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 7444,
+      "duration_ms": 7588,
       "log": "<repo>\\artifacts\\wave1-p0\\oauth-device-http.log"
     },
     {
@@ -167,10 +167,10 @@
         "run",
         "e2e:oauth-device-cli"
       ],
-      "exit_code": 0,
+      "exit_code": 1,
       "signal": null,
-      "status": "passed",
-      "duration_ms": 12866,
+      "status": "failed",
+      "duration_ms": 16211,
       "log": "<repo>\\artifacts\\wave1-p0\\oauth-device-cli.log"
     },
     {
@@ -183,7 +183,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 3478,
+      "duration_ms": 3782,
       "log": "<repo>\\artifacts\\wave1-p0\\oauth-mcp-negative-p0.log"
     },
     {
@@ -196,7 +196,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 1137,
+      "duration_ms": 1474,
       "log": "<repo>\\artifacts\\wave1-p0\\doctor.log"
     },
     {
@@ -209,7 +209,7 @@
       "exit_code": 0,
       "signal": null,
       "status": "passed",
-      "duration_ms": 441,
+      "duration_ms": 627,
       "log": "<repo>\\artifacts\\wave1-p0\\canonical-self-scan.log"
     }
   ],

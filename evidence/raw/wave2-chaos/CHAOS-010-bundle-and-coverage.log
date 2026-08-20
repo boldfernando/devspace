@@ -1,138 +1,6 @@
-rc/local-agent-store.test.ts && tsx src/roots.test.ts && tsx src/skills.test.ts && tsx src/workspaces.test.ts && tsx src/workspace-conversation.test.ts && tsx src/review-checkpoints.test.ts && tsx src/server.test.ts && tsx src/oauth-store.test.ts && npm exec -- tsx --test src/oauth-device-store.test.ts && tsx src/cli.test.ts && tsx src/ui/language-catalog.test.ts && tsx src/metrics.test.ts
-
-✔ the dev server launches tsx through Node without a shell (1.1461ms)
-ℹ tests 1
-ℹ suites 0
-ℹ pass 1
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 59.3985
-✔ undefined request metadata has no conversation scope (0.5134ms)
-✔ missing session metadata has no conversation scope (0.0639ms)
-✔ an empty session string has no conversation scope (0.046ms)
-✔ a non-string session value has no conversation scope (0.0899ms)
-✔ valid OpenAI session metadata returns the raw opaque session value (0.0547ms)
-✔ unrelated metadata fields do not alter the selected conversation scope (0.0448ms)
-ℹ tests 6
-ℹ suites 0
-ℹ pass 6
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 7.6765
-✔ the supported coding tools are recognized as card tools (0.5721ms)
-✔ tool classification distinguishes patch, edit, and shell operations (0.0811ms)
-✔ a patch card expands only when it contains patch content (0.0887ms)
-✔ a single-file patch opens immediately (0.0627ms)
-✔ a multi-file patch stays collapsed (0.0531ms)
-✔ show changes still opens immediately (0.0547ms)
-✔ a workspace card expands when it contains provider metadata (0.046ms)
-✔ a workspace card with details opens immediately (0.0505ms)
-✔ a workspace card expands when it contains agent metadata (0.0513ms)
-✔ a workspace card expands when it contains available instruction files (0.037ms)
-✔ an empty workspace card stays collapsed (0.0536ms)
-ℹ tests 11
-ℹ suites 0
-ℹ pass 11
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 9.7589
-Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-cfnKmN\project\.devspace\agents\custom.md: Subagent profile provider must be codex, claude, opencode, pi, cursor, or copilot: C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-cfnKmN\project\.devspace\agents\custom.md
-✔ a checkout exposes initial and nested instruction context while filtering outside symlinks (69.8998ms)
-✔ opening a missing checkout creates its workspace root (39.0167ms)
-✔ worktree opens require Git and create an isolated managed workspace (327.3626ms)
-✔ persisted checkout and worktree sessions restore after recreating the registry (420.4782ms)
-✔ workspace paths outside the allowed roots are rejected (4.6433ms)
-﹣ a symlinked allowed root preserves checkout and worktree path behavior (0.0696ms) # SKIP
-ℹ tests 6
-ℹ suites 0
-ℹ pass 5
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 1
-ℹ todo 0
-ℹ duration_ms 864.8773
-✔ a conversation reuses its checkout context (92.9448ms)
-✔ different conversations receive separate checkout workspaces (84.8463ms)
-✔ conversation bindings distinguish canonical projects (93.3025ms)
-✔ concurrent checkout opens reuse one workspace and return matching context (44.8774ms)
-✔ a checkout without a conversation scope does not use conversation reuse (77.3376ms)
-✔ worktree requests remain fresh without replacing the reusable checkout (521.9399ms)
-✔ a worktree-first conversation creates and then reuses its checkout (426.9545ms)
-✔ concurrent worktree opens remain fresh and return complete context (440.2372ms)
-✔ checkout reuse survives a registry restart (142.2152ms)
-✔ a failed first context load does not consume bootstrap (136.881ms)
-✔ a context-loading failure preserves a valid checkout binding (95.6327ms)
-✔ a deleted checkout is replaced with a new workspace (127.9625ms)
-✔ canonical checkout identity remains stable when the requested target starts missing (96.9322ms)
-✔ canonical checkout identity survives equivalent path and symlink aliases (81.4794ms)
-﹣ canonical checkout identity survives macOS var path aliases (0.0867ms) # SKIP
-✔ an invalid persisted checkout binding is not reused (153.1386ms)
-✔ an inactive persisted checkout binding is not reused (129.0355ms)
-✔ a checkout replaced by a file reports the filesystem error (77.8711ms)
-✔ unexpected storage errors are not mistaken for stale bindings (121.9001ms)
-﹣ unexpected filesystem errors are propagated without replacing the binding (0.0832ms) # SKIP
-ℹ tests 20
-ℹ suites 0
-ℹ pass 18
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 2
-ℹ todo 0
-ℹ duration_ms 2951.696
-✔ a clean workspace reports no changes from the last-shown checkpoint (608.5534ms)
-✔ show_changes reports and advances the last-shown checkpoint (1130.4781ms)
-✔ review checkpoints survive a manager restart (860.7334ms)
-✔ concurrent initialization produces one usable checkpoint state (776.7029ms)
-✔ a missing last-shown checkpoint falls back after restart and can be re-established (1166.1077ms)
-✔ a checkpoint workspace rejects a different root without changing its state (789.4926ms)
-✔ a concurrent review rejects a different root after initialization (603.005ms)
-✔ an unborn repository becomes reviewable after its first commit (832.72ms)
-ℹ tests 8
-ℹ suites 0
-ℹ pass 8
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 6771.8624
-{"ts":"2026-08-18T15:35:40.190Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_7b3bcdd310","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-nxbCpg\\project","success":true,"durationMs":50}
-{"ts":"2026-08-18T15:35:40.196Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_7b3bcdd310","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-nxbCpg\\project","success":true,"durationMs":5}
-✔ open_workspace keeps lifecycle flags out of model output and preserves complete card metadata (112.7205ms)
-{"ts":"2026-08-18T15:35:40.268Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_7ea3b04fc6","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-8dpg1C\\project","success":true,"durationMs":36}
-{"ts":"2026-08-18T15:35:40.268Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_7ea3b04fc6","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-8dpg1C\\project","success":true,"durationMs":37}
-✔ concurrent checkout opens return one full context and one reuse instruction (51.0959ms)
-{"ts":"2026-08-18T15:35:40.481Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_a28710ac69","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-df80GT\\project","success":true,"durationMs":38}
-{"ts":"2026-08-18T15:35:40.629Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_8c71f63fa6","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-df80GT\\.worktrees\\project-4d07d250","success":true,"durationMs":148}
-{"ts":"2026-08-18T15:35:40.797Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_e204ce75a0","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-df80GT\\.worktrees\\project-eb57a046","success":true,"durationMs":167}
-{"ts":"2026-08-18T15:35:40.806Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_a28710ac69","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-df80GT\\project","success":true,"durationMs":8}
-✔ new worktrees always receive a fresh workspace and complete worktree context (545.8879ms)
-{"ts":"2026-08-18T15:35:41.178Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_36a4702b82","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-hl0Maf\\.worktrees\\project-eb234f02","success":true,"durationMs":171}
-{"ts":"2026-08-18T15:35:41.227Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_9545330bc9","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-hl0Maf\\project","success":true,"durationMs":48}
-{"ts":"2026-08-18T15:35:41.234Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_9545330bc9","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-hl0Maf\\project","success":true,"durationMs":7}
-✔ checkout opened after a worktree receives its own complete context (425.6044ms)
-{"ts":"2026-08-18T15:35:41.317Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_1f4d9fd86a","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-et7pAI\\project","success":true,"durationMs":50}
-{"ts":"2026-08-18T15:35:41.366Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_bcc37727c0","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-et7pAI\\project","success":true,"durationMs":48}
-✔ a host without conversation metadata receives normal explicit-workspace behavior (127.1733ms)
-{"ts":"2026-08-18T15:35:41.439Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_ad598a88d5","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-U6NlwH\\project","success":true,"durationMs":50}
-{"ts":"2026-08-18T15:35:41.517Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceId":"ws_ad598a88d5","path":"C:\\Users\\fjuni\\AppData\\Local\\Temp\\devspace-server-test-U6NlwH\\project","success":true,"durationMs":68}
-✔ checkout reuse and context suppression survive a registry restart (150.6026ms)
-ℹ tests 6
-ℹ suites 0
-ℹ pass 6
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 1416.9017
-✔ device store creates a sanitized public record and enforces polling interval (24.101ms)
-✔ device store approval emits one token opportunity and rejects replay (13.2782ms)
-✔ device store denies pending requests and does not disclose invalid user codes (12.3652ms)
+ded updates (0.5258ms)
+✔ render strategy remounts when tool identity or expansion changes (0.0937ms)
+✔ render strategy remounts when no mounted payload exists (0.054ms)
 ℹ tests 3
 ℹ suites 0
 ℹ pass 3
@@ -140,9 +8,20 @@ Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-age
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 480.2389
-✔ selective language catalog falls back heavy grammars to text (0.6429ms)
-✔ selective language catalog allows explicit heavy-language opt in (0.1001ms)
+ℹ duration_ms 6.1625
+✔ connection epochs invalidate an older boot attempt (0.5848ms)
+✔ render revisions invalidate a lazy result from a previous shell (0.1502ms)
+✔ starting a connection also invalidates pending renders (0.0611ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7.7248
+✔ MCP response shaping avoids duplicating top-level content in card payloads (0.6735ms)
+✔ frontend reconstructs omitted card content from the top-level MCP result (0.0779ms)
 ℹ tests 2
 ℹ suites 0
 ℹ pass 2
@@ -150,9 +29,140 @@ Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-age
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 9.0487
-✔ runtime metrics render safe dimensions and stable Prometheus names (6.9711ms)
-✔ runtime metrics sanitize unsafe label values (0.1192ms)
+ℹ duration_ms 6.395
+✔ MCP policy classifies protocol discovery and read calls (1.1062ms)
+✔ MCP policy classifies every mutating tool as write (0.1109ms)
+✔ MCP policy denies unknown and malformed tool calls (0.1277ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7.7251
+✔ query-performance migration supports hot recency and cleanup plans (38.2444ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 41.1847
+✔ SQLite lock contention fails with a bounded SQLITE_BUSY error (90.2662ms)
+✔ SQLite full storage is surfaced as a bounded resource failure (9.1143ms)
+✔ SQLite read-only mode rejects writes without mutating the state (11.6353ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.3545
+Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-HsNgPD\project\.devspace\agents\custom.md: Subagent profile provider must be codex, claude, opencode, pi, cursor, or copilot: C:\Users\fjuni\AppData\Local\Temp\devspace-agent-profiles-test-HsNgPD\project\.devspace\agents\custom.md
+✔ a checkout exposes initial and nested instruction context while filtering outside symlinks (68.792ms)
+✔ opening a missing checkout creates its workspace root (49.4059ms)
+✔ missing checkout root creation propagates filesystem failure without a partial root (0.5268ms)
+✔ worktree opens require Git and create an isolated managed workspace (370.447ms)
+✔ persisted checkout and worktree sessions restore after recreating the registry (586.423ms)
+✔ workspace paths outside the allowed roots are rejected (10.0806ms)
+﹣ a symlinked allowed root preserves checkout and worktree path behavior (0.133ms) # SKIP
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 1089.9218
+✔ a conversation reuses its checkout context (141.858ms)
+✔ different conversations receive separate checkout workspaces (192.3272ms)
+✔ conversation bindings distinguish canonical projects (243.1292ms)
+✔ concurrent checkout opens reuse one workspace and return matching context (137.316ms)
+✔ a checkout without a conversation scope does not use conversation reuse (201.52ms)
+✔ worktree requests remain fresh without replacing the reusable checkout (822.4366ms)
+✔ a worktree-first conversation creates and then reuses its checkout (501.0946ms)
+✔ concurrent worktree opens remain fresh and return complete context (539.8997ms)
+✔ checkout reuse survives a registry restart (201.2856ms)
+✔ a failed first context load does not consume bootstrap (167.8627ms)
+✔ a context-loading failure preserves a valid checkout binding (132.7957ms)
+✔ a deleted checkout is replaced with a new workspace (154.7868ms)
+✔ canonical checkout identity remains stable when the requested target starts missing (96.6856ms)
+✔ canonical checkout identity survives equivalent path and symlink aliases (103.581ms)
+﹣ canonical checkout identity survives macOS var path aliases (0.0998ms) # SKIP
+✔ an invalid persisted checkout binding is not reused (207.4745ms)
+✔ an inactive persisted checkout binding is not reused (173.787ms)
+✔ a checkout replaced by a file reports the filesystem error (88.2757ms)
+✔ unexpected storage errors are not mistaken for stale bindings (89.6872ms)
+﹣ unexpected filesystem errors are propagated without replacing the binding (0.0712ms) # SKIP
+ℹ tests 20
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 4205.4308
+✔ a clean workspace reports no changes from the last-shown checkpoint (686.0938ms)
+✔ show_changes reports and advances the last-shown checkpoint (1256.9627ms)
+✔ review checkpoints survive a manager restart (1164.9493ms)
+✔ concurrent initialization produces one usable checkpoint state (1155.825ms)
+✔ a missing last-shown checkpoint falls back after restart and can be re-established (1423.5426ms)
+✔ a checkpoint workspace rejects a different root without changing its state (912.2246ms)
+✔ a concurrent review rejects a different root after initialization (655.8738ms)
+✔ an unborn repository becomes reviewable after its first commit (922.4008ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8182.9745
+{"ts":"2026-08-20T04:14:51.017Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"3df2bc784174ec46","pathHash":"e0a0aa38fb3bc1fc","success":true,"durationMs":92}
+{"ts":"2026-08-20T04:14:51.030Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"3df2bc784174ec46","pathHash":"e0a0aa38fb3bc1fc","success":true,"durationMs":10}
+✔ open_workspace keeps lifecycle flags out of model output and preserves complete card metadata (184.5937ms)
+{"ts":"2026-08-20T04:14:51.171Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6f5a170b4203f734","pathHash":"e2fe6cf687dbcbe3","success":true,"durationMs":70}
+{"ts":"2026-08-20T04:14:51.172Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"6f5a170b4203f734","pathHash":"e2fe6cf687dbcbe3","success":true,"durationMs":70}
+✔ concurrent checkout opens return one full context and one reuse instruction (101.2564ms)
+{"ts":"2026-08-20T04:14:51.461Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"1913001bd031f2fe","pathHash":"edee82388cfda956","success":true,"durationMs":66}
+{"ts":"2026-08-20T04:14:51.676Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"3346c05a090f9cf0","pathHash":"34d254200b2d7cec","success":true,"durationMs":214}
+{"ts":"2026-08-20T04:14:51.889Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"46eba86f54003b6d","pathHash":"71d10b957e9ae000","success":true,"durationMs":212}
+{"ts":"2026-08-20T04:14:51.899Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"1913001bd031f2fe","pathHash":"edee82388cfda956","success":true,"durationMs":9}
+✔ new worktrees always receive a fresh workspace and complete worktree context (734.1121ms)
+{"ts":"2026-08-20T04:14:52.357Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"2429c43950fc9ec9","pathHash":"bedb935717e4c5aa","success":true,"durationMs":210}
+{"ts":"2026-08-20T04:14:52.431Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"56c83165a91f1d2e","pathHash":"50bc3a3ae8ccfb5b","success":true,"durationMs":73}
+{"ts":"2026-08-20T04:14:52.441Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"56c83165a91f1d2e","pathHash":"50bc3a3ae8ccfb5b","success":true,"durationMs":9}
+✔ checkout opened after a worktree receives its own complete context (545.15ms)
+{"ts":"2026-08-20T04:14:52.624Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"c2ebdf97312b7a70","pathHash":"d2e61cdd18ab84e3","success":true,"durationMs":141}
+{"ts":"2026-08-20T04:14:52.725Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"1fbc4c7a8a92d773","pathHash":"d2e61cdd18ab84e3","success":true,"durationMs":99}
+✔ a host without conversation metadata receives normal explicit-workspace behavior (275.7759ms)
+{"ts":"2026-08-20T04:14:52.827Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"56e4af35c63cfc73","pathHash":"9b1976464fa90845","success":true,"durationMs":67}
+{"ts":"2026-08-20T04:14:52.921Z","level":"info","event":"tool_call","tool":"open_workspace","workspaceIdHash":"56e4af35c63cfc73","pathHash":"9b1976464fa90845","success":true,"durationMs":81}
+✔ checkout reuse and context suppression survive a registry restart (193.9122ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2040.5203
+✔ device store creates a sanitized public record and enforces polling interval (35.671ms)
+✔ device store approval emits one token opportunity and rejects replay (18.1449ms)
+✔ device store denies pending requests and does not disclose invalid user codes (17.8071ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 600.2102
+✔ selective language catalog falls back heavy grammars to text (0.8735ms)
+✔ selective language catalog allows explicit heavy-language opt in (0.107ms)
 ℹ tests 2
 ℹ suites 0
 ℹ pass 2
@@ -160,20 +170,42 @@ Skipping invalid subagent profile C:\Users\fjuni\AppData\Local\Temp\devspace-age
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 13.5812
+ℹ duration_ms 10.5504
+✔ runtime metrics render safe dimensions and stable Prometheus names (9.448ms)
+✔ runtime metrics sanitize unsafe label values (0.4891ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17.2245
+✔ private file hardening produces an ACL equivalent to 0600 (91.9051ms)
+✔ DevSpace auth persistence applies private-file hardening (101.494ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 198.3245
 ------------------------------|---------|----------|---------|---------|----------------------------
 File                          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
 ------------------------------|---------|----------|---------|---------|----------------------------
-All files                     |   67.52 |    80.12 |   67.95 |   67.52 |                            
- src                          |   65.34 |    79.68 |   68.94 |   65.34 |                            
+All files                     |   67.57 |    80.47 |   70.58 |   67.57 |                            
+ src                          |   65.01 |    79.68 |   70.81 |   65.01 |                            
   apply-patch.ts              |    93.6 |    86.77 |     100 |    93.6 | ...316-318,337-340,438-440 
   artifact-error.ts           |     100 |      100 |     100 |     100 |                            
-  artifact-tools.ts           |   31.86 |     37.5 |   28.57 |   31.86 | ...589-599,601-608,610-612 
+  artifact-tools.ts           |   31.98 |     37.5 |   28.57 |   31.98 | ...593-603,605-612,614-616 
   cli.ts                      |   40.45 |    61.29 |   30.55 |   40.45 | ...684-692,694-702,705-706 
-  config.ts                   |    98.2 |     94.3 |     100 |    98.2 | 41-42,65-66,275            
+  config.ts                   |   97.57 |    92.18 |     100 |   97.57 | 41-42,65-66,179,188,286    
+  credential-security.ts      |   85.41 |    71.42 |     100 |   85.41 | 41-46,76-77,90-95          
+  error-policy.ts             |   79.48 |    80.64 |     100 |   79.48 | ...64-65,67-68,76-77,82-97 
   git-worktrees.ts            |   73.68 |     60.6 |     100 |   73.68 | ...116-128,135-146,174,177 
   git.ts                      |   90.32 |    84.61 |     100 |   90.32 | 37-42                      
-  idempotency-store.ts        |   56.07 |     87.5 |   29.16 |   56.07 | ...203-232,235-244,247-254 
+  idempotency-store.ts        |   51.74 |     87.5 |      28 |   51.74 | ...234-263,266-275,278-285 
   incoming-artifacts.ts       |    79.2 |    68.84 |     100 |    79.2 | ...444,453-457,519,527-528 
   local-agent-adapters.ts     |   62.53 |    79.67 |   55.17 |   62.53 | ...708-714,716-718,720-726 
   local-agent-availability.ts |   85.43 |    66.66 |    90.9 |   85.43 | ...2,77-82,119,139,146-150 
@@ -182,38 +214,43 @@ All files                     |   67.52 |    80.12 |   67.95 |   67.52 |
   local-agent-runtime.ts      |   96.07 |       80 |   88.88 |   96.07 | 99-102                     
   local-agent-store.ts        |   97.58 |    76.92 |     100 |   97.58 | 80-83,238-239              
   local-agent-targets.ts      |   96.61 |    84.37 |     100 |   96.61 | 35-36,74-75                
-  logger.ts                   |   62.62 |    42.85 |      30 |   62.62 | ...76-78,80-82,84-94,96-99 
+  logger.ts                   |   76.39 |    76.19 |      50 |   76.39 | ...142-144,146-156,158-161 
+  mcp-request-policy.ts       |     100 |    95.83 |     100 |     100 | 62                         
   mcp-sessions.ts             |     100 |    95.23 |     100 |     100 | 24                         
-  metrics.ts                  |   94.03 |     92.3 |    92.3 |   94.03 | 67-68,70-71,92-96          
-  oauth-device-cli.ts         |   21.07 |      100 |    6.25 |   21.07 | ...219-225,227-233,235-242 
-  oauth-device-routes.ts      |    9.42 |      100 |   11.11 |    9.42 | ...5-67,69-76,78-80,83-189 
-  oauth-device-store.ts       |   93.06 |    70.58 |   89.47 |   93.06 | ...179-184,214-216,237-240 
-  oauth-provider.ts           |      50 |    64.51 |      48 |      50 | ...340-341,377-378,390-404 
-  oauth-store.ts              |   98.31 |    89.47 |   91.66 |   98.31 | 61-62,201-202              
-  pi-tools.ts                 |   32.55 |      100 |    9.09 |   32.55 | ...107-112,114-119,121-129 
+  metrics.ts                  |   97.91 |       84 |   96.15 |   97.91 | 212-216                    
+  oauth-device-cli.ts         |   19.06 |      100 |    5.88 |   19.06 | ...255-261,263-269,271-278 
+  oauth-device-routes.ts      |    9.13 |      100 |   11.11 |    9.13 | ...7-70,72-79,81-83,86-206 
+  oauth-device-store.ts       |   89.06 |    70.58 |   89.47 |   89.06 | ...179-184,214-216,237-251 
+  oauth-provider.ts           |   49.11 |     60.6 |   42.85 |   49.11 | ...381-382,421-422,434-448 
+  oauth-store.ts              |   98.39 |    85.71 |   91.66 |   98.39 | 63-64,209-210              
+  pi-tools.ts                 |   33.33 |      100 |    9.09 |   33.33 | ...107-112,114-119,121-129 
   process-platform.ts         |    97.4 |    85.71 |     100 |    97.4 | 72-73                      
-  process-sessions.ts         |    88.7 |    80.85 |   93.93 |    88.7 | ...233-235,252-258,352-385 
+  process-sessions.ts         |   86.88 |    81.81 |   94.44 |   86.88 | ...278-282,298-304,406-439 
   request-meta.ts             |     100 |      100 |     100 |     100 |                            
   review-checkpoints.ts       |   93.06 |    77.14 |     100 |   93.06 | ...103-106,190,261-271,291 
-  roots.ts                    |     100 |      100 |     100 |     100 |                            
+  roots.ts                    |     100 |    93.33 |     100 |     100 | 76-78                      
   server-shutdown.ts          |     100 |      100 |     100 |     100 |                            
-  server.ts                   |   37.54 |    59.09 |   25.71 |   37.54 | ...745,1755-2043,2054-2091 
+  server.ts                   |   35.01 |    57.35 |   25.71 |   35.01 | ...890,1900-2285,2296-2333 
   skills.ts                   |   96.06 |    91.42 |   88.88 |   96.06 | 111-115                    
-  user-config.ts              |   79.85 |    93.75 |   57.14 |   79.85 | ...107-108,132-134,137-139 
+  user-config.ts              |   89.36 |    94.73 |   78.57 |   89.36 | ...5,88-95,108-109,133-135 
   workspace-store.ts          |   98.32 |    89.65 |   93.33 |   98.32 | 173-174,211-212            
-  workspaces.ts               |   92.12 |    82.67 |      90 |   92.12 | ...546-547,554-555,566-567 
- src/db                       |     100 |    96.15 |   76.47 |     100 |                            
+  workspaces.ts               |   92.13 |     83.2 |      90 |   92.13 | ...547-548,555-556,567-568 
+ src/db                       |     100 |      100 |   78.94 |     100 |                            
   client.ts                   |     100 |      100 |     100 |     100 |                            
-  migrations.ts               |     100 |    94.11 |     100 |     100 | 269                        
+  migrations.ts               |     100 |      100 |     100 |     100 |                            
   schema.ts                   |     100 |      100 |       0 |     100 |                            
- src/reverse-engineering      |   26.34 |       50 |    4.54 |   26.34 |                            
-  cli.ts                      |       0 |        0 |       0 |       0 | 1-9                        
+ src/reverse-engineering      |   26.19 |       50 |    4.54 |   26.19 |                            
+  cli.ts                      |       0 |        0 |       0 |       0 | 1-10                       
   index.ts                    |   27.84 |      100 |    4.76 |   27.84 | ...125,127,129-140,145-150 
- src/ui                       |   88.34 |    81.64 |    82.6 |   88.34 |                            
-  card-types.ts               |   88.26 |    78.57 |   71.42 |   88.26 | ...131-132,143-144,147-156 
+ src/ui                       |   89.93 |    83.72 |   88.88 |   89.93 |                            
+  card-result-normalizer.ts   |     100 |     90.9 |     100 |     100 | 16                         
+  card-types.ts               |    90.3 |    79.54 |   85.71 |    90.3 | 104-110,143-144,147-156    
   icons.ts                    |   89.18 |      100 |   33.33 |   89.18 | 65-67,70-74                
+  journey-progress.ts         |   88.29 |    89.28 |    87.5 |   88.29 | 74-84                      
   language-catalog.ts         |     100 |    85.71 |     100 |     100 | 8                          
   patch-display.ts            |   94.63 |    84.05 |    92.3 |   94.63 | ...147-150,160-161,172-173 
+  render-strategy.ts          |     100 |      100 |     100 |     100 |                            
   scrollbar.ts                |       0 |        0 |       0 |       0 | 1-44                       
+  sync-state.ts               |     100 |      100 |     100 |     100 |                            
   tool-display.ts             |   99.09 |     81.6 |     100 |   99.09 | 207-208                    
 ------------------------------|---------|----------|---------|---------|----------------------------

@@ -2,7 +2,7 @@
 > @waishnav/devspace@1.0.7 e2e:oauth-device
 > node --test scripts/e2e-oauth-device.test.mjs
 
-✔ device authorization grant completes and is one-time consumable (2230.8137ms)
+✔ device authorization grant completes and is one-time consumable (2254.474ms)
 ℹ tests 1
 ℹ suites 0
 ℹ pass 1
@@ -10,4 +10,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 7293.2966
+ℹ duration_ms 7323.8421

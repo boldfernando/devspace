@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0.0",
-  "generated_at": "2026-08-18T15:36:26.908Z",
+  "generated_at": "2026-08-20T04:13:24.297Z",
   "repository": {
     "name": "@waishnav/devspace",
     "version": "1.0.7",
@@ -487,8 +487,12 @@
       "permissions": [],
       "telemetry": [],
       "tests": [
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
+        "test_de3c76b4fe7e",
+        "test_a06face1252e",
+        "test_6ab1661e2c39",
         "test_79f91807593e"
       ],
       "dependencies": [
@@ -574,8 +578,12 @@
       "permissions": [],
       "telemetry": [],
       "tests": [
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
+        "test_de3c76b4fe7e",
+        "test_a06face1252e",
+        "test_6ab1661e2c39",
         "test_79f91807593e"
       ],
       "dependencies": [
@@ -654,11 +662,11 @@
         "test_3bc068b7a3cb",
         "test_d8bc151faa06",
         "test_6b5ebc97d966",
+        "test_17be51126d30",
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
-        "test_79f91807593e",
-        "test_9518f8ac5193",
-        "test_1b70bb90691a"
+        "test_de3c76b4fe7e"
       ],
       "dependencies": [
         "src/server.ts",
@@ -732,7 +740,9 @@
       "permissions": [],
       "telemetry": [],
       "tests": [
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
+        "test_6ab1661e2c39",
         "test_9518f8ac5193"
       ],
       "dependencies": [
@@ -815,11 +825,11 @@
         "test_3bc068b7a3cb",
         "test_d8bc151faa06",
         "test_6b5ebc97d966",
+        "test_17be51126d30",
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
-        "test_79f91807593e",
-        "test_9518f8ac5193",
-        "test_1b70bb90691a"
+        "test_de3c76b4fe7e"
       ],
       "dependencies": [
         "src/ui/language-catalog.ts"
@@ -881,11 +891,11 @@
         "test_3bc068b7a3cb",
         "test_d8bc151faa06",
         "test_6b5ebc97d966",
+        "test_17be51126d30",
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
-        "test_79f91807593e",
-        "test_9518f8ac5193",
-        "test_1b70bb90691a"
+        "test_de3c76b4fe7e"
       ],
       "dependencies": [
         "src/cli.ts"
@@ -990,6 +1000,65 @@
     }
   ],
   "components": [
+    {
+      "id": "component_a0722b288de6",
+      "name": "accessibility-contract.test.ts",
+      "source_location": "src/ui/accessibility-contract.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/accessibility-contract.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_c79af681d6d3",
+      "name": "card-result-normalizer.test.ts",
+      "source_location": "src/ui/card-result-normalizer.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/card-result-normalizer.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_ec7cd7d4de05",
+      "name": "card-result-normalizer.ts",
+      "source_location": "src/ui/card-result-normalizer.ts",
+      "exports": [
+        "withContentFallback"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/card-result-normalizer.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
     {
       "id": "component_a15f20fdcb07",
       "name": "card-types.test.ts",
@@ -1129,6 +1198,52 @@
       ]
     },
     {
+      "id": "component_b6c0a8ebdcc2",
+      "name": "journey-progress.test.ts",
+      "source_location": "src/ui/journey-progress.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/journey-progress.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_e2d407cd6bea",
+      "name": "journey-progress.ts",
+      "source_location": "src/ui/journey-progress.ts",
+      "exports": [
+        "journeyStages",
+        "initialJourneyProgress",
+        "updateJourneyProgress",
+        "completedJourneyStages",
+        "journeyProgressPercent",
+        "nextJourneyStep",
+        "journeyStageLabel"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/journey-progress.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
       "id": "component_e374f641999c",
       "name": "language-catalog.test.ts",
       "source_location": "src/ui/language-catalog.test.ts",
@@ -1215,6 +1330,46 @@
       ]
     },
     {
+      "id": "component_ff461f51d237",
+      "name": "render-strategy.test.ts",
+      "source_location": "src/ui/render-strategy.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/render-strategy.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_c47bc1dd31fb",
+      "name": "render-strategy.ts",
+      "source_location": "src/ui/render-strategy.ts",
+      "exports": [
+        "shouldUpdateToolResultInPlace"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/render-strategy.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
       "id": "component_8563b3ffee79",
       "name": "review-payload.tsx",
       "source_location": "src/ui/review-payload.tsx",
@@ -1250,6 +1405,50 @@
           "type": "file",
           "source": "repository",
           "path": "src/ui/scrollbar.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_b7377202353b",
+      "name": "sync-state.test.ts",
+      "source_location": "src/ui/sync-state.test.ts",
+      "exports": [],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/sync-state.test.ts",
+          "detector": "component-detector",
+          "raw_signal": "UI source file",
+          "confidence": 0.86
+        }
+      ]
+    },
+    {
+      "id": "component_0478c9c5e309",
+      "name": "sync-state.ts",
+      "source_location": "src/ui/sync-state.ts",
+      "exports": [
+        "initialUiSyncState",
+        "beginConnection",
+        "beginRender",
+        "isCurrentConnection",
+        "isCurrentRender"
+      ],
+      "consumers": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.86,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/sync-state.ts",
           "detector": "component-detector",
           "raw_signal": "UI source file",
           "confidence": 0.86
@@ -1477,6 +1676,42 @@
       ]
     },
     {
+      "id": "test_17be51126d30",
+      "path": "scripts/e2e-block1-identity.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-block1-identity.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_6ec87dd0717c",
+      "path": "scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "test_dbe3d59f09a2",
       "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
       "framework": "node:test",
@@ -1506,6 +1741,60 @@
           "type": "file",
           "source": "repository",
           "path": "scripts/e2e-http-mcp-negative.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_de3c76b4fe7e",
+      "path": "scripts/e2e-http-mcp-path-containment.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-path-containment.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_a06face1252e",
+      "path": "scripts/e2e-http-mcp-resilience.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-resilience.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_6ab1661e2c39",
+      "path": "scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -1549,6 +1838,24 @@
       ]
     },
     {
+      "id": "test_9b946b18ba33",
+      "path": "scripts/e2e-mcp-monitor.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-mcp-monitor.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "test_1b70bb90691a",
       "path": "scripts/e2e-oauth-device-cli.test.mjs",
       "framework": "node:test",
@@ -1578,6 +1885,42 @@
           "type": "file",
           "source": "repository",
           "path": "scripts/e2e-oauth-device.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_202977c732ed",
+      "path": "scripts/e2e-swarm-chaos.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-swarm-chaos.test.mjs",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_3c343db3b059",
+      "path": "scripts/e2e-swarm-resilience.test.mjs",
+      "framework": "node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "scripts/e2e-swarm-resilience.test.mjs",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -1650,6 +1993,78 @@
           "type": "file",
           "source": "repository",
           "path": "src/config.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_51ac2805d716",
+      "path": "src/credential-security.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/credential-security.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_f546f3722738",
+      "path": "src/db/query-performance.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/db/query-performance.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_433839a9bc2c",
+      "path": "src/db/resilience.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/db/resilience.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_4fc193791672",
+      "path": "src/error-policy.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/error-policy.test.ts",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -1783,6 +2198,42 @@
       ]
     },
     {
+      "id": "test_bbe3acac244e",
+      "path": "src/logger.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/logger.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_f29bbabc47e1",
+      "path": "src/mcp-request-policy.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/mcp-request-policy.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "test_17566866b891",
       "path": "src/mcp-sessions.test.ts",
       "framework": "tsx/node:test",
@@ -1909,6 +2360,24 @@
       ]
     },
     {
+      "id": "test_53d39528989a",
+      "path": "src/response-shaping-contract.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/response-shaping-contract.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "test_7c589cd4ee8a",
       "path": "src/review-checkpoints.test.ts",
       "framework": "tsx/node:test",
@@ -1999,6 +2468,42 @@
       ]
     },
     {
+      "id": "test_a0722b288de6",
+      "path": "src/ui/accessibility-contract.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/accessibility-contract.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_c79af681d6d3",
+      "path": "src/ui/card-result-normalizer.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/card-result-normalizer.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
       "id": "test_a15f20fdcb07",
       "path": "src/ui/card-types.test.ts",
       "framework": "tsx/node:test",
@@ -2010,6 +2515,24 @@
           "type": "file",
           "source": "repository",
           "path": "src/ui/card-types.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_b6c0a8ebdcc2",
+      "path": "src/ui/journey-progress.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/journey-progress.test.ts",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -2046,6 +2569,42 @@
           "type": "file",
           "source": "repository",
           "path": "src/ui/patch-display.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_ff461f51d237",
+      "path": "src/ui/render-strategy.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/render-strategy.test.ts",
+          "detector": "test-detector",
+          "raw_signal": "test filename",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "id": "test_b7377202353b",
+      "path": "src/ui/sync-state.test.ts",
+      "framework": "tsx/node:test",
+      "requirements": [],
+      "evidence_status": "EXPLICIT",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "type": "file",
+          "source": "repository",
+          "path": "src/ui/sync-state.test.ts",
           "detector": "test-detector",
           "raw_signal": "test filename",
           "confidence": 0.99
@@ -2393,6 +2952,30 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "src/ui/accessibility-contract.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/card-result-normalizer.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/card-result-normalizer.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/ui/card-types.test.ts",
       "detector": "component-detector",
       "raw_signal": "UI source file",
@@ -2441,6 +3024,22 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "src/ui/journey-progress.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/journey-progress.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/ui/language-catalog.test.ts",
       "detector": "component-detector",
       "raw_signal": "UI source file",
@@ -2473,6 +3072,22 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "src/ui/render-strategy.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/render-strategy.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/ui/review-payload.tsx",
       "detector": "component-detector",
       "raw_signal": "UI source file",
@@ -2482,6 +3097,22 @@
       "type": "file",
       "source": "repository",
       "path": "src/ui/scrollbar.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/sync-state.test.ts",
+      "detector": "component-detector",
+      "raw_signal": "UI source file",
+      "confidence": 0.86
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/sync-state.ts",
       "detector": "component-detector",
       "raw_signal": "UI source file",
       "confidence": 0.86
@@ -2545,6 +3176,22 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "scripts/e2e-block1-identity.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "scripts/e2e-http-mcp-idempotency.test.mjs",
       "detector": "test-detector",
       "raw_signal": "test filename",
@@ -2554,6 +3201,30 @@
       "type": "file",
       "source": "repository",
       "path": "scripts/e2e-http-mcp-negative.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-path-containment.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-resilience.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -2577,6 +3248,14 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "scripts/e2e-mcp-monitor.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "scripts/e2e-oauth-device-cli.test.mjs",
       "detector": "test-detector",
       "raw_signal": "test filename",
@@ -2586,6 +3265,22 @@
       "type": "file",
       "source": "repository",
       "path": "scripts/e2e-oauth-device.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-swarm-chaos.test.mjs",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "scripts/e2e-swarm-resilience.test.mjs",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -2618,6 +3313,38 @@
       "type": "file",
       "source": "repository",
       "path": "src/config.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/credential-security.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/db/query-performance.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/db/resilience.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/error-policy.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -2681,6 +3408,22 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "src/logger.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/mcp-request-policy.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/mcp-sessions.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
@@ -2737,6 +3480,14 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "src/response-shaping-contract.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/review-checkpoints.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
@@ -2777,7 +3528,31 @@
     {
       "type": "file",
       "source": "repository",
+      "path": "src/ui/accessibility-contract.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/card-result-normalizer.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
       "path": "src/ui/card-types.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/journey-progress.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -2794,6 +3569,22 @@
       "type": "file",
       "source": "repository",
       "path": "src/ui/patch-display.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/render-strategy.test.ts",
+      "detector": "test-detector",
+      "raw_signal": "test filename",
+      "confidence": 0.99
+    },
+    {
+      "type": "file",
+      "source": "repository",
+      "path": "src/ui/sync-state.test.ts",
       "detector": "test-detector",
       "raw_signal": "test filename",
       "confidence": 0.99
@@ -5001,16 +5792,28 @@
         "test_3bc068b7a3cb",
         "test_d8bc151faa06",
         "test_6b5ebc97d966",
+        "test_17be51126d30",
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
+        "test_de3c76b4fe7e",
+        "test_a06face1252e",
+        "test_6ab1661e2c39",
         "test_79f91807593e",
         "test_9518f8ac5193",
+        "test_9b946b18ba33",
         "test_1b70bb90691a",
         "test_2257358bbd61",
+        "test_202977c732ed",
+        "test_3c343db3b059",
         "test_578f628d84b0",
         "test_edfde0016435",
         "test_c6e5a6551503",
         "test_3d568f154201",
+        "test_51ac2805d716",
+        "test_f546f3722738",
+        "test_433839a9bc2c",
+        "test_4fc193791672",
         "test_d0c48b734aed",
         "test_256e60d2da2b",
         "test_926ad95b499e",
@@ -5018,6 +5821,8 @@
         "test_d4f9d8ce2b6e",
         "test_a92fd9e898fd",
         "test_8f35bd0c1c45",
+        "test_bbe3acac244e",
+        "test_f29bbabc47e1",
         "test_17566866b891",
         "test_eb459c34bc64",
         "test_dfbd418d9660",
@@ -5025,14 +5830,20 @@
         "test_faf78054b92c",
         "test_76404f90283a",
         "test_e49dee9006c1",
+        "test_53d39528989a",
         "test_7c589cd4ee8a",
         "test_86de4eb4fdef",
         "test_2ec9bb28f426",
         "test_99636b5e2b3a",
         "test_972cee8a7357",
+        "test_a0722b288de6",
+        "test_c79af681d6d3",
         "test_a15f20fdcb07",
+        "test_b6c0a8ebdcc2",
         "test_e374f641999c",
         "test_cddb811068b6",
+        "test_ff461f51d237",
+        "test_b7377202353b",
         "test_9b6246bea38b",
         "test_6c8cfdc69808",
         "test_008cbd460864"
@@ -5045,16 +5856,28 @@
         "test_3bc068b7a3cb",
         "test_d8bc151faa06",
         "test_6b5ebc97d966",
+        "test_17be51126d30",
+        "test_6ec87dd0717c",
         "test_dbe3d59f09a2",
         "test_58bf0909c5a7",
+        "test_de3c76b4fe7e",
+        "test_a06face1252e",
+        "test_6ab1661e2c39",
         "test_79f91807593e",
         "test_9518f8ac5193",
+        "test_9b946b18ba33",
         "test_1b70bb90691a",
         "test_2257358bbd61",
+        "test_202977c732ed",
+        "test_3c343db3b059",
         "test_578f628d84b0",
         "test_edfde0016435",
         "test_c6e5a6551503",
         "test_3d568f154201",
+        "test_51ac2805d716",
+        "test_f546f3722738",
+        "test_433839a9bc2c",
+        "test_4fc193791672",
         "test_d0c48b734aed",
         "test_256e60d2da2b",
         "test_926ad95b499e",
@@ -5062,6 +5885,8 @@
         "test_d4f9d8ce2b6e",
         "test_a92fd9e898fd",
         "test_8f35bd0c1c45",
+        "test_bbe3acac244e",
+        "test_f29bbabc47e1",
         "test_17566866b891",
         "test_eb459c34bc64",
         "test_dfbd418d9660",
@@ -5069,14 +5894,20 @@
         "test_faf78054b92c",
         "test_76404f90283a",
         "test_e49dee9006c1",
+        "test_53d39528989a",
         "test_7c589cd4ee8a",
         "test_86de4eb4fdef",
         "test_2ec9bb28f426",
         "test_99636b5e2b3a",
         "test_972cee8a7357",
+        "test_a0722b288de6",
+        "test_c79af681d6d3",
         "test_a15f20fdcb07",
+        "test_b6c0a8ebdcc2",
         "test_e374f641999c",
         "test_cddb811068b6",
+        "test_ff461f51d237",
+        "test_b7377202353b",
         "test_9b6246bea38b",
         "test_6c8cfdc69808",
         "test_008cbd460864"

@@ -1,0 +1,98 @@
+{
+  "schema": "canonical-platform-review-360/stack",
+  "schema_version": "3.0.0",
+  "status": "OBSERVED",
+  "observed_at": "2026-08-20T04:44:12.2836440Z",
+  "repository_root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "discovery": {
+    "scanner": "canonical-platform-review-360-v3.0.0/skills/discover-codebase/scripts/scan.py",
+    "exit_code": 0,
+    "markers": [
+      "package.json",
+      "package-lock.json"
+    ],
+    "evidence": "artifacts/canonical-platform-review-360-audit/00-discovery-and-git.log"
+  },
+  "package_manager": {
+    "name": "npm",
+    "lockfile": "package-lock.json",
+    "install_command": "npm ci",
+    "evidence": "package.json"
+  },
+  "runtime": {
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "git": "2.55.0.windows.4",
+    "package_engine": ">=22.19 <27",
+    "evidence": "artifacts/canonical-platform-review-360-audit/00-discovery-and-git.log"
+  },
+  "language_and_build": {
+    "language": "TypeScript",
+    "module_system": "ESM",
+    "target": "ES2022",
+    "compiler": "TypeScript 6.0.3",
+    "build": "Vite 8 + tsc -p tsconfig.build.json",
+    "evidence": "package.json"
+  },
+  "application": {
+    "frontend": "React 19",
+    "backend": "Express 5",
+    "protocol": "MCP Streamable HTTP",
+    "database": "SQLite via better-sqlite3 with WAL and 8 migrations",
+    "orm_view": "Drizzle ORM typed schema subset",
+    "evidence": [
+      "package.json",
+      "src/server.ts",
+      "src/db/migrations.ts"
+    ]
+  },
+  "authentication_and_authorization": {
+    "oauth": [
+      "OAuth 2.0 Authorization Code with PKCE S256",
+      "OAuth 2.0 Device Authorization Grant RFC 8628",
+      "Bearer access tokens",
+      "token subject binding",
+      "trusted-header HMAC approval mode"
+    ],
+    "authorization": [
+      "resource binding",
+      "scope enforcement",
+      "principal binding",
+      "MCP session client/resource/principal binding",
+      "fail-closed unknown-tool policy"
+    ],
+    "evidence": [
+      "src/server.ts",
+      "src/oauth-device-routes.ts",
+      "src/oauth-device-cli.ts",
+      "artifacts/canonical-dod-360-audit/final-gate-matrix.json"
+    ]
+  },
+  "testing": {
+    "runner": "node:test and tsx",
+    "coverage": "c8",
+    "coverage_thresholds": {
+      "lines": 60,
+      "functions": 55,
+      "branches": 45,
+      "statements": 60
+    },
+    "e2e": "real HTTP/MCP runners with OAuth/device/idempotency/path-containment/resilience/swarm/chaos profiles",
+    "evidence": [
+      "package.json",
+      "evidence/raw/wave1-p0/coverage.log",
+      "evidence/raw/test-strategy-report.json"
+    ]
+  },
+  "ci": {
+    "provider": "GitHub Actions",
+    "workflow": ".github/workflows/ci.yml",
+    "jobs": ["smoke", "staging-load"],
+    "os_matrix": ["ubuntu-latest", "macos-latest", "windows-latest"],
+    "evidence": ".github/workflows/ci.yml"
+  },
+  "confidence": "HIGH",
+  "unknowns": [
+    "Hosted deployment target and production runtime were not available in this review environment."
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "canonical-platform-review-360/git-baseline",
+  "schema_version": "3.0.0",
+  "status": "OBSERVED",
+  "observed_at": "2026-08-20T04:44:12.2836440Z",
+  "repository_root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "scanner": "canonical-platform-review-360-v3.0.0/skills/reconcile-git-state/scripts/scan.py",
+  "scanner_exit_code": 0,
+  "head": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+  "branch": "main",
+  "tracking": {
+    "remote": "origin/main",
+    "ahead": 50,
+    "behind": 0
+  },
+  "remotes": {
+    "origin": {
+      "fetch": "https://github.com/boldfernando/devspace.git",
+      "push": "https://github.com/boldfernando/devspace.git"
+    },
+    "upstream": {
+      "fetch": "https://github.com/Fernadoteixeira/devspace.git",
+      "push": "https://github.com/Fernadoteixeira/devspace.git"
+    }
+  },
+  "worktrees": [
+    {
+      "path": "C:/Users/fjuni/.copilot/repos/devspace",
+      "head": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+      "branch": "refs/heads/main"
+    }
+  ],
+  "working_tree": {
+    "state": "DIRTY",
+    "modified_count": 70,
+    "untracked_count": 4,
+    "preexisting_changes_must_be_preserved": true,
+    "summary_evidence": "artifacts/canonical-platform-review-360-audit/00-discovery-and-git.log"
+  },
+  "rollback_anchor": {
+    "commit": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+    "captured_before_review_apply": true,
+    "reset_or_clean_performed": false
+  },
+  "confidence": "HIGH"
+}

@@ -1,0 +1,284 @@
+{
+  "schema": "canonical-platform-review-360/surface-inventory",
+  "schema_version": "3.0.0",
+  "status": "OBSERVED",
+  "observed_at": "2026-08-20T04:44:12.2836440Z",
+  "repository": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "surfaces": {
+    "http": [
+      {
+        "method": "GET",
+        "path": "/.well-known/oauth-authorization-server",
+        "auth": "public metadata",
+        "purpose": "OAuth issuer, authorization, token, revocation, registration, device authorization, grant, scope, and PKCE metadata"
+      },
+      {
+        "method": "POST",
+        "path": "/register",
+        "auth": "OAuth public client registration flow",
+        "purpose": "Dynamic OAuth client registration via MCP auth router"
+      },
+      {
+        "method": "GET/POST",
+        "path": "/authorize",
+        "auth": "OAuth authorization flow",
+        "purpose": "Authorization Code + PKCE authorization"
+      },
+      {
+        "method": "POST",
+        "path": "/token",
+        "auth": "OAuth token exchange or device polling",
+        "purpose": "Authorization code exchange, refresh-token exchange, and RFC 8628 device-code polling"
+      },
+      {
+        "method": "POST",
+        "path": "/revoke",
+        "auth": "OAuth client/token body",
+        "purpose": "Access-token revocation"
+      },
+      {
+        "method": "POST",
+        "path": "/oauth/device/authorize",
+        "auth": "rate-limited client request",
+        "purpose": "Create device authorization request"
+      },
+      {
+        "method": "GET",
+        "path": "/oauth/device",
+        "auth": "public verification UX",
+        "purpose": "Render device-code approval page"
+      },
+      {
+        "method": "POST",
+        "path": "/oauth/device/approve",
+        "auth": "owner_token or trusted identity + HMAC proof",
+        "purpose": "Approve or deny a pending device authorization"
+      },
+      {
+        "method": "OPTIONS",
+        "path": "/mcp-app-assets/{*asset}",
+        "auth": "public static asset preflight",
+        "purpose": "Static UI asset headers"
+      },
+      {
+        "method": "GET",
+        "path": "/mcp-app-assets/{*asset}",
+        "auth": "public immutable static asset",
+        "purpose": "Serve built UI assets"
+      },
+      {
+        "method": "GET",
+        "path": "/metrics",
+        "auth": "public operational endpoint",
+        "purpose": "Prometheus text exposition"
+      },
+      {
+        "method": "GET",
+        "path": "/healthz",
+        "auth": "public liveness endpoint",
+        "purpose": "Process liveness"
+      },
+      {
+        "method": "GET",
+        "path": "/readyz",
+        "auth": "public readiness endpoint",
+        "purpose": "SQLite readiness check"
+      },
+      {
+        "method": "ALL",
+        "path": "/mcp",
+        "auth": "Bearer token, resource binding, scopes, principal/client/resource session binding",
+        "purpose": "Streamable HTTP MCP transport"
+      }
+    ],
+    "mcp": {
+      "server_name": "devspace",
+      "protocol": "Streamable HTTP MCP",
+      "resources": [
+        {
+          "name": "DevSpace Diff Card",
+          "uri": "ui://devspace/workspace",
+          "purpose": "Interactive diff card UI resource",
+          "evidence": "src/server.ts"
+        }
+      ],
+      "tools": [
+        "exec_command",
+        "write_stdin",
+        "open_workspace",
+        "apply_patch",
+        "show_changes",
+        "read",
+        "write",
+        "edit",
+        "grep",
+        "glob",
+        "ls",
+        "bash"
+      ],
+      "lifecycle": [
+        "initialize",
+        "notifications/initialized",
+        "tools/list",
+        "tools/call",
+        "session close",
+        "session idle cleanup"
+      ],
+      "policy_boundaries": [
+        "unknown tools denied by default",
+        "malformed tool calls denied",
+        "required scopes enforced",
+        "unknown sessions rejected",
+        "session binding mismatch rejected",
+        "resource mismatch rejected",
+        "no valid MCP session rejected"
+      ]
+    },
+    "oauth": {
+      "authorization_code_pkce": [
+        "metadata discovery",
+        "dynamic client registration",
+        "S256 code challenge",
+        "authorization and owner approval",
+        "authorization code exchange",
+        "Bearer resource/scope validation",
+        "refresh and revocation"
+      ],
+      "device_authorization_grant": [
+        "device authorization request",
+        "user-code verification UX",
+        "owner/trusted-header approval",
+        "authorization_pending",
+        "slow_down with Retry-After",
+        "expired_token",
+        "access_denied",
+        "device-code consumption"
+      ],
+      "identity_controls": [
+        "token subject binding",
+        "trusted identity HMAC proof",
+        "principal binding in AuthInfo",
+        "MCP session binding to clientId/resource/principalId"
+      ]
+    },
+    "cli": {
+      "entrypoint": "dist/cli.js",
+      "commands": [
+        "serve",
+        "init",
+        "doctor",
+        "auth",
+        "prd-reverse",
+        "config",
+        "agents",
+        "help",
+        "version"
+      ],
+      "auth_modes": [
+        "PKCE interactive login",
+        "Device Authorization Grant login",
+        "auth status"
+      ],
+      "evidence": [
+        "src/cli.ts",
+        "src/oauth-device-cli.ts"
+      ]
+    },
+    "ui": {
+      "entrypoint": "src/ui/workspace-app.tsx",
+      "delivery": [
+        "MCP app resource",
+        "static Vite assets under /mcp-app-assets"
+      ],
+      "features": [
+        "diff/review card",
+        "lazy-loaded payload/review components",
+        "connection/render epoch synchronization",
+        "workflow progress and accessibility landmarks"
+      ]
+    },
+    "database": {
+      "engine": "SQLite via better-sqlite3",
+      "transaction_mode": "WAL with immediate migrations",
+      "migration_count": 8,
+      "migrations": [
+        "workspace-state",
+        "oauth-state",
+        "local-agent-sessions",
+        "workspace-conversation-bindings",
+        "write-idempotency",
+        "oauth-device-authorization",
+        "oauth-token-subjects",
+        "query-performance-indexes"
+      ],
+      "tables": [
+        "devspace_schema_migrations",
+        "workspace_sessions",
+        "loaded_agent_files",
+        "oauth_clients",
+        "oauth_access_tokens",
+        "oauth_refresh_tokens",
+        "local_agent_sessions",
+        "workspace_conversation_bindings",
+        "write_idempotency",
+        "oauth_device_authorizations"
+      ],
+      "critical_constraints": [
+        "workspace foreign-key cascade",
+        "OAuth client foreign-key cascade",
+        "idempotency primary key (scope_key, idempotency_key)",
+        "idempotency states pending/succeeded/failed",
+        "device states pending/approved/denied/consumed/expired"
+      ]
+    },
+    "filesystem_and_process": {
+      "boundaries": [
+        "approved-root containment",
+        "realpath and symlink escape prevention",
+        "checkout/worktree modes",
+        "long-running process sessions",
+        "write and write_stdin idempotency",
+        "allowlisted command policy"
+      ]
+    },
+    "observability": {
+      "endpoints": ["/metrics", "/healthz", "/readyz"],
+      "safe_dimensions": ["tool", "state", "outcome", "status", "reason", "hash/prefix identifiers"],
+      "prohibited_dimensions": ["token", "owner secret", "payload", "command", "chars", "stdout", "absolute secret-bearing path"],
+      "artifacts": [
+        "artifacts/observability-contract-report.json",
+        "artifacts/mcp-monitor-contract.json",
+        "observability/grafana-idempotency-dashboard.json",
+        "observability/prometheus-idempotency-alerts.yml"
+      ]
+    },
+    "ci_cd": {
+      "workflow": ".github/workflows/ci.yml",
+      "triggers": ["push main", "pull_request", "workflow_dispatch", "nightly schedule"],
+      "jobs": {
+        "smoke": {
+          "os": ["ubuntu-latest", "macos-latest", "windows-latest"],
+          "gates": ["npm ci", "typecheck", "unit/contract tests", "build", "OAuth/device E2E", "HTTP/MCP E2E", "negative P0", "coverage", "bundle", "doctor", "swarm/chaos on Ubuntu"]
+        },
+        "staging-load": {
+          "os": ["ubuntu-latest"],
+          "gates": ["build", "bundle", "observability contract", "authenticated sustained MCP load", "coverage", "doctor"]
+        }
+      },
+      "artifact_policy": "upload sanitized JSON/log/coverage artifacts on always where configured",
+      "deployment_target": "UNKNOWN",
+      "rollback_drill": "UNKNOWN",
+      "sbom_provenance": "UNKNOWN"
+    }
+  },
+  "sources": [
+    "src/server.ts",
+    "src/oauth-device-routes.ts",
+    "src/oauth-device-cli.ts",
+    "src/cli.ts",
+    "src/db/migrations.ts",
+    "src/ui/workspace-app.tsx",
+    ".github/workflows/ci.yml"
+  ],
+  "confidence": "HIGH"
+}

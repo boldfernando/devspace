@@ -1,0 +1,343 @@
+{
+  "schema": "devspace.test-strategy.v1",
+  "generated_at": "2026-08-20T05:03:03.395Z",
+  "repository": "",
+  "commit": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+  "inventory": {
+    "source_unit_contract_files": 41,
+    "script_e2e_integration_files": 15,
+    "executable_runner_files": 17,
+    "by_layer": {
+      "unit_contract": 41,
+      "integration_contract": 2,
+      "end_to_end": 13
+    }
+  },
+  "package_gates": {
+    "test": true,
+    "coverage_check": true,
+    "build": true,
+    "security_p0": true,
+    "observability": true,
+    "swarm_resilience": true,
+    "swarm_chaos": true,
+    "coverage_thresholds": {
+      "lines": 60,
+      "functions": 55,
+      "branches": 45,
+      "statements": 60
+    },
+    "names": [
+      "clean",
+      "build",
+      "build:app",
+      "dev",
+      "postinstall",
+      "start",
+      "test",
+      "test:observability",
+      "test:strategy:audit",
+      "wave1:p0",
+      "wave2:chaos",
+      "wave3:performance",
+      "evidence:index",
+      "test:mcp-monitor",
+      "e2e:block1:identity",
+      "typecheck",
+      "e2e",
+      "e2e:idempotency",
+      "e2e:write-stdin:idempotency",
+      "e2e:idempotency:recovery",
+      "e2e:path-containment",
+      "e2e:resilience:p2",
+      "e2e:swarm:resilience",
+      "e2e:swarm:chaos",
+      "test:idempotency:p1",
+      "prd:reverse",
+      "prd:reverse:strict",
+      "test:prd-reverse",
+      "test:oauth-device",
+      "e2e:oauth-device",
+      "e2e:oauth-device-cli",
+      "coverage",
+      "coverage:check",
+      "bundle:audit",
+      "bundle:audit:check",
+      "test:bundle-audit",
+      "mcp:monitor",
+      "mcp:monitor:once",
+      "mcp:monitor:continuous",
+      "mcp:load:log",
+      "presentation:script",
+      "security:p0"
+    ]
+  },
+  "ci": {
+    "workflow": ".github/workflows/ci.yml",
+    "smoke_matrix": [
+      "ubuntu-latest",
+      "macos-latest",
+      "windows-latest"
+    ],
+    "staging_load_present": true,
+    "smoke_step_count": 37,
+    "critical_step_names": [
+      "Test",
+      "Build",
+      "OAuth device store contract",
+      "OAuth device HTTP E2E",
+      "OAuth device CLI E2E",
+      "Upload OAuth device CLI security artifact",
+      "Path containment HTTP/MCP E2E",
+      "Canonical 360 contract tests",
+      "Bundle budget gate",
+      "Bundle audit module tests",
+      "End-to-end HTTP/MCP OAuth P0",
+      "MCP monitor contract E2E",
+      "Block 1 identity and authorization E2E",
+      "Idempotency crash and reconciliation E2E",
+      "Upload idempotency recovery evidence",
+      "write_stdin idempotency and sequence E2E",
+      "Upload write_stdin idempotency evidence",
+      "OAuth/MCP P0 negative matrix",
+      "Upload OAuth/MCP security artifacts",
+      "Agents Swarm resilience E2E",
+      "Agents Swarm chaos E2E",
+      "Upload Agents Swarm evidence",
+      "Test strategy audit",
+      "Upload test strategy report",
+      "Coverage gate",
+      "Upload coverage report",
+      "Upload UI bundle report",
+      "Doctor"
+    ]
+  },
+  "coverage": {
+    "lines": {
+      "total": 12904,
+      "covered": 8761,
+      "skipped": 0,
+      "pct": 67.89
+    },
+    "statements": {
+      "total": 12904,
+      "covered": 8761,
+      "skipped": 0,
+      "pct": 67.89
+    },
+    "functions": {
+      "total": 718,
+      "covered": 505,
+      "skipped": 0,
+      "pct": 70.33
+    },
+    "branches": {
+      "total": 1962,
+      "covered": 1586,
+      "skipped": 0,
+      "pct": 80.83
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "coverage_hotspots": [
+    {
+      "file": "src/oauth-device-routes.ts",
+      "lines": 9.13,
+      "functions": 11.11,
+      "branches": 100,
+      "line_total": 208
+    },
+    {
+      "file": "src/oauth-device-cli.ts",
+      "lines": 19.41,
+      "functions": 5.88,
+      "branches": 100,
+      "line_total": 273
+    },
+    {
+      "file": "src/reverse-engineering/index.ts",
+      "lines": 27.84,
+      "functions": 4.76,
+      "branches": 100,
+      "line_total": 158
+    },
+    {
+      "file": "src/artifact-tools.ts",
+      "lines": 31.98,
+      "functions": 28.57,
+      "branches": 37.5,
+      "line_total": 616
+    },
+    {
+      "file": "src/pi-tools.ts",
+      "lines": 33.33,
+      "functions": 9.09,
+      "branches": 100,
+      "line_total": 129
+    },
+    {
+      "file": "src/server.ts",
+      "lines": 35.36,
+      "functions": 25.71,
+      "branches": 60,
+      "line_total": 2282
+    },
+    {
+      "file": "src/cli.ts",
+      "lines": 40.45,
+      "functions": 30.55,
+      "branches": 61.29,
+      "line_total": 707
+    },
+    {
+      "file": "src/oauth-provider.ts",
+      "lines": 49.11,
+      "functions": 42.85,
+      "branches": 60.6,
+      "line_total": 452
+    },
+    {
+      "file": "src/idempotency-store.ts",
+      "lines": 51.74,
+      "functions": 28,
+      "branches": 87.5,
+      "line_total": 286
+    },
+    {
+      "file": "src/local-agent-adapters.ts",
+      "lines": 62.53,
+      "functions": 55.17,
+      "branches": 79.67,
+      "line_total": 726
+    },
+    {
+      "file": "src/git-worktrees.ts",
+      "lines": 73.68,
+      "functions": 100,
+      "branches": 60.6,
+      "line_total": 190
+    },
+    {
+      "file": "src/logger.ts",
+      "lines": 76.39,
+      "functions": 50,
+      "branches": 76.19,
+      "line_total": 161
+    },
+    {
+      "file": "src/incoming-artifacts.ts",
+      "lines": 79.2,
+      "functions": 100,
+      "branches": 68.84,
+      "line_total": 529
+    },
+    {
+      "file": "src/error-policy.ts",
+      "lines": 79.48,
+      "functions": 100,
+      "branches": 80.64,
+      "line_total": 117
+    },
+    {
+      "file": "src/credential-security.ts",
+      "lines": 85.41,
+      "functions": 100,
+      "branches": 71.42,
+      "line_total": 96
+    }
+  ],
+  "strategy_gaps": {
+    "npm_test_is_not_real_http_mcp": true,
+    "real_http_mcp_is_executed_by_separate_ci_steps": true,
+    "hosted_alert_firing_requires_external_environment": true,
+    "full_os_matrix_for_all_chaos_and_swarm_runners": false,
+    "browser_host_visual_trace_is_not_asserted_by_node_contracts": true
+  },
+  "evidence": {
+    "report_is_sanitized": true,
+    "source_tests": [
+      "src/apply-patch.test.ts",
+      "src/artifact-download.test.ts",
+      "src/cli.test.ts",
+      "src/config.test.ts",
+      "src/credential-security.test.ts",
+      "src/db/query-performance.test.ts",
+      "src/db/resilience.test.ts",
+      "src/error-policy.test.ts",
+      "src/incoming-artifacts.test.ts",
+      "src/local-agent-adapters.test.ts",
+      "src/local-agent-availability.test.ts",
+      "src/local-agent-profiles.test.ts",
+      "src/local-agent-runtime.test.ts",
+      "src/local-agent-store.test.ts",
+      "src/local-agent-targets.test.ts",
+      "src/logger.test.ts",
+      "src/mcp-request-policy.test.ts",
+      "src/mcp-sessions.test.ts",
+      "src/metrics.test.ts",
+      "src/oauth-device-store.test.ts",
+      "src/oauth-store.test.ts",
+      "src/process-platform.test.ts",
+      "src/process-sessions.test.ts",
+      "src/request-meta.test.ts",
+      "src/response-shaping-contract.test.ts",
+      "src/review-checkpoints.test.ts",
+      "src/roots.test.ts",
+      "src/server-shutdown.test.ts",
+      "src/server.test.ts",
+      "src/skills.test.ts",
+      "src/ui/accessibility-contract.test.ts",
+      "src/ui/card-result-normalizer.test.ts",
+      "src/ui/card-types.test.ts",
+      "src/ui/journey-progress.test.ts",
+      "src/ui/language-catalog.test.ts",
+      "src/ui/patch-display.test.ts",
+      "src/ui/render-strategy.test.ts",
+      "src/ui/sync-state.test.ts",
+      "src/ui/tool-display.test.ts",
+      "src/workspace-conversation.test.ts",
+      "src/workspaces.test.ts"
+    ],
+    "script_tests": [
+      "scripts/audit-ui-bundle.test.mjs",
+      "scripts/dev-command.test.mjs",
+      "scripts/e2e-block1-identity.test.mjs",
+      "scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+      "scripts/e2e-http-mcp-idempotency.test.mjs",
+      "scripts/e2e-http-mcp-negative.test.mjs",
+      "scripts/e2e-http-mcp-path-containment.test.mjs",
+      "scripts/e2e-http-mcp-resilience.test.mjs",
+      "scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
+      "scripts/e2e-http-mcp.test.mjs",
+      "scripts/e2e-mcp-monitor.test.mjs",
+      "scripts/e2e-oauth-device-cli.test.mjs",
+      "scripts/e2e-oauth-device.test.mjs",
+      "scripts/e2e-swarm-chaos.test.mjs",
+      "scripts/e2e-swarm-resilience.test.mjs"
+    ],
+    "runners": [
+      "scripts/e2e-block1-identity.test.mjs",
+      "scripts/e2e-http-mcp-idempotency-recovery.test.mjs",
+      "scripts/e2e-http-mcp-idempotency.test.mjs",
+      "scripts/e2e-http-mcp-negative.test.mjs",
+      "scripts/e2e-http-mcp-path-containment.test.mjs",
+      "scripts/e2e-http-mcp-resilience.test.mjs",
+      "scripts/e2e-http-mcp-write-stdin-idempotency.test.mjs",
+      "scripts/e2e-http-mcp.test.mjs",
+      "scripts/e2e-mcp-monitor.test.mjs",
+      "scripts/e2e-oauth-device-cli.test.mjs",
+      "scripts/e2e-oauth-device.test.mjs",
+      "scripts/e2e-swarm-chaos.test.mjs",
+      "scripts/e2e-swarm-resilience.test.mjs",
+      "scripts/mcp-load-log.mjs",
+      "scripts/run-wave1-p0.mjs",
+      "scripts/run-wave2-chaos.mjs",
+      "scripts/run-wave3-performance.mjs"
+    ]
+  }
+}

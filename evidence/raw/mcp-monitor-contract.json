@@ -9,13 +9,29 @@
   "statuses": [
     {
       "health": 200,
+      "ready": 200,
       "unauthenticated": 401,
-      "authenticated": 200
+      "authenticated": 200,
+      "metrics": 200
     },
     {
       "health": 200,
+      "ready": 200,
       "unauthenticated": 401,
-      "authenticated": 200
+      "authenticated": 200,
+      "metrics": 200
+    }
+  ],
+  "latency": [
+    {
+      "wallMs": 68,
+      "authenticatedWallMs": 24,
+      "slowProbes": 0
+    },
+    {
+      "wallMs": 79,
+      "authenticatedWallMs": 18,
+      "slowProbes": 0
     }
   ],
   "secrets_included": false

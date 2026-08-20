@@ -1,0 +1,131 @@
+{
+  "schema": "devspace.canonical-platform-review-360.v3.platform-review",
+  "schema_version": "3.0.0",
+  "generated_at": "2026-08-20T05:10:00Z",
+  "repository": "@waishnav/devspace",
+  "repository_root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "branch": "main",
+  "head": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+  "working_tree": "DIRTY",
+  "mode": "READ_ONLY",
+  "decision": "NOT_RELEASE_READY",
+  "dor": "CONDITIONAL",
+  "dod": "PARTIAL",
+  "release_ready": false,
+  "status_summary": {
+    "green": 6,
+    "yellow": 5,
+    "red": 1,
+    "overall": "YELLOW_WITH_RED_RELEASE_BLOCKER"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Package and runtime validation",
+      "status": "GREEN",
+      "proof": "Canonical review pack v3.0.0 validated with 29 skills, zero errors, zero warnings; isolated READ_ONLY runtime initialized with run_id and tool inventory.",
+      "evidence": ["03-review-v3-validate.log", "06-runtime-state.json"],
+      "blockers": []
+    },
+    {
+      "id": "G1",
+      "name": "Discovery and immutable baseline",
+      "status": "GREEN",
+      "proof": "Discovery and Git scanners exited 0; npm markers, runtime versions, HEAD, branch, remotes, worktree, dirty state, and rollback anchor are recorded.",
+      "evidence": ["00-discovery-and-git.log", "STACK.json", "GIT_BASELINE.json", "ROLLBACK_POINT.json"],
+      "blockers": []
+    },
+    {
+      "id": "G2",
+      "name": "Building blocks, DAG, and applicable specialist selection",
+      "status": "GREEN",
+      "proof": "BB-DAG is constructed from the canonical registry; 11 applicable specialist skills were installed into an isolated custom root with no missing or invalid skills and no collisions.",
+      "evidence": ["BB-DAG.json", "05-active-applicable-receipt.json", "01-integration-inspection.json"],
+      "blockers": []
+    },
+    {
+      "id": "G3",
+      "name": "OAuth, identity, authorization, and MCP session isolation",
+      "status": "GREEN",
+      "proof": "Block 1 identity E2E, OAuth device HTTP/CLI E2E, the 23-ID negative matrix, and current positive authenticated MCP E2E all exit 0; resource, scope, principal, and session binding controls are evidenced.",
+      "evidence": ["review-auth-iam.log", "device-http.log", "device-cli.log", "review-security-devsecops.log", "e2e-positive.log", "artifacts/block1-identity-report.json", "artifacts/oauth-mcp-negative-report.json"],
+      "blockers": []
+    },
+    {
+      "id": "G4",
+      "name": "Application security and DevSecOps",
+      "status": "YELLOW",
+      "proof": "Static security review, URL hardening regression, secret-safe logging, and P0 negative matrix pass locally; the isolated real-server CSRF/XSS/SQLi probe could not bind its test port and is explicitly not treated as PASS.",
+      "evidence": ["artifacts/security-audit/01-static-scan.log", "artifacts/security-audit/07-url-hardening-tests.log", "artifacts/security-audit/10-probe-diagnosis.log", "review-security-devsecops.log"],
+      "blockers": ["Authorized real-server DAST probe incomplete; hosted secret scan and signed SBOM/provenance are unknown." ]
+    },
+    {
+      "id": "G5",
+      "name": "Testing, quality, and performance",
+      "status": "YELLOW",
+      "proof": "41 source test files, 15 script E2E/integration files, current coverage gate exit 0, positive E2E, resilience, idempotency, bundle audit, and query/fault tests pass; historical Wave 1/Wave 2 aggregate RED artifacts remain preserved.",
+      "evidence": ["review-testing-quality.log", "coverage-gate.log", "e2e-positive.log", "review-resilience-errors.log", "review-idempotency.log", "review-bundle.log", "evidence/raw/test-strategy-report.json", "artifacts/wave1-p0/summary.json", "artifacts/wave2-chaos/summary.json"],
+      "blockers": ["Browser-host E2E/visual traces and complete macOS/Windows chaos/Swarm equivalence are not proven; retained aggregate RED artifacts require reconciliation rather than deletion." ]
+    },
+    {
+      "id": "G6",
+      "name": "API and data contract integrity",
+      "status": "YELLOW",
+      "proof": "HTTP/MCP/OAuth surface inventory, read-only contract scan, schema/migration inventory, query-plan tests, SQLite fault tests, and idempotency recovery pass locally.",
+      "evidence": ["SURFACE_INVENTORY.json", "api-contract-scan.json", "src/db/migrations.ts", "review-data-database.log", "artifacts/idempotency-recovery-report.json"],
+      "blockers": ["No independently published versioned API compatibility contract; runtime production schema comparison and backup/restore drill are unknown." ]
+    },
+    {
+      "id": "G7",
+      "name": "Observability and SRE",
+      "status": "YELLOW",
+      "proof": "Local observability contract passes with 15 metrics, 13 alerts, 12 dashboard panels, no secret leak, readiness endpoint, safe dimensions, and monitor evidence.",
+      "evidence": ["review-observability-sre.log", "artifacts/observability-contract-report.json", "artifacts/mcp-monitor-contract.json", "observability/prometheus-idempotency-alerts.yml", "observability/grafana-idempotency-dashboard.json"],
+      "blockers": ["Hosted scrape, alert firing, notification delivery, recovery, SLO/error-budget operation, and incident drill are UNKNOWN." ]
+    },
+    {
+      "id": "G8",
+      "name": "CI/CD reproducibility and supply-chain provenance",
+      "status": "YELLOW",
+      "proof": "GitHub Actions smoke matrix and staging-load job define install, typecheck, test, build, E2E, security, coverage, bundle, observability, artifacts, and doctor gates across Ubuntu/macOS/Windows smoke.",
+      "evidence": [".github/workflows/ci.yml", "review-bundle.log", "review-testing-quality.log"],
+      "blockers": ["No SBOM, signed attestation, build-once/promote digest, or deployment artifact provenance is proven." ]
+    },
+    {
+      "id": "G9",
+      "name": "Deployment, rollback, backup, and disaster recovery",
+      "status": "RED",
+      "proof": "A local rollback anchor exists, but no deployment target, promotion environment, executed rollback, SQLite restore, or disaster-recovery drill is available in evidence.",
+      "evidence": ["ROLLBACK_POINT.json", ".github/workflows/ci.yml", "artifacts/canonical-dod-360-audit/final-gate-matrix.json"],
+      "blockers": ["Release candidate cannot be traced to a deployed artifact; promotion and reversal are unproven; backup/restore is unproven." ]
+    },
+    {
+      "id": "G10",
+      "name": "GitHub Intelligence and learning loop",
+      "status": "YELLOW",
+      "proof": "Adopt/Adapt/Avoid stances were captured and applied to baseline immutability, skill versioning, specification-before-mutation, observability adaptation, provenance gap tracking, dynamic selection, and scanner claims.",
+      "evidence": ["GITHUB-INTELLIGENCE.json", "02-github-intelligence-stances.md"],
+      "blockers": ["Remote GitHub provenance and signed attestation availability remain UNKNOWN." ]
+    },
+    {
+      "id": "G11",
+      "name": "Independent verification and synthesis",
+      "status": "YELLOW",
+      "proof": "Specialist ledger, findings, roadmap, and this gate matrix preserve evidence, unknowns, rollback posture, and a non-release-ready decision without averaging away the RED release gate.",
+      "evidence": ["SPECIALIST-REVIEW-LEDGER.json", "PLATFORM-REVIEW-REPORT.md", "platform-review-gate-matrix.json"],
+      "blockers": ["Independent hosted release verification cannot complete until G9 prerequisites exist." ]
+    }
+  ],
+  "critical_blockers": [
+    {"severity": "P1", "id": "PR-001", "title": "Deployment and rollback unproven", "gate": "G9", "status": "OPEN"},
+    {"severity": "P1", "id": "PR-002", "title": "Production identity gateway/RBAC/key rotation not proven", "gate": "G3", "status": "OPEN"},
+    {"severity": "P1", "id": "PR-003", "title": "Hosted Prometheus/Grafana alert firing and recovery not proven", "gate": "G7", "status": "OPEN"},
+    {"severity": "P2", "id": "PR-004", "title": "Real-server DAST probe incomplete", "gate": "G4", "status": "OPEN"},
+    {"severity": "P2", "id": "PR-005", "title": "SBOM/signed provenance unavailable", "gate": "G8", "status": "OPEN"},
+    {"severity": "P2", "id": "PR-006", "title": "Cross-OS and browser-host proof incomplete", "gate": "G5", "status": "OPEN"},
+    {"severity": "P3", "id": "PR-007", "title": "Write-to-ACK ambiguous interval remains for non-reversible process/stdin effects", "gate": "G5", "status": "OPEN"},
+    {"severity": "P3", "id": "PR-008", "title": "Hosted load calibration and provider/runtime behavior unknown", "gate": "G5", "status": "OPEN"},
+    {"severity": "P4", "id": "PR-009", "title": "Explicit RBAC, key rotation, and provenance automation backlog", "gate": "G3/G8", "status": "OPEN"}
+  ],
+  "release_rule": "Do not mark RELEASE_READY while any P0/P1 is unresolved or G9 is RED."
+}

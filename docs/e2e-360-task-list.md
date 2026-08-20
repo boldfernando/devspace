@@ -167,17 +167,19 @@ Essas métricas qualificam o build e o servidor isolado testados. Não constitue
 
 | ID | Task | Status | Dependências | Critério de aceite / próxima evidência |
 |---|---|---|---|---|
-| P1-OBS-001 | Instrumentar claim, replay, conflict, pending age, lease lost, ambiguous e SQLite busy. | Concluída localmente; scrape externo UNKNOWN | P0-IDEMP-002 | `/metrics`, dimensões seguras, unit/E2E e scan. |
-| P1-OBS-002 | Implantar alertas Prometheus/Grafana para idempotência e Device Flow. | Parcial — contrato local aprovado; hosted UNKNOWN | P1-OBS-001 | 9/9 alertas, 9/9 métricas e 7 painéis validados sem secrets; falta scrape, alert firing e recovery em Prometheus/Grafana operacional. |
+| P1-OBS-001 | Instrumentar claim, replay, conflict, pending age, lease lost, ambiguous, SQLite busy, HTTP, tools, auth denials e readiness. | Concluída localmente; scrape externo UNKNOWN | P0-IDEMP-002 | `/metrics`, counters/histograms/gauges com dimensões seguras, unit/E2E e secret scan. |
+| P1-OBS-002 | Implantar alertas Prometheus/Grafana para idempotência, Device Flow, performance, auth e readiness. | Parcial — contrato local aprovado; hosted UNKNOWN | P1-OBS-001 | 13/13 alertas, 15/15 métricas e 12 painéis validados sem secrets; falta scrape, alert firing e recovery em Prometheus/Grafana operacional. |
 | P1-OBS-003 | Instrumentar polling device, pending, slow_down, denied, expired e replay. | Concluída localmente; alerting hosted UNKNOWN | P0-DEVICE-004 | `mcp_oauth_device_event_total` registra requested/pending/slow_down/approved/consumed/denied/expired/rejected/rate_limited; E2E confirma requested/approved/consumed e sem secrets. |
 | P1-OBS-004 | Definir recovery pós-crash em pending sem reexecutar efeito não compensável. | Concluída localmente; runbook/hosted UNKNOWN | IDEMP-P1-005 | Crash drill real, métricas ambiguous/pending age, reconciliação explícita, retry bloqueado e artifact sanitizado passam. |
-| P1-OBS-005 | Monitorar continuamente MCP e alertar falhas Bearer. | Concluída localmente; scheduler/hosted UNKNOWN | P1-OBS-001 | `scripts/mcp-monitor.mjs` e wrapper PowerShell validam health, 401 anônimo, Bearer 200/401, configuração ausente, JSONL sanitizado e `--fail-on-alert`; falta instalar/agendar no ambiente operacional. |
+| P1-OBS-005 | Monitorar continuamente MCP e alertar falhas Bearer. | Concluída localmente; scheduler/hosted UNKNOWN | P1-OBS-001 | `scripts/mcp-monitor.mjs` valida health, readiness SQLite, 401 anônimo, Bearer 200, `/metrics`, séries esperadas, latência por probe, slow probes, configuração ausente, JSONL sanitizado e `--fail-on-alert`; falta instalar/agendar no ambiente operacional. |
 | P1-OBS-006 | Persistir carga com p50/p95/p99, throughput, erros e amostras sanitizadas. | Concluída localmente | P1-OBS-001 | Baseline e Wave 3 versionados; hosted ainda UNKNOWN. |
+
 
 ## 6. Tasks P2 — performance, resiliência, filesystem e integrações
 
 | ID | Domínio | Task | Status | Dependências | Critério de aceite / evidência |
 |---|---|---|---|---|---|
+| P2-OBS-001 | Observabilidade | Correlacionar request ID, status/outcome, latência HTTP, latência por tool, negações e readiness em métricas e logs sanitizados. | Concluída localmente; scrape externo UNKNOWN | P1-OBS-001, P2-ERR-002 | Histograms/counters/gauges com labels bounded, `/readyz`, dashboard com 12 painéis, 4 alertas de aplicação, testes unitários e E2E real passam. |
 | P2-PERF-001 | UI | Medir chunks lazy de Emacs Lisp, C++ e WASM em bytes bruto, gzip, brotli, requests e entrypoint. | Parcial | P0-PERF-001 | Cada chunk tem owner, motivo e impacto medido. |
 | P2-PERF-002 | UI | Implementar catálogo seletivo de linguagens e carregar grammars sob demanda. | Parcial | P2-PERF-001 | Caminho inicial sem módulos opcionais e seleção funcional. |
 | P2-PERF-003 | UI | Comparar entrypoint, TTI, requests, parse cost e regressão antes/depois. | Backlog | P2-PERF-002 | Melhoria demonstrada por métricas comparáveis. |

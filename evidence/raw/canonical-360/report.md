@@ -1,6 +1,6 @@
 # Canonical 360° PRD Reverse Engineering
 
-Generated: 2026-08-18T15:36:26.908Z
+Generated: 2026-08-20T04:13:24.297Z
 
 ## Discovery
 
@@ -11,7 +11,7 @@ Generated: 2026-08-18T15:36:26.908Z
 - Surfaces: **6**
 - Features: **6**
 - Routes/APIs: **3**
-- Tests: **38**
+- Tests: **58**
 
 ## Surface map
 

@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-18T21:01:46.006Z",
+  "generatedAt": "2026-08-20T05:05:11.457Z",
   "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\dist\\ui",
   "manifest": "C:\\Users\\fjuni\\.copilot\\repos\\devspace\\dist\\ui\\.vite\\manifest.json",
   "maxInitialBytes": 500000,
   "entries": [
     {
       "name": "workspace-app.html",
-      "file": "assets/workspace-app-BV5f-GSn.js",
-      "initialBytes": 37673,
+      "file": "assets/workspace-app-JzIQ4NzF.js",
+      "initialBytes": 41680,
       "dynamicImports": [
         "../../node_modules/@modelcontextprotocol/ext-apps/dist/src/app.js",
         "heavy-payload.tsx",
@@ -29,11 +29,11 @@
       "bytes": 622325
     },
     {
-      "file": "assets/app-WbrAjV1C.js",
+      "file": "assets/app-CxDP9rTt.js",
       "bytes": 335262
     },
     {
-      "file": "assets/scrollbar-DhSds7EZ.js",
+      "file": "assets/scrollbar-U1EWtVV5.js",
       "bytes": 263278
     },
     {
@@ -73,7 +73,7 @@
       "bytes": 171965
     },
     {
-      "file": "assets/useFileDiffInstance-sKg_Glk4.js",
+      "file": "assets/useFileDiffInstance-CJ1jJMKh.js",
       "bytes": 167352
     },
     {

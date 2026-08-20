@@ -1,0 +1,19 @@
+{
+  "root": "C:\\Users\\fjuni\\.copilot\\repos\\devspace",
+  "contracts": [
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\actor-agent-skill-tool.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\canonical-pattern.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\capability.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\dor-dod.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\evidence.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\finding.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\gate.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\repository-evidence.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\review-report.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\skill-execution-ledger.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\skill-runtime-state.schema.json",
+    "evidence\\raw\\canonical-platform-review-360-audit\\package\\canonical-platform-review-360-v3.0.0\\contracts\\source-provenance.schema.json",
+    "schemas\\canonical-360-manifest.schema.json"
+  ]
+}
+exit_code=0

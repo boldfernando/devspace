@@ -1,0 +1,82 @@
+{
+  "schema": "canonical-platform-review-360/github-intelligence",
+  "schema_version": "3.0.0",
+  "status": "APPLIED_AS_METHOD",
+  "source": "/home/ubuntu/canonical-platform-review-360-audit/02-github-intelligence-stances.md",
+  "baseline": {
+    "commit": "02d99a2f9c0dc560a23bcf6e89946cd0d45d9a88",
+    "branch": "main",
+    "timestamp": "2026-08-20T04:44:12.2836440Z"
+  },
+  "stances": [
+    {
+      "id": "PAT-GH-001",
+      "stance": "ADOPT",
+      "pattern": "Immutable repository evidence baseline",
+      "application": "Emit STACK.json, GIT_BASELINE.json, ROLLBACK_POINT.json, exact scanner logs, and SHA-256-indexed raw evidence.",
+      "devspace_status": "APPLIED",
+      "evidence": ["STACK.json", "GIT_BASELINE.json", "ROLLBACK_POINT.json", "evidence/raw-evidence-manifest.json"]
+    },
+    {
+      "id": "PAT-GH-002",
+      "stance": "ADOPT",
+      "pattern": "Skills as versioned engineering artifacts",
+      "application": "Validate package structure, install transactionally, record receipts, activate a bounded applicable set, and initialize runtime state.",
+      "devspace_status": "APPLIED",
+      "evidence": ["03-review-v3-validate.log", "04-install-review.log", "05-active-applicable-receipt.json", "06-runtime-state.json"]
+    },
+    {
+      "id": "PAT-GH-003",
+      "stance": "ADOPT",
+      "pattern": "Specification before mutation",
+      "application": "READ_ONLY mode, DoR/DoD, BB/DAG, and rollback anchor precede any product APPLY change.",
+      "devspace_status": "APPLIED",
+      "evidence": ["DOR-DOD.json", "BB-DAG.json", "ROLLBACK_POINT.json"]
+    },
+    {
+      "id": "PAT-GH-004",
+      "stance": "ADAPT",
+      "pattern": "Agentic observability contract",
+      "application": "Use sanitized request IDs, bounded metrics, safe dimensions, readiness, auth-denial events, and monitor artifacts; do not emit secrets or payloads.",
+      "devspace_status": "PARTIALLY_APPLIED",
+      "evidence": ["artifacts/observability-contract-report.json", "artifacts/mcp-monitor-contract.json", "docs/observability-monitoring.md"]
+    },
+    {
+      "id": "PAT-GH-005",
+      "stance": "ADAPT",
+      "pattern": "GitHub-native provenance with SLSA/CycloneDX",
+      "application": "Keep commit and artifact evidence local now; require SBOM, signed provenance, promotion digest, and deployment linkage before release.",
+      "devspace_status": "GAP_UNKNOWN",
+      "evidence": [".github/workflows/ci.yml", "artifacts/canonical-dod-360-audit/final-gate-matrix.json"]
+    },
+    {
+      "id": "PAT-GH-006",
+      "stance": "ADOPT",
+      "pattern": "Dynamic specialist selection",
+      "application": "Activate only review-auth-iam, review-security-devsecops, review-api-contracts, review-testing-quality, review-observability-sre, review-cicd-release, review-data-database, review-resilience-errors, orchestration, discovery/Git, and synthesis.",
+      "devspace_status": "APPLIED",
+      "evidence": ["BB-DAG.json", "05-active-applicable-receipt.json"]
+    },
+    {
+      "id": "PAT-GH-007",
+      "stance": "AVOID",
+      "pattern": "Popularity as assurance proxy",
+      "application": "No stars, contributor counts, README quality, or dependency presence were used as security or release proof.",
+      "devspace_status": "APPLIED",
+      "evidence": ["DOR-DOD.json", "PLATFORM-REVIEW-REPORT.md"]
+    },
+    {
+      "id": "PAT-GH-008",
+      "stance": "AVOID",
+      "pattern": "Unversioned scanner claims",
+      "application": "Every transferred scanner is named by package/version, target SHA, timestamp, exit code, and preserved output.",
+      "devspace_status": "APPLIED",
+      "evidence": ["00-discovery-and-git.log", "03-review-v3-validate.log", "api-contract-scan.json"]
+    }
+  ],
+  "unresolved": [
+    "Remote GitHub owner/repository provenance and signed attestation availability were not independently verified; status remains UNKNOWN.",
+    "No pattern was promoted into the product codebase or host-global skill catalog in READ_ONLY mode."
+  ],
+  "confidence": "HIGH"
+}

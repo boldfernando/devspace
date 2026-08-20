@@ -2,12 +2,24 @@
 > @waishnav/devspace@1.0.7 e2e:oauth-device-cli
 > node --test scripts/e2e-oauth-device-cli.test.mjs
 
-✔ CLI completes device login and stores only sanitized credential metadata (7522.2342ms)
-ℹ tests 1
+✖ CLI completes device login and stores private credential metadata (7815.9166ms)
+✔ Ctrl-C cancels device polling and leaves no credential or child process (2992.3149ms)
+ℹ tests 2
 ℹ suites 0
 ℹ pass 1
-ℹ fail 0
+ℹ fail 1
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 12571.7768
+ℹ duration_ms 15843.6908
+
+✖ failing tests:
+
+test at scripts\e2e-oauth-device-cli.test.mjs:147:1
+✖ CLI completes device login and stores private credential metadata (7815.9166ms)
+  Error: child process did not exit within cleanup deadline
+      at file:///C:/Users/fjuni/.copilot/repos/devspace/scripts/e2e-oauth-device-cli.test.mjs:44:13
+      at async waitForExit (file:///C:/Users/fjuni/.copilot/repos/devspace/scripts/e2e-oauth-device-cli.test.mjs:41:10)
+      at async TestContext.<anonymous> (file:///C:/Users/fjuni/.copilot/repos/devspace/scripts/e2e-oauth-device-cli.test.mjs:161:18)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)

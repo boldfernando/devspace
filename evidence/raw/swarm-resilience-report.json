@@ -43,10 +43,10 @@
     "requested_operations": 96,
     "succeeded_operations": 96,
     "failed_operations": 0,
-    "p50_ms": 27,
-    "p95_ms": 38,
-    "p99_ms": 38,
-    "max_ms": 38
+    "p50_ms": 45,
+    "p95_ms": 49,
+    "p99_ms": 50,
+    "max_ms": 50
   },
   "isolation": {
     "attempts": 8,
@@ -91,9 +91,9 @@
     "attempts": 8,
     "succeeded": 8,
     "failed": 0,
-    "p50_ms": 26,
-    "p95_ms": 32,
-    "p99_ms": 32
+    "p50_ms": 67,
+    "p95_ms": 73,
+    "p99_ms": 73
   },
   "cleanup": true,
   "failed_scenarios": [],

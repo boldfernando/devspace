@@ -1,0 +1,130 @@
+{
+  "schema": "canonical-platform-review-360/building-block-dag",
+  "schema_version": "3.0.0",
+  "status": "CONSTRUCTED",
+  "constructed_at": "2026-08-20T04:56:18.748651+00:00",
+  "archetype": "MCP server + OAuth PKCE/device auth + CLI + React UI + SQLite + CI/CD",
+  "mode": "READ_ONLY",
+  "source_registry": "building-blocks/building-block-registry.json",
+  "active_blocks": [
+    {
+      "id": "BB00",
+      "title": "Governance & Control Plane",
+      "gate": "MISSION_ACCEPTED",
+      "skills": ["orchestrate-platform-review-360"],
+      "state": "ACTIVE",
+      "evidence": "06-runtime-state.json"
+    },
+    {
+      "id": "BB01",
+      "title": "Skill Runtime & Distribution",
+      "gate": "RUNTIME_READY",
+      "skills": ["install-skill-pack", "integrate-skill-pack", "initialize-skill-runtime"],
+      "state": "ACTIVE",
+      "evidence": ["04-install-review.log", "05-active-applicable-receipt.json", "06-runtime-state.json"]
+    },
+    {
+      "id": "BB02",
+      "title": "Discovery & Immutable Baseline",
+      "gate": "BASELINE_FROZEN",
+      "skills": ["discover-codebase", "reconcile-git-state"],
+      "state": "ACTIVE",
+      "evidence": ["00-discovery-and-git.log", "STACK.json", "GIT_BASELINE.json", "ROLLBACK_POINT.json"]
+    },
+    {
+      "id": "BB05",
+      "title": "Application Architecture",
+      "gate": "ARCHITECTURE_READY",
+      "skills": ["review-resilience-errors"],
+      "state": "ACTIVE_PARTIAL",
+      "evidence": ["SURFACE_INVENTORY.json", "artifacts/canonical-dod-360-audit/FINAL-REPORT.md"]
+    },
+    {
+      "id": "BB06",
+      "title": "Contracts, Identity & Data",
+      "gate": "CONTRACT_DATA_FREEZE",
+      "skills": ["review-api-contracts", "review-data-database", "review-auth-iam"],
+      "state": "ACTIVE",
+      "evidence": ["SURFACE_INVENTORY.json", "src/server.ts", "src/db/migrations.ts"]
+    },
+    {
+      "id": "BB07",
+      "title": "Quality & Performance",
+      "gate": "QUALITY_BASELINE",
+      "skills": ["review-testing-quality"],
+      "state": "ACTIVE",
+      "evidence": ["evidence/raw/test-strategy-report.json", "evidence/raw/wave1-p0/coverage.log"]
+    },
+    {
+      "id": "BB08",
+      "title": "Security & Ecosystem Risk",
+      "gate": "SECURITY_ACCEPTED",
+      "skills": ["review-security-devsecops"],
+      "state": "ACTIVE",
+      "evidence": ["artifacts/security-audit/", "artifacts/canonical-dod-360-audit/final-gate-matrix.json"]
+    },
+    {
+      "id": "BB09",
+      "title": "Platform, Release & Operations",
+      "gate": "OPERABILITY_READY",
+      "skills": ["review-cicd-release", "review-observability-sre"],
+      "state": "ACTIVE",
+      "evidence": [".github/workflows/ci.yml", "observability/", "evidence/raw/observability-contract-report.json"]
+    },
+    {
+      "id": "BB12",
+      "title": "Independent Verification",
+      "gate": "RELEASE_GATE",
+      "skills": ["verify-skill-system"],
+      "state": "DEFERRED_UNTIL_REVIEW_COMPLETE",
+      "evidence": "03-review-v3-validate.log"
+    },
+    {
+      "id": "BB13",
+      "title": "Synthesis & Roadmap",
+      "gate": "NEXT_CYCLE_DECIDED",
+      "skills": ["synthesize-roadmap-gates"],
+      "state": "DEFERRED_UNTIL_FINDINGS_CLASSIFIED",
+      "evidence": "pending final report"
+    },
+    {
+      "id": "BB14",
+      "title": "GitHub Intelligence & Learning Loop",
+      "gate": "INTELLIGENCE_PROMOTED",
+      "skills": ["github-intelligence-sweep", "github-verify-provenance-supply-chain", "github-distill-canonical-patterns"],
+      "state": "ACTIVE_EVIDENCE_ONLY",
+      "evidence": "/home/ubuntu/canonical-platform-review-360-audit/github-intelligence/"
+    }
+  ],
+  "skipped_blocks": [
+    {"id": "BB03", "title": "Product & Domain", "reason": "No product JTBD/domain compliance review requested for this technical platform gate."},
+    {"id": "BB04", "title": "Experience", "reason": "Frontend/UI/UX specialist review was explicitly skipped; prior UI accessibility/responsive/journey work remains evidence."},
+    {"id": "BB10", "title": "Knowledge & Maintainability", "reason": "Docs/code-quality specialist review was explicitly skipped; existing documentation is used as evidence only."},
+    {"id": "BB11", "title": "Execution / APPLY", "reason": "Evidence-first READ_ONLY mode; no product mutation authorized by this review phase."}
+  ],
+  "edges": [
+    {"from": "BB00", "to": "BB01", "reason": "mission acceptance precedes runtime lifecycle"},
+    {"from": "BB01", "to": "BB02", "reason": "runtime must be validated before discovery baseline"},
+    {"from": "BB02", "to": "BB05", "reason": "architecture review consumes discovered stack and Git baseline"},
+    {"from": "BB02", "to": "BB06", "reason": "contract/identity/data review consumes surfaces and baseline"},
+    {"from": "BB02", "to": "BB07", "reason": "quality review consumes test/build/runtime inventory"},
+    {"from": "BB02", "to": "BB08", "reason": "security review consumes codebase and baseline"},
+    {"from": "BB02", "to": "BB09", "reason": "operations review consumes CI/CD and runtime surfaces"},
+    {"from": "BB02", "to": "BB14", "reason": "GitHub intelligence compares immutable baseline and provenance evidence"},
+    {"from": "BB05", "to": "BB07", "reason": "resilience/error architecture informs test and performance risk"},
+    {"from": "BB06", "to": "BB08", "reason": "identity, API and data contracts define security threat boundaries"},
+    {"from": "BB06", "to": "BB09", "reason": "operability depends on contract/data health signals"},
+    {"from": "BB07", "to": "BB09", "reason": "release operations consume quality gates and evidence artifacts"},
+    {"from": "BB08", "to": "BB09", "reason": "release operations consume security and provenance gates"},
+    {"from": "BB05", "to": "BB12", "reason": "independent verification validates architecture/resilience findings"},
+    {"from": "BB06", "to": "BB12", "reason": "independent verification validates auth/API/data findings"},
+    {"from": "BB07", "to": "BB12", "reason": "independent verification validates quality/performance evidence"},
+    {"from": "BB08", "to": "BB12", "reason": "independent verification validates security evidence"},
+    {"from": "BB09", "to": "BB12", "reason": "independent verification validates release/operations evidence"},
+    {"from": "BB12", "to": "BB13", "reason": "roadmap synthesis requires verified gate state"},
+    {"from": "BB14", "to": "BB13", "reason": "learning patterns inform remediation and future controls"}
+  ],
+  "critical_path": ["BB00", "BB01", "BB02", "BB06", "BB08", "BB09", "BB12", "BB13"],
+  "rollback_control": "ROLLBACK_POINT.json",
+  "confidence": "HIGH"
+}

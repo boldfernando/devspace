@@ -2,14 +2,14 @@
 > @waishnav/devspace@1.0.7 test:idempotency:p1
 > tsx --test scripts/e2e-idempotency-p1.test.ts
 
-✔ IDEMP-P1-001 first write creates exactly one effect (46.6969ms)
-✔ IDEMP-P1-002 replay returns the stored result without a second effect (2.2135ms)
-✔ IDEMP-P1-003 same key with different payload returns conflict (2.3516ms)
-✔ IDEMP-P1-004 concurrent claims deduplicate atomically (86.7806ms)
-✔ IDEMP-P1-005 retry after ambiguous timeout replays the committed result (50.6532ms)
-✔ IDEMP-P1-006 identical keys are isolated by scope (56.1409ms)
-✔ IDEMP-P1-007 retention expiry is explicit and deterministic (26.1142ms)
-✔ IDEMP-P1-008 artifacts and logs contain no secret-like values (3.176ms)
+✔ IDEMP-P1-001 first write creates exactly one effect (120.3838ms)
+✔ IDEMP-P1-002 replay returns the stored result without a second effect (10.5882ms)
+✔ IDEMP-P1-003 same key with different payload returns conflict (2.4875ms)
+✔ IDEMP-P1-004 concurrent claims deduplicate atomically (105.961ms)
+✔ IDEMP-P1-005 retry after ambiguous timeout replays the committed result (286.784ms)
+✔ IDEMP-P1-006 identical keys are isolated by scope (54.538ms)
+✔ IDEMP-P1-007 retention expiry is explicit and deterministic (526.0834ms)
+✔ IDEMP-P1-008 artifacts and logs contain no secret-like values (3.4595ms)
 ℹ tests 8
 ℹ suites 0
 ℹ pass 8
@@ -17,4 +17,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 393.5234
+ℹ duration_ms 1338.3715
