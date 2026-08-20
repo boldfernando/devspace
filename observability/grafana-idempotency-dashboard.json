@@ -1,10 +1,10 @@
 {
-  "title": "DevSpace MCP · Idempotência e Recovery",
+  "title": "DevSpace MCP · Operability, Performance e Recovery",
   "uid": "devspace-idempotency",
   "schemaVersion": 39,
   "refresh": "30s",
   "time": {"from": "now-6h", "to": "now"},
-  "tags": ["devspace", "mcp", "idempotency", "crash-recovery", "oauth-device"],
+  "tags": ["devspace", "mcp", "idempotency", "crash-recovery", "oauth-device", "performance"],
   "templating": {
     "list": [
       {"name": "tool", "type": "query", "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"}, "query": "label_values(mcp_idempotency_claim_total, tool)", "includeAll": true, "multi": true}
@@ -78,6 +78,54 @@
       "gridPos": {"h": 8, "w": 24, "x": 0, "y": 21},
       "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
       "targets": [{"refId": "A", "expr": "sum by (outcome) (rate(mcp_oauth_device_event_total{tool=\"oauth_device\"}[5m]))", "legendFormat": "{{outcome}}"}],
+      "fieldConfig": {"defaults": {"unit": "ops"}}
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "HTTP requests by outcome",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 29},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "sum by (status_class, outcome) (rate(devspace_http_requests_total[5m]))", "legendFormat": "{{status_class}}/{{outcome}}"}],
+      "fieldConfig": {"defaults": {"unit": "reqps"}}
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "HTTP latency p95",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 29},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "histogram_quantile(0.95, sum by (le, route) (rate(devspace_http_request_duration_ms_bucket[5m])))", "legendFormat": "{{route}}"}],
+      "fieldConfig": {"defaults": {"unit": "ms"}}
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "MCP tool latency p95",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 37},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "histogram_quantile(0.95, sum by (le, tool) (rate(devspace_mcp_tool_duration_ms_bucket{tool=~\"$tool\"}[5m])))", "legendFormat": "{{tool}}"}],
+      "fieldConfig": {"defaults": {"unit": "ms"}}
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "Auth denials and readiness",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 37},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [
+        {"refId": "A", "expr": "sum by (reason) (rate(devspace_mcp_auth_denied_total[5m]))", "legendFormat": "denied {{reason}}"},
+        {"refId": "B", "expr": "devspace_health_status{component=\"database\"}", "legendFormat": "database readiness"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "short"}}
+    },
+    {
+      "id": 12,
+      "type": "timeseries",
+      "title": "MCP tool outcomes",
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 45},
+      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "targets": [{"refId": "A", "expr": "sum by (tool, outcome) (rate(devspace_mcp_tool_calls_total{tool=~\"$tool\"}[5m]))", "legendFormat": "{{tool}}/{{outcome}}"}],
       "fieldConfig": {"defaults": {"unit": "ops"}}
     }
   ]

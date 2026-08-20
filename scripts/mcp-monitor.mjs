@@ -9,14 +9,22 @@ function getArg(name, fallback) {
 }
 
 const baseUrl = getArg("--base-url", process.env.MCP_MONITOR_BASE_URL ?? process.env.MCP_MONITOR_URL ?? "http://127.0.0.1:7676").replace(/\/$/, "");
+const safeBaseUrl = (() => {
+  try {
+    return new URL(baseUrl).origin;
+  } catch {
+    return "invalid";
+  }
+})();
 const outputPath = getArg("--output", process.env.MCP_MONITOR_OUTPUT ?? process.env.MCP_MONITOR_LOG ?? "artifacts/mcp-monitor.log");
 const samples = Math.max(0, Number(getArg("--samples", process.env.MCP_MONITOR_SAMPLES ?? "0")));
 const intervalMs = Math.max(250, Number(getArg("--interval-ms", process.env.MCP_MONITOR_INTERVAL_MS ?? "60000")));
+const latencyThresholdMs = Math.max(1, Number(getArg("--latency-threshold-ms", process.env.MCP_MONITOR_LATENCY_THRESHOLD_MS ?? "1000")));
 const failOnAlert = argv.includes("--fail-on-alert");
 const bearerToken = process.env.MCP_MONITOR_BEARER_TOKEN;
 const schema = "devspace.mcp-monitor.v1";
 
-if (!Number.isInteger(samples) || !Number.isInteger(intervalMs)) {
+if (!Number.isInteger(samples) || !Number.isInteger(intervalMs) || !Number.isFinite(latencyThresholdMs)) {
   console.error("invalid_monitor_parameters");
   process.exit(2);
 }
@@ -25,7 +33,7 @@ if (!bearerToken) {
     schema,
     event: "configuration_error",
     reason: "bearer_token_required_via_environment",
-    baseUrl,
+    baseUrl: safeBaseUrl,
   };
   await mkdir(dirname(outputPath), { recursive: true });
   await appendFile(outputPath, `${JSON.stringify(record)}\n`, "utf8");
@@ -46,24 +54,31 @@ function rpcBody(id) {
   });
 }
 
-async function statusOf(url, options = {}) {
+async function probeStatus(url, options = {}, readText = false) {
+  const started = performance.now();
   try {
     const response = await fetch(url, { ...options, signal: AbortSignal.timeout(5000) });
-    return response.status;
+    const text = readText ? await response.text() : undefined;
+    return {
+      status: response.status,
+      wallMs: Math.round(performance.now() - started),
+      ...(readText ? { text } : {}),
+    };
   } catch {
-    return 0;
+    return { status: 0, wallMs: Math.round(performance.now() - started) };
   }
 }
 
 async function probe(sample) {
   const started = performance.now();
-  const healthStatus = await statusOf(`${baseUrl}/healthz`);
-  const unauthenticatedStatus = await statusOf(`${baseUrl}/mcp`, {
+  const health = await probeStatus(`${baseUrl}/healthz`);
+  const ready = await probeStatus(`${baseUrl}/readyz`);
+  const unauthenticated = await probeStatus(`${baseUrl}/mcp`, {
     method: "POST",
     headers: { Accept: "application/json, text/event-stream", "content-type": "application/json" },
     body: rpcBody(9001),
   });
-  const authenticatedStatus = await statusOf(`${baseUrl}/mcp`, {
+  const authenticated = await probeStatus(`${baseUrl}/mcp`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${bearerToken}`,
@@ -72,23 +87,52 @@ async function probe(sample) {
     },
     body: rpcBody(9002),
   });
-  const event = healthStatus !== 200
+  const metrics = await probeStatus(`${baseUrl}/metrics`, {}, true);
+  const metricsText = metrics.text ?? "";
+  const metricsContractOk = metrics.status === 200
+    && metricsText.includes("devspace_http_requests_total")
+    && metricsText.includes("devspace_mcp_tool_duration_ms");
+  const slowProbes = [
+    ["health", health.wallMs],
+    ["ready", ready.wallMs],
+    ["unauthenticated_mcp", unauthenticated.wallMs],
+    ["authenticated_mcp", authenticated.wallMs],
+    ["metrics", metrics.wallMs],
+  ].filter(([, wallMs]) => wallMs > latencyThresholdMs).map(([probeName, wallMs]) => ({ probe: probeName, wallMs }));
+  const event = health.status !== 200
     ? "health_alert"
-    : unauthenticatedStatus !== 401
-      ? "protocol_alert"
-      : authenticatedStatus !== 200
-        ? "bearer_auth_alert"
-        : "mcp_monitor_ok";
+    : ready.status !== 200
+      ? "readiness_alert"
+      : unauthenticated.status !== 401
+        ? "protocol_alert"
+        : authenticated.status !== 200
+          ? "bearer_auth_alert"
+          : !metricsContractOk
+            ? "metrics_alert"
+            : slowProbes.length > 0
+              ? "performance_alert"
+              : "mcp_monitor_ok";
   return {
     schema,
     ts: new Date().toISOString(),
     sample,
     event,
-    healthStatus,
-    unauthenticatedStatus,
-    authenticatedStatus,
+    healthStatus: health.status,
+    readyStatus: ready.status,
+    unauthenticatedStatus: unauthenticated.status,
+    authenticatedStatus: authenticated.status,
+    metricsStatus: metrics.status,
+    metricsSeriesCount: metricsText.split("\n").filter((line) => line && !line.startsWith("#")).length,
+    metricsContractOk,
+    healthWallMs: health.wallMs,
+    readyWallMs: ready.wallMs,
+    unauthenticatedWallMs: unauthenticated.wallMs,
+    authenticatedWallMs: authenticated.wallMs,
+    metricsWallMs: metrics.wallMs,
     wallMs: Math.round(performance.now() - started),
-    baseUrl,
+    latencyThresholdMs,
+    slowProbes,
+    baseUrl: safeBaseUrl,
   };
 }
 

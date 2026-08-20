@@ -103,3 +103,50 @@ groups:
         annotations:
           summary: "Device Authorization expirou"
           description: "Uma autorização Device expirou antes do consumo. Verificar tempo de aprovação, polling e disponibilidade do gateway."
+
+  - name: devspace-application
+    interval: 30s
+    rules:
+      - alert: DevSpaceHTTPServerErrorRate
+        expr: sum(rate(devspace_http_requests_total{outcome="server_error"}[5m])) / clamp_min(sum(rate(devspace_http_requests_total[5m])), 1) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: devspace-mcp
+          runbook: http-server-errors
+        annotations:
+          summary: "Taxa de erros 5xx elevada"
+          description: "A taxa de respostas 5xx do DevSpace excedeu 5% por cinco minutos. Correlacionar request_id, categoria de erro e dependência afetada."
+
+      - alert: DevSpaceMcpToolLatencyHigh
+        expr: histogram_quantile(0.95, sum by (le, tool) (rate(devspace_mcp_tool_duration_ms_bucket[5m]))) > 1000
+        for: 10m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: mcp-tool-latency
+        annotations:
+          summary: "Latência p95 elevada em ferramenta MCP"
+          description: "A latência p95 da ferramenta {{ $labels.tool }} excedeu 1 segundo por dez minutos. Verificar filesystem, processo, SQLite e carga concorrente."
+
+      - alert: DevSpaceMcpAuthDeniedBurst
+        expr: sum(increase(devspace_mcp_auth_denied_total[5m])) >= 10
+        for: 2m
+        labels:
+          severity: warning
+          service: devspace-mcp
+          runbook: mcp-auth-denials
+        annotations:
+          summary: "Burst de falhas de autenticação/autorização MCP"
+          description: "O servidor acumulou pelo menos dez negações MCP em cinco minutos. Investigar resource, scopes, binding de sessão e possível cliente mal configurado."
+
+      - alert: DevSpaceReadinessFailed
+        expr: devspace_health_status{component="database"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: devspace-mcp
+          runbook: readiness-failed
+        annotations:
+          summary: "Readiness do banco SQLite falhou"
+          description: "O check de readiness do banco não está saudável. Retirar a instância do tráfego e verificar filesystem, lock, storage e recuperação do estado."

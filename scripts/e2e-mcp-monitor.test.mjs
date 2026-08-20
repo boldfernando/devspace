@@ -133,8 +133,15 @@ test("mcp monitor contract validates real health and Bearer authentication", asy
       assert.equal(record.schema, "devspace.mcp-monitor.v1");
       assert.equal(record.event, "mcp_monitor_ok");
       assert.equal(record.healthStatus, 200);
+      assert.equal(record.readyStatus, 200);
       assert.equal(record.unauthenticatedStatus, 401);
       assert.equal(record.authenticatedStatus, 200);
+      assert.equal(record.metricsStatus, 200);
+      assert.equal(record.metricsContractOk, true);
+      assert.ok(record.metricsSeriesCount > 0);
+      assert.ok(record.healthWallMs >= 0);
+      assert.ok(record.authenticatedWallMs >= 0);
+      assert.deepEqual(record.slowProbes, []);
       assert.equal("bearerToken" in record, false);
     }
     await mkdir(join(repoRoot, "artifacts"), { recursive: true });
@@ -143,7 +150,8 @@ test("mcp monitor contract validates real health and Bearer authentication", asy
       status: "passed",
       samples: records.length,
       events: records.map((record) => record.event),
-      statuses: records.map((record) => ({ health: record.healthStatus, unauthenticated: record.unauthenticatedStatus, authenticated: record.authenticatedStatus })),
+      statuses: records.map((record) => ({ health: record.healthStatus, ready: record.readyStatus, unauthenticated: record.unauthenticatedStatus, authenticated: record.authenticatedStatus, metrics: record.metricsStatus })),
+      latency: records.map((record) => ({ wallMs: record.wallMs, authenticatedWallMs: record.authenticatedWallMs, slowProbes: record.slowProbes.length })),
       secrets_included: false,
     }, null, 2)}\n`, "utf8");
     const missingResult = await runMonitor(repoRoot, missingTokenOutput, {}, ["--samples", "1"]);

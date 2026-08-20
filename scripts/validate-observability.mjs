@@ -23,6 +23,10 @@ const requiredAlerts = [
   "DevSpaceOAuthDeviceSlowDown",
   "DevSpaceOAuthDeviceRejected",
   "DevSpaceOAuthDeviceExpired",
+  "DevSpaceHTTPServerErrorRate",
+  "DevSpaceMcpToolLatencyHigh",
+  "DevSpaceMcpAuthDeniedBurst",
+  "DevSpaceReadinessFailed",
 ];
 const requiredMetrics = [
   "mcp_idempotency_claim_total",
@@ -34,6 +38,12 @@ const requiredMetrics = [
   "mcp_idempotency_recovery_total",
   "sqlite_busy_total",
   "mcp_oauth_device_event_total",
+  "devspace_http_requests_total",
+  "devspace_http_request_duration_ms",
+  "devspace_mcp_tool_calls_total",
+  "devspace_mcp_tool_duration_ms",
+  "devspace_mcp_auth_denied_total",
+  "devspace_health_status",
 ];
 const secretLike = /(bearer\s+|owner[_-]?token|access[_-]?token|code[_-]?verifier|device[_-]?code|secret\s*[:=])/i;
 const missingAlerts = requiredAlerts.filter((name) => !rules.includes(`alert: ${name}`));

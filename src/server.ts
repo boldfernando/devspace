@@ -337,7 +337,14 @@ function requestLogFields(req: Request, config: ServerConfig): Record<string, un
   };
 }
 
+const runtimeMetricsByConfig = new WeakMap<ServerConfig, RuntimeMetrics>();
+
 function logToolCall(config: ServerConfig, fields: ToolLogFields): void {
+  runtimeMetricsByConfig.get(config)?.recordToolCall(
+    fields.tool,
+    fields.success ? "success" : "error",
+    fields.durationMs,
+  );
   if (!config.logging.toolCalls) return;
 
   logEvent(config.logging, fields.success ? "info" : "warn", "tool_call", fields);
@@ -831,7 +838,10 @@ export function createMcpServer(
   sessionClientId?: string | null,
   sessionResource?: string | null,
 ): McpServer {
+    if (runtimeMetrics) runtimeMetricsByConfig.set(config, runtimeMetrics);
+
   const server = new McpServer(
+
     {
       name: "devspace",
       title: "DevSpace",
@@ -1895,8 +1905,10 @@ export function createServer(
   const allowedHosts = config.allowedHosts.includes("*")
     ? undefined
     : Array.from(new Set([config.host, ...config.allowedHosts]));
-  const runtimeMetrics = createRuntimeMetrics();
+    const runtimeMetrics = createRuntimeMetrics();
+  runtimeMetricsByConfig.set(config, runtimeMetrics);
   const app = createMcpExpressApp({
+
     host: config.host,
     ...(allowedHosts ? { allowedHosts } : {}),
   });
@@ -1963,8 +1975,9 @@ export function createServer(
     res.setHeader("x-request-id", requestId);
 
     res.on("finish", () => {
-
       const path = requestPath(req);
+      const durationMs = Math.round(performance.now() - startedAt);
+      runtimeMetrics.recordHttpRequest(path, req.method, res.statusCode, durationMs);
       if (!config.logging.requests) return;
       if (!config.logging.assets && path.startsWith("/mcp-app-assets")) return;
 
@@ -1973,7 +1986,7 @@ export function createServer(
         method: req.method,
         path,
         status: res.statusCode,
-        durationMs: Math.round(performance.now() - startedAt),
+        durationMs,
         ...requestLogFields(req, config),
       });
     });
@@ -2040,7 +2053,18 @@ export function createServer(
     res.type("text/plain; version=0.0.4").send(runtimeMetrics.renderPrometheus());
   });
   app.get("/healthz", (_req, res) => {
+    runtimeMetrics.recordHealthStatus("http", true);
     res.json({ ok: true, name: "devspace" });
+  });
+  app.get("/readyz", (_req, res) => {
+    try {
+      idempotencyDatabase.sqlite.prepare("SELECT 1").get();
+      runtimeMetrics.recordHealthStatus("database", true);
+      res.json({ ok: true, name: "devspace", checks: { database: "ok" } });
+    } catch {
+      runtimeMetrics.recordHealthStatus("database", false);
+      res.status(503).json({ ok: false, name: "devspace", checks: { database: "failed" } });
+    }
   });
 
   app.all("/mcp", async (req, res) => {
@@ -2048,15 +2072,38 @@ export function createServer(
     const sessionId = req.header("mcp-session-id");
     const initializeRequest = req.method === "POST" && isInitializeRequest(req.body);
 
-    await new Promise<void>((resolve, reject) => {
-      bearerAuth(req, res, (error?: unknown) => {
-        if (error) reject(error);
-        else resolve();
+    try {
+      await new Promise<void>((resolve, reject) => {
+        bearerAuth(req, res, (error?: unknown) => {
+          if (error) reject(error);
+          else resolve();
+        });
       });
-    });
-    if (res.headersSent) return;
+    } catch (error) {
+      runtimeMetrics.recordAuthDenied("bearer_auth");
+      logEvent(config.logging, "warn", "auth_denied", {
+        requestId,
+        method: req.method,
+        path: requestPath(req),
+        reason: "bearer_auth",
+        ...requestLogFields(req, config),
+      });
+      throw error;
+    }
+    if (res.headersSent) {
+      runtimeMetrics.recordAuthDenied("bearer_auth");
+      logEvent(config.logging, "warn", "auth_denied", {
+        requestId,
+        method: req.method,
+        path: requestPath(req),
+        reason: "bearer_auth",
+        ...requestLogFields(req, config),
+      });
+      return;
+    }
 
     if (!req.auth?.resource || !checkResourceAllowed({ requestedResource: req.auth.resource, configuredResource: resourceServerUrl })) {
+      runtimeMetrics.recordAuthDenied("invalid_oauth_resource");
       logEvent(config.logging, "warn", "auth_denied", {
         requestId,
         method: req.method,
@@ -2070,6 +2117,7 @@ export function createServer(
 
     const policyDecision: McpRequestPolicyDecision = classifyMcpRequest(req);
     if (policyDecision.kind === "deny") {
+      runtimeMetrics.recordAuthDenied(policyDecision.reason === "unknown_tool" ? "unknown_mcp_tool" : "malformed_mcp_tool_call");
       logEvent(config.logging, "warn", "auth_denied", {
         requestId,
         method: req.method,
@@ -2087,6 +2135,7 @@ export function createServer(
       ? tokenScopes.includes(requiredScope) || tokenScopes.includes(`devspace:${requiredScope}`) || tokenScopes.includes("devspace")
       : true;
     if (requiredScope && !scopeAllowed) {
+      runtimeMetrics.recordAuthDenied("insufficient_scope");
       logEvent(config.logging, "warn", "auth_denied", {
         requestId,
         method: req.method,
@@ -2130,11 +2179,13 @@ export function createServer(
           binding.principalId !== principalId
         ) {
 
+                    runtimeMetrics.recordAuthDenied("mcp_session_binding_mismatch");
           logEvent(config.logging, "warn", "auth_denied", {
             requestId,
             method: req.method,
             path: requestPath(req),
             reason: "mcp_session_binding_mismatch",
+
             sessionIdPresent: true,
             sessionIdPrefix: sessionIdPrefix(sessionId),
             ...requestLogFields(req, config),
